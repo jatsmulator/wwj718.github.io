@@ -1,0 +1,619 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+就喜欢你这种没事喜欢看看源码的人
+你如果恰好也熟悉git/requirejs/reactjs
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ssh相关</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                                          			  <li class="divider-vertical"></li>
+                                              <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                                <li class="active">
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/途中.html">
+						<i class="icon-folder-open icon-large"></i>途中
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+              			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+            <section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to ssh相关">
+					ssh相关 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+			<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-07-10T00:00:00">
+	<i class="icon-calendar"></i>四 10 七月 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/gong-ju.html"><i class="icon-folder-open"></i>工具</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/ubuntu.html"><i class="icon-tag"></i>ubuntu</a>
+</footer><!-- /.post-info -->		</div>
+		<h2>安装（ubuntu）</h2>
+<p><code>sudo apt-get install openssh-server</code></p>
+<h2>配置</h2>
+<h3>允许密码配置</h3>
+<p><code>vim /etc/ssh/sshd_config</code>使：</p>
+<p><code>PasswordAuthentication yes</code></p>
+<h3>安全相关</h3>
+<p>修改登录端口</p>
+<p><code>vim /etc/ssh/sshd_config</code>使：</p>
+<p><code>Port [port]</code></p>
+<p>端口号选择大一些，被随机扫描的可能性更小</p>
+<h3>使用密钥登录并禁止口令登录实践</h3>
+<p>这是最相对安全的登录管理方式</p>
+<div class="highlight"><pre><span></span>#以下用户都是root（sudo）
+
+#生成SSH密钥对，一路回车就行
+ssh-keygen -t rsa
+
+#复制公钥到无密码登录的服务器上,22端口改变可以使用下面的命令
+#ssh-copy-id -i ~/.ssh/id_rsa.pub -p 10022 user@server
+ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.15.241
+#登录时需要使用相应账号登录
+
+#也可以登录被控机器后 cd .ssh，wget https://github.com/wwj718.keys 之后chmod 600 authorized_keys
+#authorized_keys 文件必须是600权限或者644
+#.ssh目录必须是700权限
+#/home/ubuntu 目录必须是755权限
+
+#修改SSH配置文件
+#编辑sshd_config文件
+vi /etc/ssh/sshd_config
+
+#禁用密码验证
+PasswordAuthentication no
+#启用密钥验证
+RSAAuthentication yes
+PubkeyAuthentication yes
+#指定公钥数据库文件
+AuthorsizedKeysFile .ssh/authorized_keys
+
+#重启SSH服务前建议多保留一个会话以防不测
+
+#手动增加管理用户
+echo &#39;ssh-rsa XXXX&#39; &gt;&gt;/root/.ssh/authorized_keys
+
+# 复查
+cat /root/.ssh/authorized_keys
+</pre></div>
+
+
+<h2>重启</h2>
+<div class="highlight"><pre><span></span>#RHEL/CentOS系统
+service sshd restart
+#ubuntu系统
+service ssh restart
+#debian系统
+/etc/init.d/ssh restart
+</pre></div>
+
+
+<h1>补遗</h1>
+<h3>X11 Forwarding</h3>
+<p>通过使用ssh -X user@host，可以做到开启远端GUI应用，就像在本地开启一样,max下需要安装Quartz</p>
+<hr />
+<p>2016-05-04修改</p>
+<h1>SSH 简化配置</h1>
+<ul>
+<li>强烈建议使用 ssh-copy-id来移动你的公共密钥</li>
+<li>使用<code>~/.ssh/config</code>, 你可以在~/.ssh/config里面指定相当数量的配置选项，强烈建议看网上的文档或者 ssh_config 手册页</li>
+</ul>
+<div class="highlight"><pre><span></span># contents of $HOME/.ssh/config
+Host dev
+    HostName dev.example.com
+    Port 22000
+    User fooey
+</pre></div>
+
+
+<h1>参考</h1>
+<ul>
+<li><a href="https://github.com/xitu/gold-miner/blob/master/TODO/simplify-your-life-with-an-ssh-config-file.md">SSH 简化配置</a></li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+		<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+            <ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>
+</hr>
+</hr>
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机登录：</h4>
+<img src="/img/ewm.jpg" alt="二维码">
+<hr>
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/途中.html">
+    <i class="icon-folder-open icon-large"></i>途中
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<li class="tag-2">
+    <a href="/tag/tools.html">
+        <i class="icon-tag icon-large"></i>tools
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/thought.html">
+        <i class="icon-tag icon-large"></i>thought
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/regex.html">
+        <i class="icon-tag icon-large"></i>regex
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/RESTful.html">
+        <i class="icon-tag icon-large"></i>RESTful
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/lisp.html">
+        <i class="icon-tag icon-large"></i>lisp
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/途中.html">
+        <i class="icon-tag icon-large"></i>途中
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/book.html">
+        <i class="icon-tag icon-large"></i>book
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/edx.html">
+        <i class="icon-tag icon-large"></i>edx
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/诗词.html">
+        <i class="icon-tag icon-large"></i>诗词
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/web.html">
+        <i class="icon-tag icon-large"></i>web
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/idea.html">
+        <i class="icon-tag icon-large"></i>idea
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/code.html">
+        <i class="icon-tag icon-large"></i>code
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/linux.html">
+        <i class="icon-tag icon-large"></i>linux
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/algorithm.html">
+        <i class="icon-tag icon-large"></i>algorithm
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/data.html">
+        <i class="icon-tag icon-large"></i>data
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/free.html">
+        <i class="icon-tag icon-large"></i>free
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/读书.html">
+        <i class="icon-tag icon-large"></i>读书
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/ubuntu.html">
+        <i class="icon-tag icon-large"></i>ubuntu
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/随笔.html">
+        <i class="icon-tag icon-large"></i>随笔
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>python
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/django.html">
+        <i class="icon-tag icon-large"></i>django
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/dev-tools.html">
+        <i class="icon-tag icon-large"></i>dev-tools
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/编程.html">
+        <i class="icon-tag icon-large"></i>编程
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/杂感.html">
+        <i class="icon-tag icon-large"></i>杂感
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/ngrok.html">
+        <i class="icon-tag icon-large"></i>ngrok
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/ipython.html">
+        <i class="icon-tag icon-large"></i>ipython
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/技术.html">
+        <i class="icon-tag icon-large"></i>技术
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/ssh.html">
+        <i class="icon-tag icon-large"></i>ssh
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/wechat.html">
+        <i class="icon-tag icon-large"></i>wechat
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/刘瑜.html">
+        <i class="icon-tag icon-large"></i>刘瑜
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/kindle.html">
+        <i class="icon-tag icon-large"></i>kindle
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/日记.html">
+        <i class="icon-tag icon-large"></i>日记
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/gist.html">
+        <i class="icon-tag icon-large"></i>gist
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/js.html">
+        <i class="icon-tag icon-large"></i>js
+    </a>
+</li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            被误解是表达者的宿命<hr>
+              powered by Pelican 
+              <script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
