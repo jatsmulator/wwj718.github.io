@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>writing for time</title><link>/</link><description></description><atom:link href="/feeds/suan-fa.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 25 Nov 2015 00:00:00 -0000</lastBuildDate><item><title>算法.前言</title><link>/algorithm-foreword.html</link><description>&lt;p&gt;算法这块看得断断续续，看了后头忘了前头，平时用得也不多，想把学习过程和资源记录到博客，方便自己回顾，免得每次拿起都从绪论翻起&lt;/p&gt;
+&lt;h2&gt;记录的内容&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;伪代码&lt;/li&gt;
+&lt;li&gt;C语言版本&lt;/li&gt;
+&lt;li&gt;Python语言版本&lt;/li&gt;
+&lt;li&gt;可视化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;学习策略&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;推敲&lt;/li&gt;
+&lt;li&gt;默写&lt;/li&gt;
+&lt;li&gt;定期回顾&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;一些好的资源&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://zh.visualgo.net/"&gt;visualgo&lt;/a&gt;：数据结构和算法动态可视化 (Chinese)&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://coolshell.cn/articles/4671.html"&gt;可视化的数据结构和算法&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/julycoding/The-Art-Of-Programming-By-July"&gt;编程之法：面试和算法心得&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.csdn.net/v_JULY_v"&gt;结构之法 算法之道&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.csdn.net/MoreWindows/article/category/859207"&gt;白话经典算法系列&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.zhihu.com/question/20368410"&gt;有哪些学习算法的网站推荐?(知乎)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Python&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/donnemartin/interactive-coding-challenges"&gt;interactive-coding-challenges&lt;/a&gt;:Python数据结构和算法挑战（Ipython Notebook）&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/prakhar1989/Algorithms"&gt;Algorithms&lt;/a&gt;:Python中的数据结构和算法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;leetcode&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/haoel/leetcode"&gt;haoel/leetcode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/soulmachine/leetcode"&gt;soulmachine/leetcode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.gitbook.com/book/siddontang/leetcode-solution/details"&gt;LeetCode题解&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">wuwenjie</dc:creator><pubDate>Wed, 25 Nov 2015 00:00:00 -0000</pubDate><guid>tag:,2015-11-25:algorithm-foreword.html</guid><category>algorithm</category></item></channel></rss>
