@@ -1,0 +1,628 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+就喜欢你这种没事喜欢看看源码的人
+你如果恰好也熟悉git/requirejs/reactjs
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>使用Let’s Encrypt(certbot)为你的网站生成免费的 SSL 证书</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                                          			  <li class="divider-vertical"></li>
+                                              <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                                <li class="active">
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/途中.html">
+						<i class="icon-folder-open icon-large"></i>途中
+					</a>
+                  </li>
+                                <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+              			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+            <section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to 使用Let’s Encrypt(certbot)为你的网站生成免费的 SSL 证书">
+					使用Let’s Encrypt(certbot)为你的网站生成免费的 SSL 证书 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+			<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-06-19T00:00:00">
+	<i class="icon-calendar"></i>日 19 六月 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/gong-ju.html"><i class="icon-folder-open"></i>工具</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/tools.html"><i class="icon-tag"></i>tools</a>
+</footer><!-- /.post-info -->		</div>
+		<h3>关于HTTPS</h3>
+<p>引维基百科的说法</p>
+<blockquote>
+<p>超文本传输安全协议（英语：Hypertext Transfer Protocol Secure，缩写：HTTPS）是一种网络安全传输协议。在计算机网络上，HTTPS经由超文本传输协议进行通信，但利用SSL/TLS来对数据包进行加密。HTTPS开发的主要目的，是提供对网络服务器的身份认证，保护交换数据的隐私与完整性</p>
+<p>HTTPS的主要思想是在不安全的网络上创建一安全信道，并可在使用适当的加密包和服务器证书可被验证且可被信任时，对窃听和中间人攻击提供合理的防护。</p>
+</blockquote>
+<h3>关于TLS/SSL</h3>
+<p>依然引用维基百科</p>
+<blockquote>
+<p>传输层安全协议（英语：Transport Layer Security，缩写：TLS），及其前身安全套接层（Secure Sockets Layer，缩写：SSL）是一种安全协议，目的是为互联网通信，提供安全及数据完整性保障</p>
+</blockquote>
+<h3>相关算法</h3>
+<blockquote>
+<p>TLS利用密钥算法在互联网上提供端点身份认证与通讯保密，其基础是公钥基础设施。</p>
+</blockquote>
+<p>TLS包含三个基本阶段：</p>
+<ul>
+<li>对等协商支持的密钥算法</li>
+<li>基于非对称密钥的信息传输加密和身份认证、基于PKI证书的身份认证</li>
+<li>基于对称密钥的数据传输保密</li>
+</ul>
+<h3>国内现状</h3>
+<p>由于运营商的劫持，国内公司不堪其扰，纷纷将全站采用https</p>
+<h3>安装配置</h3>
+<ul>
+<li>wget https://dl.eff.org/certbot-auto</li>
+<li>chmod a+x ./certbot-auto</li>
+<li>./certbot-auto --help all</li>
+<li>./certbot-auto certonly --standalone --email wwj@example.com  -d www.just4fun.site (可以使用二级域名)</li>
+</ul>
+<p>需要注意的是，验证的时候保证80/443端口对外开放，且不被占用，如果这些端口实现被nginx占用，先停掉nginx</p>
+<p>完成后查看生成的证书：</p>
+<ul>
+<li>sudo tree /etc/letsencrypt/live/</li>
+</ul>
+<h3>证书续签</h3>
+<p>证书的失效期是3个月，</p>
+<p>续签的命令为:</p>
+<ul>
+<li>./certbot-auto renew 或</li>
+<li>./certbot-auto renew --standalone --pre-hook "service nginx stop" --post-hook "service nginx start"</li>
+</ul>
+<p>可以用cron添加一个定时任务，自动续签。</p>
+<h3>将证书用于nginx</h3>
+<div class="highlight"><pre><span></span>upstream minio_server {
+            server 127.0.0.1:9000 fail_timeout=0;
+    }
+
+# 监听 HTTPS 请求
+server {
+        #server_name example.com;
+        listen 8443 ssl;
+
+        # TLS 基本设置
+        ssl_certificate /etc/letsencrypt/live/www.just4fun.site/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/www.just4fun.site/privkey.pem;
+        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
+        # 网站的其它设置不变
+        # [...]
+  location / {
+        try_files $uri @proxy_to_app;
+  }
+
+  # No basic auth security on the heartbeat url, so that ELB can use it
+
+
+  location @proxy_to_app {
+    proxy_set_header X-Forwarded-Proto $http_x_forwarded_proto;
+    proxy_set_header X-Forwarded-Port $http_x_forwarded_port;
+    proxy_set_header X-Forwarded-For $http_x_forwarded_for;
+    proxy_set_header Host $http_host;
+
+    proxy_redirect off;
+    proxy_pass http://minio_server;
+  }
+}
+</pre></div>
+
+
+<p>当然我们可以将任意端口用于https，不过证书无法移植到其他服务器（可能是我还不熟悉）</p>
+<p>访问https://www.just4fun.site:18443，一切正常（我在青云的路由器上将8443端口映射为18443）</p>
+<h3>参考</h3>
+<ul>
+<li><a href="https://zh.wikipedia.org/zh/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE">超文本传输安全协议</a></li>
+<li><a href="https://zh.wikipedia.org/zh-cn/%E5%82%B3%E8%BC%B8%E5%B1%A4%E5%AE%89%E5%85%A8%E5%8D%94%E8%AD%B0">传输层安全协议</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html">SSL/TLS协议运行机制的概述</a></li>
+<li><a href="https://github.com/certbot/certbot">certbot</a></li>
+<li><a href="http://blog.windrunner.info/sa/lets-encrypt.html">使用 Let's Encrypt 生成免费的 SSL 证书</a></li>
+<li><a href="https://linuxtoy.org/archives/certbot.html">Certbot：自动部署 Let's Encrypt 证书</a></li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+		<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+            <ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>
+</hr>
+</hr>
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机登录：</h4>
+<img src="/img/ewm.jpg" alt="二维码">
+<hr>
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/途中.html">
+    <i class="icon-folder-open icon-large"></i>途中
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<li class="tag-2">
+    <a href="/tag/dev-tools.html">
+        <i class="icon-tag icon-large"></i>dev-tools
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/linux.html">
+        <i class="icon-tag icon-large"></i>linux
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/thought.html">
+        <i class="icon-tag icon-large"></i>thought
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/途中.html">
+        <i class="icon-tag icon-large"></i>途中
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/tools.html">
+        <i class="icon-tag icon-large"></i>tools
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/刘瑜.html">
+        <i class="icon-tag icon-large"></i>刘瑜
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/ngrok.html">
+        <i class="icon-tag icon-large"></i>ngrok
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/随笔.html">
+        <i class="icon-tag icon-large"></i>随笔
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/data.html">
+        <i class="icon-tag icon-large"></i>data
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/编程.html">
+        <i class="icon-tag icon-large"></i>编程
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/ipython.html">
+        <i class="icon-tag icon-large"></i>ipython
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/ubuntu.html">
+        <i class="icon-tag icon-large"></i>ubuntu
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/web.html">
+        <i class="icon-tag icon-large"></i>web
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/code.html">
+        <i class="icon-tag icon-large"></i>code
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>python
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/kindle.html">
+        <i class="icon-tag icon-large"></i>kindle
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/js.html">
+        <i class="icon-tag icon-large"></i>js
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/技术.html">
+        <i class="icon-tag icon-large"></i>技术
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/wechat.html">
+        <i class="icon-tag icon-large"></i>wechat
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/ssh.html">
+        <i class="icon-tag icon-large"></i>ssh
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/杂感.html">
+        <i class="icon-tag icon-large"></i>杂感
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/free.html">
+        <i class="icon-tag icon-large"></i>free
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/lisp.html">
+        <i class="icon-tag icon-large"></i>lisp
+    </a>
+</li>
+<li class="tag-1">
+    <a href="/tag/edx.html">
+        <i class="icon-tag icon-large"></i>edx
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/读书.html">
+        <i class="icon-tag icon-large"></i>读书
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/RESTful.html">
+        <i class="icon-tag icon-large"></i>RESTful
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/django.html">
+        <i class="icon-tag icon-large"></i>django
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/日记.html">
+        <i class="icon-tag icon-large"></i>日记
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/gist.html">
+        <i class="icon-tag icon-large"></i>gist
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/book.html">
+        <i class="icon-tag icon-large"></i>book
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/regex.html">
+        <i class="icon-tag icon-large"></i>regex
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/诗词.html">
+        <i class="icon-tag icon-large"></i>诗词
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/algorithm.html">
+        <i class="icon-tag icon-large"></i>algorithm
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/idea.html">
+        <i class="icon-tag icon-large"></i>idea
+    </a>
+</li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            被误解是表达者的宿命<hr>
+              powered by Pelican 
+              <script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
