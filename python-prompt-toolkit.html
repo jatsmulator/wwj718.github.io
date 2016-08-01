@@ -199,9 +199,7 @@
 <span class="label">Tags</span> 
 	<a href="/tag/tools.html"><i class="icon-tag"></i>tools</a>
 </footer><!-- /.post-info -->		</div>
-		<blockquote>
-<p>黑客是数字时代的手工艺人</p>
-</blockquote>
+		<p><img alt="" src="https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/tutorial/screenshots/6.png?raw=true" /></p>
 <p>原文参考<a href="https://github.com/jonathanslenders/python-prompt-toolkit/tree/master/examples/tutorial">Build a REPL With Python Prompt Toolkit</a>,我十分喜欢这篇教程，清晰简单，读起来十分舒服，翻译过来分析给大家</p>
 <h1>前言</h1>
 <p>正式开始翻译之前，我们先了解一些背景知识</p>
@@ -242,7 +240,7 @@
 </pre></div>
 
 
-<p><img alt="" src="https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/tutorial/screenshots/1.png" /></p>
+<p><img alt="" src="https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/tutorial/screenshots/1.png?raw=true" /></p>
 <h3>REPL循环</h3>
 <p>现在让我们在一个while循环里调用<code>prompt</code>方法，同时将输入历史保存在<code>InMemoryHistory</code>对象里</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
@@ -262,7 +260,7 @@
 </pre></div>
 
 
-<p><img alt="" src="https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/tutorial/screenshots/2.png" /></p>
+<p><img alt="" src="https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/tutorial/screenshots/2.png?raw=true" /></p>
 <h3>语法高亮</h3>
 <p>我们已经做了一些基础工作，现在让我们将语法高亮加入到用户的输入中。我们知道用户将会输入sql语句，我们可以使用<a href="http://pygments.org/">Pygments</a>来高亮用户的输入.<code>lexer</code>参数允许你设置词法分析器(译者注：lexical analyzer，简称lexer)，我们将使用Pygments 库的<code>SqlLexer</code>来对输入做高亮处理：</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
@@ -283,7 +281,7 @@
 </pre></div>
 
 
-<p><img alt="" src="https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/tutorial/screenshots/3.png" /></p>
+<p><img alt="" src="https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/tutorial/screenshots/3.png?raw=true" /></p>
 <h3>自动补全</h3>
 <p>语法高亮屌爆啦！你造什么更牛一些吗？自动补全！开干！</p>
 <p>使用<code>WordCompleter</code>类创建一个叫做<code>sql_completer</code>的实例，初始化的时候，定义一组关键字集合，它们将用于自动补全</p>
@@ -311,7 +309,7 @@
 </pre></div>
 
 
-<p><img alt="" src="https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/tutorial/screenshots/4.png" /></p>
+<p><img alt="" src="https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/tutorial/screenshots/4.png?raw=true" /></p>
 <p>大约用了30行代码我们就得到了一个拥有自动补全和语法高亮的REPL。 再接再厉！</p>
 <h3>修改菜单样式</h3>
 <p>自动补全菜单忒丑，让我们给它点"颜色"看看！创建<code>DocumentStyle</code>，使它成为pygments.style的子类. 定制自动补全菜单的颜色，并把样式作为参数传到<code>prompt</code>函数里：</p>
@@ -350,7 +348,7 @@
 </pre></div>
 
 
-<p><img alt="" src="https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/tutorial/screenshots/5.png" /></p>
+<p><img alt="" src="https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/tutorial/screenshots/5.png?raw=true" /></p>
 <p>剩下的工作就是如何对接到sqlite后端，作为读者的家庭作业好了。哈哈开玩笑啦...我们继续</p>
 <h3>对接到Sqlite</h3>
 <p>这一步是可选的 ;)  之前我们一直在关注如何构建REPL. 现在是时候将输入传给SQLite</p>
@@ -406,7 +404,7 @@
 </pre></div>
 
 
-<p><img alt="" src="https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/tutorial/screenshots/6.png" /></p>
+<p><img alt="" src="https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/tutorial/screenshots/6.png?raw=true" /></p>
 <p>希望这篇文章能给你一些启发去构建命令行工具</p>
 <p>以上</p>
 <h1>附录</h1>
@@ -541,114 +539,19 @@ var duoshuoQuery = {short_name:"wwj718blog"};
 </li>
 
 <li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
-<li class="tag-2">
-    <a href="/tag/dev-tools.html">
-        <i class="icon-tag icon-large"></i>dev-tools
-    </a>
-</li>
 <li class="tag-3">
-    <a href="/tag/linux.html">
-        <i class="icon-tag icon-large"></i>linux
+    <a href="/tag/gist.html">
+        <i class="icon-tag icon-large"></i>gist
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/thought.html">
-        <i class="icon-tag icon-large"></i>thought
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/途中.html">
-        <i class="icon-tag icon-large"></i>途中
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/tools.html">
-        <i class="icon-tag icon-large"></i>tools
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/刘瑜.html">
-        <i class="icon-tag icon-large"></i>刘瑜
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/ngrok.html">
-        <i class="icon-tag icon-large"></i>ngrok
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/随笔.html">
-        <i class="icon-tag icon-large"></i>随笔
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/data.html">
-        <i class="icon-tag icon-large"></i>data
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/编程.html">
-        <i class="icon-tag icon-large"></i>编程
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/ipython.html">
-        <i class="icon-tag icon-large"></i>ipython
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/ubuntu.html">
-        <i class="icon-tag icon-large"></i>ubuntu
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/git.html">
-        <i class="icon-tag icon-large"></i>git
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/web.html">
-        <i class="icon-tag icon-large"></i>web
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/code.html">
-        <i class="icon-tag icon-large"></i>code
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/python.html">
-        <i class="icon-tag icon-large"></i>python
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/kindle.html">
-        <i class="icon-tag icon-large"></i>kindle
+    <a href="/tag/django.html">
+        <i class="icon-tag icon-large"></i>django
     </a>
 </li>
 <li class="tag-4">
     <a href="/tag/js.html">
         <i class="icon-tag icon-large"></i>js
-    </a>
-</li>
-<li class="tag-2">
-    <a href="/tag/技术.html">
-        <i class="icon-tag icon-large"></i>技术
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/wechat.html">
-        <i class="icon-tag icon-large"></i>wechat
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/ssh.html">
-        <i class="icon-tag icon-large"></i>ssh
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/杂感.html">
-        <i class="icon-tag icon-large"></i>杂感
     </a>
 </li>
 <li class="tag-4">
@@ -657,13 +560,113 @@ var duoshuoQuery = {short_name:"wwj718blog"};
     </a>
 </li>
 <li class="tag-4">
+    <a href="/tag/ngrok.html">
+        <i class="icon-tag icon-large"></i>ngrok
+    </a>
+</li>
+<li class="tag-4">
     <a href="/tag/lisp.html">
         <i class="icon-tag icon-large"></i>lisp
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/data.html">
+        <i class="icon-tag icon-large"></i>data
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/杂感.html">
+        <i class="icon-tag icon-large"></i>杂感
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/book.html">
+        <i class="icon-tag icon-large"></i>book
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/tools.html">
+        <i class="icon-tag icon-large"></i>tools
     </a>
 </li>
 <li class="tag-1">
     <a href="/tag/edx.html">
         <i class="icon-tag icon-large"></i>edx
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/dev-tools.html">
+        <i class="icon-tag icon-large"></i>dev-tools
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/ipython.html">
+        <i class="icon-tag icon-large"></i>ipython
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/刘瑜.html">
+        <i class="icon-tag icon-large"></i>刘瑜
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/诗词.html">
+        <i class="icon-tag icon-large"></i>诗词
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/code.html">
+        <i class="icon-tag icon-large"></i>code
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/linux.html">
+        <i class="icon-tag icon-large"></i>linux
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/RESTful.html">
+        <i class="icon-tag icon-large"></i>RESTful
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/途中.html">
+        <i class="icon-tag icon-large"></i>途中
+    </a>
+</li>
+<li class="tag-3">
+    <a href="/tag/日记.html">
+        <i class="icon-tag icon-large"></i>日记
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/git.html">
+        <i class="icon-tag icon-large"></i>git
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/thought.html">
+        <i class="icon-tag icon-large"></i>thought
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/编程.html">
+        <i class="icon-tag icon-large"></i>编程
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/kindle.html">
+        <i class="icon-tag icon-large"></i>kindle
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/技术.html">
+        <i class="icon-tag icon-large"></i>技术
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/python.html">
+        <i class="icon-tag icon-large"></i>python
     </a>
 </li>
 <li class="tag-3">
@@ -672,28 +675,33 @@ var duoshuoQuery = {short_name:"wwj718blog"};
     </a>
 </li>
 <li class="tag-3">
-    <a href="/tag/RESTful.html">
-        <i class="icon-tag icon-large"></i>RESTful
+    <a href="/tag/wechat.html">
+        <i class="icon-tag icon-large"></i>wechat
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/django.html">
-        <i class="icon-tag icon-large"></i>django
+    <a href="/tag/web.html">
+        <i class="icon-tag icon-large"></i>web
     </a>
 </li>
-<li class="tag-3">
-    <a href="/tag/日记.html">
-        <i class="icon-tag icon-large"></i>日记
-    </a>
-</li>
-<li class="tag-3">
-    <a href="/tag/gist.html">
-        <i class="icon-tag icon-large"></i>gist
+<li class="tag-4">
+    <a href="/tag/ssh.html">
+        <i class="icon-tag icon-large"></i>ssh
     </a>
 </li>
 <li class="tag-2">
-    <a href="/tag/book.html">
-        <i class="icon-tag icon-large"></i>book
+    <a href="/tag/ubuntu.html">
+        <i class="icon-tag icon-large"></i>ubuntu
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/tag/idea.html">
+        <i class="icon-tag icon-large"></i>idea
+    </a>
+</li>
+<li class="tag-2">
+    <a href="/tag/随笔.html">
+        <i class="icon-tag icon-large"></i>随笔
     </a>
 </li>
 <li class="tag-3">
@@ -701,19 +709,9 @@ var duoshuoQuery = {short_name:"wwj718blog"};
         <i class="icon-tag icon-large"></i>regex
     </a>
 </li>
-<li class="tag-2">
-    <a href="/tag/诗词.html">
-        <i class="icon-tag icon-large"></i>诗词
-    </a>
-</li>
 <li class="tag-4">
     <a href="/tag/algorithm.html">
         <i class="icon-tag icon-large"></i>algorithm
-    </a>
-</li>
-<li class="tag-4">
-    <a href="/tag/idea.html">
-        <i class="icon-tag icon-large"></i>idea
     </a>
 </li>
 <hr>
