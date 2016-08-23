@@ -1,5 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>writing for time</title><link>/</link><description></description><atom:link href="/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Sat, 20 Aug 2016 00:00:00 +0000</lastBuildDate><item><title>[译]神经网络的"Hello world" --keras 入门</title><link>/keras-hello-world-pelican.html</link><description>&lt;h1&gt;本文写作说明&lt;/h1&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>writing for time</title><link>/</link><description></description><atom:link href="/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 23 Aug 2016 00:00:00 +0000</lastBuildDate><item><title>热力学熵与信息熵</title><link>/Entropy.html</link><description>&lt;blockquote&gt;
+&lt;p&gt;贝尔实验室和MIT有很多人将香农和爱因斯坦相提并论，而其他人也则认为这种对比是不公平的，对香农不公平  -- 威廉·庞德斯通&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这两天晚上在看&lt;code&gt;熵&lt;/code&gt;相关的知识，觉得饶有趣味，做个笔记&lt;/p&gt;
+&lt;p&gt;我大学本科学的是&lt;code&gt;热能与动力工程&lt;/code&gt;，大多时间在与热力学打交道。出于对编程的喜爱，毕业后当了程序员。熵是我毕业前后都接触的概念，在热力学和信息论中都极其重要。&lt;/p&gt;
+&lt;h1&gt;热力学熵&lt;/h1&gt;
+&lt;p&gt;我们先说说热力学第二定律。&lt;/p&gt;
+&lt;p&gt;热力学第二定律是热力学的四个基本定律之一（第零定律不大出名：若两个热力学系统均与第三个系统处于热平衡状态，此两个系统也必互相处于热平衡）&lt;/p&gt;
+&lt;p&gt;热力学第二定律有多种表述，克劳修斯表述为：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;不可能把热量从低温物体传递到高温物体而不产生其他影响。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这个表述我们在高中物理中应该就见过&lt;/p&gt;
+&lt;p&gt;他重点描述了热量传递的不可逆性，如此一来，&lt;a href="https://zh.wikipedia.org/wiki/%E6%B0%B8%E5%8A%A8%E6%9C%BA#.E7.AC.AC.E4.BA.8C.E7.B1.BB.E6.B0.B8.E5.8A.A8.E6.9C.BA"&gt;第二类永动机&lt;/a&gt;梦想宣告破灭&lt;/p&gt;
+&lt;h4&gt;插曲：永动机&lt;/h4&gt;
+&lt;p&gt;相信不少小时候喜欢折腾机械玩具的小伙伴，都有过永动机的梦想。小时候我设想过几类永动机，印象深刻的是一个，是一年小学暑假，在我把碎了一半的磁铁用胶带粘到玩具小车A的车尾，而相斥的另一半粘到玩具小车B的车头，中间通过一个弹性绳子连接。我不知哪来的信心，确信自己解决了人类能源的问题：小车B启动后，靠近小车A，由于磁性，把小车A往前推，之后小车A拉长弹性绳子，拉动小车B，小车B前进，如此周而复始。不需要给车加油&lt;/p&gt;
+&lt;p&gt;做实验的时候，并不顺利，我发现它们往复几次就停下了，我将其归结为两者重量问题，和绳子的弹性问题以及初始推力大小问题，我当满足某种比例时（当时模糊觉得是某种组合方式），它们就能永远运动下去，为了找到这个比例，我每天下午无聊的时候，玩腻了小霸王游戏机的时候，都会拿出我的玩具盒寻找这个合适的比例。&lt;/p&gt;
+&lt;h3&gt;数学表述&lt;/h3&gt;
+&lt;p&gt;热力学第二定律的数学表述主要借助克劳修斯所引入的&lt;code&gt;熵&lt;/code&gt;的概念，下边的式子描述了热力学系统中熵的增减:&lt;/p&gt;
+&lt;p&gt;$$\Delta S = \frac{\Delta Q}{T}$$&lt;/p&gt;
+&lt;p&gt;变量S被定义为&lt;code&gt;熵&lt;/code&gt;，$\delta Q$ 是系统热的变化，吸热为正，放热为负，T为系统的绝对温度。&lt;/p&gt;
+&lt;p&gt;如果$\delta Q = 0$，那么ΔS ≥ 0。意思是一个绝热系统的全部熵不会自动减少。这是热力学第二定律的另一种表述（熵增原理）&lt;/p&gt;
+&lt;p&gt;你可能想到那个著名的担忧：如果没有新的能量源源不断流入我们的宇宙，由于熵只增不减，我们的宇宙终将走向无序和寂灭（热寂说）&lt;/p&gt;
+&lt;h4&gt;插曲：生命-负熵&lt;/h4&gt;
+&lt;p&gt;关于熵增与生命，凯文凯利在《失控》中有段精彩的感慨：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;宇宙中并存着两个趋势。一种是永远下行的趋势，这股力量初时炽热难当，然后嘶嘶作响归于冰冷的死寂。这就是令人沮丧的卡诺第二定律，所有规律中最残酷的法则：所有秩序都终归于混沌，所有火焰都将熄灭，所有变异都趋于平淡，所有结构都终将自行消亡&lt;/p&gt;
+&lt;p&gt;第二种趋势与此平行，但产生与此相反的效果。它在热量消散前（因为热必会消散）将其转移，在无序中构建有序。它借助趋微之势，逆流而上。 这股上升之流利用其短暂的有序时光，尽可能抢夺消散的能量以建立一个平台，来为下一轮的有序作铺垫。它倾尽所有，无所保留，其秩序全部用来增强下一轮的复杂性、成长和有序。它以这种方式在混沌中孕育出反混沌，我们称之为生命&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;ps：关于生命是否是负熵，反方的有力反驳是生命不是孤立系统，包括地球也不是&lt;/p&gt;
+&lt;h3&gt;熵的微观解释&lt;/h3&gt;
+&lt;p&gt;热力学第二定律在热力学范畴内是一条经验定律，随着统计力学的发展，这一定律才得到了解释，同时也使其意义更加深远，波及到物理学之外的许多领域&lt;/p&gt;
+&lt;p&gt;玻尔兹曼发现单一系统中的熵跟构成热力学性质的微观状态数量相关。微观状态可以以每个组成的原子的位置及动量予以表达&lt;/p&gt;
+&lt;p&gt;玻尔兹曼这样来定义熵：&lt;/p&gt;
+&lt;p&gt;$$S = k(ln\Omega)$$&lt;/p&gt;
+&lt;p&gt;其中k是玻尔兹曼常数，$\Omega$则为&lt;code&gt;该宏观状态中所包含之微观状态数量&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;我们知道，熵可以作为混乱程度的度量，可此前无论在热力学第二的表述或是克劳修斯定义的熵中，我们都无从看到这点。&lt;/p&gt;
+&lt;p&gt;只有在玻尔兹曼这里，熵才和系统的混乱程度联系起来，因为$\Omega$可以作为一个系统混乱程度的度量：作为有规律的系统，只有有限的几种构型，而混乱的系统可以有无限多个构型&lt;/p&gt;
+&lt;p&gt;维基百科里的这个例子很好：&lt;/p&gt;
+&lt;p&gt;设想有一组10个硬币，每一个硬币有两面，掷硬币时得到最有规律的状态是10个都是正面或10个都是反面，这两种状态都只有一种构型（排列）。反之，如果是最混乱的情况，有5个正面5个反面，排列构型可以有 ${\displaystyle C_{10}^{5}}$ = 252种&lt;/p&gt;
+&lt;p&gt;在微观视角下，如何解释孤立系统熵增的必然性呢，毕竟，如果例子数量和上边硬币一样多，在瓶子里乱窜，按概率来说。完全可能存在某个时段，熵减啊，诸如原本反向的例子碰壁后都同向了，如此一来$\Omega$减小，熵不是也减小了么。如果你对这个问题感到疑惑，可以参考这个答案:&lt;a href="https://www.zhihu.com/question/19753084"&gt;这个答案&lt;/a&gt;。简单来说就是：&lt;strong&gt;熵增，这样一个在微观状态下完全由概率决定的事情，在宏观状态就成了必然。&lt;/strong&gt;，在分子数目足够多的时候，只有一种情况最常见最稳定，即所有气体分子均匀分布&lt;/p&gt;
+&lt;h1&gt;信息熵&lt;/h1&gt;
+&lt;p&gt;1948年，香农这位不世出的天才，将热力学熵，引入到信息论&lt;/p&gt;
+&lt;p&gt;在热力学中，熵可以作为混乱程度的度量度量。在信息论中，熵最好理解为不确定性的量度。两者的关联，放到后边论述&lt;/p&gt;
+&lt;p&gt;在信息世界，熵越高，则能传输越多的信息，熵越低，则意味着传输的信息越少&lt;/p&gt;
+&lt;h3&gt;定义&lt;/h3&gt;
+&lt;p&gt;$$\mathrm{H} (X)=-\sum &lt;em i="i"&gt;{{i}}{{\mathrm  {P}}(x&lt;/em&gt;)\log &lt;em i="i"&gt;{b}{\mathrm  {P}}(x&lt;/em&gt;)},$$&lt;/p&gt;
+&lt;p&gt;b是对数所使用的底，通常是2,自然常数e，或是10，b为2时，熵的单位是bit&lt;/p&gt;
+&lt;h1&gt;两者联系&lt;/h1&gt;
+&lt;p&gt;在传统热力学中，熵被定义为对系统的宏观测定，并没有涉及概率分布，而概率分布是信息熵的核心定义。&lt;/p&gt;
+&lt;p&gt;香农在定义熵时，根据的是玻尔兹曼对熵的统计学定义，所以两者在形式上基本一致，基本意义也完全一样，都是『（拥有某种观测能力的观测者）描述一个系统所需的信息量』。（按&lt;a href="https://www.zhihu.com/question/20992022"&gt;信息熵与热力学熵有什么区别和联系？&lt;/a&gt;）&lt;/p&gt;
+&lt;p&gt;描述一个系统所需的信息量（信息熵）与观测的精细程度相关，这个精细度存在物理极限，达到物理极限时，玻尔兹曼熵就是信息熵，系统的物理状态数就是这个系统包含的/携带的信息量的上限。就是说，当这个世界的信息量达到（或接近）这个世界本身的玻尔兹曼熵之后，就无法增长了&lt;/p&gt;
+&lt;h3&gt;&lt;a href="https://zh.wikipedia.org/wiki/%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E5%A6%96"&gt;麦克斯韦妖&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;麦克斯韦妖（Maxwell's demon），是在物理学中假想的妖，能探测并控制单个分子的运动。&lt;/p&gt;
+&lt;p&gt;可以表述为：一个绝热容器被分成相等的两格，中间是由“妖”控制的一扇小“门”，容器中的空气分子作无规则热运动时会向门上撞击，“门”可以选择性的将速度较快的分子放入一格，而较慢的分子放入另一格，这样，其中的一格就会比另外一格温度高，可以利用此温差，驱动热机做功。&lt;/p&gt;
+&lt;p&gt;这是第二类永动机的一个范例&lt;/p&gt;
+&lt;p&gt;可以采用信息熵来消解这个问题：让小妖精行使职责本身——即便只是了解和储存每个分子最初的香农信息——就会给系统带来热力学熵的增加，因此总的来说，系统的熵的总量没有减少&lt;/p&gt;
+&lt;h1&gt;参考&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://zh.wikipedia.org/wiki/%E7%86%B5"&gt;维基百科 熵(热力学)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://zh.wikipedia.org/wiki/%E7%86%B5_(%E4%BF%A1%E6%81%AF%E8%AE%BA)"&gt;维基百科 熵(信息论)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.zhihu.com/question/19753084"&gt;「熵」是什么？ 怎样以简单易懂的方式向其他人解释？&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.zhihu.com/question/20992022"&gt;信息熵与热力学熵有什么区别和联系？&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">wuwenjie</dc:creator><pubDate>Tue, 23 Aug 2016 00:00:00 +0000</pubDate><guid>tag:,2016-08-23:Entropy.html</guid><category>data</category></item><item><title>为open-edx构建审核系统</title><link>/edx-check-publish.html</link><description>&lt;h1&gt;目的&lt;/h1&gt;
+&lt;p&gt;审核人员审核通过才予以发布，粒度细到每一&lt;code&gt;单元&lt;/code&gt; （章-&amp;gt;节-&amp;gt;单元）&lt;/p&gt;
+&lt;h1&gt;思路&lt;/h1&gt;
+&lt;p&gt;构建审核系统的核心是构建权限系统，将审核系统视为权限系统的一个应用（上下层关系）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;利用django的权限系统,参考&lt;a href="https://wizardforcel.gitbooks.io/django-book-20-zh-cn/content/14.html"&gt;djangobook:会话、用户和注册&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;构建用户组，可实现不同粒度的权限系统（审核只是权限系统的一个应用）&lt;ul&gt;
+&lt;li&gt;django admin可以增删改用户/用户组&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;把用户组与课程关联&lt;ul&gt;
+&lt;li&gt;构建出院系/部分之类的逻辑关系&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;简单地利用既有的is_staff/is_superuser构建全局的权限系统&lt;ul&gt;
+&lt;li&gt;利用is_staff可以构建出课程级别的审核权限（全局审核员，将课程审核员添加为对应课程的团队成员）&lt;ul&gt;
+&lt;li&gt;代价，可能会损失is_staff本身的特性，比如studio本可以将其用于教师身份审核机制（当然这个特性默认不启用）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;简易实现&lt;/h1&gt;
+&lt;p&gt;我们先实现&lt;code&gt;全局的权限系统&lt;/code&gt;,superuser拥有全局的审核权限，每一个章节的发布都需要superuser的审核&lt;/p&gt;
+&lt;h3&gt;特性描述&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;superuser是网站全站管理员，可以增删其他&lt;code&gt;superuser&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;每一个章节的发布都需要superuser的审核通过&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;技术实现&lt;/h3&gt;
+&lt;p&gt;我们可以直接以发布按钮作为切入点：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://oav6fgfj1.bkt.clouddn.com/publish77ab6185.png" /&gt;&lt;/p&gt;
+&lt;p&gt;具体的想法是，&lt;code&gt;发布&lt;/code&gt;按钮改为&lt;code&gt;审核通过&lt;/code&gt;按钮，只有superuser对其可见/可操作。&lt;/p&gt;
+&lt;p&gt;使用浏览器调试工具，锁定元素（action-publish），跟踪到&lt;a href="https://github.com/edx/edx-platform/blob/master/cms/templates/js/publish-xblock.underscore#L113"&gt;publish-xblock.underscore&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我们现在需要在目标元素（主要是&lt;code&gt;发布&lt;/code&gt;按钮）前后一个逻辑判断，仅当用户是superuser时才予以展示（潜在风险是后台其实没做验证，暂不论）&lt;/p&gt;
+&lt;p&gt;往细里说，我们只需要往这个文件中传递&lt;code&gt;request.user.is_superuser&lt;/code&gt;参数，便可得知当前用户是否是superuser。&lt;/p&gt;
+&lt;p&gt;问题装化为如何往当前文件(publish-xblock.underscore) 传递变量&lt;/p&gt;
+&lt;p&gt;我们发现&lt;code&gt;publish-xblock.underscore&lt;/code&gt;由&lt;a href="https://github.com/edx/edx-platform/blob/master/cms/static/js/views/pages/container_subviews.js#L89"&gt;container_subviews.js&lt;/a&gt;加载&lt;/p&gt;
+&lt;p&gt;这是一个枢纽。我们可以跟踪&lt;a href="https://github.com/edx/edx-platform/blob/master/cms/static/js/views/pages/container_subviews.js#L112"&gt;publishedBy&lt;/a&gt;变量，它关联到后端变量&lt;a href="https://github.com/edx/edx-platform/blob/master/cms/djangoapps/contentstore/views/item.py#L1063"&gt;published_by&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在此注入变量便可&lt;/p&gt;
+&lt;h1&gt;提醒&lt;/h1&gt;
+&lt;p&gt;不要忘了编辑静态文件后，用paver编译一下&lt;/p&gt;
+&lt;h1&gt;遗留问题&lt;/h1&gt;
+&lt;p&gt;能否在js里直接写 &lt;code&gt;${ request.user.username }&lt;/code&gt; &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">wuwenjie</dc:creator><pubDate>Tue, 23 Aug 2016 00:00:00 +0000</pubDate><guid>tag:,2016-08-23:edx-check-publish.html</guid><category>edx</category></item><item><title>[译]神经网络的"Hello world" --keras 入门</title><link>/keras-hello-world-pelican.html</link><description>&lt;h1&gt;本文写作说明&lt;/h1&gt;
 &lt;p&gt;本文在jupyter notebook中写作，因为博客使用pelican构建，于是我将ipynb导出为html(单个文件)，然后放到博客的output里，用&lt;code&gt;&amp;lt;iframe&amp;gt;&lt;/code&gt;链入博客主体&lt;/p&gt;
 &lt;p&gt;当然你也可以直接在github上读：&lt;a href="https://github.com/wwj718/keras-hello-world/blob/master/kerashelloworld_zh.ipynb"&gt;wwj718/keras-hello-world&lt;/a&gt;&lt;/p&gt;
 &lt;h1&gt;正文&lt;/h1&gt;
@@ -12179,14 +12287,14 @@ sudo su insights
 &lt;li&gt;统计答案分布：&lt;ul&gt;
 &lt;li&gt;export WHEEL_URL=http://edx-wheelhouse.s3-website-us-east-1.amazonaws.com/Ubuntu/precise&lt;/li&gt;
 &lt;li&gt;export UNIQUE_NAME=$(date +%Y-%m-%dT%H_%M_%SZ)&lt;/li&gt;
-&lt;li&gt;remote-task --vagrant-path &lt;path to &lt;code&gt;analyticstack&lt;/code&gt;&gt; --remote-name devstack --override-config &lt;span class="math"&gt;\({PWD}/config/devstack.cfg --wheel-url $WHEEL_URL --wait \  
-AnswerDistributionWorkflow --local-scheduler \  
-  --src hdfs://localhost:9000/data/ \  
-  --include '*tracking.log*' \  
-  --dest hdfs://localhost:9000/edx-analytics-pipeline/output/answer_distribution_raw/\)&lt;/span&gt;UNIQUE_NAME/data \&lt;br /&gt;
-  --name &lt;span class="math"&gt;\(UNIQUE_NAME \  
-  --output-root hdfs://localhost:9000/edx-analytics-pipeline/output/answer_distribution/ \  
-  --marker hdfs://localhost:9000/edx-analytics-pipeline/output/answer_distribution_raw/\)&lt;/span&gt;UNIQUE_NAME/marker \&lt;br /&gt;
+&lt;li&gt;remote-task --vagrant-path &lt;path to &lt;code&gt;analyticstack&lt;/code&gt;&gt; --remote-name devstack --override-config ${PWD}/config/devstack.cfg --wheel-url $WHEEL_URL --wait \&lt;br /&gt;
+AnswerDistributionWorkflow --local-scheduler \&lt;br /&gt;
+  --src hdfs://localhost:9000/data/ \&lt;br /&gt;
+  --include '&lt;em&gt;tracking.log&lt;/em&gt;' \&lt;br /&gt;
+  --dest hdfs://localhost:9000/edx-analytics-pipeline/output/answer_distribution_raw/$UNIQUE_NAME/data \&lt;br /&gt;
+  --name $UNIQUE_NAME \&lt;br /&gt;
+  --output-root hdfs://localhost:9000/edx-analytics-pipeline/output/answer_distribution/ \&lt;br /&gt;
+  --marker hdfs://localhost:9000/edx-analytics-pipeline/output/answer_distribution_raw/$UNIQUE_NAME/marker \&lt;br /&gt;
   --n-reduce-tasks 1  &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -12197,64 +12305,7 @@ AnswerDistributionWorkflow --local-scheduler \
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://open.edx.org/blog/development-environment-open-edx-insights"&gt;A Development Environment for Open edX Insights&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://edx.readthedocs.org/projects/edx-installing-configuring-and-running/en/latest/devstack/analytics_devstack.html"&gt;Installing the Open edX Analytics Developer Stack&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width &lt; 768) ? "left" : align;
-        indent = (screen.width &lt; 768) ? "0em" : indent;
-        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    var location_protocol = (false) ? 'https' : document.location.protocol;
-    if (location_protocol !== 'http' &amp;&amp; location_protocol !== 'https') location_protocol = 'https:';
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
-    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' }, Macros: {} }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-&lt;/script&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">wuwenjie</dc:creator><pubDate>Tue, 22 Sep 2015 00:00:00 +0000</pubDate><guid>tag:,2015-09-22:Installing-the-Open-edX-Analytics-Developer-Stack.html</guid><category>edx</category></item><item><title>在edX Cypress中启用notes功能</title><link>/use-notes-in-cypress.html</link><description>&lt;p&gt;以下内容基于Cypress版本&lt;/p&gt;
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">wuwenjie</dc:creator><pubDate>Tue, 22 Sep 2015 00:00:00 +0000</pubDate><guid>tag:,2015-09-22:Installing-the-Open-edX-Analytics-Developer-Stack.html</guid><category>edx</category></item><item><title>在edX Cypress中启用notes功能</title><link>/use-notes-in-cypress.html</link><description>&lt;p&gt;以下内容基于Cypress版本&lt;/p&gt;
 &lt;p&gt;根据&lt;a href="http://edx.readthedocs.org/projects/open-edx-building-and-running-a-course/en/named-release-birch/exercises_tools/student_notes.html"&gt;student_notes&lt;/a&gt;的说法，在&lt;code&gt;Advanced Settings&lt;/code&gt;中将&lt;code&gt;Enable Student Note&lt;/code&gt;设置为true,结果并没有像文档说的那样，一点击notes tab就报错。于是查看错误日志发现&lt;code&gt;OAuth2 Client with name 'edx-notes' is not present in the DB&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;于是翻看notesserver的配置文件，查看相关参数：&lt;a href="https://github.com/edx/edx-notes-api/blob/master/notesserver/settings/common.py#L19"&gt;common.py&lt;/a&gt;，发现：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# ID and Secret used for authenticating JWT Auth Tokens&lt;/span&gt;

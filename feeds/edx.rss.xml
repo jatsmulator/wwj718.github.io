@@ -1,5 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>writing for time</title><link>/</link><description></description><atom:link href="/feeds/edx.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 15 Aug 2016 00:00:00 +0000</lastBuildDate><item><title>为Open edX移动端实现选课功能</title><link>/edx-mobile-enrollment.html</link><description>&lt;p&gt;Open edX移动端进展缓慢，几个月前的坑也不见填好。&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>writing for time</title><link>/</link><description></description><atom:link href="/feeds/edx.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 23 Aug 2016 00:00:00 +0000</lastBuildDate><item><title>为open-edx构建审核系统</title><link>/edx-check-publish.html</link><description>&lt;h1&gt;目的&lt;/h1&gt;
+&lt;p&gt;审核人员审核通过才予以发布，粒度细到每一&lt;code&gt;单元&lt;/code&gt; （章-&amp;gt;节-&amp;gt;单元）&lt;/p&gt;
+&lt;h1&gt;思路&lt;/h1&gt;
+&lt;p&gt;构建审核系统的核心是构建权限系统，将审核系统视为权限系统的一个应用（上下层关系）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;利用django的权限系统,参考&lt;a href="https://wizardforcel.gitbooks.io/django-book-20-zh-cn/content/14.html"&gt;djangobook:会话、用户和注册&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;构建用户组，可实现不同粒度的权限系统（审核只是权限系统的一个应用）&lt;ul&gt;
+&lt;li&gt;django admin可以增删改用户/用户组&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;把用户组与课程关联&lt;ul&gt;
+&lt;li&gt;构建出院系/部分之类的逻辑关系&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;简单地利用既有的is_staff/is_superuser构建全局的权限系统&lt;ul&gt;
+&lt;li&gt;利用is_staff可以构建出课程级别的审核权限（全局审核员，将课程审核员添加为对应课程的团队成员）&lt;ul&gt;
+&lt;li&gt;代价，可能会损失is_staff本身的特性，比如studio本可以将其用于教师身份审核机制（当然这个特性默认不启用）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;简易实现&lt;/h1&gt;
+&lt;p&gt;我们先实现&lt;code&gt;全局的权限系统&lt;/code&gt;,superuser拥有全局的审核权限，每一个章节的发布都需要superuser的审核&lt;/p&gt;
+&lt;h3&gt;特性描述&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;superuser是网站全站管理员，可以增删其他&lt;code&gt;superuser&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;每一个章节的发布都需要superuser的审核通过&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;技术实现&lt;/h3&gt;
+&lt;p&gt;我们可以直接以发布按钮作为切入点：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://oav6fgfj1.bkt.clouddn.com/publish77ab6185.png" /&gt;&lt;/p&gt;
+&lt;p&gt;具体的想法是，&lt;code&gt;发布&lt;/code&gt;按钮改为&lt;code&gt;审核通过&lt;/code&gt;按钮，只有superuser对其可见/可操作。&lt;/p&gt;
+&lt;p&gt;使用浏览器调试工具，锁定元素（action-publish），跟踪到&lt;a href="https://github.com/edx/edx-platform/blob/master/cms/templates/js/publish-xblock.underscore#L113"&gt;publish-xblock.underscore&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我们现在需要在目标元素（主要是&lt;code&gt;发布&lt;/code&gt;按钮）前后一个逻辑判断，仅当用户是superuser时才予以展示（潜在风险是后台其实没做验证，暂不论）&lt;/p&gt;
+&lt;p&gt;往细里说，我们只需要往这个文件中传递&lt;code&gt;request.user.is_superuser&lt;/code&gt;参数，便可得知当前用户是否是superuser。&lt;/p&gt;
+&lt;p&gt;问题装化为如何往当前文件(publish-xblock.underscore) 传递变量&lt;/p&gt;
+&lt;p&gt;我们发现&lt;code&gt;publish-xblock.underscore&lt;/code&gt;由&lt;a href="https://github.com/edx/edx-platform/blob/master/cms/static/js/views/pages/container_subviews.js#L89"&gt;container_subviews.js&lt;/a&gt;加载&lt;/p&gt;
+&lt;p&gt;这是一个枢纽。我们可以跟踪&lt;a href="https://github.com/edx/edx-platform/blob/master/cms/static/js/views/pages/container_subviews.js#L112"&gt;publishedBy&lt;/a&gt;变量，它关联到后端变量&lt;a href="https://github.com/edx/edx-platform/blob/master/cms/djangoapps/contentstore/views/item.py#L1063"&gt;published_by&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在此注入变量便可&lt;/p&gt;
+&lt;h1&gt;提醒&lt;/h1&gt;
+&lt;p&gt;不要忘了编辑静态文件后，用paver编译一下&lt;/p&gt;
+&lt;h1&gt;遗留问题&lt;/h1&gt;
+&lt;p&gt;能否在js里直接写 &lt;code&gt;${ request.user.username }&lt;/code&gt; &lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">wuwenjie</dc:creator><pubDate>Tue, 23 Aug 2016 00:00:00 +0000</pubDate><guid>tag:,2016-08-23:edx-check-publish.html</guid><category>edx</category></item><item><title>为Open edX移动端实现选课功能</title><link>/edx-mobile-enrollment.html</link><description>&lt;p&gt;Open edX移动端进展缓慢，几个月前的坑也不见填好。&lt;/p&gt;
 &lt;p&gt;现有的后台接口已经满足选课要求了,移动端还没更上，只能自己动手丰衣足食了，在此演示如何使用这些接口实现选课功能（使用工具&lt;a href="https://github.com/jkbrzt/httpie"&gt;httpie&lt;/a&gt;（把它理解为一个更先进的curl就行）做演示）&lt;/p&gt;
 &lt;h3&gt;列出所有课程&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;http http://LMS_HOST/api/courses/v1/courses/&lt;/code&gt;&lt;/p&gt;
@@ -4437,14 +4482,14 @@ sudo su insights
 &lt;li&gt;统计答案分布：&lt;ul&gt;
 &lt;li&gt;export WHEEL_URL=http://edx-wheelhouse.s3-website-us-east-1.amazonaws.com/Ubuntu/precise&lt;/li&gt;
 &lt;li&gt;export UNIQUE_NAME=$(date +%Y-%m-%dT%H_%M_%SZ)&lt;/li&gt;
-&lt;li&gt;remote-task --vagrant-path &lt;path to &lt;code&gt;analyticstack&lt;/code&gt;&gt; --remote-name devstack --override-config &lt;span class="math"&gt;\({PWD}/config/devstack.cfg --wheel-url $WHEEL_URL --wait \  
-AnswerDistributionWorkflow --local-scheduler \  
-  --src hdfs://localhost:9000/data/ \  
-  --include '*tracking.log*' \  
-  --dest hdfs://localhost:9000/edx-analytics-pipeline/output/answer_distribution_raw/\)&lt;/span&gt;UNIQUE_NAME/data \&lt;br /&gt;
-  --name &lt;span class="math"&gt;\(UNIQUE_NAME \  
-  --output-root hdfs://localhost:9000/edx-analytics-pipeline/output/answer_distribution/ \  
-  --marker hdfs://localhost:9000/edx-analytics-pipeline/output/answer_distribution_raw/\)&lt;/span&gt;UNIQUE_NAME/marker \&lt;br /&gt;
+&lt;li&gt;remote-task --vagrant-path &lt;path to &lt;code&gt;analyticstack&lt;/code&gt;&gt; --remote-name devstack --override-config ${PWD}/config/devstack.cfg --wheel-url $WHEEL_URL --wait \&lt;br /&gt;
+AnswerDistributionWorkflow --local-scheduler \&lt;br /&gt;
+  --src hdfs://localhost:9000/data/ \&lt;br /&gt;
+  --include '&lt;em&gt;tracking.log&lt;/em&gt;' \&lt;br /&gt;
+  --dest hdfs://localhost:9000/edx-analytics-pipeline/output/answer_distribution_raw/$UNIQUE_NAME/data \&lt;br /&gt;
+  --name $UNIQUE_NAME \&lt;br /&gt;
+  --output-root hdfs://localhost:9000/edx-analytics-pipeline/output/answer_distribution/ \&lt;br /&gt;
+  --marker hdfs://localhost:9000/edx-analytics-pipeline/output/answer_distribution_raw/$UNIQUE_NAME/marker \&lt;br /&gt;
   --n-reduce-tasks 1  &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -4455,64 +4500,7 @@ AnswerDistributionWorkflow --local-scheduler \
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://open.edx.org/blog/development-environment-open-edx-insights"&gt;A Development Environment for Open edX Insights&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://edx.readthedocs.org/projects/edx-installing-configuring-and-running/en/latest/devstack/analytics_devstack.html"&gt;Installing the Open edX Analytics Developer Stack&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width &lt; 768) ? "left" : align;
-        indent = (screen.width &lt; 768) ? "0em" : indent;
-        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    var location_protocol = (false) ? 'https' : document.location.protocol;
-    if (location_protocol !== 'http' &amp;&amp; location_protocol !== 'https') location_protocol = 'https:';
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
-    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' }, Macros: {} }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-&lt;/script&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">wuwenjie</dc:creator><pubDate>Tue, 22 Sep 2015 00:00:00 +0000</pubDate><guid>tag:,2015-09-22:Installing-the-Open-edX-Analytics-Developer-Stack.html</guid><category>edx</category></item><item><title>在edX Cypress中启用notes功能</title><link>/use-notes-in-cypress.html</link><description>&lt;p&gt;以下内容基于Cypress版本&lt;/p&gt;
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">wuwenjie</dc:creator><pubDate>Tue, 22 Sep 2015 00:00:00 +0000</pubDate><guid>tag:,2015-09-22:Installing-the-Open-edX-Analytics-Developer-Stack.html</guid><category>edx</category></item><item><title>在edX Cypress中启用notes功能</title><link>/use-notes-in-cypress.html</link><description>&lt;p&gt;以下内容基于Cypress版本&lt;/p&gt;
 &lt;p&gt;根据&lt;a href="http://edx.readthedocs.org/projects/open-edx-building-and-running-a-course/en/named-release-birch/exercises_tools/student_notes.html"&gt;student_notes&lt;/a&gt;的说法，在&lt;code&gt;Advanced Settings&lt;/code&gt;中将&lt;code&gt;Enable Student Note&lt;/code&gt;设置为true,结果并没有像文档说的那样，一点击notes tab就报错。于是查看错误日志发现&lt;code&gt;OAuth2 Client with name 'edx-notes' is not present in the DB&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;于是翻看notesserver的配置文件，查看相关参数：&lt;a href="https://github.com/edx/edx-notes-api/blob/master/notesserver/settings/common.py#L19"&gt;common.py&lt;/a&gt;，发现：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# ID and Secret used for authenticating JWT Auth Tokens&lt;/span&gt;
