@@ -1,0 +1,527 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+就喜欢你这种没事喜欢看看源码的人
+你如果恰好也熟悉git/requirejs/reactjs
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>树莓派折腾笔记之系统安装与配置</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="http://7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/途中.html">
+						<i class="icon-folder-open icon-large"></i>途中
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to 树莓派折腾笔记之系统安装与配置">
+					树莓派折腾笔记之系统安装与配置 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-10-11T00:00:00+00:00">
+	<i class="icon-calendar"></i>二 11 十月 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/ying-jian.html"><i class="icon-folder-open"></i>硬件</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/tools.html"><i class="icon-tag"></i>tools</a>
+</footer><!-- /.post-info -->		</div>
+		<p>最近我的树莓派被用于作原型机了</p>
+<p>只好重新用新的板子重新配置</p>
+<h1>下载系统镜像</h1>
+<p>镜像<a href="https://www.raspberrypi.org/downloads/">下载地址</a>,这里有许多可选镜像,我用的是<a href="https://www.raspberrypi.org/downloads/raspbian/">raspbian</a></p>
+<p>我之前是在windows下用win32diskimager往sd卡里刷系统的</p>
+<p>这次准备用dd(方便批量操作)，在mac下.参考这篇文章：<a href="https://github.com/ccforward/cc/issues/25">Mac下给SD卡安装树莓派Raspbian系统</a></p>
+<h1>安装系统</h1>
+<p>这里我们讨论两种情况，新买的sd卡和已经安装过系统的sd卡（重刷）</p>
+<h3>新的sd卡</h3>
+<p>一般新买的卡都已经格式化好了，这是最简单的情况,  按照<a href="https://github.com/ccforward/cc/issues/25">Mac下给SD卡安装树莓派Raspbian系统</a>的做法就行</p>
+<p>这里复述一下核心内容：</p>
+<div class="highlight"><pre><span></span>df <span class="c1"># 查看当前已经挂载的卷</span>
+<span class="c1"># 假设设备文件为：/dev/disk1s1 ,（ 通过查看设备名判断）</span>
+diskutil unmount /dev/disk1s1 <span class="c1">#卸载</span>
+diskutil list <span class="c1"># 确认设备  (通过存储大小)</span>
+<span class="c1"># 安装系统</span>
+dd <span class="nv">bs</span><span class="o">=</span>4m <span class="k">if</span><span class="o">=</span>pi.img <span class="nv">of</span><span class="o">=</span>/dev/rdisk1 <span class="c1">#我的速度大概是17m/s</span>
+diskutil unmountDisk /dev/disk1  <span class="c1">#卸载设备</span>
+</pre></div>
+
+
+<p>至此，系统就刷好了</p>
+<h3>重刷装有系统的sd卡</h3>
+<p>如果是重刷装有系统的sd卡,我们需要先把SD卡还原成初始状态：</p>
+<ul>
+<li>下载<a href="http://www.alexpage.de/download/usbit/bootsector.img">bootsector.img</a></li>
+<li>dd bs=4m if=./bootsector.img of=/dev/rdisk1 # 假设设备为disk1 </li>
+</ul>
+<p>然后格式化sd卡(我把它格式化为MS-DOS(FAT))，至此你就可以把它当做新卡，用处理新卡的方式安装系统了</p>
+<h1>登录系统</h1>
+<p>我只买了树莓派，没有买高清转接头之类的东西，没打算把树莓派连到屏幕。那么我们如何登录系统，进行操作呢</p>
+<p>首先使用网络连接树莓派网口，然后找个扫描ip的软件,我用的是fing（mac和iphone都有），手机/电脑只要和树莓派在同个网络里，就可以找到它（通过设备名） （ps: brew cask install fing）</p>
+<p>然后ssh登录即可，用户名和密码分别是：pi/raspberry</p>
+<p>树莓派3代自带无线网卡，我们把无线网卡连上wifi，之后就不需要，细节下文再说</p>
+<h1>配置</h1>
+<p>输入<code>sudo raspi-config</code>开始设置，相关设置可以看说明</p>
+<h2>#Expand Filesystem</h2>
+<p>扩展 SD 卡上可用的空间, 否则你会觉得怎么可用空间这么小</p>
+<h3>配置<a href="https://zh.wikipedia.org/zh/VNC">VNC</a></h3>
+<p>VNC借由网络，可发送键盘与鼠标的动作及即时的屏幕画面</p>
+<p>VNC与操作系统无关，因此可跨平台使用</p>
+<p>我在mac下使用RealVNC</p>
+<div class="highlight"><pre><span></span>sudo apt-get install tightvncserver <span class="c1"># 安装</span>
+vncserver :1 <span class="c1"># 启用 ，之后在 vnc client里输入 ip:1即可进入图形界面</span>
+<span class="c1"># vncpasswd # 修改密码</span>
+</pre></div>
+
+
+<h3>换国内源</h3>
+<p>```:::text</p>
+<h1>sudo vi /etc/apt/sources.list ,使内容变为</h1>
+<p>deb http://mirrors.aliyun.com/raspbian/raspbian/ jessie main non-free contrib
+deb-src http://mirrors.aliyun.com/raspbian/raspbian/ jessie main non-free contrib</p>
+<div class="highlight"><pre><span></span>### 无线网络
+如果你直接在命令行里配置可以参考:[树莓派 Raspberry Pi 设置无线上网](http://www.jianshu.com/p/b42e8d3df449)
+
+修改配置文件:`/etc/network/interfaces`:
+</pre></div>
+
+
+<p>:::text
+auto wlan0
+iface wlan0 inet dhcp
+wpa-conf /etc/wpa.conf
+iface default inet dhcp</p>
+<div class="highlight"><pre><span></span>之后在`/etc/wpa.conf`里加上你的无线热点(可以添加多个)：
+</pre></div>
+
+
+<p>:::text
+network={
+        ssid="xxx"
+        key_mgmt=WPA-PSK
+        psk="xxx"
+        id_str="myiphone"
+}</p>
+<div class="highlight"><pre><span></span>无线网卡的控制命令为：
+
+```bash
+sudo ifup wlan0 #启用
+sudo ufdown wlan0 #关闭
+sudo service network-manager restart #重启
+</pre></div>
+
+
+<p>更直观的配置方式可以使用VNC client进入图形环境里</p>
+<h3>其它</h3>
+<h4>我的编程环境</h4>
+<div class="highlight"><pre><span></span>sudo apt-get install vim git tmux 
+
+<span class="c1"># 我的vim配置文件 </span>
+wget https://raw.githubusercontent.com/wwj718/wwj718-vim/master/wwj718_vim_vimrc -O ~/.vimrc
+</pre></div>
+
+
+<h4>jupyter lab （开发环境）</h4>
+<div class="highlight"><pre><span></span>sudo pip install pip --upgrade -i http://pypi.douban.com/simple
+sudo apt-get install python-dev
+
+<span class="c1"># jupyter</span>
+sudo pip install jupyter  -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+sudo pip install jupyterlab  -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+
+sudo jupyter serverextension <span class="nb">enable</span> --py jupyterlab --sys-prefix
+<span class="c1"># jupyter lab --notebook-dir=&quot;.&quot; --no-browser --port 5000 --ip=0.0.0.0 </span>
+<span class="c1"># vim ~/.bashrc</span>
+<span class="c1"># alias jupyterlab=&quot;jupyter lab --notebook-dir=&quot;.&quot; --no-browser --port 8888 --ip=0.0.0.0&quot;</span>
+<span class="c1"># jupyter notebook --no-browser --port 5000 --ip=0.0.0.0 </span>
+<span class="c1"># 属于jupyter作为开发环境</span>
+</pre></div>
+
+
+<h4>supervisor</h4>
+<div class="highlight"><pre><span></span><span class="c1">#切换到sudo用户</span>
+pip install supervisor
+echo_supervisord_conf &gt; /etc/supervisord.conf
+mkdir /etc/supervisord.conf.d
+<span class="c1"># 修改配置文件,include区段修改为 files = /etc/supervisord.conf.d/*.conf</span>
+<span class="c1"># 开机自启 . 往/etc/rc.local加入/usr/local/bin/supervisord</span>
+</pre></div>
+
+
+<h4><a href="https://github.com/rupa/z">z</a></h4>
+<div class="highlight"><pre><span></span>wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/z.sh
+<span class="c1"># 在.bashrc添加 ~/.bashrc</span>
+<span class="nb">echo</span> . ~/z.sh &gt; ~/.bashrc
+<span class="c1"># souce ~/.bashrc</span>
+</pre></div>
+
+
+<h1>GPIO相关</h1>
+<h3>I2C</h3>
+<p>如果要用Adafruit_LED_Backpack,需要开启I2C</p>
+<div class="highlight"><pre><span></span>sudo apt-get install python-smbus
+sudo apt-get install i2c-tools
+sudo raspi-config <span class="c1">#advanced options</span>
+sudo vim  /etc/modules <span class="c1"># add i2c-bcm2708 and i2c-dev </span>
+<span class="c1"># reboot</span>
+<span class="c1"># test</span>
+sudo i2cdetect -y 1
+</pre></div>
+
+
+<h1>坑</h1>
+<p>09-23的版本坑多</p>
+<h3>zip包mac下无法解压</h3>
+<p>在linux和window下都行</p>
+<h3>ssh端口拒绝</h3>
+<p>ip能ping通，ssh端口关闭，怀疑是ssh server没有开启</p>
+<p>nmap -p 22 xxx 测试关闭，fuck</p>
+<p>建议下载<a href="https://downloads.raspberrypi.org/raspbian/images/raspbian-2016-05-31/2016-05-27-raspbian-jessie.zip">5-27版本</a>,所有版本在这里：<a href="https://downloads.raspberrypi.org/">downloads.raspberrypi.org</a></p>
+<h1>参考</h1>
+<ul>
+<li><a href="http://www.shumeipai.net/thread-1263-1-1.html?_dsign=55be35fa">用镜像写入工具将安装过树莓派系统的SD卡还原卡</a></li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>
+</hr>
+</hr>
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机登录：</h4>
+<img src="/img/ewm.jpg" alt="二维码">
+<hr>
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/途中.html">
+    <i class="icon-folder-open icon-large"></i>途中
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            被误解是表达者的宿命<hr>
+              powered by Pelican 
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
