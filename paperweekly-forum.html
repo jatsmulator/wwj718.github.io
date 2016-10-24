@@ -1,0 +1,780 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+就喜欢你这种没事喜欢看看源码的人
+你如果恰好也熟悉git/requirejs/reactjs
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>论坛机器人的技术实现</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="http://7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li class="active">
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/途中.html">
+						<i class="icon-folder-open icon-large"></i>途中
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to 论坛机器人的技术实现">
+					论坛机器人的技术实现 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-10-24T00:00:00+00:00">
+	<i class="icon-calendar"></i>一 24 十月 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/bian-cheng.html"><i class="icon-folder-open"></i>编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/code.html"><i class="icon-tag"></i>code</a>
+</footer><!-- /.post-info -->		</div>
+		<h1>大纲</h1>
+<ul>
+<li>最初的需求 ：<img alt="" src="http://oav6fgfj1.bkt.clouddn.com/paperweeklyae5df2dd.png" />  （哈哈项目经理这份荣耀归@张俊）  </li>
+<li>开源:<a href="https://github.com/wwj718/paperweekly_forum">paperweekly_forum</a></li>
+<li>只论述实现，安装细节看文档</li>
+<li>我用了一个晚上时间实现了微信与论坛的通信机制（大半时间在熟悉Misago）。次日早起，调试完成</li>
+</ul>
+<h1>前言</h1>
+<p>群主@张俊有天晚上和我说邀一期文章，来介绍论坛机器人的实现，诚惶诚恐，群里大神云集，欢迎拍砖</p>
+<p>这里主要谈论整体的设计和关键部分，细节大家可以看文档和源码 ：）</p>
+<h1>论坛机器人是什么鬼</h1>
+<h3>缘起</h3>
+<p>中秋假期的最后一个晚上，在paperweekly群里，看到paperweekly发起人@张俊在征集论坛的开源解决方案</p>
+<h3>功能</h3>
+<p>目前实现了三个功能：</p>
+<ul>
+<li>微信群与paperweekly论坛双向通信</li>
+<li>消息转发（只支持文本（utf-8，包含ejjor）和微信自带表情）</li>
+<li>问题搜索</li>
+</ul>
+<p>以上三个功能按实现的先后顺序排列</p>
+<p>下面，我们分别简述他们的实现</p>
+<p>https://github.com/wwj718/paperweekly_forum</p>
+<h1>微信群与paperweekly论坛双向通信</h1>
+<p>这是最初的需求，@张俊同学觉得群聊消息归档不便，不适合对问题做深入讨论问题。为了更加高效的分类和管理大家讨论的精华，决定做个bot，来与外部bbs打通数据。交流和回答的时候只要按照格式，机器人就能自动处理消息</p>
+<p>我觉得这个想法很有趣，决定一试。于是用了一个晚上时间实现了微信与论坛的通信机制（大半时间在熟悉Misago）。次日早起，调试完成</p>
+<h3>思路</h3>
+<p>论坛机器人实际是个消息转发bot</p>
+<h3>思路</h3>
+<ul>
+<li>事件机制: 从论坛-&gt;微信 （用消息队列）</li>
+<li>人工标记：从微信-&gt;论坛 @bot</li>
+<li>中间层分类，questionParser</li>
+</ul>
+<h3>论坛框架选型</h3>
+<p>群里熟悉python的小伙伴居多，选型上放弃了discourse。一番筛选下来，决定使用<a href="https://github.com/rafalp/Misago">Misago</a></p>
+<blockquote>
+<p>Misago is fully featured forum application written in Python and ES6, powered by Django and React.js</p>
+</blockquote>
+<h3>介绍</h3>
+<p>我们引用该项目首页的介绍：</p>
+<blockquote>
+<p>Misago aims to be complete, featured and modern forum solution that has no fear to say 'NO' to common and outdated opinions about how forum software should be made and what it should do.</p>
+</blockquote>
+<p>该项目主要由波兰程序员<a href="https://github.com/rafalp">Rafał Pitoń</a>推进，他完成了绝大多数的代码实现</p>
+<p>技术栈很新,用的多是当下正流行的开源组件,折腾起来很有意思.</p>
+<h3>特性</h3>
+<p>就论坛应用而言，这个项目的设计很现代</p>
+<ul>
+<li>基于web的管理界面（和discourse类似）: <code>/admincp/</code>   </li>
+</ul>
+<p><img alt="" src="http://oav6fgfj1.bkt.clouddn.com/paperweekly862d225b.png" /></p>
+<ul>
+<li>对markdown的支持（学霸多。支持mathjax）</li>
+</ul>
+<h5>数据库建立</h5>
+<p>sudo su - postgres</p>
+<p>登录数据库：<code>psql -U dbuser -d exampledb -h 127.0.0.1 -p 5432</code></p>
+<p>另外推荐一个很受欢迎的命令行工具:<a href="https://github.com/dbcli/pgcli">pgcli</a>,使用pgcli连接数据库:<code>pgcli -U dbuser -d exampledb -h 127.0.0.1 -p 5432</code></p>
+<p>还有个工具:<a href="https://github.com/jeffknupp/sandman2">sandman2</a>,用于提供数据库的rest接口,方面我们直接侵入拓展，暴力美学</p>
+<p>sandman2ctl postgresql+psycopg2://dbuser:wwjtest@localhost/exampledb. 访问：<code>http://127.0.0.1:5000/admin/</code></p>
+<p>forum项目中，设置如下:</p>
+<div class="highlight"><pre><span></span>DATABASES = {
+      &#39;default&#39;: {
+          # Only PostgreSQL is supported
+          &#39;ENGINE&#39;: &#39;django.db.backends.postgresql_psycopg2&#39;,
+          &#39;NAME&#39;: &#39;exampledb&#39;,
+          &#39;USER&#39;: &#39;dbuser&#39;,
+          &#39;HOST&#39;: &#39;localhost&#39;,
+          &#39;PASSWORD&#39;: &#39;password&#39;,
+          &#39;PORT&#39;: 5432,
+      }
+}
+</pre></div>
+
+
+<h3>正式安装</h3>
+<h4>方法一</h4>
+<p>安装官方的做法，应该这样:</p>
+<div class="highlight"><pre><span></span>git clone https://github.com/rafalp/Misago
+<span class="nb">cd</span> Misago
+<span class="c1"># 使用virtualenv建立虚拟环境</span>
+python setup.py install
+pip install -r misago/project_template/requirements.txt
+misago-start.py testforum <span class="c1"># 项目本身有坑，你可以直接使用我建立好的论坛: https://github.com/wwj718/paperweekly_forum</span>
+<span class="c1"># 构建项目依赖</span>
+<span class="nb">cd</span> testforum
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+</pre></div>
+
+
+<p>在此解释下Misago个testforum的关系，这就类似于，django和django site的关系，testforum可以看做Misago的示例，Misago里是作者写好的论坛的核心部件，使用misago-start.py新建的工程，将直接使用Misago的部件来够构建论坛，这样的好处是，用的定制化内容可以放在自建项目里，而核心组件由社区推动，这是开源社区常见做法</p>
+<h4>方法二</h4>
+<p>我已经把项目剥离到github，如果你安装我的版本，坑可能少些</p>
+<div class="highlight"><pre><span></span># 使用virtualenv建立虚拟环境
+# 先把pip升级到1.8以上: pip install --upgrade pip
+
+git clone https://github.com/wwj718/Misago  --depth=1 # 我fork了自己的版本(2016.09.18)，之后的定制基于这个版本,--depth=1表示只克隆最新的版本
+pip install -e ./Misago # -e是edit模式，对源码的修改即时生效 , 源码安装, __version__ = &#39;0.6a1.dev1&#39;,
+git clone https://github.com/wwj718/paperweekly_forum
+pip install -r paperweekly_forum/testforum/requirements.txt
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+</pre></div>
+
+
+<h5>我的调整</h5>
+<ul>
+<li>使用OAuth2Authentication(django-oauth-toolkit)，引出restful接口与外部bot通信</li>
+<li>开启/admin</li>
+<li>支持跨域请求</li>
+</ul>
+<p>默认的设置:<a href="https://github.com/rafalp/Misago/blob/master/misago/conf/defaults.py">conf/defaults</a>，这是django层面的默认设置，可以在forum项目的settings.py中自行覆盖</p>
+<h4>发帖</h4>
+<p>httpie
+http post  http://paperweekly.just4fun.site/api/threads/ title='from httpie' category=3  post="from httpie"  "Authorization: Bearer test" </p>
+<p>{
+    "id": 2,
+    "title": "from httpie",
+    "url": "/thread/from-httpie-2/"
+}</p>
+<p>requests</p>
+<div class="highlight"><pre><span></span>def post2forum(content,title=&quot;来自paperweekly的问题&quot;):
+    threads_url = &quot;http://paperweekly.just4fun.site/api/threads/&quot;
+    headers = {&quot;Authorization&quot;: &quot;bearer test&quot;, &quot;User-Agent&quot;: &quot;wechatClient/0.1 by paperweekly&quot;}
+    post_data = {&quot;title&quot;: title, &quot;post&quot;:content, &quot;category&quot;: 3}
+    response = requests.post(threads_url, data=post_data,headers=headers,verify=False)
+    return response.json() #json
+</pre></div>
+
+
+<h3>发评论</h3>
+<p>从id里</p>
+<p>http post http://paperweekly.just4fun.site/api/threads/2/posts/ post='test2'  "Authorization: Bearer test"  根据up发帖</p>
+<p>@bot#threads#2 test2</p>
+<h3>论坛管理</h3>
+<ul>
+<li>/admincp/：管理界面入口(需要管理员权限) </li>
+<li>/admincp/settings/basic/ :  论坛基本设置，名称等</li>
+<li>/admincp/settings/users/ : 注册机制设置</li>
+</ul>
+<h1>todo</h1>
+<p>对数学公式的支持</p>
+<div class="math">$$e=mc^2$$</div>
+<p>docker化</p>
+<p>依赖调整 1.5</p>
+<p>写具体依赖</p>
+<h1>与微信通信</h1>
+<p>我们使用<a href="https://github.com/liuwons/wxBot">wxBot</a>来与微信通信，视为微信的io即可</p>
+<p>为了在linux命令行中使用，需要设置 WXBot 对象的 conf['qr'] 为 tty ,如此一来二维码直接在终端打印出</p>
+<h3>将微信群中的问题类消息发往论坛</h3>
+<p>源码参考:<a href="https://github.com/wwj718/paperweekly_forum/blob/master/wx_test.py">wx_test.py</a></p>
+<div class="highlight"><pre><span></span>
+</pre></div>
+
+
+<p>wxbot出现1102错误</p>
+<p>试试：https://github.com/littlecodersh/ItChat  这个可用</p>
+<h1>服务器监控</h1>
+<p>使用之前的anjax 或者linux的</p>
+<h1>正式部署</h1>
+<p>http://michal.karzynski.pl/blog/2013/06/09/django-nginx-gunicorn-virtualenv-supervisor/</p>
+<p>django</p>
+<p>收集静态文件：<code>python manage.py  collectstatic</code></p>
+<p>tmux 中： gunicorn</p>
+<p><code>gunicorn testforum.wsgi:application --bind 127.0.0.1:8001 -w 4</code></p>
+<p>反向代理</p>
+<p>http://paperweekly.just4fun.site/</p>
+<h3>nginx</h3>
+<div class="highlight"><pre><span></span>
+</pre></div>
+
+
+<h1>坑</h1>
+<p>ubuntu14.04</p>
+<p>http://stackoverflow.com/questions/4011705/python-the-imagingft-c-module-is-not-installed  pillow的问题</p>
+<div class="highlight"><pre><span></span>sudo apt-get install libfreetype6-dev
+Then, in the virtualenv:
+
+pip uninstall pillow
+pip install --no-cache-dir pillow
+</pre></div>
+
+
+<h3>顶部警告</h3>
+<p>'Warning: This is unreleased version of Misago. There's no support or update path available for it!'</p>
+<p>Misago中misago/templates/misago/base.html </p>
+<h3>smtplib</h3>
+<div class="highlight"><pre><span></span># smtp
+#EMAIL_USE_TLS = True
+EMAIL_BACKEND = &#39;django.core.mail.backends.smtp.EmailBackend&#39;
+EMAIL_HOST = &#39;smtp.qq.com&#39;
+EMAIL_HOST_PASSWORD = &#39;wwjtest&#39; #my gmail password
+EMAIL_HOST_USER = &#39;2230360562@qq.com&#39; #my gmail username
+EMAIL_PORT = 25
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+</pre></div>
+
+
+<p>wwj718</p>
+<p>wwj</p>
+<h3>备份</h3>
+<p>postgres
+http://postgresguide.com/utilities/backup-restore.html
+pg_dump exampledb &gt; /tmp/exampledb.sql
+恢复：psql  exampledb &lt;  /tmp/exampledb.sql</p>
+<h1>数据迁移</h1>
+<p>pg_dump -d exampledb -U dbuser -W -h 127.0.0.1 -p 5432 &gt; /tmp/exampledb.sql 
+scp  /tmp/exampledb.sql wwj@139.162.234.107:/tmp
+sudo su - postgres
+psql  exampledb &lt;  /tmp/exampledb.sql #先删除原有数据</p>
+<p>备份到git里，大文件
+pg_dump -Fc -d exampledb  -U dbuser -W -h 127.0.0.1 -p 5432 &gt; /tmp/exampledb.bak # compressed binary format </p>
+<h3>收集翻译信息</h3>
+<p>django-admin makemessages -l zh_CN</p>
+<p>django-admin compilemessages</p>
+<h3>categories</h3>
+<p>http://paperweekly.just4fun.site/categories/</p>
+<p>表里记录了最新的一次提交，如果提交被删，就会有问题</p>
+<p>Misago_categories_category</p>
+<p>删了，分类会报错</p>
+<p>又好了  只有开发环境有问题</p>
+<h3>中文翻译</h3>
+<p>https://github.com/fooying/misago-trans-cn</p>
+<h1>markdown</h1>
+<p>渲染可以纯前端</p>
+<p>看下取得的页面</p>
+<p>http://paperweekly.just4fun.site/thread/hello-7/ </p>
+<p>https://github.com/rafalp/Misago/blob/master/misago/markup/parser.py  渲染，不是前端做的</p>
+<p>bleach ： Bleach is a whitelist-based HTML sanitizing library that escapes or strips markup and attributes.  漂白剂</p>
+<p>bleach.linkify('an <script>evil()</script> example')
+ u'an &lt;script&gt;evil()&lt;/script&gt; example'</p>
+<p>markdown==2.6.6
+https://github.com/waylan/Python-Markdown  文档：https://pythonhosted.org/Markdown/</p>
+<p>支持数学公式 
+https://github.com/mitya57/python-markdown-math 文档里说清楚拓展方式了</p>
+<p>https://github.com/rafalp/Misago/blob/master/misago/markup/parser.py#L66 只在这里生效</p>
+<p>misago/markup/parser.py</p>
+<div class="highlight"><pre><span></span>md = markdown.Markdown(safe_mode=&#39;escape&#39;,
+                       extensions=[&#39;nl2br&#39;]) # extensions是啥  mdx_math ，已经生效
+</pre></div>
+
+
+<p>/home/wwj/paperweekly/paperweekly_forum/testforum/theme/templates
+/home/wwj/paperweekly/Misago/misago/templates
+/home/wwj/paperweekly/Misago/misago/templates/misago/thread/thread.html
+/home/wwj/paperweekly/Misago/misago/templates/misago/base.html
+/home/wwj/paperweekly/Misago/misago/templates/misago/scripts.html</p>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+
+<p>misago/markup/parser.py</p>
+<p>misago/templates/misago/thread/posts/post/body.html </p>
+<p>并不是这里？？</p>
+<p>这才是核心所在：https://github.com/rafalp/Misago/blob/17698a67f60e8a2b1f69c6261997481c0a65a944/frontend/src/components/posts-list/post/body.js#L22  ？</p>
+<p>thread/test-22 页面是怎么来的</p>
+<p>/thread/test-22 slug   -&gt; template_name = 'misago/thread/thread.html'</p>
+<div class="highlight"><pre><span></span>def get_default_frontend_context(self):
+    return {
+        &#39;THREADS_API&#39;: reverse(&#39;misago:api:thread-list&#39;)
+    }
+# api
+</pre></div>
+
+
+<p>get_frontend_context</p>
+<p>api有数据，允许js访问</p>
+<p>Thread get json</p>
+<p>变为一个misago.init 在页低</p>
+<p>misago js对象</p>
+<p>http://paperweekly.just4fun.site/static/misago/js/misago.js</p>
+<p>js取到时候就处理了script</p>
+<p>parsed_text = md.convert(text)</p>
+<p>是因为bleach.linkify</p>
+<p>如果有script，就会引起页面错误</p>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Marked in the browser</title>
+  <script src="http://cdn.bootcss.com/marked/0.3.6/marked.js"></script>
+</head>
+<body>
+  <div id="content"></div>
+  <script>
+    document.getElementById('content').innerHTML =
+      marked('# Marked in browser\n\nRendered by **marked**.');
+  </script>
+</body>
+</html>
+
+<p>https://github.com/chjj/marked</p>
+<p>需要连接数据时怎么放到页面的, misago</p>
+<p>http://paperweekly.just4fun.site/static/misago/js/misago.js</p>
+<p>Misago frontend relies heavily on React.js components backed by Django API</p>
+<p>Misago defines template that allows you to include custom html and js code before Misago's JavaScript app is ran, named scripts.html.</p>
+<p>bootstrap-transition</p>
+<p>https://github.com/rafalp/Misago/tree/master/misago/static/misago/js    这是编译好的</p>
+<p>需要构建好的前端开发环境</p>
+<p>react才能动页面</p>
+<p>看看这个  https://github.com/trentm/python-markdown2</p>
+<p>实施： 查看页面网页，markdown嵌入 react</p>
+<p>ok啦公式在前端渲染！</p>
+<p>直接在前端解析多好</p>
+<h1>redis远程</h1>
+<p>http://stackoverflow.com/questions/16539061/talking-to-a-remote-redis-server-using-redis-py-python-wrapper-over-redis  密码</p>
+<p>http://stackoverflow.com/questions/30149493/redis-auth-command-in-python</p>
+<p>先做正向发送再做反向</p>
+<p>http://stackoverflow.com/questions/12967107/managing-connection-to-redis-from-python</p>
+<p>实际是分布式消息队列</p>
+<p>分布式消息队列  先进先出</p>
+<p>https://www.rails365.net/articles/postgresql-listen-notify-xiao-xi-dui-lie-shi-san-san   PostgreSQL的listen/notify之消息队列</p>
+<p>docker化，redis</p>
+<p>docker run --name redis -d -p  $LOCAL_IP:6379:6379 redis</p>
+<p>https://yeasy.gitbooks.io/docker_practice/content/appendix_repo/redis.html
+https://hub.docker.com/_/redis/</p>
+<p>redis.conf</p>
+<p>http://blog.binux.me/2016/05/deployment-of-demopyspiderorg/</p>
+<p>kinot来查询，存储信息  消息队列  分布式消息中间件  rabiitmq</p>
+<p>费io没事  用多线程</p>
+<p>一个发一个取</p>
+<p>不使用redis和rabbitmq，redis remote 不安全  rabbitmq客户端不方便，作为服务</p>
+<p>https://github.com/Kinto/kinto</p>
+<p>postgres rest 
+real time</p>
+<p>https://ruby-china.org/topics/28094 redis安全  远程只读  验证方式，还是kinto来得好</p>
+<p>http://blog.just4fun.site/kinto-note-05-31.html  基于docker吧，构建实时应用，读取最新</p>
+<p>直接 docker run --env-file ./kinto.env -p 8888:8888 kinto/kinto-server</p>
+<p>kinto-telegram-wall 消息墙明显是只拉取最新  消息发到kinto（生产者），然后另一个消费者去拉取</p>
+<p>http://kinto.readthedocs.io/en/stable/tutorials/synchronisation.html   同步机制
+Remote changes are downloaded and applied on the local data.</p>
+<p>看实现</p>
+<p>已有实现：https://kintojs.readthedocs.io/en/latest/</p>
+<p>列出两次查询的不同即可了，都用当前时间就行。测试</p>
+<p>https://github.com/Kinto/kinto-http.py  python客户端</p>
+<h1>处理消息</h1>
+<p>{'ActualNickName': u't', u'AppInfo': {u'Type': 0, u'AppID': u''}, u'ImgWidth': 0, u'FromUserName': u'@@6d1502831fc5aafa583eecffe3486cbba4b5dae509f1664fdc30bec95003d715', u'PlayLength': 0, u'ImgStatus': 1, u'RecommendInfo': {u'UserName': u'', u'Province': u'', u'City': u'', u'Scene': 0, u'QQNum': 0, u'Content': u'', u'Alias': u'', u'OpCode': 0, u'Signature': u'', u'Ticket': u'', u'Sex': 0, u'NickName': u'', u'AttrStatus': 0, u'VerifyFlag': 0}, u'Content': u'\u5475\u5475', u'MsgType': 1, u'ImgHeight': 0, u'StatusNotifyUserName': u'', u'StatusNotifyCode': 0, 'Type': 'Text', u'NewMsgId': 5275517008260413966, u'Status': 3, u'VoiceLength': 0, u'MediaId': u'', u'MsgId': u'5275517008260413966', u'ToUserName': u'@70a8e3a5d769c4ee46a761e59a193e12', u'ForwardFlag': 0, u'FileName': u'', u'Url': u'', u'HasProductId': 0, u'FileSize': u'', u'AppMsgType': 0, 'Text': u'\u5475\u5475', 'ActualUserName': u'@e2ba58ea127885fee586cf661c8c1b0713cc57f5cdd52d5f6dfbe890e0e7f104', u'Ticket': u'', 'isAt': False, u'CreateTime': 1474295125, u'SubMsgType': 0}</p>
+<h1>论坛发送消息</h1>
+<p>https://github.com/rafalp/Misago/blob/master/misago/threads/api/threads.py#L90</p>
+<p>Misago/misago/threads/api/threads.py</p>
+<p>title  pk
+thread.first_post.poster_name
+thread.first_post.original
+用户名</p>
+<p>pip install kinto-http</p>
+<p>用sandman2看</p>
+<p>http://139.196.14.215:5000/admin/misago_threads_thread/
+没在misago_threads_thread表里，post有版本</p>
+<p>kinto-http==6.2.1</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    var location_protocol = (false) ? 'https' : document.location.protocol;
+    if (location_protocol !== 'http' && location_protocol !== 'https') location_protocol = 'https:';
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' }, Macros: {} }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>
+</hr>
+</hr>
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机登录：</h4>
+<img src="/img/ewm.jpg" alt="二维码">
+<hr>
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/途中.html">
+    <i class="icon-folder-open icon-large"></i>途中
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            被误解是表达者的宿命<hr>
+              powered by Pelican 
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
