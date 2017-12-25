@@ -1,0 +1,538 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+喜欢你这种没事喜欢翻源码的人
+如果你恰好也热爱技术、喜欢折腾，来啊，互相伤害，一起捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>micro:bit使用笔记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="http://7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to micro:bit使用笔记">
+					micro:bit使用笔记 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2017-12-24T00:00:00+00:00">
+	<i class="icon-calendar"></i>日 24 十二月 2017
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/ying-jian.html"><i class="icon-folder-open"></i>硬件</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/microbit.html"><i class="icon-tag"></i>microbit</a>
+</footer><!-- /.post-info -->		</div>
+		<p>折腾micro:bit过程中记录的笔记。涉及资源、工具、文档等。</p>
+<p>如果你想获取更多micro:bit相关资源，可以到<a href="https://github.com/wwj718/awesome-microbit-zh">awesome-microbit-zh</a>里淘金</p>
+<h1>micro:bit概述</h1>
+<blockquote>
+<p>micro:bit是一个小型的可编程计算机，旨在使学习与教学变得轻松有趣</p>
+</blockquote>
+<p>micro:bit是一款由BBC（英国广播电视公司）推出的为青少年编程教育设计的微型电脑开发板(43 mm × 52 mm), 集成了ARM Cortex-M0处理器、低功耗蓝牙，加速度计，磁力计，三个按钮，5 x 5 LED点阵以及GPIO。</p>
+<p>使用micro:bit可以快速地把你脑子中好玩的想法付诸实践，做出酷炫的小发明。</p>
+<p>microbit官网有许多统计数据表明这个板子取得的教育成就和受欢迎程度:<a href="http://microbit.org/teach/">Research Findings</a></p>
+<h3>技术参数</h3>
+<p><img alt="" src="http://tech.microbit.org/docs/hardware/assets/microbit-overview.png" /></p>
+<ul>
+<li>5x5 LED点阵</li>
+<li>3个按钮（2个用于用户操作，1个用于复位）</li>
+<li>23个GPIO引脚</li>
+<li>Nordic nRF51822 - 16 MHz 32位ARM Cortex-M0 微控制器，256 KB 闪存，16 KB RAM，2.4 GHz 蓝牙低功耗无线网络。ARM内核可以在16 MHz或32.768 kHz之间切换. 实际运行代码的地方</li>
+<li>NXP/Freescale KL26Z - 接口芯片／接口MCU. 48MHz 的ARM Cortex-M0+ 内核微控制器，其中有全速USB 2.0 OTG控制器，用作USB和Nordic nRF51822控制器之间的通信接口</li>
+<li>NXP/Freescale MMA8652 - 3轴加速度传感器(I²C总线)</li>
+<li>NXP/Freescale MAG3110 - 3轴磁力仪传感器I²C总线（用作指南针和金属探测器）</li>
+</ul>
+<p>microbit有两个两个MCU(nRF51822/KL26Z)，可能一开始会让人有点疑惑，它们的关系如下</p>
+<div class="highlight"><pre><span></span>     PC
+      ^                                                    +----------------------------+
+      |        +---------------------+                     |       TARGET MCU           |
+      |        |   INTERFACE MCU     |                     | +------------------------+ |
+      |        |                     |                     | |      Application       | |
+      |        | +-----------------+ |     SWD             | +------------------------+ |
+      |  USB   | |                 | +---------------------+ | micro:bit runtime DAL  | |
+      +--------+ |    DAPLink      | &lt;----------+          | +------------------------+ |
+        * Mass | +-----------------+ |     UART |          | |          | |           | |
+        Storage| +-----------------+ |          |          | |   mbed   | | SoftDevice| |
+               | |   Bootloader    | |          +------------&gt;          | |           | |
+        * UART | +-----------------+ |                     | +----------+ +-----------+ |
+               +---------------------+                     +----------------------------+
+        * CMSIS-DAP
+</pre></div>
+
+
+<p>更多细节参考:<a href="http://tech.microbit.org/software/daplink-interface/">DAPlink and the USB interface</a></p>
+<!--
+### 历史
+micro:bit旨在鼓励孩子开始编程和构建新事物，而不是成为软件/媒体消费者.它可以与树莓派协同工作。
+-->
+
+<h3>开放性</h3>
+<h4>硬件开源</h4>
+<p>关于硬件部分，两部分关键信息可以一窥Microbit 的内部设计:</p>
+<ul>
+<li><a href="http://tech.microbit.org/hardware/schematic/">线路图(schematics)</a>, 可以看到主要零件的链接方式及设计.</li>
+<li><a href="http://tech.microbit.org/hardware/reference-design/">reference design</a>, 这部分的数据可以帮助进一步了解Microbit 的设计及变更</li>
+</ul>
+<p>关于硬件部分更多的描述参考:<a href="http://tech.microbit.org/hardware/">Hardware Description</a></p>
+<p>兰卡斯特大学（Lancaster University）构建了完整的microbit的硬件抽象（C/C++），包括一个事件调度器和消息总线，这对个人用户和更高级的语言都是有用的（比如Python），这儿有完整的<a href="https://lancaster-university.github.io/microbit-docs/ubit/">API文档</a>和<a href="http://lancaster-university.github.io/microbit-docs/online-toolchains/">入门指南</a></p>
+<h4>软件开源</h4>
+<p>而为micro:bit编程的软件/web平台，目前基本都开源</p>
+<h1>开始编程</h1>
+<h3>可选编程工具</h3>
+<p>有多种工具可以为microbit编程，包括图形化界面(makecode等)、Python、C++等。我们先在架构层面关注一下microbit的运行时，如下图:</p>
+<p><img alt="" src="http://tech.microbit.org/docs/software/assets/dal-4032c.png" /></p>
+<p>代码的执行过程为(如果你对更多细节感兴趣，可以参考<a href="http://tech.microbit.org/software/">the micro:bit Software Ecosystem</a>):</p>
+<p><img alt="" src="http://tech.microbit.org/docs/software/assets/overview.png" /></p>
+<p>尽管有许多可选工具，官方推荐我们使用两种工具来为microbit编程:</p>
+<ul>
+<li>由微软打造的<a href="https://makecode.microbit.org/#">JavaScript Blocks Editor(makecode)</a>: makecode是一个图形化工具，对新手友好</li>
+<li>来自python社区的<a href="http://python.microbit.org/v/1">Python Editor</a>: 使用python代码驱动microbit，适合进阶的孩子</li>
+</ul>
+<p>如果你偏好使用离线的编辑器,推荐<a href="https://codewith.mu/">Mu</a>和<a href="http://kittenbot.cn/bbs/forum.php?mod=viewthread&amp;tid=156&amp;highlight=makecode">Makecode离线版本</a></p>
+<p>更多可选择的编程工具，你可以参考这里:<a href="https://github.com/wwj718/awesome-microbit-zh#%E7%BC%96%E7%A8%8B">awesome-microbit-zh 编程</a></p>
+<h3>图形化编程</h3>
+<p>如果你选择图形化编程,目前的可选方案有几个:</p>
+<ul>
+<li><a href="https://makecode.microbit.org/">makecode</a>： 提供一个基于浏览器的模拟器和积木编程环境，堆叠好的积木块最终将生成JavaScript (TypeScript)代码。PXT支持代码的双向转换！</li>
+<li><a href="https://www.microbit.co.uk/app/#create:tomwku">Code Kingdoms</a> - 基于图形界面的编程工具，帮助用户从拖曳式编程到文本编程(JavaScript)的过渡.</li>
+<li><a href="http://lab.open-roberta.org/">Open Roberta Lab</a> - 为机器人编程设计的积木时编程环境, 通过将堆叠好的积木生成MicroPython代码来支持microbit.</li>
+<li><a href="http://microbit.site/editor-zh-hans.html">microbit zh</a>: 国内社区提供的在线工具,堆叠好的积木块生成python代码</li>
+</ul>
+<p>在浏览器中的编程环境内置了编译器（可离线使用，十分适合在教室或公共计算机上使用）,代码块转换为hex文件的过程如下</p>
+<p>更多细节,参考这里:<a href="http://tech.microbit.org/docs/software/assets/browser-build-pipeline.png"></a></p>
+<h3>Python 编程</h3>
+<p>microbit上跑了一个MicroPython解释器(一个移植版本):<a href="https://github.com/bbcmicrobit/micropython">bbcmicrobit/micropython</a>.这一点可以通过上边那张关于运行时的图种看出</p>
+<p><a href="https://github.com/bbcmicrobit/micropython">bbcmicrobit/micropython</a>源码中包含了很多使用python驱动microbit的<a href="https://github.com/bbcmicrobit/micropython/blob/master/examples/">examples</a></p>
+<p>既然microbit上跑了MicroPython，那我们就可以用为MicroPython打造的工具来为microbit编程(诸如picocom),关于MicroPython相关的工具和资源，我之前写了这篇文章:<a href="http://blog.just4fun.site/micropython-notes.html">MicroPython使用笔记</a></p>
+<p>这儿有一些工具方便在python脚本和hex文件中转化:<a href="https://github.com/bbcmicrobit/micropython/tree/master/tools">tools</a>、<a href="https://github.com/ntoll/uflash">uflash</a></p>
+<h3>一些有趣项目</h3>
+<ul>
+<li><a href="https://github.com/wwj718/bitio">bitio</a>: 把bitio当成一个IO设备。可以用这库很方便地与电脑脚本，把bitio当成可编程的外设，强烈推荐！</li>
+<li><a href="http://tech.microbit.org/bluetooth/apps-and-examples/">Bluetooth Apps and Examples</a><ul>
+<li><a href="http://www.bittysoftware.com/">bitty software apps</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/wwj718/scratch2-microbit">scratch2-microbit</a>: 使用microbit来控制scratch2中的角色</li>
+<li><a href="https://microbit-playground.co.uk/howto/GUIZero-pySerial-microbit-how-to-connect">pySerial Microbit GUI</a></li>
+</ul>
+<h3>课程</h3>
+<ul>
+<li><a href="http://microbit.org/zh-CN/teach/">microbit teach</a></li>
+<li><a href="http://microbit.org/zh-CN/teach/code-org-fundamentals/">Micro:bit Lessons Aligned to Code.org's CS Fundamentals</a><ul>
+<li><a href="http://microbit.org/zh-CN/2017-12-04-code_org_loops_2/">Course E - Loops 2 - Nested Loops and Scoreboards</a></li>
+<li><a href="http://microbit.org/zh-CN/2017-12-04-code_org_conditionals-1/">Course F - Conditionals 1 - Conditionals with the Weather Predictor</a>:有配套的教师资源</li>
+</ul>
+</li>
+<li><a href="https://microbit-playground.co.uk/">python游乐场</a><ul>
+<li><a href="https://microbit-playground.co.uk/components/PIR-sensor">PIR Sensor</a></li>
+</ul>
+</li>
+<li><a href="http://www.bbc.co.uk/programmes/articles/S3Htm99fVV4XrtncmZfPQT/bbc-micro-bit-classroom-activities">BBC micro:bit classroom activities</a>: 模拟器、作业、slides</li>
+<li><a href="https://makecode.microbit.org/projects">Microsoft 14 Week Curriculum</a></li>
+<li><a href="https://www.microbit.co.uk/STEM">STEM Centre Lessons</a><ul>
+<li><a href="https://microbit0.blob.core.windows.net/pub/hohwmegr/STEM-Learning-Acceleration-lesson-plan.pdf">Acceleration</a><ul>
+<li><a href="http://microbit.org/assets/documents/us_stem_curriculum/stem-acceleration-teacher-notes.pdf">Acceleration STEM Experiment 教师笔记</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1>FAQ</h1>
+<h3>与Arduino对比</h3>
+<p>相比与Arduino，micro:bit具有免装驱动,易上手，电子模块集成度高，支持时下热门的多种编程语言等优势，节省了教学资源成本的同时也大大增加了可玩性和拓展空间。关于这方面的讨论可以参考:<a href="http://kittenbot.cn/bbs/forum.php?mod=viewthread&amp;tid=81">Microbit和arduino有什么关系？</a></p>
+<h3>microbit在拖入hex文件后将自动弹出并自动运行程序</h3>
+<p>microbit的flash文件系统完全是虚拟，这就是为什么在写入新文件之后驱动器会自动弹出，当你把hex文件拖到MICROBIT上，它并没有被写入到闪存里，而是直接流到nRF51822(target MCU)中</p>
+<p>这方便的讨论参考:<a href="http://tech.microbit.org/software/daplink-interface/">DAPlink and the USB interface|Files on the MICROBIT Drive</a></p>
+<h1>参考</h1>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Micro_Bit">wikipedia Micro Bit</a></li>
+<li><a href="http://tech.microbit.org/">microbit developer community</a><ul>
+<li><a href="http://tech.microbit.org/software/">he micro:bit Software Ecosystem</a></li>
+<li><a href="http://tech.microbit.org/hardware/">Hardware Description</a></li>
+</ul>
+</li>
+<li><a href="http://tech.microbit.org/software/runtime-mbed/">The micro:bit runtime and mbed programming</a></li>
+<li><a href="http://www.cnblogs.com/TWmicrobit/p/6984285.html">Microbit 硬件架构介绍</a></li>
+<li><a href="https://github.com/wwj718/awesome-microbit-zh">awesome-microbit-zh</a></li>
+<li><a href="https://microbit.hackster.io/">microbit.hackster.io</a></li>
+<li><a href="http://mc.dfrobot.com.cn/forum.php?mod=viewthread&amp;tid=23903">BBC Micro:bit是什么和microbit怎么玩起来 中文教程</a></li>
+<li><a href="http://kittenbot.cn/bbs/forum.php?mod=viewthread&amp;tid=81">Microbit和arduino有什么关系？</a></li>
+<li><a href="http://tech.microbit.org/software/daplink-interface/">DAPlink and the USB interface</a></li>
+<li><a href="http://lancaster-university.github.io/microbit-docs/online-toolchains/">Web-based C/C++ environments supporting the runtime</a>
+&lt;!--
+https://github.com/bbcmicrobit/micropython/blob/master/tools/pyboard.py  是一个分支</li>
+</ul>
+<p>http://mc.dfrobot.com.cn/forum.php?mod=viewthread&amp;tid=30029  电子琴</p>
+<p>http://mc.dfrobot.com.cn/forum.php?mod=viewthread&amp;tid=30010  计步器</p>
+<p>https://sites.google.com/site/hardwaremonkey/home/handshake  实际使用 实验</p>
+<p>https://github.com/lancaster-university/quiz-bit  投票程序</p>
+<p>https://github.com/ubirch/pxt-ubirch 发送数据到云端</p>
+<p>http://warksjammy.blogspot.kr/2017/07/bitio-blogs-in-one-place.html?view=timeslide  例子 用于控制minecrft  树莓派</p>
+<p>图形化</p>
+<p>http://www.micropython.org.cn/bbs/forum.php?mod=viewthread&amp;tid=273&amp;extra=</p>
+<p>microbit和scratch连接</p>
+<p>https://github.com/vecsei/Scratchbit</p>
+<p>https://www.youtube.com/watch?v=nJengUwURdE&amp;feature=youtu.be</p>
+<p>https://github.com/wwj718/scratch2-microbit  成功！！！ 非常酷</p>
+<p>https://mryslab.github.io/s2m/
+--&gt;</p>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li><a style="text-align: center;" href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://os54tv4fc.bkt.clouddn.com/education.png" width="150px" /> </a></li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li>
+<img style="text-align: center;" src="http://os54tv4fc.bkt.clouddn.com/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            被误解是表达者的宿命<hr>
+              powered by Pelican 
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>

@@ -1,0 +1,559 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+喜欢你这种没事喜欢翻源码的人
+如果你恰好也热爱技术、喜欢折腾，来啊，互相伤害，一起捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>关系型数据库小结</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="http://7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li class="active">
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to 关系型数据库小结">
+					关系型数据库小结 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-05-03T00:00:00+00:00">
+	<i class="icon-calendar"></i>二 03 五月 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/bian-cheng.html"><i class="icon-folder-open"></i>编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/code.html"><i class="icon-tag"></i>code</a>
+</footer><!-- /.post-info -->		</div>
+		<p>平时用ORM偏多，生疏了SQL，周末翻了一遍《SQL必知必会》，也整理了一下相关工具，做个记录</p>
+<h1>关系数据库（Relational database）</h1>
+<p>按照维基百科说法</p>
+<blockquote>
+<p>表(关系Relation)是以行(属性Attribate)和列(值组Tuble)的形式组织起来的数据的集合。一个数据库包括一个或多个表 (关系Relation)。例如，可能有一个有关作者信息的名为authors的表(关系Relation)。每列(值组Tuble)都包含特定类型的信息，如作者的姓氏。每行(属性Attribate)都包含有关特定作者的所有信息：姓、名、住址等等。在关系型数据库当中一个表 (关系Relation)就是一个关系，一个关系数据库可以包含多个表(关系Relation)</p>
+</blockquote>
+<h1>安装</h1>
+<p>开源的关系数据库中，PostgreSQL 与MySQL 最为流行。一般使用linux发行版的包管理器就能方便地安装，更多的安装方式可以参考官网</p>
+<h1>客户端</h1>
+<p>关系数据库中，我用MySQL和SQLite偏多，所以列出这两个数据库相关的工具</p>
+<ul>
+<li><a href="https://www.mysql.com/products/workbench/">MySQL Workbench</a></li>
+<li><a href="https://github.com/dbcli/mycli">mycli</a></li>
+<li><a href="http://mesasqlite.en.softonic.com/mac">MesaSQLite</a>，本地应用首选是sqlite</li>
+</ul>
+<p>当然更经常地，我偏好在jupyter里使用sqlalchemy来连接数据库</p>
+<h1>SQL</h1>
+<p>《SQL必知必会》（第三版）里的代码:<a href="https://github.com/wwj718/teach-yourself-sql.git">teach-yourself-sql</a></p>
+<p>使用mycli连接数据库</p>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">mytest</span><span class="p">;</span> <span class="c1">--创建数据库</span>
+<span class="n">USE</span> <span class="n">mytest</span><span class="p">;</span> <span class="c1">--进入数据库</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>mysql -u root -D mytest   &lt; /tmp/teach-yourself-sql/create.txt  <span class="c1">#创建新表</span>
+mysql -u root -D mytest   &lt; /tmp/teach-yourself-sql/populate.txt  <span class="c1"># 插入数据</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">TABLES</span><span class="p">;</span>  <span class="c1">--查看表</span>
+<span class="k">DESCRIBE</span> <span class="n">Customers</span><span class="p">;</span>  <span class="c1">--显示表结构</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">Customers</span> <span class="k">limit</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">--查看数据 </span>
+</pre></div>
+
+
+<h3>查询</h3>
+<p>使用pandas做实验，存为ipynb</p>
+<p><a href="https://github.com/wwj718/teach-yourself-sql/blob/master/SQL.ipynb">SQL.ipynb</a></p>
+<p>todo：用SQLAlchemy实现</p>
+<h1>SQLAlchemy</h1>
+<p>SQLAlchemy是Python社区中最广泛使用的ORM工具，底层而强大</p>
+<blockquote>
+<p>SQLAlchemy的理念是，SQL数据库的量级和性能重要于对象集合；而对象集合的抽象又重要于表和行</p>
+</blockquote>
+<h3>连接已有数据库</h3>
+<p>一般情况下我们已经有数据库了，那么如何将既有数据库和SQLAlchemy对接呢</p>
+<p>可以利用表的反射（Table Reflection）。把它们”导入”进来即可，这时得使用<code>autoload</code>参数。</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span><span class="p">,</span> <span class="n">MetaData</span><span class="p">,</span> <span class="n">Table</span>
+<span class="c1">#使用mysql，需要安装mysql驱动</span>
+<span class="c1">#brew install mysql-connector-c（mac）</span>
+<span class="c1">#sudo apt-get install libmysqlclient-dev （ubuntu）</span>
+<span class="c1">#pip install MySQL-python</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;mysql+mysqldb://root@edx_host/edxapp&#39;</span><span class="p">,</span> <span class="n">echo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">MetaData</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span> <span class="c1">#连接成功</span>
+<span class="k">print</span> <span class="s1">&#39;auth_user&#39;</span> <span class="ow">in</span> <span class="n">metadata</span><span class="o">.</span><span class="n">tables</span> <span class="c1">#true</span>
+<span class="n">user_table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s1">&#39;auth_user&#39;</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="c1">#metadata携带连接信息</span>
+<span class="k">print</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">user_table</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span> <span class="c1">#打印出字段名</span>
+<span class="n">ins</span> <span class="o">=</span> <span class="n">user_table</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">ins</span> <span class="c1">#查看编译的sql</span>
+<span class="n">users</span><span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM auth_user limit 5&quot;</span><span class="p">)</span> <span class="c1">#直接执行sql</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="n">user_table</span><span class="p">])</span>
+</pre></div>
+
+
+<ul>
+<li>参考：<a href="https://segmentfault.com/a/1190000004288061">SQLAlchemy入门（一）</a></li>
+</ul>
+<h2>基于SQLAlchemy的便利工具</h2>
+<h4><a href="https://github.com/pudo/dataset">dataset</a></h4>
+<blockquote>
+<p>In short, dataset makes reading and writing data in databases as simple as reading and writing JSON files.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="n">db</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;mysql+mysqldb://root@edx_host/edxapp&#39;</span><span class="p">)</span>
+<span class="c1">#print(db.tables)</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;auth_user&#39;</span><span class="p">]</span>
+<span class="n">table</span><span class="o">.</span><span class="n">columns</span>
+<span class="c1">#result = db.query</span>
+<span class="c1"># 导出数据 dataset.freeze(result, format=&#39;json&#39;, filename=&#39;users.json&#39;)</span>
+</pre></div>
+
+
+<h4><a href="https://github.com/kennethreitz/records">records</a></h4>
+<blockquote>
+<p>SQL for Humans</p>
+</blockquote>
+<p>易于导出到xls或是json。records 使用了 tablib 可以导出为任何格式</p>
+<div class="highlight"><pre><span></span><span class="n">db</span> <span class="o">=</span> <span class="n">records</span><span class="o">.</span><span class="n">Database</span><span class="p">(</span><span class="s1">&#39;mysql+mysqldb://root@edx_host/edxapp&#39;</span><span class="p">)</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;select * from auth_user limit 5&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">rows</span><span class="o">.</span><span class="n">dataset</span>
+</pre></div>
+
+
+<h1><a href="https://github.com/coleifer/peewee">peewee</a></h1>
+<blockquote>
+<p>a small, expressive orm -- supports postgresql, mysql and sqlite</p>
+</blockquote>
+<p>使用习惯和django orm很像</p>
+<div class="highlight"><pre><span></span><span class="c1"># http://docs.peewee-orm.com/en/latest/peewee/example.html</span>
+
+<span class="kn">from</span> <span class="nn">peewee</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="n">mysql_db</span> <span class="o">=</span> <span class="n">MySQLDatabase</span><span class="p">(</span><span class="s1">&#39;yunfan&#39;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">,</span> <span class="n">charset</span><span class="o">=</span><span class="s1">&#39;utf8mb4&#39;</span><span class="p">)</span>
+<span class="c1">#CREATE DATABASE `yunfan` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;  创建数据库使用utf-8 否则有编码问题</span>
+
+<span class="k">class</span> <span class="nc">QiniuStore</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">course_id</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">null</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="c1">#key是关键字</span>
+    <span class="n">file_key</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">filesize</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+    <span class="c1">#endUser = Column(String(100),nullable=True)</span>
+    <span class="n">create_time</span> <span class="o">=</span> <span class="n">DateTimeField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">)</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">database</span> <span class="o">=</span> <span class="n">mysql_db</span>
+        <span class="n">order_by</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;-create_time&#39;</span><span class="p">,)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">mysql_db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+    <span class="n">mysql_db</span><span class="o">.</span><span class="n">create_tables</span><span class="p">([</span><span class="n">QiniuStore</span><span class="p">])</span>
+</pre></div>
+
+
+<h1>pandas</h1>
+<p>pandas的DataFrame大多时候也用来容纳二维数据，像一张<code>表</code>,所以易于与数据库打交道</p>
+<div class="highlight"><pre><span></span><span class="c1">#Pandas读取Mysql数据</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">MySQLdb</span>
+<span class="n">mysql_cn</span><span class="o">=</span> <span class="n">MySQLdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">3306</span><span class="p">,</span><span class="n">user</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">,</span> <span class="n">passwd</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="s1">&#39;edxapp&#39;</span><span class="p">)</span>
+<span class="c1">#df = pd.read_sql(&#39;select * from auth_user limit 100;&#39;, con=mysql_cn)  </span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s1">&#39;select * from auth_user limit 10;&#39;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">mysql_cn</span><span class="p">)</span>
+<span class="n">mysql_cn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Read SQL query into a DataFrame ,之后可以使用pandas的查询和绘图统计功能</p>
+<p>参考:</p>
+<ul>
+<li><a href="http://blog.csdn.net/u011715678/article/details/48497291">利用Python 的 Pandas进行数据分析</a></li>
+<li><a href="http://pandas.pydata.org/pandas-docs/stable/comparison_with_sql.html">comparison_with_sql</a>: pd与sql比较</li>
+</ul>
+<h1>心得</h1>
+<ul>
+<li>数据库的重点是表，操作可以用python方法，为了查询的灵活，还是需要sql</li>
+<li>用好ORM的前提是了解关系数据库的概念和典型用例</li>
+</ul>
+<h3>理解</h3>
+<p>数据库表是一个二维表，包含多行多列。把一个表的内容用Python的数据结构表示出来的话，可以用一个list表示多行，list的每一个元素是tuple，表示一行记录</p>
+<p>行，想象为二维数据(csv),外键是一种关系  </p>
+<h3>通用技能</h3>
+<ul>
+<li>多维数据的可视化 （降维）是一个常见的问题模式 。如何聚合，pandas部分</li>
+<li>帆船项目 帮助理解pandas如何用于web流<ul>
+<li>如何实时读取sql，这样一来oricle问题就解决了 可视化问题</li>
+<li>从真实数据学习数据图表化的原理  《网站分析》</li>
+</ul>
+</li>
+<li>投资技能 pandas -&gt; scikit-learn   </li>
+<li>edx的log先导入数据库  保留关系 然后变为扁平化数据  <ul>
+<li>将log导入数据库是为了获得强大的查询能力  </li>
+</ul>
+</li>
+<li>对sql的使用场景要有所了解  适合作什么</li>
+</ul>
+<h1>参考</h1>
+<ul>
+<li><a href="https://zh.wikipedia.org/zh/SQLAlchemy">SQLAlchemy 维基百科</a></li>
+<li><a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0014021031294178f993c85204e4d1b81ab032070641ce5000">使用SQLAlchemy</a></li>
+<li><a href="http://forta.com/books/0672336073/">SQL必知必会 源码</a></li>
+<li><a href="http://www.jianshu.com/p/e6bba189fcbd">SQLAlchemy 简单笔记</a></li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li><a style="text-align: center;" href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://os54tv4fc.bkt.clouddn.com/education.png" width="150px" /> </a></li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li>
+<img style="text-align: center;" src="http://os54tv4fc.bkt.clouddn.com/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            被误解是表达者的宿命<hr>
+              powered by Pelican 
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
