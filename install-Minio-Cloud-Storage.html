@@ -1,0 +1,559 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+喜欢你这种没事喜欢翻源码的人
+如果你恰好也热爱技术、喜欢折腾，来啊，互相伤害，一起捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>构建类s3存储系统（Minio）</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="http://7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to 构建类s3存储系统（Minio）">
+					构建类s3存储系统（Minio） 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-06-19T00:00:00+00:00">
+	<i class="icon-calendar"></i>日 19 六月 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/gong-ju.html"><i class="icon-folder-open"></i>工具</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/ji-zhu.html"><i class="icon-tag"></i>技术</a>
+</footer><!-- /.post-info -->		</div>
+		<h1>缘起</h1>
+<p>Open edX跟S3有许多整合，包括日志的存储，成绩单的存储，静态文件的存储和加速等，当然需要开启才被采用.亚马逊的服务真是业界标杆式的存在，一旦用过，便曾经沧海。</p>
+<p>可惜我们与S3无缘。</p>
+<p>后来想做edxapp负载均衡的时候，又想到这个问题，edxapp是有状态的，主要是涉及静态文件的时候，所以想用s3的开源实现，来替代S3，如此一来可以让代码的修改降到最低。把静态文件挪到云中，edxapp就无状态了</p>
+<p>github一番，也没找到特别合适的，所以用了七牛来替代，七牛的直传功能很不错，而且有各个平台的sdk！</p>
+<h1>S3的开源实现</h1>
+<h3><a href="https://github.com/jubos/fake-s3">fake-s3</a>：</h3>
+<blockquote>
+<p>The goal of Fake S3 is to minimize runtime dependencies and be more of a development tool to test S3 calls in your code rather than a production server looking to duplicate S3 functionality. Trying RiakCS, ParkPlace/Boardwalk, or Ceph might be a place to start if that is your goal.</p>
+</blockquote>
+<p>由此可知，fake-s3适合看做一个开发测试环境，而不是生产可用的环境，类s3的生产系统，可以试试：RiakCS, ParkPlace/Boardwalk, or Ceph</p>
+<h3><a href="https://github.com/minio/minio">minio</a></h3>
+<blockquote>
+<p>Minio is an object storage server compatible with Amazon S3 </p>
+</blockquote>
+<h1>minio</h1>
+<h3>minio是什么</h3>
+<blockquote>
+<p>Unlike databases, Minio stores objects such as photos, videos, log files, backups, container / VM images and so on. Minio is best suited for storing blobs of information ranging from KBs to 5 TBs each. In a simplistic sense, it is like a FTP server with a simple get / put API over HTTP.</p>
+</blockquote>
+<p>minio是Go实现的一个类s3服务，和大多go项目一样，干净小巧，没有依赖，整个就一可运行。便利之极</p>
+<h3>不足</h3>
+<p>目前minio还很年轻，使用过程我遇到过一些bug</p>
+<ul>
+<li>web端没有用户概念，当然可以采用sdk来自行构建，稍后我会演示python的例子</li>
+<li>上传的文件不完整（损坏）</li>
+<li>提示上传成功后，却不予显示</li>
+</ul>
+<h3>构建外部存储系统的实践</h3>
+<p><a href="https://blog.minio.io/object-storage-in-practice-creating-a-reliable-data-store-9b424a22e8e">Object storage in practice: Creating a reliable data store</a></p>
+<p>这篇文章讨论了这样一种思路， 把存储任务分离出去，只留下 putObject()和 getObject()接口</p>
+<blockquote>
+<p>files sit in the object store, metadata goes to the database</p>
+</blockquote>
+<p>不过这里没有用到直传</p>
+<h3>安装与启动</h3>
+<p>过程简单至极</p>
+<ul>
+<li>curl -O https://dl.minio.io/server/minio/release/linux-amd64/minio</li>
+<li>chmod +x minio</li>
+<li>./minio --help</li>
+<li>./minio server /tmp/test</li>
+</ul>
+<p><img alt="minio" src="http://7xrc4h.com1.z0.glb.clouddn.com/MINIO.png?imageView2/2/w/1000" /></p>
+<h3>配置</h3>
+<p><a href="https://docs.minio.io/docs/minio-server-configuration-files-guide">Minio Server Configuration Files Guide</a></p>
+<h3>存储结构</h3>
+<p>就是原始目录，很好地与其他整合（诸如nginx）</p>
+<h3>可能的场景</h3>
+<ul>
+<li>作为内容管理平台是完备的</li>
+<li>作为用户级别的资源管理平台（诸如视频的管理平台，播放使用nginx），还有些问题</li>
+<li>没有用户级别的权限</li>
+<li>没有用户系统</li>
+<li>可能的出路<ul>
+<li>期待之后有用户系统，可以对接到cas/oauth2</li>
+<li>在nginx这里加一层？</li>
+</ul>
+</li>
+<li>也许你期待的云盘，可以试试seafile和owncloud</li>
+<li>作为抽象存储服务，采用sdk才做这个服务，可以想象为局域网中的七牛，不足是没有webhook（callback）</li>
+</ul>
+<h3>client/sdk</h3>
+<ul>
+<li><a href="https://minio.io/download/#minio-client">minio-client</a> </li>
+<li><a href="https://github.com/minio/mc">mc</a></li>
+<li><a href="https://github.com/minio/minio-py">minio-py</a></li>
+<li><a href="https://github.com/minio/minio-py/blob/master/API.md#presigned_post_policy">presigned_post_policy</a> 控制权限</li>
+</ul>
+<h3>采用s3客户端</h3>
+<p>有没有可能采用s3的生态链，诸如上传前端</p>
+<h4>s3cmd</h4>
+<p>sudo pip install s3cmd</p>
+<p>创建~/.s3cfg</p>
+<div class="highlight"><pre><span></span><span class="nv">host_base</span> <span class="o">=</span> http://s3.just4fun.site/
+<span class="nv">host_bucket</span> <span class="o">=</span> http://s3.just4fun.site/
+<span class="nv">access_key</span> <span class="o">=</span> xxx
+<span class="nv">secret_key</span> <span class="o">=</span> xxx
+<span class="nv">signature_v2</span> <span class="o">=</span> False
+<span class="nv">bucket_location</span> <span class="o">=</span> us-east-1
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>s3cmd mb s3://www.just4fun.com  <span class="c1">#create</span>
+s3cmd ls
+s3cmd ls s3://www.just4fun.com 
+s3cmd put some-file.xml s3://www.just4fun.com /somefile.xml
+</pre></div>
+
+
+<h3>awscli</h3>
+<p>pip install awscli</p>
+<p>文档：</p>
+<ul>
+<li>http://docs.aws.amazon.com/cli/latest/reference/s3/index.html </li>
+</ul>
+<div class="highlight"><pre><span></span>aws configure //配置文件位置在哪里 ~/.aws/
+aws configure <span class="nb">set</span> default.s3.signature_version s3v4
+aws --endpoint-url http://s3.just4fun.site s3 ls
+aws --endpoint-url http://s3.just4fun.site s3 ls  //list your buckets
+aws --endpoint-url http://s3.just4fun.site s3 ls  s3://edx  // list contents inside bucket
+aws --endpoint-url http://s3.just4fun.site  s3 mb s3://mybucket   // make a bucket
+aws --endpoint-url http://s3.just4fun.site s3 cp /tmp/aa.html s3://mybucket //add an object to a bucket
+aws  s3api list-objects --bucket edx --query Contents<span class="o">[]</span>.<span class="o">[</span>Key,Size<span class="o">]</span> --endpoint-url http://s3.just4fun.site  //列出文件大小
+</pre></div>
+
+
+<h3>前端上传：<a href="https://github.com/FineUploader/fine-uploader">fine-uploader</a></h3>
+<ul>
+<li><a href="http://fineuploader.com/demos.html#amazon-demo">demo</a>:是否支持回调 类似七牛 s3支持，minio不确定</li>
+</ul>
+<p>前端通过凭证操作，这是后端sdk构建的，和存储层无关</p>
+<h4>boto</h4>
+<p>edx是用boto，不过boto和s3耦合，不容易替换为s3开源实现</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">boto.s3.connection</span> <span class="kn">import</span> <span class="n">S3Connection</span>  <span class="c1">#可查看细节，可以不连默认host</span>
+<span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;xxx&quot;</span> 
+<span class="n">secret</span> <span class="o">=</span> <span class="s2">&quot;xxx&quot;</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">S3Connection</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">secret</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">&#39;s3.just4fun.site&#39;</span><span class="p">,</span> <span class="n">is_secure</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+
+
+<p>可以试试<a href="https://github.com/boto/botocore/issues/424">这里</a>  </p>
+<hr />
+<p>2016.09.18更新</p>
+<p><a href="https://docs.minio.io/docs/how-to-use-aws-sdk-for-python-with-minio-server">How to use AWS SDK for Python with Minio Server</a>给出了boto3中可以如何十一minio替代s3</p>
+<hr />
+<h3>构建带有身份的存储系统</h3>
+<ul>
+<li>minio仅仅视为存储层</li>
+<li>采用<a href="https://github.com/minio/minio-py#presigned-operations">Presigned Operations</a>,控制细粒度的存储，上传凭证是核心所在</li>
+<li>之后采用通用的上传前端</li>
+</ul>
+<p>凭证相关：</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+
+<span class="kn">from</span> <span class="nn">minio</span> <span class="kn">import</span> <span class="n">Minio</span>
+<span class="kn">from</span> <span class="nn">minio</span> <span class="kn">import</span> <span class="n">PostPolicy</span>
+<span class="kn">from</span> <span class="nn">minio.error</span> <span class="kn">import</span> <span class="n">ResponseError</span>
+
+<span class="n">post_policy</span> <span class="o">=</span> <span class="n">PostPolicy</span><span class="p">()</span>
+<span class="c1"># set bucket name location for uploads.</span>
+<span class="n">post_policy</span><span class="o">.</span><span class="n">set_bucket_name</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+<span class="c1"># set key prefix for all incoming uploads.</span>
+<span class="n">post_policy</span><span class="o">.</span><span class="n">set_key_startswith</span><span class="p">(</span><span class="s1">&#39;test.html&#39;</span><span class="p">)</span>
+<span class="c1"># set content length for incoming uploads.</span>
+<span class="n">post_policy</span><span class="o">.</span><span class="n">set_content_length_range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
+
+<span class="c1"># set expiry 10 days into future.</span>
+<span class="n">expires_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">+</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">post_policy</span><span class="o">.</span><span class="n">set_expires</span><span class="p">(</span><span class="n">expires_date</span><span class="p">)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">Minio</span><span class="p">(</span><span class="s1">&#39;s3.just4fun.site&#39;</span><span class="p">,</span> <span class="c1"># 默认采用的是https，否则报错</span>
+               <span class="n">access_key</span><span class="o">=</span><span class="s1">&#39;AN0GSB29FGW7UXQ6WIEM&#39;</span><span class="p">,</span>
+               <span class="n">secret_key</span><span class="o">=</span><span class="s1">&#39;Wyyzr8/D5lEOoCfZymID4ZG/PNhb6th7YAdVT/Zs&#39;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">url_str</span><span class="p">,</span> <span class="n">signed_form_data</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">presigned_post_policy</span><span class="p">(</span><span class="n">post_policy</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">url_str</span><span class="p">,</span> <span class="n">signed_form_data</span><span class="p">)</span>
+    <span class="n">curl_str</span> <span class="o">=</span> <span class="s1">&#39;curl -X POST {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url_str</span><span class="p">)</span>
+    <span class="n">curl_cmd</span> <span class="o">=</span> <span class="p">[</span><span class="n">curl_str</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">signed_form_data</span><span class="p">:</span>
+        <span class="n">curl_cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;-F {0}={1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">signed_form_data</span><span class="p">[</span><span class="n">field</span><span class="p">]))</span>
+
+        <span class="c1"># print curl command to upload files.</span>
+        <span class="n">curl_cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;-F file=@/tmp/aa.html&#39;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">curl_cmd</span><span class="p">))</span>
+<span class="k">except</span> <span class="n">ResponseError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+</pre></div>
+
+
+<h1>问题</h1>
+<p>支持多用户吗？</p>
+<p>ACCESSKEYID是全局只有一个？无法天然支持多client？需要在应用逻辑里做？</p>
+<p>可以使用这个机制:<a href="https://docs.minio.io/docs/upload-files-from-browser-using-pre-signed-urls">Upload files from browser using pre-signed URLs</a>，类似七牛</p>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://os54tv4fc.bkt.clouddn.com/education.png" width="150px" /> </a></li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://os54tv4fc.bkt.clouddn.com/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            被误解是表达者的宿命<hr>
+              powered by Pelican 
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
