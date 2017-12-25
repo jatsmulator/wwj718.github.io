@@ -1,0 +1,449 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+喜欢你这种没事喜欢翻源码的人
+如果你恰好也热爱技术、喜欢折腾，来啊，互相伤害，一起捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>部署edx release-2014-09-17</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="http://7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to 部署edx release-2014-09-17">
+					部署edx release-2014-09-17 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-09-26T00:00:00+00:00">
+	<i class="icon-calendar"></i>五 26 九月 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/edx.html"><i class="icon-folder-open"></i>edx</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/edx.html"><i class="icon-tag"></i>edx</a>
+</footer><!-- /.post-info -->		</div>
+		<p>在新的服务器上部署edX(version=release-2014-09-17)成功，过程还是挺折腾的，做个笔记。</p>
+<p><a href="http://www.idefs.com/share-open-share-2014-9-18-edx-ova-template-by-edustack.html">竹轩</a>同学整理了2014年8月12日以来(到14.9.18)edx上更新的内容,更新内容很多，许多新的特性还是很实用的，也修复了不少bug，这也会我决定使用新版本的原因</p>
+<h1>部署经过</h1>
+<p><a href="https://github.com/edx/configuration/wiki/edX-Ubuntu-12.04-64-bit-Installation">官方教程</a>，新旧版本都适用。主要的安装步骤里边都有。我采用了Manual installation，分步安装，其实就是把一步安装脚本拆开来</p>
+<h3>换源</h3>
+<p>我的ubuntu版本是12.04.5，默认apt源是国内的，会找不到依赖包，所以我们先换源。欧洲源好像还不行（也有部分软件包无法拉下来），所以后来我采用美国的源。</p>
+<div class="highlight"><pre><span></span>#备份
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.bat
+#添加us的源
+sudo vim /etc/apt/sources.list，加入以下内容
+
+###### Ubuntu Main Repos
+deb http://us.archive.ubuntu.com/ubuntu/ precise main restricted universe multiverse 
+deb-src http://us.archive.ubuntu.com/ubuntu/ precise main restricted universe multiverse 
+
+###### Ubuntu Update Repos
+deb http://us.archive.ubuntu.com/ubuntu/ precise-security main restricted universe multiverse 
+deb http://us.archive.ubuntu.com/ubuntu/ precise-updates main restricted universe multiverse 
+deb http://us.archive.ubuntu.com/ubuntu/ precise-backports main restricted universe multiverse 
+deb-src http://us.archive.ubuntu.com/ubuntu/ precise-security main restricted universe multiverse 
+deb-src http://us.archive.ubuntu.com/ubuntu/ precise-updates main restricted universe multiverse 
+deb-src http://us.archive.ubuntu.com/ubuntu/ precise-backports main restricted universe multiverse 
+
+###### Ubuntu Partner Repo
+deb http://archive.canonical.com/ubuntu precise partner
+deb-src http://archive.canonical.com/ubuntu precise partner
+
+###### Ubuntu Extras Repo
+deb http://extras.ubuntu.com/ubuntu precise main
+deb-src http://extras.ubuntu.com/ubuntu precise main
+</pre></div>
+
+
+<p>deb http://extras.ubuntu.com/ubuntu precise main，可能会说你缺少密钥，无视它</p>
+<p>sudo apt-get upgrade 之后，记得看下ssh配置文件(/etc/ssh/sshd_config)，确定允许认证登录: PasswordAuthentication yes</p>
+<p>之后再重启</p>
+<h3>部署</h3>
+<p>下面我们就按照官方教程部署<a href="https://github.com/edx/configuration/wiki/edX-Ubuntu-12.04-64-bit-Installation">edX-Ubuntu-12.04-64-bit-Installation</a></p>
+<p>如果完全按照官方教程走，那么安装的edx版本是master（生产环境尽量不要安装master版本），也就是最新的，作为第一个吃螃蟹的人，遇到问题挺不好解决的。所以最好是安装某个版本，自己或别人部署成功过的。</p>
+<p>要做到这点，就在安装的时候指定版本，像下面这样</p>
+<div class="highlight"><pre><span></span>cd /var/tmp/configuration/playbooks &amp;&amp; sudo ansible-playbook -c local ./edx_sandbox.yml -i &quot;localhost,&quot;  -e edx_platform_version=release-2014-09-17
+</pre></div>
+
+
+<p>以上是我用的，edx-platform版本是release-2014-09-17</p>
+<p>之后的安装过程遇到的错误，其实大同小异，无非网络问题(推荐使用<a href="http://wwj718.github.io/use-sshuttle.html">sshuttle</a>)，兼容（依赖）问题，如果再哪一步断了(一般都会中断，很少有一次成功),可以停下来解决完问题再继续.</p>
+<p>当遇到的是国外网络无法连接问题，使用sshuttle就好</p>
+<p>需要注意的是使用sshuttle的时候，服务器ip就被隐藏了，你一旦退出ssh连接就无法再连上。解决方案也是有的。使用ngrok映射出ssh端口，可以参考我的<a href="http://wwj718.github.io/use-ngrok.html">这篇文章</a>，目前不清楚原因，偶然发现的，也许还算原创^_^</p>
+<p>当遇到系统依赖问题。诸如 TASK: [edxapp | install python base-requirements］报错说无法找到依赖包(比如使用了豆瓣源)，就手动切换到edxapp用户，source到edxapp_environment，至于edxapp_environment在那个，可查看playbooks/roles/edxapp里的相关参数，或是直接这样 /edx/app/edxapp/venvs/edxapp/bin/pip  安装好依赖再从这个task执行就好</p>
+<h4>从某个task继续执行</h4>
+<div class="highlight"><pre><span></span>cd /var/tmp/configuration/playbooks &amp;&amp; sudo ansible-playbook -c local ./edx_sandbox.yml -i &quot;localhost,&quot;  -e edx_platform_version=release-2014-09-17 --start-at-task=&quot;TASK_NAME&quot;
+</pre></div>
+
+
+<p>这里需要注意的是，有些步骤有前后依赖问题，诸如前面步骤设置了运行所需参数，所以有时可能要倒退几个task开始，如何寻找之前的task，查看/var/tmp/configuration/playbooks/roles/...</p>
+<p>暂时写到这里，新版本的汉化和主题可能也有些变更，之后再写</p>
+<h1>附</h1>
+<h2>1</h2>
+<p>竹轩同学提到的<a href="http://www.idefs.com/share-open-share-2014-9-18-edx-ova-template-by-edustack.html">近期部署可能遇到的问题@2014.9.18</a>，我在ubuntu上直接部署没有遇到。不过之前在安装devstack时遇到了。</p>
+<p>后来我的devstack又部署了之前用的release-2014-07-02</p>
+<h2>2</h2>
+<p>python换源</p>
+<p>如果觉得国外python源太慢，可以换用国内的，我用的是豆瓣</p>
+<p>vim /var/tmp/configuration/playbooks/roles/common/defaults/main.yml</p>
+<p><code>COMMON_PYPI_MIRROR_URL: 'http://pypi.douban.com/simple</code></p>
+<p>使用豆瓣源时，速度很快，不过在edxapp(user_role)安装/edx/app/edxapp/edx-platform/requirements/edx/base.txt的时候找不到dogapi==1.2.1。我是停下来手动装好了</p>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<a href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://os54tv4fc.bkt.clouddn.com/education.png" width="150px" /> </a>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+
+<img src="http://os54tv4fc.bkt.clouddn.com/1514204585.png" width="150px" /> 
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            被误解是表达者的宿命<hr>
+              powered by Pelican 
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
