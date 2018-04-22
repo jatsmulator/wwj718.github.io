@@ -1,0 +1,472 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+喜欢你这种没事喜欢翻源码的人
+如果你恰好也热爱技术、喜欢折腾，来啊，互相伤害，一起捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Python与系统日常管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to Python与系统日常管理">
+					Python与系统日常管理 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-10-17T00:00:00+00:00">
+	<i class="icon-calendar"></i>六 17 十月 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/ji-zhu.html"><i class="icon-folder-open"></i>技术</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/ji-zhu.html"><i class="icon-tag"></i>技术</a>
+</footer><!-- /.post-info -->		</div>
+		<p>大多时间都在linux下工作，虽说不算系统管理员，也免不了要处理许多系统相关的东西。对linux还算熟悉，偶尔也在公司客串系统管理员的角色。于是就免不了要写许多自动化脚本的东西，来方便系统日常管理了。</p>
+<p>bash脚本挺让人恶心的，属于dirty and quick一类。而Python语法清新可人，Python与系统的交互也极其便利，写自动化脚本再合适不过。</p>
+<p>在此就分享些自己在写自动化脚本时中意的Python工具：</p>
+<hr />
+<h3>build-in</h3>
+<ul>
+<li>glob:文件名的匹配,比如 <ul>
+<li>glob.glob('somedir/*.py')</li>
+</ul>
+</li>
+<li>pathlib python3支持,路径处理的瑞士军刀</li>
+<li>subprocess<ul>
+<li>启动一个子进程建议的方式是使用下面的便捷函数:subprocess.call(args, *, stdin=None, stdout=None, stderr=None, shell=False)<ul>
+<li>subprocess.call(["ls", "-l"])</li>
+</ul>
+</li>
+<li>对于更高级的使用场景当它们不能满足你的需求时，可以使用底层的Popen接口。</li>
+<li>subprocess.call(["sed", "-i", "-e",  's/hello/helloworld/g', "www.txt"])</li>
+<li>单行：subprocess.call(["sed -i -e 's/hello/helloworld/g' www.txt"], shell=True)  </li>
+</ul>
+</li>
+</ul>
+<h3><a href="https://github.com/amoffat/sh">sh</a></h3>
+<blockquote>
+<p>sh is a full-fledged subprocess replacement for Python 2.6 - 3.4 that allows you to call any program as if it were a function</p>
+</blockquote>
+<p>使用sh可以用 Python 函数的语法去调用 shell 命令，比subprocess舒服多了</p>
+<p>有了sh，就可以方便地用python写逻辑，而与系统的交互依然使用shell指令</p>
+<p>sh并没有自己去实现一遍系统指令(也不现实)，sh的原理很有趣，是通过ModuleType来实现的。有兴趣的同学可以参考源码</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sh</span> <span class="kn">import</span> <span class="n">tail</span>
+
+<span class="k">def</span> <span class="nf">process_log_line</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s2">&quot;ERROR&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+        <span class="n">send_an_email_to_support</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="n">process</span> <span class="o">=</span> <span class="n">tail</span><span class="p">(</span><span class="s2">&quot;-f&quot;</span><span class="p">,</span> <span class="s2">&quot;info.log&quot;</span><span class="p">,</span> <span class="n">_out</span><span class="o">=</span><span class="n">process_log_line</span><span class="p">)</span>
+
+<span class="c1"># ... do other stuff here ...</span>
+
+<span class="n">process</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+</pre></div>
+
+
+<h3><a href="https://github.com/jaraco/path.py">path.py</a></h3>
+<p>简化文件系统相关操作。与文件系统的相关操作，在python中有些分散，path.py把它们聚合在一个类文件对象里</p>
+<blockquote>
+<p>path.py implements a path objects as first-class entities, allowing common operations on files to be invoked on those path objects directly</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">path</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;/home/guido/bin&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">files</span><span class="p">(</span><span class="s1">&#39;*.py&#39;</span><span class="p">):</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="mo">0755</span><span class="p">)</span>
+</pre></div>
+
+
+<h3><a href="https://github.com/gorakhargosh/watchdog">Watchdog</a></h3>
+<p>监视文件系统改动.事件驱动真是适合用来写监控逻辑啊</p>
+<blockquote>
+<p>Python library and shell utilities to monitor filesystem events</p>
+</blockquote>
+<p>可以在python中使用，也提供shell指令</p>
+<h3><a href="https://github.com/Russell91/pythonpy">pythonpy</a></h3>
+<blockquote>
+<p>the swiss army knife of the command line</p>
+</blockquote>
+<p>让python更方便与shell配合使用，行为更像过滤器</p>
+<div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">|</span> <span class="n">py</span> <span class="o">-</span><span class="n">x</span> <span class="s1">&#39;&quot;mv `</span><span class="si">%s</span><span class="s1">` `</span><span class="si">%s</span><span class="s1">.txt`&quot; % (x,x)&#39;</span> <span class="o">|</span> <span class="n">sh</span>
+</pre></div>
+
+
+<h3><a href="https://github.com/giampaolo/psutil">psutil</a></h3>
+<blockquote>
+<p>A cross-platform process and system utilities module for Python</p>
+</blockquote>
+<p>方便用来查看系统信息（CPU, memory, disks, network）</p>
+<h3><a href="https://github.com/fabric/fabric">Fabric</a></h3>
+<blockquote>
+<p>Simple, Pythonic remote execution and deployment.</p>
+</blockquote>
+<p>自动化运维工具，也可用于自动化本地任务，本地机器无非也只是一个普通的host</p>
+<h3><a href="https://github.com/ansible/ansible">ansible</a></h3>
+<p>大大有名的自动化运维工具，热度已远超Fabric，当部署环境巨复杂是，ansible playbook就是救星了。当然学习成本也是在不低，edX就是用它来自动化部署的，有700+ task好像</p>
+<hr />
+<h1>用户身份与进程权限</h1>
+<p>顺便提一下用户身份与进程权限，python脚本中与系统交互（操作文件等），必然涉及到权限问题，所以我们需要了解linux的权限机制</p>
+<p>linux中，子进程将继承了父进程的所有权限</p>
+<p>当Linux加载内核文件以后，就开始运行第一个程序 /sbin/init，它的作用是初始化系统环境，init是第一个运行的程序，它的进程编号（pid）为1。其他所有进程都从它衍生，都是它的子进程。init进程在运行各种开机启动的程序之后，会执行一个login的子进程。我们将用户名和密码传递给login子进程。login在查询了/etc/passwd和/etc/shadow，并确定了其合法性之后，运行(利用exec)一个shell进程，shell进程有效身份被设置成为该用户的身份。</p>
+<p>终于轮到我们的python进程登场啦，python进程从shell中启动，<code>python权限为执行它的用户的权限，此后python中调用的shell指令则为python的子进程，权限与python相同</code></p>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://os54tv4fc.bkt.clouddn.com/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://os54tv4fc.bkt.clouddn.com/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            被误解是表达者的宿命<hr>
+              powered by Pelican 
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
