@@ -1,0 +1,533 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+喜欢你这种没事喜欢翻源码的人
+如果你恰好也热爱技术、喜欢折腾，来啊，互相伤害，一起捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>LinkedIn爬虫笔记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to LinkedIn爬虫笔记">
+					LinkedIn爬虫笔记 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2017-02-01T00:00:00+00:00">
+	<i class="icon-calendar"></i>三 01 二月 2017
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/ji-zhu.html"><i class="icon-folder-open"></i>技术</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/python.html"><i class="icon-tag"></i>python</a>
+</footer><!-- /.post-info -->		</div>
+		<p><img alt="" src="http://oav6fgfj1.bkt.clouddn.com/linkedin132b8af8.png" /></p>
+<h1>需求</h1>
+<p>朋友在国外留学，老板让完成一个任务: 登录LinkedIn后搜索pr关键词， 对结果做简单分析、筛选和分类，将目标信息手动摘录到Google Drive ,以便作进一步沟通，发展为client。朋友打电话抱怨说，工作量可怕，至少需要淹没一周的时间(从图中可以看到有465,276条匹配结果)。聊完，我觉得是个典型的信息采集工作，可以用爬虫完成</p>
+<h1>需求描述</h1>
+<p>我让朋友将手动操作写成伪代码，用if else写出操作逻辑，这样能避免反复沟通成本，最理想的情况是当面做演示，传送门发明之前只好作罢。</p>
+<p>朋友之前有简单入门过编程，将任务表达得十分清晰</p>
+<p>此处涉及隐私，操作文档就不放出了，是典型的网页信息采集任务（外加一些定制化的筛选和分类逻辑）</p>
+<h1>思路</h1>
+<p>最初想走捷径，直接调用api来取数据，在github里搜索一圈，试图找到好用LinkedIn api，逛了一圈，发现LinkedIn的库都是基于oauth2与LinkedIn通信（诸如<a href="https://github.com/ozgur/python-linkedin">python-linkedin</a>），需要申请为开发者，操作挺繁琐，而且获得的数据也不够丰富</p>
+<p>于是回退到用爬虫解决这个问题（网页所见即所得）</p>
+<h1>技术问题</h1>
+<p>初步尝试后，发现存在两个需要处理的问题</p>
+<h3>登录</h3>
+<p>要在LinkedIn的搜索前头的<code>pr</code>，需要先登录。</p>
+<p>尽管我们通过在浏览器搜索pr，知道实际对应的url是:<code>http://www.linkedin.com/search/results/index/?keywords=pr&amp;origin=GLOBAL_SEARCH_HEADER</code> 。但未登录会报404</p>
+<p>简易的解决方案是模拟登陆，用requests的Session维持登录状态即可，文档见<a href="http://docs.python-requests.org/zh_CN/latest/user/advanced.html">高级用法</a></p>
+<p>如何模拟登录，还需需要分析下提交参数的，如果连分析都懒，google呀！这么常见的问题，赌五毛钱肯定有人遇到过！</p>
+<p>果不其然：<a href="http://stackoverflow.com/questions/18907503/logging-in-to-linkedin-with-python-requests-sessions">Logging in to LinkedIn with python requests sessions</a></p>
+<p>于是我们我们便解决了登录问题(linkedin_spider.py):</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+
+<span class="n">HOMEPAGE_URL</span> <span class="o">=</span> <span class="s1">&#39;https://www.linkedin.com&#39;</span>
+<span class="n">LOGIN_URL</span> <span class="o">=</span> <span class="s1">&#39;https://www.linkedin.com/uas/login-submit&#39;</span>
+
+<span class="n">html</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">HOMEPAGE_URL</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+<span class="n">csrf</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;loginCsrfParam-login&quot;</span><span class="p">)[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+
+<span class="n">login_information</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;session_key&#39;</span><span class="p">:</span><span class="s1">&#39;username&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;session_password&#39;</span><span class="p">:</span><span class="s1">&#39;password&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;loginCsrfParam&#39;</span><span class="p">:</span> <span class="n">csrf</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">LOGIN_URL</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">login_information</span><span class="p">)</span>
+<span class="n">search_url</span> <span class="o">=</span> <span class="s2">&quot;http://www.linkedin.com/search/results/index/?keywords=pr&amp;origin=GLOBAL_SEARCH_HEADER&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;search_url&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="c1"># 200</span>
+</pre></div>
+
+
+<h3>ajax</h3>
+<p>我们查看页面内容（<code>print(response.content)</code>）发现，搜索pr，linkedin的页面是通过ajax异步加载出的</p>
+<p>我们运行js之后，才能拿到页面内容，我们可以使用phantomjs，这个问题我在之前爬京东时候记录过：<a href="http://blog.just4fun.site/pyspider-demo.html">用pyspider写的爬虫几例</a>，pyspider集成了phantomjs</p>
+<p>phantomjs实际上作为一个服务运行，你可以理解成一个管道，输入网页源码，输入解析完的对象</p>
+<p>当然你也可以使用Selenium</p>
+<h1>策略</h1>
+<p>所以要完成我们的爬虫任务需要将以上两个问题的解决方案结合在一起，方法很多</p>
+<ul>
+<li>直接使用Selenium驱动chrome（可能最简易）</li>
+<li>在pyspider中模拟登陆（pyspider已经和phantomjs集成）</li>
+<li>将phantomjs与我们前头的代码整合，phantomjs作为服务即可，原理可以看pyspider中相关源码，也可以看这个项目：<a href="https://github.com/2shou/PhantomjsFetcher">PhantomjsFetcher</a></li>
+</ul>
+<p>至于如何写入Google Drive ，这倒是个简易的任务，诸如你可以先将采集的信息存为CSV，然后导入Google Drive即可</p>
+<p>或者使用相关库来操作Google Drive，诸如:<a href="https://github.com/googledrive/PyDrive">googledrive/PyDrive</a></p>
+<h1>动手</h1>
+<p>最终我选择Selenium驱动chrome的方案（通过），重要的原因之一是，朋友的需求中有一点非这么做不可：需要使用chrome插件<code>hunter</code>来获取LinkedIn用户的邮箱(如果缺失的话)</p>
+<p>google出来的Selenium资料基本是在window下的使用经验。在mac下的资料不错，踩的坑不少，记录一下</p>
+<p>前头提到我们遇到两个问题：登陆和ajax，使用Selenium的话，这两个问题似乎都不存在，然后坑在后边</p>
+<h3>安装依赖</h3>
+<div class="highlight"><pre><span></span>brew install chromedriver
+pip install selenium #selenium==2.52.0
+</pre></div>
+
+
+<h3>先跑起来</h3>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span> 
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.zhihu.com&quot;</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">driver</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">save_screenshot</span><span class="p">(</span><span class="s1">&#39;/tmp/test.png&#39;</span><span class="p">)</span> <span class="c1">#截个图</span>
+</pre></div>
+
+
+<p>很快我们就遇到问题。在默认情况下，每次的数据目录都是临时的，于是我们的浏览器每次都是崭新的，既没有插件，也没有任何历史记录，就算你登陆过LinkedIn，下次运行脚本也啥都没了</p>
+<p>一番搜索，我们发现需要使用user-data-dir来指定用户数据目录，好让webdriver驱动的浏览器能和我们日常使用的一样</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># encoding: utf-8</span>
+<span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="n">options</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">ChromeOptions</span><span class="p">()</span>
+<span class="n">options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--user-data-dir=/Users/wwj/Library/Application Support/Google/Chrome&quot;</span><span class="p">);</span> <span class="c1"># mac下 各种插件可用</span>
+<span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">(</span><span class="n">executable_path</span><span class="o">=</span><span class="s1">&#39;/usr/local/bin/chromedriver&#39;</span><span class="p">,</span><span class="n">chrome_options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+<span class="c1">#url = &quot;https://www.linkedin.com/feed/&quot; #在浏览器里登陆过</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.linkedin.com/search/results/index/?keywords=pr&amp;origin=GLOBAL_SEARCH_HEADER&quot;</span> <span class="c1">#在浏览器里登陆过</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="c1">#element = driver.find_element_by_xpath(&#39;&#39;)</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">save_screenshot</span><span class="p">(</span><span class="s1">&#39;/tmp/test.png&#39;</span><span class="p">)</span> <span class="c1">#等待时间</span>
+<span class="c1">#data = element.text</span>
+<span class="c1">#print(data)</span>
+</pre></div>
+</td></tr></table>
+
+<p>我们又发现了一个问题，ajax的渲染</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># encoding: utf-8</span>
+<span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.support.ui</span> <span class="kn">import</span> <span class="n">WebDriverWait</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.common.by</span> <span class="kn">import</span> <span class="n">By</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.support</span> <span class="kn">import</span> <span class="n">expected_conditions</span> <span class="k">as</span> <span class="n">EC</span>
+<span class="n">options</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">ChromeOptions</span><span class="p">()</span>
+<span class="n">options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--user-data-dir=/Users/wwj/Library/Application Support/Google/Chrome&quot;</span><span class="p">);</span> <span class="c1"># mac下 各种插件可用</span>
+<span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">(</span><span class="n">executable_path</span><span class="o">=</span><span class="s1">&#39;/usr/local/bin/chromedriver&#39;</span><span class="p">,</span><span class="n">chrome_options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.linkedin.com/search/results/index/?keywords=pr&amp;origin=GLOBAL_SEARCH_HEADER&quot;</span> <span class="c1">#在浏览器里登陆过</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="c1">#element = driver.find_element_by_xpath(&#39;&#39;)</span>
+<span class="c1">#driver.implicitly_wait(10)</span>
+<span class="n">wait</span> <span class="o">=</span> <span class="n">WebDriverWait</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">element</span> <span class="o">=</span> <span class="n">wait</span><span class="o">.</span><span class="n">until</span><span class="p">(</span><span class="n">EC</span><span class="o">.</span><span class="n">presence_of_element_located</span><span class="p">((</span><span class="n">By</span><span class="o">.</span><span class="n">CLASS_NAME</span><span class="p">,</span><span class="s1">&#39;search-results__title-and-total-wrapper&#39;</span><span class="p">)))</span><span class="c1">#如果发现就继续往下走，所以这可以视为一种阻塞操作，文档不足，使用ipython探索，诸如By.CLASS_NAME</span>
+<span class="c1"># 获取页面的数据 存入</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">save_screenshot</span><span class="p">(</span><span class="s1">&#39;/tmp/test.png&#39;</span><span class="p">)</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</td></tr></table>
+
+<h3>存储数据</h3>
+<p>开发的时候使用peewee存储，方便去重之类，之后导出为csv或是其他</p>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://os54tv4fc.bkt.clouddn.com/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://os54tv4fc.bkt.clouddn.com/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            被误解是表达者的宿命<hr>
+              powered by Pelican 
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
