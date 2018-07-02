@@ -1,0 +1,573 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+喜欢你这种没事喜欢翻源码的人
+如果你恰好也热爱技术、喜欢折腾，来啊，互相伤害，一起捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>以最佳实践开始你的Django项目</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/电影放映.html">
+						<i class="icon-folder-open icon-large"></i>电影放映
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to 以最佳实践开始你的Django项目">
+					以最佳实践开始你的Django项目 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2018-06-21T00:00:00+00:00">
+	<i class="icon-calendar"></i>四 21 六月 2018
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/jia-gou.html"><i class="icon-folder-open"></i>架构</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/django.html"><i class="icon-tag"></i>django</a>
+</footer><!-- /.post-info -->		</div>
+		<blockquote>
+<p>“How long will it take to fix that?” One person, who’d been at the company for years, said, “Three months.” A new person, who’d just come from a world of rapidly provisioned cloud microservices, said, “Three minutes.” They were both correct. That’s how change enters into this world  -- <a href="https://www.bloomberg.com/graphics/2015-paul-ford-what-is-code/">what is code</a></p>
+</blockquote>
+<h1>前言</h1>
+<p>我近年写过的Django项目基本都采用<a href="https://github.com/pydanny/cookiecutter-django">cookiecutter-django</a>来启动</p>
+<blockquote>
+<p>Cookiecutter Django is a framework for jumpstarting production-ready Django projects quickly.</p>
+</blockquote>
+<p><a href="https://github.com/pydanny/cookiecutter-django">cookiecutter-django</a>将帮助你快速构建一个生产可用的项目骨架，通过初始化项目时回答几个问题，你将开箱得到许多常用的东西(往往遵循最佳实践)，而避免配置</p>
+<p><a href="https://github.com/pydanny/cookiecutter-django">cookiecutter-django</a>由<a href="https://github.com/pydanny">pydanny</a>构建，<a href="https://github.com/pydanny">pydanny</a>写过一本Django最佳实践相关的书《Two Scoops of Django》</p>
+<h1>cookiecutter-django介绍</h1>
+<p>cookiecutter-django相关的信息，项目readme里写的很清楚，我简单做些脚注</p>
+<h3><a href="https://github.com/pydanny/cookiecutter-django#features">Features</a></h3>
+<ul>
+<li>For Django 2.0<ul>
+<li>Django 2.0的新特性可以看<a href="https://docs.djangoproject.com/en/2.0/releases/2.0/">这里</a> <ul>
+<li><a href="https://docs.djangoproject.com/en/2.0/releases/2.0/#simplified-url-routing-syntax">Simplified URL routing syntax</a></li>
+<li><a href="https://docs.djangoproject.com/en/2.0/releases/2.0/#mobile-friendly-contrib-admin">Mobile-friendly contrib.admin</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Works with Python 3.6<ul>
+<li><a href="https://docs.python.org/3/whatsnew/3.6.html">What’s New In Python 3.6</a><ul>
+<li><a href="https://docs.python.org/3/whatsnew/3.6.html#pep-498-formatted-string-literals">PEP 498: Formatted string literals</a></li>
+<li><a href="https://docs.python.org/3/whatsnew/3.6.html#pep-526-syntax-for-variable-annotations">Syntax for variable annotations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Renders Django projects with 100% starting test coverage</li>
+<li>Twitter Bootstrap v4.0.0 (maintained Foundation fork also available)<ul>
+<li>使用的是: https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css</li>
+</ul>
+</li>
+<li>12-Factor based settings via <a href="https://github.com/joke2k/django-environ">django-environ</a></li>
+<li>Secure by default. We believe in SSL.</li>
+<li>Optimized development and production settings</li>
+<li>Registration via <a href="https://github.com/pennersr/django-allauth">django-allauth</a><ul>
+<li>可以很轻松做到第三方登陆/绑定(oauth)</li>
+<li>关于这个项目致力于解决的问题可以看<a href="https://github.com/pennersr/django-allauth#rationale">这里</a></li>
+</ul>
+</li>
+<li>Comes with custom user model ready to go</li>
+<li>Grunt build for compass and livereload<ul>
+<li>前后端分离，不需要这个</li>
+</ul>
+</li>
+<li>Send emails via <a href="https://github.com/anymail/django-anymail">Anymail</a> (using <a href="http://www.mailgun.com/">Mailgun</a> by default, but switchable)<ul>
+<li>邮件发送的调试是个繁琐的问题，<a href="http://www.mailgun.com/">Mailgun</a>堪称完美的解决方案</li>
+</ul>
+</li>
+<li>Media storage using Amazon S3<ul>
+<li>国内使用S3可能有坑，我偏向使用七牛云</li>
+</ul>
+</li>
+<li>Docker support using docker-compose for development and production (using Caddy with LetsEncrypt support)<ul>
+<li>尽管这个项目不强制使用docker，但我十分偏好docker</li>
+</ul>
+</li>
+<li>Procfile for deploying to Heroku<ul>
+<li>国内用不到</li>
+</ul>
+</li>
+<li>Instructions for deploying to PythonAnywhere<ul>
+<li>国内用不到</li>
+</ul>
+</li>
+<li>Run tests with unittest or py.test</li>
+<li>Customizable PostgreSQL version<ul>
+<li>PostgreSQL支持json，参考<a href="https://docs.djangoproject.com/zh-hans/2.0/ref/contrib/postgres/fields/">PostgreSQL specific model fields</a></li>
+</ul>
+</li>
+</ul>
+<h3><a href="https://cookiecutter-django.readthedocs.io/en/latest/">Documentation</a></h3>
+<p>我倾向于使用docker，文档在<a href="https://cookiecutter-django.readthedocs.io/en/latest/developing-locally-docker.html">Getting Up and Running Locally With Docker</a></p>
+<p>建议有空多翻阅文档，文档里把开发和部署的大多数问题都谈论了</p>
+<p>一些docker命令偏长，可以自行写个makefile</p>
+<p>服务器的远程管理，推开使用<a href="http://fabric-chs.readthedocs.io/zh_CN/chs/tutorial.html">fabric</a>，<a href="http://ansible-tran.readthedocs.io/en/latest/">ansible</a>比较重</p>
+<h3><a href="https://github.com/pydanny/cookiecutter-django#optional-integrations">optional-integrations</a></h3>
+<ul>
+<li>Serve static files from Amazon S3 or <a href="https://whitenoise.readthedocs.io/">Whitenoise</a><ul>
+<li>我偏向把文件存于本地，之后使用七牛云做镜像到本地，来分发(CDN),使用Whitenoise就不必使用nginx来处理静态文件了</li>
+<li>关于文件管理可以看下Caddy的插件<a href="https://github.com/filebrowser/filebrowser">filebrowser</a></li>
+</ul>
+</li>
+<li>Configuration for <a href="http://www.celeryproject.org/">Celery</a></li>
+<li>Integration with <a href="https://github.com/mailhog/MailHog">MailHog</a> for local email testing</li>
+<li>Integration with <a href="https://sentry.io/welcome/">Sentry</a> for error logging<ul>
+<li>错误提醒及时(邮件通知)，错误信息详细</li>
+<li>可以直接使用官方的云平台，不必自己搭建，目前国内可以正常使用</li>
+</ul>
+</li>
+</ul>
+<h1>使用笔记</h1>
+<h3>创建项目</h3>
+<p>我们使用cookiecutter替代<code>django-admin startproject</code>来初始化项目.</p>
+<p>首先安装依赖<code>pip3 install "cookiecutter&gt;=1.4.0"</code></p>
+<p>接着开始创建项目<code>cookiecutter https://github.com/pydanny/cookiecutter-django</code>，你讲被要求回答几个问题，关于项目的信息，以及你需要的组件，我的回答见: <a href="https://gist.github.com/wwj718/ff9ae7fcf268359ac69abf83ff2f53ac">start_django_project.md</a></p>
+<h3>运行项目</h3>
+<p>我使用docker来运行项目，我们需要安装：</p>
+<ul>
+<li><a href="https://docs.docker.com/install/#supported-platforms">Docker</a></li>
+<li><a href="https://docs.docker.com/compose/install/">Docker Compose</a>: <code>pip3 install docker-compose</code></li>
+</ul>
+<h4>Build the Stack</h4>
+<p><code>docker-compose -f local.yml build</code> </p>
+<p>生产环境使用<code>production.yml</code>替代<code>local.yml</code></p>
+<p>第一次build需要一断时间</p>
+<p>如果你添加了python库，需要重新build，不过所花时间要少很多</p>
+<h4>Run the Stack</h4>
+<p><code>docker-compose -f local.yml up</code></p>
+<p>或者</p>
+<div class="highlight"><pre><span></span>export COMPOSE_FILE=local.yml
+docker-compose up 
+# docker-compose up -d # 后台运行
+</pre></div>
+
+
+<h4>Execute Management Commands</h4>
+<div class="highlight"><pre><span></span>docker-compose -f local.yml run --rm django python manage.py migrate
+docker-compose -f local.yml run --rm django python manage.py createsuperuser # django django123
+</pre></div>
+
+
+<p>以上每个进程都跑在一个单独的容器中（无状态），进程结束即销毁，数据库使用公共的(由<code>docker-compose up</code>之前启动的)</p>
+<h4>其他</h4>
+<ul>
+<li>Mailhog跑在<code>http://127.0.0.1:8025</code></li>
+<li><a href="https://cookiecutter-django.readthedocs.io/en/latest/docker-postgres-backups.html">数据备份</a><ul>
+<li>备份: <code>docker-compose -f local.yml exec postgres backup</code></li>
+<li>列出: <code>docker-compose -f local.yml exec postgres backups</code></li>
+<li>复制到本地: <code>docker cp 9c5c3f055843:/backups/backup_2018_03_13T09_05_07.sql.gz .</code></li>
+<li>从本地恢复: <code>docker-compose -f local.yml exec postgres restore backup_2018_03_13T09_05_07.sql.gz</code></li>
+</ul>
+</li>
+</ul>
+<h1>一些个人意见</h1>
+<p>下边是一些围绕构建一个django项目，我个人所采取的一些策略</p>
+<h3>用户系统</h3>
+<p>使用<a href="https://django-allauth.readthedocs.io/en/latest/overview.html">django-allauth</a></p>
+<p>用户账号相关的页面由后端做(django-allauth基本都做了，这部分逻辑考虑步骤可能会有安全问题），此外部分前后端分离</p>
+<p>如果希望注册和登陆更灵活(提供REST接口),可以使用<a href="https://github.com/Tivix/django-rest-auth">django-rest-auth</a>。django-rest-auth做的主要工作是让django-allauth暴露出API。</p>
+<h4>关于User model</h4>
+<p>如果你对django自带的User model感到满意, 只是想额外增加field的话, 你可以扩展AbstractUser类，<a href="https://github.com/pydanny">pydanny</a>在《Two Scoops of Django》讨论过这块，提到有几种策略。扩展AbstractUser是第一种，目前<a href="https://github.com/pydanny/cookiecutter-django">cookiecutter-django</a>用的也是这种</p>
+<h4>添加django-rest-auth</h4>
+<p>添加依赖之后，记得<code>docker-compose -f local.yml build</code></p>
+<p><a href="https://github.com/Tivix/django-rest-auth">django-rest-auth</a>暴露出以下<a href="http://django-rest-auth.readthedocs.io/en/latest/api_endpoints.html">API</a></p>
+<ul>
+<li><code>http://127.0.0.1:8000/rest-auth/user/</code> 将允许你在web页面调试获取用户数据和注册用户</li>
+<li><code>http://127.0.0.1:8000/rest-auth/registration/</code> 中注册成功之后，验证邮箱会<a href="https://github.com/Tivix/django-rest-auth/issues/15">出错</a>,解决方案参考<a href="https://stackoverflow.com/questions/29725369/improperlyconfigured-at-rest-auth-registration-account-confirm-email">ImproperlyConfigured at /rest-auth/registration/account-confirm-email</a>,直接使用allauth提供的confirm_email即可</li>
+<li>登陆(换取token): http POST http://127.0.0.1:8000/rest-auth/login/ username=django password=django123</li>
+</ul>
+<h4>github登陆</h4>
+<p>记录一下，配置github登陆的流程</p>
+<ul>
+<li>添加INSTALLED_APPS : <a href="http://django-allauth.readthedocs.io/en/latest/installation.html">Installation</a></li>
+<li>到github注册client: <a href="http://django-allauth.readthedocs.io/en/latest/providers.html#github">providers github</a></li>
+<li>在admin中配置github信息: http://127.0.0.1:8000/admin/socialaccount/socialapp/</li>
+</ul>
+<p><img alt="oauth github" src="http://oav6fgfj1.bkt.clouddn.com/github_f63bc856.png" /></p>
+<h3>开发者协同</h3>
+<ul>
+<li>git pull</li>
+<li>docker build</li>
+<li>数据库分发备份</li>
+</ul>
+<h3>表单</h3>
+<ul>
+<li>采集数据的表单，可以由后端来做，然后放在django admin里管理<ul>
+<li>admin + 表单十分迅速</li>
+</ul>
+</li>
+</ul>
+<h1>参考</h1>
+<ul>
+<li><a href="https://github.com/pydanny/cookiecutter-django">cookiecutter-django</a></li>
+<li><a href="https://cookiecutter-django.readthedocs.io/en/latest/developing-locally-docker.html">Getting Up and Running Locally With Docker</a></li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://os54tv4fc.bkt.clouddn.com/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://os54tv4fc.bkt.clouddn.com/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/电影放映.html">
+    <i class="icon-folder-open icon-large"></i>电影放映
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            被误解是表达者的宿命<hr>
+              powered by Pelican 
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
