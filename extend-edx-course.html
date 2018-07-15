@@ -1,0 +1,554 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+喜欢你这种没事喜欢翻源码的人
+如果你恰好也热爱技术、喜欢折腾，来啊，互相伤害，一起捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>在edX中为course扩充字段</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to 在edX中为course扩充字段">
+					在edX中为course扩充字段 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-10-21T00:00:00+00:00">
+	<i class="icon-calendar"></i>二 21 十月 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/edx.html"><i class="icon-folder-open"></i>edx</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/edx.html"><i class="icon-tag"></i>edx</a>
+</footer><!-- /.post-info -->		</div>
+		<p>之前在<a href="https://groups.google.com/forum/#!forum/edx-code">edx code</a>（edX google group）上问过如何为course扩充字段（如为课程添加category字段）。</p>
+<p>得到的回复说直接往CoueseFields里添加你要的字段就行。位置在<code>common/lib/xmodule/course_module.py</code>.之后该字段会自动显示在Advanced Settings里。我按照这种方法发现字段的确成为course的属性了（在shell里实验)。不过并没有自动显示在Advanced Settings里，不晓得是不是版本问题。</p>
+<p>此外还有回复说他是采用org字段来存储课程分类。因为他们是内部使用edx,不需要org。不过这种方式总归不大好。</p>
+<p>前两天收到一封邮件，说他也想扩充课程，和我之前需求类似，希望给与帮助。</p>
+<p>看来这还是个挺常见的需求。</p>
+<p>我就分享下自己的方法好了。也讲下具体流程，而不仅是给出方案，这样小伙伴们下回遇到类似的问题，可以按照类似思路自己解决啦。</p>
+<h3>需求描述</h3>
+<p>常见的需求类似这样：给课程添加category字段，用于分类课程，在首页使用。</p>
+<h3>最初的方案</h3>
+<ul>
+<li>自己写了个django app加入到lms/djangoapps里。app.models中有course_id字段</li>
+<li>自己写个首页</li>
+<li>在admin里管理首页的内容</li>
+</ul>
+<p>其实就像自己写了个小型内容管理系统，管理的核心对象是course。而我们知道课程的关键标志是course_id。我跟踪注册课程相关的代码，在代码执行路径上加上自定义的create_home_course函数。<br />
+在create_home_course函数中将新建的课程注册到我们自己的app.models里，关键是从中获得course_id，这样就能定位到课程。</p>
+<p>这种方式的好处是不需侵入CoueseFields</p>
+<hr />
+<p>我们今天重点说下面的方案</p>
+<h3>现在的方案</h3>
+<p>其实思路也简单。就是跟踪<code>日程&amp;细节</code>里的字段是如何存储并与前端交互的。模仿它就行。</p>
+<p>好的，满上咖啡，我们开始。</p>
+<hr />
+<p>我选择跟踪这个字段：<code>每周投入课程学习的小时数</code>。 </p>
+<p>使用chrome开发者工具，看到该表单字段的id是 <code>course-effort</code></p>
+<p>在<a href="https://github.com/edx/edx-platform">edx-platform</a>搜索effort。我们就可以看到所有与effort相关的代码及其所在文件。其实挺推荐使用github来研究代码的，可以参考我的<a href="http://wwj718.github.io/github-edx.html">这篇博客</a></p>
+<p><img alt="github-search.png" src="img/github-search.png" /></p>
+<p>接下来就是依葫芦画瓢的工作了。据此添加我们需要的字段了。我们按照以下文件顺序修改:python&gt;js&gt;html&gt;Sass</p>
+<hr />
+<h3>0</h3>
+<p>以下工作均在/edx/app/edxapp/edx-platform/目录里进行</p>
+<h3>python</h3>
+<p>vim cms/djangoapps/models/settings/course_details.py </p>
+<div class="highlight"><pre><span></span>         self.effort = None  # int hours/week
++        self.category = None
+         self.course_image_name = &quot;&quot;
+
+         ...
+
++        temploc = course_key.make_usage_key(&#39;about&#39;, &#39;category&#39;)
++        try:
++            course_details.category = modulestore().get_item(temploc).data
++        except ItemNotFoundError:
++            pass
++
++
+         temploc = course_key.make_usage_key(&#39;about&#39;, &#39;video&#39;)
+         try:
+             raw_video = modulestore().get_item(temploc).data
+
+         ...
+
+-        for about_type in [&#39;syllabus&#39;, &#39;overview&#39;, &#39;effort&#39;, &#39;short_description&#39;]:
++        for about_type in [&#39;syllabus&#39;, &#39;overview&#39;, &#39;effort&#39;,&#39;category&#39;, &#39;short_description&#39;]:
+             cls.update_about_item(course_key, about_type, jsondict[about_type], descriptor, user)             
+</pre></div>
+
+
+<p>vim cms/templates/settings.html</p>
+<div class="highlight"><pre><span></span>                        &#39;requirements&#39;, &#39;syllabus&#39;, &#39;textbook&#39;, &#39;faq&#39;, &#39;more_info&#39;,
+                        &#39;number&#39;, &#39;instructors&#39;, &#39;overview&#39;,
+-                       &#39;effort&#39;, &#39;end_date&#39;, &#39;prerequisites&#39;, &#39;ocw_links&#39;]:
++                       &#39;effort&#39;,&#39;category&#39;, &#39;end_date&#39;, &#39;prerequisites&#39;, &#39;ocw_links&#39;]:
+</pre></div>
+
+
+<h3>js</h3>
+<p>vim cms/static/js/views/settings/main.js </p>
+<div class="highlight"><pre><span></span>         this.$el.find(&#39;#&#39; + this.fieldToSelectorMap[&#39;effort&#39;]).val(this.model.get(&#39;effort&#39;));
++
++        //added by wwj
++        this.$el.find(&#39;#&#39; + this.fieldToSelectorMap[&#39;category&#39;]).val(this.model.get(&#39;category&#39;));
+
+        ...
+
+         &#39;effort&#39; : &quot;course-effort&quot;,
++        &#39;category&#39; : &quot;course-category&quot;,
+         &#39;course_image_asset_path&#39;: &#39;course-image-url&#39;
+
+         ...
+
+         case &#39;course-effort&#39;:
+             this.setField(event);
+             break;
++        //added by wwj
++        case &#39;course-category&#39;:
++            this.setField(event);
++            break;
+</pre></div>
+
+
+<p>vim cms/static/js/models/settings/course_details.js </p>
+<div class="highlight"><pre><span></span>         effort: null,  // an int or null,
++        category: null,
+</pre></div>
+
+
+<h3>html</h3>
+<p>vim cms/templates/settings.html </p>
+<div class="highlight"><pre><span></span>+          ##added by wwj
++          % if about_page_editable:
++            &lt;hr class=&quot;divide&quot; /&gt;
++
++            &lt;section class=&quot;group-settings requirements&quot;&gt;
++              &lt;header&gt;
++                &lt;h2 class=&quot;title-2&quot;&gt;课程分类&lt;/h2&gt;
++                &lt;span class=&quot;tip&quot;&gt;${_(&quot;Expectations of the students taking this course&quot;)}&lt;/span&gt;
++              &lt;/header&gt;
++
++              &lt;ol class=&quot;list-input&quot;&gt;
++                &lt;li class=&quot;field text&quot; id=&quot;field-course-category&quot;&gt;
++                  &lt;label for=&quot;course-category&quot;&gt;${_(&quot;course category&quot;)}&lt;/label&gt;
++                  &lt;input type=&quot;text&quot; class=&quot;short time&quot; id=&quot;course-category&quot; placeholder=&quot;Math&quot; /&gt;
++                  &lt;span class=&quot;tip tip-inline&quot;&gt;${_(&quot;course category&quot;)}&lt;/span&gt;
++                &lt;/li&gt;
++              &lt;/ol&gt;
++            &lt;/section&gt;
++          % endif
++
+       &lt;/form&gt;
+     &lt;/article&gt;
+     &lt;aside class=&quot;content-supplementary&quot; role=&quot;complimentary&quot;&gt;
+</pre></div>
+
+
+<p>vim lms/templates/courseware/course_about.html</p>
+<div class="highlight"><pre><span></span>             &lt;li&gt;&lt;div class=&quot;icon effort&quot;&gt;&lt;/div&gt;&lt;p&gt;${_(&quot;Estimated Effort&quot;)}&lt;/p&gt;&lt;span class=&quot;start-date&quot;&gt;${get_course_about_section(course, &quot;effort&quot;)}&lt;/span&gt;&lt;/li&gt;
+           % endif
+
++          % if get_course_about_section(course, &quot;category&quot;):
++            &lt;li&gt;&lt;div class=&quot;icon category&quot;&gt;&lt;/div&gt;&lt;p&gt;课程分类&lt;/p&gt;&lt;span class=&quot;start-date&quot;&gt;${get_course_about_section(course, &quot;category&quot;)}&lt;/span&gt;&lt;/li&gt;
++          % endif
+</pre></div>
+
+
+<h3>Sass</h3>
+<p>vim cms/static/sass/views/_settings.scss </p>
+<div class="highlight"><pre><span></span>       #field-course-effort {
+         width: flex-grid(3, 9);
+       }
++      #field-course-category {
++        width: flex-grid(3, 9);
++      }
+</pre></div>
+
+
+<h3>扫尾</h3>
+<ul>
+<li>将以上修改一次性commit到你自己的分支上，尽量不要合并到官方分支里</li>
+<li>update_assets</li>
+</ul>
+<div class="highlight"><pre><span></span>sudo -H -u edxapp bash
+source /edx/app/edxapp/edxapp_env
+cd /edx/app/edxapp/edx-platform
+paver update_assets cms --settings=aws
+</pre></div>
+
+
+<p>*
+  重启edxapp: <code>sudo /edx/bin/supervisorctl -c /edx/etc/supervisord.conf restart edxapp:</code></p>
+<h3>测试</h3>
+<ul>
+<li>我们先到cms的<code>日程&amp;细节</code>里，填上课程分类</li>
+</ul>
+<p><img alt="course_category" src="img/course_category.png" /></p>
+<ul>
+<li>再到课程的about页面即可看到</li>
+</ul>
+<p><img alt="course-category-lms" src="img/course-category-lms.png" /></p>
+<p>搞定~</p>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://os54tv4fc.bkt.clouddn.com/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://os54tv4fc.bkt.clouddn.com/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            被误解是表达者的宿命<hr>
+              powered by Pelican 
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
