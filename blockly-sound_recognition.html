@@ -1,0 +1,508 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+喜欢你这种没事喜欢翻源码的人
+如果你恰好也热爱技术、喜欢折腾，来啊，互相伤害，一起捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>在blockly中构建语音识别/合成 积木块</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to 在blockly中构建语音识别/合成 积木块">
+					在blockly中构建语音识别/合成 积木块 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2017-05-12T00:00:00+00:00">
+	<i class="icon-calendar"></i>五 12 五月 2017
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/ying-jian.html"><i class="icon-folder-open"></i>硬件</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/rpi.html"><i class="icon-tag"></i>rpi</a>
+</footer><!-- /.post-info -->		</div>
+		<p><img alt="" src="http://oav6fgfj1.bkt.clouddn.com/speech_block9f7d476a.png" /></p>
+<h1>背景</h1>
+<p>近期在完善blockly4pi中AI的相关部分，语音和图像/视频流是常见的输入，语音的输入之前计划在硬件积木那边采集，之后流向树莓派，交由树莓派来处理，不过协议因此变得复杂许多，一番权衡之下，我们决定在浏览器里来处理多媒体输入</p>
+<p>我一直在关注浏览器中的webRTC和Web Speech，之前在几个项目中也接触过它们,这些接口现在越发强大了，而且浏览器的支持也在变好</p>
+<h1>Web Speech</h1>
+<p>HTML5中和Web Speech相关的API有两类, 一类是"语音合成(Speech Synthesis)"，一类是"语音识别(Speech Recognition)",无论哪种,使用起来都非常简单. </p>
+<h3>语音合成</h3>
+<p>之前语音合成我一直用百度语音来做，效果还不错，不过多了一层网络请求.</p>
+<p>Chrome 浏览器在版本25之后开始支持这一特性，效果非常棒.你可以调出你的控制台,让浏览器说: '你好,世界',像下边这样:</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">utterThis</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">window</span><span class="p">.</span><span class="nx">SpeechSynthesisUtterance</span><span class="p">(</span><span class="s1">&#39;你好，世界！&#39;</span><span class="p">);</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">speechSynthesis</span><span class="p">.</span><span class="nx">speak</span><span class="p">(</span><span class="nx">utterThis</span><span class="p">);</span>
+</pre></div>
+
+
+<p>神奇的是，竟然没有用到云服务，完全在本地完成!</p>
+<h3>语音识别</h3>
+<p>相比于语音合成，语音识别还有些坑。</p>
+<p>我们先来说下它的简单用法</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">newRecognition</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">webkitSpeechRecognition</span><span class="p">();</span>
+<span class="nx">newRecognition</span><span class="p">.</span><span class="nx">onresult</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">newRecognition</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+</pre></div>
+
+
+<p>上边短短的几行，你就完成了浏览器调用麦克风，等待语音输入到结果输出的完成流程</p>
+<p>如果你只是想拿到输出结果的内容，可以这样:</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">newRecognition</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">webkitSpeechRecognition</span><span class="p">();</span>
+<span class="c1">//newRecognition.continuous = false;</span>
+<span class="nx">newRecognition</span><span class="p">.</span><span class="nx">onresult</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//console.log(event);</span>
+        <span class="nx">result</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+        <span class="nx">transcript</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">transcript</span><span class="p">;</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">transcript</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">newRecognition</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+</pre></div>
+
+
+<p>识别结果比较理想</p>
+<h4>坑</h4>
+<p>有个恼人的坑是，识别开始后，浏览器有时候一直在等待输入，而无法返回识别结果（可能是墙的原因），这种情况时常发生，而且在各个平台下(mac/windows)下都是如此</p>
+<p>不过在chrome的开发版(canary)中一切正常,我的当前版本号是:<code>60.0.3099.0（正式版本）canary （64 位</code></p>
+<h1>包装成blockly积木块</h1>
+<p>为了将其纳入到blockly4pi体系中，我们需要将Web Speech包装为blockly积木块</p>
+<p>语音合成部分比较简单,在积木中接受用户输入，传到api中即可，@dsl已经完成了这个工作</p>
+<p>语音识别部分会比较麻烦，在上边的语音识别示例代码里，我们看到对语音的识别结果出现在<code>onresult</code>事件回调的函数里，这样一来控制流就不是线性的了(哈哈 在js中这才是常态)，如何在blockly中表达变达这种控制流，是个值得思考的问题</p>
+<p>熟悉js的同学会觉得思路上不难，可要在blockly中表达也没有很容易，首先得熟悉blockly的表达习惯和api,有些部分涉及比较高级的api</p>
+<p>这个问题webduino团队给出了漂亮的解答，我们稍后对其<a href="https://github.com/webduinoio/webduino-blockly">源码</a>做个分析</p>
+<h3>源码分析</h3>
+<p>熟悉blockly的小伙伴，很轻松能定位到目标积木块的源码(我们只关注sound_recognition块，其他块相对简单)</p>
+<p>在注释中我们找到了积木块的生成方式：<a href="https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#shuqaz">sound_recognition blockfactory</a></p>
+<p><img alt="" src="http://oav6fgfj1.bkt.clouddn.com/sound_blockfccbdea4.png" /></p>
+<p>积木外观由以下代码定义:</p>
+<div class="highlight"><pre><span></span>Blockly.Blocks[&#39;sound_recognition&#39;] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(&quot;開始語音辨識 ( Chrome 限定，不支援 iOS )&quot;);
+    this.appendDummyInput()
+        .appendField(&quot;辨識語言：&quot;)
+        .appendField(new Blockly.FieldDropdown([[&quot;中文&quot;,&quot;cmn-Hant-TW&quot;], [&quot;English&quot;,&quot;en-US&quot;]]), &quot;lang_&quot;)
+        .appendField(&quot;    即時辨識：&quot;)
+        .appendField(new Blockly.FieldDropdown([[&quot;on&quot;,&quot;on&quot;], [&quot;off&quot;,&quot;off&quot;]]), &quot;interimResults_&quot;)
+        .appendField(&quot;( 行動裝置勾選 off )&quot;);
+    this.appendStatementInput(&quot;recognition_&quot;);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip(&#39;&#39;);
+    this.setHelpUrl(&#39;&#39;);
+  }
+};
+</pre></div>
+
+
+<p>(以js为例)拿到积木中的用户的输入很简单:</p>
+<div class="highlight"><pre><span></span>Blockly.JavaScript[&#39;sound_recognition&#39;] = function(block) {
+  var dropdown_lang_ = block.getFieldValue(&#39;lang_&#39;);
+  var dropdown_interimresults_ = block.getFieldValue(&#39;interimResults_&#39;);
+  var statements_recognition_ = Blockly.JavaScript.statementToCode(block, &#39;recognition_&#39;);
+  // TODO: Assemble JavaScript into code variable.
+  var code = &#39;...;\n&#39;;
+  return code;
+};
+</pre></div>
+
+
+<p>其中<code>statements_recognition_</code>值得留意</p>
+<p>至此整个积木块已经完成，只剩下最后也最核心的问题了，sound_recognition是如何来generate出代码的，上边提到的回调的问题也是在这里处理</p>
+<p>直接上代码更直观些: <a href="https://github.com/webduinoio/webduino-blockly/blob/19e40f0108e72dbd08628705a1e4fad9c3ccab7e/generators/webduino.js#L1727"></a></p>
+<p>抛开辅助性的代码，我们看到最核心的部分是</p>
+<div class="highlight"><pre><span></span>    &#39;    window._recognition.onresult = async function(event,result) {\n&#39; +
+    &#39;      result = {};\n&#39; +
+    &#39;      result.resultLength = event.results.length-1;\n&#39; +
+    &#39;      result.resultTranscript = event.results[result.resultLength][0].transcript;\n&#39; +
+    &#39;      if(event.results[result.resultLength].isFinal===&#39; + inter1 + &#39;){\n&#39; +
+    &#39;        console.log(result.resultTranscript);\n&#39; +
+    &#39;        &#39; + statements_recognition_ +
+    &#39;        &#39; + consoleFinal1 +
+    &#39;      }else if(event.results[result.resultLength].isFinal===&#39; + inter2 + &#39;){\n&#39; +
+    &#39;        &#39; + consoleFinal2 +
+    &#39;      }\n&#39; +
+    &#39;    };\n&#39; +
+    &#39;    window._recognition.start();\n&#39; +
+</pre></div>
+
+
+<p>特别注意<code>statements_recognition_</code></p>
+<p>顺便吐个槽，尽管code的拼接极尽排版的工整，但读起来还是不舒服，用es6的模版字符串来写会好看很多</p>
+<h1>参考</h1>
+<ul>
+<li><a href="http://javascript.ruanyifeng.com/htmlapi/webspeech.html">Web Speech</a></li>
+<li><a href="https://github.com/webduinoio/webduino-blockly">webduino-blockly</a></li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://os54tv4fc.bkt.clouddn.com/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://os54tv4fc.bkt.clouddn.com/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a href="http://microbit.org/">micro:bit</a></li>
+<li><a href="https://code.org/">Code.org</a></li>
+<li><a href="https://www.edustack.org/">edustack</a></li>
+<li><a href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
