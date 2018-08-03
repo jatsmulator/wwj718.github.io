@@ -1,0 +1,522 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+喜欢你这种没事喜欢翻源码的人
+如果你恰好也热爱技术、喜欢折腾，来啊，互相伤害，一起捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Open edX开发技能与入门资料</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://os54tv4fc.bkt.clouddn.com/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to Open edX开发技能与入门资料">
+					Open edX开发技能与入门资料 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-01-11T00:00:00+00:00">
+	<i class="icon-calendar"></i>一 11 一月 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/edx.html"><i class="icon-folder-open"></i>edx</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/edx.html"><i class="icon-tag"></i>edx</a>
+</footer><!-- /.post-info -->		</div>
+		<p>上周末应@COVER老师邀请，去了趟华中师范大学，和@徐潇@treasure@liuyuantao 及其他几个小伙伴，讨论了些Open edX相关的技术话题，关于Open edX架构、源码结构、源码阅读建议、开发及工作流建议、遇到的坑及解决思路相关的问题</p>
+<p>由于我们踩过的坑比较多，分享完前车之鉴，大家希望我分享些源码阅读经验和入门资料，我说我最近正好在思考这个问题，回去写成博客好啦，所以有下边这篇文章</p>
+<hr />
+<p>哈哈上边的总结未免官方，我真正想说的是作为一个能吃辣地南方人，武汉的菜很合我胃口呀 ：） 与大家相处的周末很开心，像回到一年多以前，在学校里与一群热爱技术的小伙伴在一起的感觉</p>
+<hr />
+<p>@MT在前些日子写过一篇<a href="http://edustack.org/2015/12/14/open-edx%E6%B6%89%E5%8F%8A%E7%9A%84%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80%E3%80%81%E6%A1%86%E6%9E%B6%E5%92%8C%E5%BC%80%E6%BA%90%E7%BB%84%E4%BB%B6/">Open edX涉及的开发语言、框架和开源组件
+</a>，整理得很全了，对整个技术栈有兴趣的小伙伴，可以看那篇</p>
+<p>哦对了，招聘要求往往也是很不错的技能风向标，所以<a href="http://www.xuetangx.com/">学堂在线</a>的<a href="http://www.xuetangx.com/about#join_us">招兵买马</a>当然也是很好的参考啦</p>
+<p>我在这里主要整理我认为开发Open edX主要涉及的技术以及我自己比较喜欢的入门书籍,以及其他一些我的个人建议，分以下几个部分</p>
+<ul>
+<li>通用技能</li>
+<li>后端技能</li>
+<li>前端技能</li>
+<li>运维技能</li>
+</ul>
+<h1>通用技能</h1>
+<h3>Git</h3>
+<p><code>建议</code>：团队中应当至少有一人熟练使用Git，这样能省下大量的时间。如果不能熟练使用Git，那么团队的协作将举步维艰，大多可以通过版本管理轻松解决的问题，将变为手工操作，效率极大地下降。当然也不要求所有人都精通Git，大多成员只要会最基本的操作就行，对于新手，SourceTree是十分不错的工具</p>
+<p>推荐资料：</p>
+<ul>
+<li>入门教程：  <ul>
+<li><a href="http://rogerdudler.github.io/git-guide/index.zh.html">git - 简明指南</a></li>
+<li><a href="https://github.com/Mark24Code/15minGit/blob/master/15minGit.md">15分钟学会使用Git</a></li>
+</ul>
+</li>
+<li>深入学习<ul>
+<li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">Git教程 廖雪峰</a></li>
+<li><a href="http://backlogtool.com/git-guide/cn/intro/intro1_1.html">猴子都能懂的GIT入门</a></li>
+<li><a href="http://zhengkun.info/2014/10/09/git_usage.html">Git 常用命令用法：程序员的场景</a></li>
+</ul>
+</li>
+<li>终极教程：    <ul>
+<li><a href="https://git-scm.com/book/zh/v2">Pro Git</a></li>
+</ul>
+</li>
+</ul>
+<h1>后端技能</h1>
+<h3>Linux(Ubuntu)</h3>
+<p>推荐几个特别有用的工具：</p>
+<ul>
+<li>tmux</li>
+<li>ssh</li>
+<li>IPython</li>
+<li>sshuttle</li>
+<li>ngrok</li>
+<li>htop</li>
+<li>nethogs</li>
+</ul>
+<p>推荐资料：</p>
+<ul>
+<li><a href="http://billie66.github.io/TLCL/book/zh/">The Linux Command Line </a></li>
+<li><a href="http://linuxtools-rst.readthedocs.org/zh_CN/latest/index.html">Linux工具快速教程</a></li>
+<li><a href="https://github.com/jlevy/the-art-of-command-line/blob/master/README-zh.md">命令行的艺术</a></li>
+<li><a href="http://man.linuxde.net/">Linux命令大全</a></li>
+</ul>
+<h3>Python</h3>
+<p>推荐资料：</p>
+<ul>
+<li>Head First Programming</li>
+<li><a href="http://book.douban.com/subject/3988517/">Learning Python</a></li>
+<li><a href="http://old.sebug.net/paper/books/LearnPythonTheHardWay/">笨办法学 Python</a></li>
+<li>Python简明教程</li>
+<li><a href="http://www.pythondoc.com/pythontutorial27/index.html">Python 2.7 官方教程</a></li>
+</ul>
+<p>进阶：</p>
+<ul>
+<li><a href="http://python3-cookbook.readthedocs.org/zh_CN/latest/">Python Cookbook</a></li>
+<li><a href="https://book.douban.com/subject/26389274/">Python高手之路</a></li>
+</ul>
+<h3>Django</h3>
+<p>我自己的入门资料是<a href="http://djangobook.py3k.cn/2.0/">djangobook</a>,十分喜欢这本书，往复翻了有好几遍。此外的建议是边看书，边去github上找些小项目跟着做，写个小博客就是很好的练手项目</p>
+<p>推荐资料：</p>
+<ul>
+<li><a href="http://djangobook.py3k.cn/2.0/">djangobook</a></li>
+<li><a href="https://github.com/yangyubo/zh-django-best-practices">Django 最佳实践</a></li>
+<li><a href="http://python.usyiyi.cn/django/index.html">Django 1.8.2 文档中文版 </a></li>
+<li><a href="https://www.gitbook.com/book/andrew-liu/django-blog/details">Django搭建简易博客教程</a></li>
+</ul>
+<h3>Mako</h3>
+<ul>
+<li><a href="http://docs.makotemplates.org/en/latest/">http://docs.makotemplates.org/</a></li>
+<li><a href="http://www.yeolar.com/note/2012/08/28/mako-syntax/">Python模板库Mako的语法</a></li>
+</ul>
+<h3>数据库</h3>
+<ul>
+<li>Mysql<ul>
+<li><a href="http://www.cnblogs.com/mr-wid/archive/2013/05/09/3068229.html">21分钟 MySQL 入门教程</a>  </li>
+</ul>
+</li>
+<li>MongoDB<ul>
+<li><a href="https://github.com/justinyhuang/the-little-mongodb-book-cn/blob/master/mongodb.md">The Little MongoDB Book</a> </li>
+</ul>
+</li>
+</ul>
+<h3>可选：Docker</h3>
+<ul>
+<li><a href=""></a></li>
+</ul>
+<hr />
+<h1>Todo</h1>
+<h1>前端技能</h1>
+<p>HTML、CSS、Javascript(jQuery)当然是必备的</p>
+<h3>调试工具</h3>
+<ul>
+<li><a href="http://jinlong.github.io/2013/08/29/devtoolsecrets/">浏览器开发工具的秘密</a></li>
+<li><a href="https://github.com/CN-Chrome-DevTools/CN-Chrome-DevTools/blob/master/directory.md">Chrome DevTools</a></li>
+</ul>
+<h3>Backbone.js</h3>
+<h3>Require.js</h3>
+<h3>Sass</h3>
+<h1>运维技能</h1>
+<h3>Linux(Ubuntu)</h3>
+<h1></h1>
+<h2>Nginx</h2>
+<h3>Ansible</h3>
+<h1>附录</h1>
+<h3>vim</h3>
+<p>我日常使用vim作为编辑器，如果你想学习vim，推荐这篇文章<a href="http://coolshell.cn/articles/5426.html">简明 Vim 练级攻略</a></p>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://os54tv4fc.bkt.clouddn.com/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://os54tv4fc.bkt.clouddn.com/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>

@@ -1,0 +1,511 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+喜欢你这种没事喜欢翻源码的人
+如果你恰好也热爱技术、喜欢折腾，来啊，互相伤害，一起捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>django笔记之富文本编辑器</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://os54tv4fc.bkt.clouddn.com/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to django笔记之富文本编辑器">
+					django笔记之富文本编辑器 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2014-03-11T00:00:00+00:00">
+	<i class="icon-calendar"></i>二 11 三月 2014
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/ji-zhu.html"><i class="icon-folder-open"></i>技术</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/django.html"><i class="icon-tag"></i>django</a>
+</footer><!-- /.post-info -->		</div>
+		<p>个人而言我更喜欢markdown，django中配置使用markdown很简单。一两分钟的功夫而已。就不在这里说了。  <br />
+对于普通用户，还是更喜欢富文本编辑器的。  </p>
+<h3>Ueditor</h3>
+<p>我们重点说说这个编辑器。之后会给出一些常见需求的定制化的方案，可能手法有些暴力。
+国内的话，百度开源出来的Ueditor很赞，资料也挺全，反正我最近的项目都在用它。<br />
+别急着各种埋头配置啦，干活之前不妨先逛逛github，常常有惊喜哦～<br />
+搜索django ueditor，果然出来一个<a href="https://github.com/zhangfisher/DjangoUeditor">DjangoUeditor</a>，貌似人家都帮我们集成好了！！<br />
+按照说明，分分钟配置好，python manage.py runserver ...能用！！就这么简单！！ 
+省下的时间陪你的妹子，看你书去吧。
+github，你，值得拥有～</p>
+<p>好的，下面我们来说几个定制化问题：（挺常见的需求）</p>
+<ul>
+<li>前两天在django技术群里帮一妹子（她非坚持说比我早毕业两年，应当喊姐姐。。）解决了些小问题，她之前使用TinyMCE，无法本地上传图片，我对TinyMCE不太熟，于是推荐DjangoUeditor给她，她觉得默认的功能按钮太少，想使用全功能的。</li>
+</ul>
+<p>这个好办：</p>
+<div class="highlight"><pre><span></span><span class="c1">#settings.py</span>
+<span class="n">UEDITOR_SETTINGS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;toolbars&#39;</span><span class="p">:{</span><span class="s2">&quot;testa&quot;</span><span class="p">:[[</span><span class="s1">&#39;fullscreen&#39;</span><span class="p">,</span> <span class="s1">&#39;source&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;undo&#39;</span><span class="p">,</span> <span class="s1">&#39;redo&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="s1">&#39;italic&#39;</span><span class="p">,</span> <span class="s1">&#39;underline&#39;</span><span class="p">]],</span>
+                <span class="s2">&quot;testb&quot;</span><span class="p">:[[</span> <span class="s1">&#39;source&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="s1">&#39;italic&#39;</span><span class="p">,</span> <span class="s1">&#39;underline&#39;</span><span class="p">]]</span>
+                <span class="p">},</span>
+    <span class="s1">&#39;images_upload&#39;</span><span class="p">:{</span>
+        <span class="s1">&#39;max_size&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+        <span class="s1">&#39;path&#39;</span><span class="p">:</span><span class="s2">&quot;asd&quot;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;scrawl_upload&#39;</span><span class="p">:{</span>
+        <span class="s1">&#39;path&#39;</span><span class="p">:</span><span class="s1">&#39;scrawlabc&#39;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>容易看出我们应当在toolbars这里配置功能按钮，testa，testb是功能面板名称,可选的参数看这里<a href="https://github.com/campaign/ueditor/blob/master/ueditor.config.js">ueditor.config.js</a>，有这些：</p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;fullscreen&#39;</span><span class="p">,</span> <span class="s1">&#39;source&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;undo&#39;</span><span class="p">,</span> <span class="s1">&#39;redo&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="s1">&#39;italic&#39;</span><span class="p">,</span> <span class="s1">&#39;underline&#39;</span><span class="p">,</span> <span class="s1">&#39;fontborder&#39;</span><span class="p">,</span> <span class="s1">&#39;strikethrough&#39;</span><span class="p">,</span> <span class="s1">&#39;superscript&#39;</span><span class="p">,</span> <span class="s1">&#39;subscript&#39;</span><span class="p">,</span> <span class="s1">&#39;removeformat&#39;</span><span class="p">,</span> <span class="s1">&#39;formatmatch&#39;</span><span class="p">,</span> <span class="s1">&#39;autotypeset&#39;</span><span class="p">,</span> <span class="s1">&#39;blockquote&#39;</span><span class="p">,</span> <span class="s1">&#39;pasteplain&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;forecolor&#39;</span><span class="p">,</span> <span class="s1">&#39;backcolor&#39;</span><span class="p">,</span> <span class="s1">&#39;insertorderedlist&#39;</span><span class="p">,</span> <span class="s1">&#39;insertunorderedlist&#39;</span><span class="p">,</span> <span class="s1">&#39;selectall&#39;</span><span class="p">,</span> <span class="s1">&#39;cleardoc&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;rowspacingtop&#39;</span><span class="p">,</span> <span class="s1">&#39;rowspacingbottom&#39;</span><span class="p">,</span> <span class="s1">&#39;lineheight&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;customstyle&#39;</span><span class="p">,</span> <span class="s1">&#39;paragraph&#39;</span><span class="p">,</span> <span class="s1">&#39;fontfamily&#39;</span><span class="p">,</span> <span class="s1">&#39;fontsize&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;directionalityltr&#39;</span><span class="p">,</span> <span class="s1">&#39;directionalityrtl&#39;</span><span class="p">,</span> <span class="s1">&#39;indent&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;justifyleft&#39;</span><span class="p">,</span> <span class="s1">&#39;justifycenter&#39;</span><span class="p">,</span> <span class="s1">&#39;justifyright&#39;</span><span class="p">,</span> <span class="s1">&#39;justifyjustify&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;touppercase&#39;</span><span class="p">,</span> <span class="s1">&#39;tolowercase&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;link&#39;</span><span class="p">,</span> <span class="s1">&#39;unlink&#39;</span><span class="p">,</span> <span class="s1">&#39;anchor&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;imagenone&#39;</span><span class="p">,</span> <span class="s1">&#39;imageleft&#39;</span><span class="p">,</span> <span class="s1">&#39;imageright&#39;</span><span class="p">,</span> <span class="s1">&#39;imagecenter&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;insertimage&#39;</span><span class="p">,</span> <span class="s1">&#39;emotion&#39;</span><span class="p">,</span> <span class="s1">&#39;scrawl&#39;</span><span class="p">,</span> <span class="s1">&#39;insertvideo&#39;</span><span class="p">,</span> <span class="s1">&#39;music&#39;</span><span class="p">,</span> <span class="s1">&#39;attachment&#39;</span><span class="p">,</span> <span class="s1">&#39;map&#39;</span><span class="p">,</span> <span class="s1">&#39;gmap&#39;</span><span class="p">,</span> <span class="s1">&#39;insertframe&#39;</span><span class="p">,</span><span class="s1">&#39;insertcode&#39;</span><span class="p">,</span> <span class="s1">&#39;webapp&#39;</span><span class="p">,</span> <span class="s1">&#39;pagebreak&#39;</span><span class="p">,</span> <span class="s1">&#39;template&#39;</span><span class="p">,</span> <span class="s1">&#39;background&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;spechars&#39;</span><span class="p">,</span> <span class="s1">&#39;snapscreen&#39;</span><span class="p">,</span> <span class="s1">&#39;wordimage&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;inserttable&#39;</span><span class="p">,</span> <span class="s1">&#39;deletetable&#39;</span><span class="p">,</span> <span class="s1">&#39;insertparagraphbeforetable&#39;</span><span class="p">,</span> <span class="s1">&#39;insertrow&#39;</span><span class="p">,</span> <span class="s1">&#39;deleterow&#39;</span><span class="p">,</span> <span class="s1">&#39;insertcol&#39;</span><span class="p">,</span> <span class="s1">&#39;deletecol&#39;</span><span class="p">,</span> <span class="s1">&#39;mergecells&#39;</span><span class="p">,</span> <span class="s1">&#39;mergeright&#39;</span><span class="p">,</span> <span class="s1">&#39;mergedown&#39;</span><span class="p">,</span> <span class="s1">&#39;splittocells&#39;</span><span class="p">,</span> <span class="s1">&#39;splittorows&#39;</span><span class="p">,</span> <span class="s1">&#39;splittocols&#39;</span><span class="p">,</span> <span class="s1">&#39;charts&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;print&#39;</span><span class="p">,</span> <span class="s1">&#39;preview&#39;</span><span class="p">,</span> <span class="s1">&#39;searchreplace&#39;</span><span class="p">,</span> <span class="s1">&#39;help&#39;</span><span class="p">,</span> <span class="s1">&#39;drafts&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<p>我们把为toolbars添加一个mytoolbars,像这样</p>
+<div class="highlight"><pre><span></span><span class="s1">&#39;toolbars&#39;</span><span class="p">:{</span><span class="s2">&quot;testa&quot;</span><span class="p">:[[</span><span class="s1">&#39;fullscreen&#39;</span><span class="p">,</span> <span class="s1">&#39;source&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;undo&#39;</span><span class="p">,</span> <span class="s1">&#39;redo&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="s1">&#39;italic&#39;</span><span class="p">,</span> <span class="s1">&#39;underline&#39;</span><span class="p">]],</span>
+            <span class="s2">&quot;testb&quot;</span><span class="p">:[[</span> <span class="s1">&#39;source&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="s1">&#39;italic&#39;</span><span class="p">,</span> <span class="s1">&#39;underline&#39;</span><span class="p">]],</span>
+            <span class="s2">&quot;mytoolbars&quot;</span><span class="p">:[[</span><span class="s1">&#39;fullscreen&#39;</span><span class="p">,</span> <span class="s1">&#39;source&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;undo&#39;</span><span class="p">,</span> <span class="s1">&#39;redo&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="s1">&#39;italic&#39;</span><span class="p">,</span> <span class="s1">&#39;underline&#39;</span><span class="p">,</span> <span class="s1">&#39;fontborder&#39;</span><span class="p">,</span> <span class="s1">&#39;strikethrough&#39;</span><span class="p">,</span> <span class="s1">&#39;superscript&#39;</span><span class="p">,</span> <span class="s1">&#39;subscript&#39;</span><span class="p">,</span> <span class="s1">&#39;removeformat&#39;</span><span class="p">,</span> <span class="s1">&#39;formatmatch&#39;</span><span class="p">,</span> <span class="s1">&#39;autotypeset&#39;</span><span class="p">,</span> <span class="s1">&#39;blockquote&#39;</span><span class="p">,</span> <span class="s1">&#39;pasteplain&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;forecolor&#39;</span><span class="p">,</span> <span class="s1">&#39;backcolor&#39;</span><span class="p">,</span> <span class="s1">&#39;insertorderedlist&#39;</span><span class="p">,</span> <span class="s1">&#39;insertunorderedlist&#39;</span><span class="p">,</span> <span class="s1">&#39;selectall&#39;</span><span class="p">,</span> <span class="s1">&#39;cleardoc&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;rowspacingtop&#39;</span><span class="p">,</span> <span class="s1">&#39;rowspacingbottom&#39;</span><span class="p">,</span> <span class="s1">&#39;lineheight&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;customstyle&#39;</span><span class="p">,</span> <span class="s1">&#39;paragraph&#39;</span><span class="p">,</span> <span class="s1">&#39;fontfamily&#39;</span><span class="p">,</span> <span class="s1">&#39;fontsize&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;directionalityltr&#39;</span><span class="p">,</span> <span class="s1">&#39;directionalityrtl&#39;</span><span class="p">,</span> <span class="s1">&#39;indent&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;justifyleft&#39;</span><span class="p">,</span> <span class="s1">&#39;justifycenter&#39;</span><span class="p">,</span> <span class="s1">&#39;justifyright&#39;</span><span class="p">,</span> <span class="s1">&#39;justifyjustify&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;touppercase&#39;</span><span class="p">,</span> <span class="s1">&#39;tolowercase&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;link&#39;</span><span class="p">,</span> <span class="s1">&#39;unlink&#39;</span><span class="p">,</span> <span class="s1">&#39;anchor&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;imagenone&#39;</span><span class="p">,</span> <span class="s1">&#39;imageleft&#39;</span><span class="p">,</span> <span class="s1">&#39;imageright&#39;</span><span class="p">,</span> <span class="s1">&#39;imagecenter&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;insertimage&#39;</span><span class="p">,</span> <span class="s1">&#39;emotion&#39;</span><span class="p">,</span> <span class="s1">&#39;scrawl&#39;</span><span class="p">,</span> <span class="s1">&#39;insertvideo&#39;</span><span class="p">,</span> <span class="s1">&#39;music&#39;</span><span class="p">,</span> <span class="s1">&#39;attachment&#39;</span><span class="p">,</span> <span class="s1">&#39;map&#39;</span><span class="p">,</span> <span class="s1">&#39;gmap&#39;</span><span class="p">,</span> <span class="s1">&#39;insertframe&#39;</span><span class="p">,</span><span class="s1">&#39;insertcode&#39;</span><span class="p">,</span> <span class="s1">&#39;webapp&#39;</span><span class="p">,</span> <span class="s1">&#39;pagebreak&#39;</span><span class="p">,</span> <span class="s1">&#39;template&#39;</span><span class="p">,</span> <span class="s1">&#39;background&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;spechars&#39;</span><span class="p">,</span> <span class="s1">&#39;snapscreen&#39;</span><span class="p">,</span> <span class="s1">&#39;wordimage&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;inserttable&#39;</span><span class="p">,</span> <span class="s1">&#39;deletetable&#39;</span><span class="p">,</span> <span class="s1">&#39;insertparagraphbeforetable&#39;</span><span class="p">,</span> <span class="s1">&#39;insertrow&#39;</span><span class="p">,</span> <span class="s1">&#39;deleterow&#39;</span><span class="p">,</span> <span class="s1">&#39;insertcol&#39;</span><span class="p">,</span> <span class="s1">&#39;deletecol&#39;</span><span class="p">,</span> <span class="s1">&#39;mergecells&#39;</span><span class="p">,</span> <span class="s1">&#39;mergeright&#39;</span><span class="p">,</span> <span class="s1">&#39;mergedown&#39;</span><span class="p">,</span> <span class="s1">&#39;splittocells&#39;</span><span class="p">,</span> <span class="s1">&#39;splittorows&#39;</span><span class="p">,</span> <span class="s1">&#39;splittocols&#39;</span><span class="p">,</span> <span class="s1">&#39;charts&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;print&#39;</span><span class="p">,</span> <span class="s1">&#39;preview&#39;</span><span class="p">,</span> <span class="s1">&#39;searchreplace&#39;</span><span class="p">,</span> <span class="s1">&#39;help&#39;</span><span class="p">,</span> <span class="s1">&#39;drafts&#39;</span><span class="p">]],</span>
+    <span class="p">},</span>
+</pre></div>
+
+
+<p>在models.py里选用mytoolbars这个风格，像这样：</p>
+<div class="highlight"><pre><span></span><span class="n">Content</span><span class="o">=</span><span class="n">UEditorField</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;内容   &#39;</span><span class="p">,</span><span class="n">height</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">,</span><span class="n">imagePath</span><span class="o">=</span><span class="s2">&quot;uploadimg/&quot;</span><span class="p">,</span><span class="n">imageManagerPath</span><span class="o">=</span><span class="s2">&quot;imglib&quot;</span><span class="p">,</span><span class="n">toolbars</span><span class="o">=</span><span class="s1">&#39;mytoolbars&#39;</span><span class="p">,</span><span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;elementPathEnabled&quot;</span><span class="p">:</span><span class="bp">True</span><span class="p">},</span><span class="n">filePath</span><span class="o">=</span><span class="s1">&#39;upload&#39;</span><span class="p">,</span><span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+
+<p>打开后台，可以看到全功按钮板块。</p>
+<p>她说项目要求上传的本地图片必须把图片名字哈希<code>加密</code>，由于近来略忙，我只想当然地给她讲了下思路：在自己重载form，在表单里拦截一下数据，在那里修改图片名字。或者在图片保存前修改。<br />
+她按照这个思路并没有成功，于是我看了下DjangoUeditor源码，似乎上传图片那块不是很常规，于是直接修改源码（这个习惯不好。。），我们先找到文件名的生成函数，就是这个<a href="https://github.com/zhangfisher/DjangoUeditor/blob/master/DjangoUeditor/utils.py">GenerateRndFilename</a>，<code>return "%s_%s%s%s"</code>,改之～搞定。这种方法略暴力，DjangoUeditor的源码不复杂，似乎页不需要升级，这样不会带来什么兼容问题。暂时取个捷径。  大家估计开始鄙视我了。。  </p>
+<p>此外，需要注意的是：<code>xadmin</code>中并不支持DjangoUeditor，
+之前在django技术群中同xadmin的作者聊过 ，xadmin中并不支持DjangoUeditor，我们可以使用其他的富文本编辑器。这个东西已经帮我们做好配置的脏活了。好东西自然是在github里的，<a href="https://github.com/sshwsfc/xadmin-cms">xadmin-cms</a>,介绍中说：<br />
+Xcms 是 django-xadmin 的一套插件集, 包含制作 cms 系统需要的常用插件:  </p>
+<ul>
+<li>可见即可得编辑器</li>
+<li>树形组件</li>
+</ul>
+<p>至于怎么用，自己跑一遍demo_app，看看里面的参数，参考注释修修改改就好了。蛋疼的是我的后台一直不显示富文本编辑器，django群里的一哥们说他的没问题，难道是我打开方式不对 囧，一直怀疑是xadmin版本的问题。xadmin-cms最新一次提交是11个月前。</p>
+<p>如果你非要在xadmin中使用Ueditor，参考下这篇文章<a href="http://blog.csdn.net/u012762088/article/details/14497105">在django xadmin中使用 Ueditor</a></p>
+<p>===========分界线 14-3-20===============
+在新闻发布系统中有一个需求其实挺常见的：在news_list(新闻列表)页显示摘要，一般而言需要将新闻中的第一张图片也放到这里。
+这里解决方案很多，粗暴的方法比如在前台里<code>{{new.content}}</code>(content用于保存新闻内容)，之后用js来做，取出图片置顶,多余的文本隐藏（我们并不知道图片在文本中的什么位置,所以有必要把文本全部显示出）。
+很不优雅对吧，我们也可以这样解决，前台仅显示{{new.content_first_img|safe }} ,<code>{{new.content|slice:":200"|safe }}</code>,这样语意很清晰有木有。
+“代码是写给人看的，只是顺带能在机器上运行”
+那么content_first_img是怎么实现的。
+直接上代码：</p>
+<div class="highlight"><pre><span></span><span class="c1">#models.py</span>
+<span class="kn">from</span> <span class="nn">BeautifulSoup</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1">#取出第一张图片的html，使用正则</span>
+        <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content_html</span><span class="p">)</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">content_first_img</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">first</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">))</span> <span class="c1">#soup.first(&quot;img&quot;) #只返回第一个pic,需要转化为str，否则是对象</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_pic</span> <span class="p">:</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">content_pic</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">News</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span> 
+</pre></div>
+
+
+<p>实质上我们就是重载了save()方法在，当然你需要为你的模型新建一个content_first_img字段，用于存储第一张图片
+好了～。</p>
+<h3>TinyMCE</h3>
+<p>waiting</p>
+<h3>ckeditor</h3>
+<p>waiting</p>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://os54tv4fc.bkt.clouddn.com/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://os54tv4fc.bkt.clouddn.com/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
