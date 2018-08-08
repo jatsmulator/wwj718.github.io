@@ -1,0 +1,602 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+喜欢你这种没事喜欢翻源码的人
+如果你恰好也热爱技术、喜欢折腾，来啊，互相伤害，一起捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>为Open edX集成七牛云存储</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://os54tv4fc.bkt.clouddn.com/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to 为Open edX集成七牛云存储">
+					为Open edX集成七牛云存储 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-09-13T00:00:00+00:00">
+	<i class="icon-calendar"></i>二 13 九月 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/edx.html"><i class="icon-folder-open"></i>edx</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/edx.html"><i class="icon-tag"></i>edx</a>
+</footer><!-- /.post-info -->		</div>
+		<p><img alt="" src="http://oav6fgfj1.bkt.clouddn.com/qiniuf2e44878.png" /></p>
+<h1>Open edX与视频流</h1>
+<p>在Open edX的众多组件和服务中，并不包含视频流服务。不可否认的是，在线教育中，视频是要素之一，也许是最重要的要素之一，对一些人而言，甚至没有之一。</p>
+<p>视频流一般被视为一个common server，市面上有数不清的商业或是开源解决方案，Open edX没有去重造车轮，而是和youtube做了很多整合。我们与youtube无缘。当然作为通用的组件，Open edX中的视频模块支持一般的视频资源（url），无论是云存储还是自建服务</p>
+<h3>自建视频流</h3>
+<p>如果准备自建视频流服务，可以参考@MT的<a href="http://edustack.org/2015/10/17/%E5%9C%A8%E5%86%85%E9%83%A8%E7%BD%91%E7%BB%9C%E4%B8%BAedx%E9%85%8D%E7%BD%AE%E8%A7%86%E9%A2%91%E6%9C%8D%E5%8A%A1/">在内部网络为edX配置视频服务</a>。对于局域网内的用户（学校/企业），自建服务是个有诱惑力的方案。</p>
+<p>不过这里边存在的坑是，视频流服务搭建不难，搭建一个友好的客户端，上传管理视频却颇为不易。在此推荐使用<a href="https://github.com/minio/minio">minio</a>作为管理视频资源的工具，细节可以参考我的这篇文章:<a href="http://blog.just4fun.site/install-Minio-Cloud-Storage.html">构建类s3存储系统（Minio）</a></p>
+<h3>使用云存储</h3>
+<p>视频解决方案有很多，大家可以自行google，看大家的对比评测，再结合自己的需求选型，在此就不多推荐了</p>
+<p>我比较偏好<a href="http://www.qiniu.com/">七牛云</a>。对开发者友好，api写得很漂亮</p>
+<p>在此演示如何使用七牛云为open edX提供视频服务，并将客户端（js）集成其中</p>
+<h1>成果展示</h1>
+<p><img alt="" src="http://oav6fgfj1.bkt.clouddn.com/qiniuf2e44878.png" /></p>
+<p><img alt="" src="http://oav6fgfj1.bkt.clouddn.com/qiniu_upload2f7fea6e.png" /></p>
+<h1>思路与设计</h1>
+<h3>如何集成</h3>
+<p>首先我们需要考虑一个问题，视频管理入口以什么形态集成到Open edX中合适（如何集成七牛云存储）。换个角度，Open edX有哪些拓展方式呢。毕竟我们可以把集成外部存储系统，看做一次对系统的拓展</p>
+<p>在<a href="https://open.edx.org/extending-edx">Extending edX</a>中，官方给出了集中常见的拓展方式。此外还有两种很典型的拓展：</p>
+<ul>
+<li>对django开发者而言还可以直接侵入式拓展open edx，通过添加django app或者修改增强mvt中的任何一个环节</li>
+<li>模仿insights的做法，完全构建一个新的服务（网站），之后使用oauth2来打通用户系统</li>
+</ul>
+<p>因为我们希望将系统集成到open edx内部，所以决定采用添加django app的做法。
+用户上传和管理视频资源需要UI界面，参考<a href="http://edx.readthedocs.io/projects/edx-developer-guide/en/latest/user_interface_development.html#adding-a-ui-page">Adding a UI Page</a>，发现侵入式地定制open edx很是繁琐，我们决定为此功能写一个独立的页面，绕开繁重的前端架构</p>
+<h3>为何不是xblock</h3>
+<p>也许许多Open edX用户会觉得为何放着xlock不用，而采用侵入性更大的django app来拓展呢。原因有二：</p>
+<ul>
+<li>视频管理是一个用户视角下，全局性的操作，应该有一个同意的资源管理入口，而不是每次需要先添加一个组件，再在组件里边管理视频，逻辑上，这样也能做出来。我们可以把xblock视为必须实例化（instance）为组件的东西</li>
+<li>我们不想放弃既有的视频组件（数据采集等强大功能）</li>
+</ul>
+<h1>技术背景</h1>
+<p>关于七牛云你需要了解的知识和上传管理的逻辑，可以参考我此前的文章：<a href="http://blog.just4fun.site/built-data-storage-system.html">为Open edX构建存储服务</a></p>
+<p>如果你想读懂接下来的源码，你需要了解django和django-restful-framework，如果只是用的话，就无所谓</p>
+<h1>just do it</h1>
+<h2>后端部分</h2>
+<p>我们直接在<code>/edx/app/edxapp/edx-platform/cms/djangoapps</code>添加一个django app<code>qiniu_storage</code>,形如：</p>
+<div class="highlight"><pre><span></span>├── add_the_app.sh
+├── ajax.js
+├── __init__.py
+├── models.py
+├── permissions.py
+├── readme.md
+├── serializers.py
+├── urls.py
+├── views.py
+</pre></div>
+
+
+<p>我们重点介绍model和view部分，其他不赘述</p>
+<h4>models.py</h4>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># encoding: utf-8</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="c1">#from django.contrib.auth.models import User</span>
+
+<span class="k">class</span> <span class="nc">QiniuFiles</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">course_id</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="c1"># 上传用户，资源所有者</span>
+    <span class="n">file_key</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">file_url</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">file_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">file_size</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+    <span class="c1">#endUser = Column(String(100),nullable=True)</span>
+    <span class="n">create_time</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;创建时间&#39;</span><span class="p">,</span><span class="n">auto_now</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;create_time&#39;</span><span class="p">,)</span>
+</pre></div>
+
+
+<h4>views.py</h4>
+<p>只列出关键部分</p>
+<div class="highlight"><pre><span></span><span class="n">qiniu_access_key</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span>  <span class="s2">&quot;QINIU_ACCESS_KEY&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">QiniuFilesViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+    <span class="n">authentication_classes</span> <span class="o">=</span> <span class="p">(</span><span class="n">TokenAuthentication</span><span class="p">,</span> <span class="n">SessionAuthentication</span><span class="p">,)</span> 
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">QiniuFilesSerializer</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">(</span><span class="n">permissions</span><span class="o">.</span><span class="n">IsAuthenticatedOrReadOnly</span><span class="p">,</span><span class="n">IsOwnerOrReadOnly</span><span class="p">,)</span>
+
+    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This view should return a list of all the purchases</span>
+<span class="sd">        for the currently authenticated user.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">QiniuFiles</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">)</span> <span class="c1">#用户级别的管理权限，每个用户只能管理自己上传的文件</span>
+    <span class="c1"># 删除功能暂不演示</span>
+</pre></div>
+
+
+<p>其中的<code>IsOwnerOrReadOnly</code>值得关注，校验用户与资源的关系</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">permissions</span>
+
+<span class="k">class</span> <span class="nc">IsOwnerOrReadOnly</span><span class="p">(</span><span class="n">permissions</span><span class="o">.</span><span class="n">BasePermission</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Object-level permission to only allow owners of an object to edit it.</span>
+<span class="sd">    Assumes the model instance has an `owner` attribute.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">has_object_permission</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="ow">in</span> <span class="n">permissions</span><span class="o">.</span><span class="n">SAFE_METHODS</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span>
+</pre></div>
+
+
+<h2>前端部分</h2>
+<p>前端部分主要参考七牛的<a href="https://github.com/qiniu/js-sdk">js-sdk</a>，使用了<a href="https://github.com/zenorocha/clipboard.js">clipboard.js</a>用于点击事件，使用了<a href="https://github.com/needim/noty">noty</a>用于消息提醒</p>
+<p>代码形如：</p>
+<div class="highlight"><pre><span></span><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">uploader</span> <span class="o">=</span> <span class="nx">Qiniu</span><span class="p">.</span><span class="nx">uploader</span><span class="p">({</span>
+        <span class="nx">runtimes</span><span class="o">:</span> <span class="s1">&#39;html5,flash,html4&#39;</span><span class="p">,</span>
+        <span class="nx">browse_button</span><span class="o">:</span> <span class="s1">&#39;pickfiles&#39;</span><span class="p">,</span><span class="c1">//是哪个可上传的元素</span>
+        <span class="nx">container</span><span class="o">:</span> <span class="s1">&#39;container&#39;</span><span class="p">,</span>
+        <span class="nx">drop_element</span><span class="o">:</span> <span class="s1">&#39;container&#39;</span><span class="p">,</span><span class="c1">//是否可拖动，且是哪个元素</span>
+        <span class="nx">max_file_size</span><span class="o">:</span> <span class="s1">&#39;1000mb&#39;</span><span class="p">,</span>
+       <span class="c1">// flash_swf_url: &#39;bower_components/plupload/js/Moxie.swf&#39;,</span>
+        <span class="nx">dragdrop</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nx">chunk_size</span><span class="o">:</span> <span class="s1">&#39;4mb&#39;</span><span class="p">,</span>
+        <span class="c1">//uptoken: &#39;xxx&#39; //测试用</span>
+        <span class="nx">uptoken_url</span><span class="o">:</span> <span class="s1">&#39;/qiniu/uptoken&#39;</span><span class="p">,</span>  <span class="c1">//key由后端生成，定制化的规则包含在载荷中</span>
+        <span class="nx">domain</span><span class="o">:</span> <span class="s1">&#39;xxx&#39;</span><span class="p">,</span><span class="c1">//这是域名的绑定地址</span>
+        <span class="nx">get_new_uptoken</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nx">unique_names</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nx">auto_start</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nx">log_level</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="p">...</span>
+</pre></div>
+
+
+<h3>上传流程涉及的代码</h3>
+<p>在七牛的上传原理中，上传需要凭证，我们来看看凭证的生成规则</p>
+<div class="highlight"><pre><span></span><span class="nd">@api_view</span><span class="p">([</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">make_uptoken</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+            <span class="n">test_uptoken</span> <span class="o">=</span> <span class="n">QiniuTool</span><span class="p">()</span><span class="o">.</span><span class="n">get_test_uptoken</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+            <span class="c1">#跨域的问题 Access-Control-Allow-Origin</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;uptoken&quot;</span><span class="p">:</span> <span class="n">test_uptoken</span><span class="p">})</span>
+            <span class="k">return</span> <span class="n">response</span>
+</pre></div>
+
+
+<p>其中Qiniu类为</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">QiniuTool</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        #处理七牛凭证相关的工具，生成uptoken</span>
+<span class="sd">        存储相关的部分被抽象为rest服务</span>
+<span class="sd">        函数只接受get和post</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">callback_url</span> <span class="o">=</span> <span class="s1">&#39;http://studio.xxx.com/qiniu/post_from_qiniu&#39;</span>
+        <span class="c1">#http://developer.qiniu.com/article/kodo/kodo-developer/up/vars.html 所有的魔法变量</span>
+        <span class="c1">#callback_body = &#39;filename=$(fname)&amp;filesize=$(fsize)&amp;key=$(key)&amp;mimeType=$(mimeType)&amp;endUser=$(endUser)&amp;etag=$(etag)&#39;</span>
+        <span class="n">access_key</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span>  <span class="s2">&quot;QINIU_ACCESS_KEY&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">secret_key</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span>  <span class="s2">&quot;QINIU_SECRET_KEY&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">Auth</span><span class="p">(</span><span class="n">access_key</span><span class="p">,</span> <span class="n">secret_key</span><span class="p">)</span> <span class="c1"># access_key和secret_key来自settings里</span>
+        <span class="n">bucket_name</span> <span class="o">=</span> <span class="s2">&quot;easy-edx&quot;</span>
+        <span class="k">def</span> <span class="nf">get_test_uptoken</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">request</span><span class="p">):</span>
+            <span class="n">callback_body</span> <span class="o">=</span> <span class="s1">&#39;file_name=$(fname)&amp;file_size=$(fsize)&amp;file_key=$(key)&amp;mimeType=$(mimeType)&amp;endUser=$(endUser)&amp;etag=$(etag)&amp;username={}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">)</span>
+            <span class="c1"># 上传策略有许多可选的参数，方便服务于业务逻辑：参考[python-sdk](http://developer.qiniu.com/docs/v6/sdk/python-sdk.html)</span>
+            <span class="c1">#上传文件到七牛后， 七牛将文件名和文件大小回调给业务服务器。</span>
+            <span class="n">policy</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s1">&#39;scope&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">bucket_name</span><span class="p">,</span>
+                    <span class="s1">&#39;callbackUrl&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">callback_url</span><span class="p">,</span> <span class="c1">#回调 请求方式为POST</span>
+                    <span class="s1">&#39;callbackBody&#39;</span><span class="p">:</span><span class="n">callback_body</span>
+            <span class="p">}</span>
+            <span class="c1">#token = q.upload_token(bucket_name,3600,policy)</span>
+            <span class="n">token</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="o">.</span><span class="n">upload_token</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bucket_name</span><span class="p">,</span><span class="n">policy</span><span class="o">=</span><span class="n">policy</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">token</span>
+</pre></div>
+
+
+<p>视频上传好之后，七牛会可以发送一个消息给服务器，我们在此存下文件信息即可</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiniu_files.serializers</span> <span class="kn">import</span> <span class="n">QiniuFilesSerializer</span>
+
+<span class="nd">@api_view</span><span class="p">([</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">post_from_qiniu</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+            <span class="n">origin_authorization</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">META</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;HTTP_AUTHORIZATION&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="n">access_key</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\W&#39;</span><span class="p">,</span><span class="n">origin_authorization</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;file_url&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;http://media.xxx.com/&quot;</span><span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;file_key&quot;</span><span class="p">]</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;file_size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;file_size&quot;</span><span class="p">]</span>
+            <span class="n">serializer</span> <span class="o">=</span>  <span class="n">QiniuFilesSerializer</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">access_key</span> <span class="o">==</span> <span class="n">Qiniu</span><span class="p">()</span><span class="o">.</span><span class="n">access_key</span> <span class="ow">and</span> <span class="n">serializer</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+                <span class="n">serializer</span><span class="o">.</span><span class="n">save</span><span class="p">()</span> <span class="c1">#把信息存储到qiniu_storage模型里</span>
+                <span class="n">instance</span> <span class="o">=</span> <span class="n">serializer</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">file_info_format</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+                <span class="c1">#使用序列化就能存入本地</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">instance</span><span class="o">.</span><span class="n">pk</span>
+                <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;success&quot;</span><span class="p">:</span><span class="bp">False</span><span class="p">,</span><span class="s2">&quot;message&quot;</span><span class="p">:</span><span class="sa">u</span><span class="s2">&quot;请求不合格&quot;</span><span class="p">})</span>
+</pre></div>
+
+
+<h1>todo</h1>
+<p>还有许多细节可以改进，诸如校验用户是否有教师权限</p>
+<h1>后记</h1>
+<p>上边实际给出了open edx集成外部存储的方式，思路是通用的，不限于七牛。诸如你也可以将你自建的视频存储集成到open edx中，区别仅在抽象的存储接口（我们可以用minio构建）</p>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://os54tv4fc.bkt.clouddn.com/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://os54tv4fc.bkt.clouddn.com/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
