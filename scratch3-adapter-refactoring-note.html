@@ -1,0 +1,481 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+喜欢你这种没事喜欢翻源码的人
+如果你恰好也热爱技术、喜欢折腾，来啊，互相伤害，一起捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>scratch3-adapter重构笔记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://os54tv4fc.bkt.clouddn.com/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/公众号.html">
+						<i class="icon-folder-open icon-large"></i>公众号
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to scratch3-adapter重构笔记">
+					scratch3-adapter重构笔记 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2018-09-16T00:00:00+00:00">
+	<i class="icon-calendar"></i>日 16 九月 2018
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/shao-er-bian-cheng.html"><i class="icon-folder-open"></i>少儿编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/scratch3.html"><i class="icon-tag"></i>scratch3</a>
+</footer><!-- /.post-info -->		</div>
+		<p><img alt="" src="http://wwj-fig-bed.just4fun.site/adapter_47fb79f2.png" /></p>
+<p>近期在重构<a href="https://scratch3-adapter-docs.just4fun.site/">scratch3-adapter</a>,目前的最新版本是0.1.1, 我们计划在10月份发布0.2.0</p>
+<p>这次重构带来的改变包括:</p>
+<ul>
+<li>本地SSL安全证书</li>
+<li>引入<a href="https://github.com/pavlov99/json-rpc">json-rpc</a>，鼓励开发者使用json-rpc简化插件的开发</li>
+<li>引入<a href="https://scratch.mit.edu/microbit">Scratch Link</a>模式（目前scratch3-adapter在开发模式下允许切换为Scratch Link模式，与官方Scratch Link保持相同的架构，官方暂未开放Scratch Link，我做了逆向分析。）</li>
+<li>允许在GUI面板上启停插件</li>
+<li>发布不同平台的安装包(exe/dmg/Python package)<ul>
+<li>在跨平台软件分发这块，很多地方参考了<a href="https://github.com/mu-editor/mu">mu</a></li>
+</ul>
+</li>
+<li>在插件方面，添加了优必选alpha系列机器人的支持</li>
+</ul>
+<h1>缘起</h1>
+<p>近期使用官方七月底发布的<a href="https://scratch.mit.edu/microbit">Scratch Link</a>，我很喜欢这个软件，对它做了不少分析，<a href="https://scratch.mit.edu/microbit">Scratch Link</a>有许多聪明的设计，准备把这些好的主意移植到scratch3-adapter上。当然也有一些我们不喜欢的地方，我们准备做些有趣的探索和调整。</p>
+<h1>目标</h1>
+<p>此次重构的主要目标是提升软件易用性，<a href="https://github.com/mu-editor/mu">mu</a>和<a href="https://scratch.mit.edu/microbit">Scratch Link</a>在易用性方面都做得非常好，这两个软件是我们主要的学习对象。</p>
+<h1>重大变更</h1>
+<p>下边记录重构前后，发生的一些大的变更</p>
+<h3>本地SSL安全证书</h3>
+<p>我在<a href="https://blog.just4fun.site/scratch3-plugin-2.html">为Scratch3.0设计的插件系统(下篇)</a>中描述了<a href="https://scratch3-adapter-docs.just4fun.site/">scratch3-adapter</a>的架构设计，其中提到:scratch3-adapter中包含了一个websocket-server</p>
+<p>逆向分析<a href="https://scratch.mit.edu/microbit">Scratch Link</a>可以看到，它内部也包含了一个websocket-server，使用的是<a href="https://github.com/Building42/Telegraph">Telegraph</a></p>
+<p>当我们从https网站访问本地websocket-server服务时，如果本地websocket-server服务没有采用SSL安全证书，会给用户增加操作步骤(需要用户确认继续访问)，体验不够友好，问题的描述和解决方案我都写在<a href="https://blog.just4fun.site/localhost-https-ssl.html">本地https/wss服务与SSL安全证书</a></p>
+<h3>引入<a href="https://github.com/pavlov99/json-rpc">json-rpc</a></h3>
+<p>scratch3-adapter受<a href="https://zh.wikipedia.org/wiki/%E6%A9%9F%E5%99%A8%E4%BA%BA%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1">ROS</a>影响很深,ROS本质上是一个消息系统。</p>
+<p>我很喜欢Smalltalk的设计原则中的这条:</p>
+<blockquote>
+<p>计算应该被视为可通过发送消息来统一调用的对象的内在功能。</p>
+</blockquote>
+<p>Scratch的<a href="https://github.com/LLK/Scratch_1.4">第一个版本</a>由Smalltalk的方言Squeak写成，受Smalltalk影响极深。可以看到Scratch3.0依然保持着这条设计原则。</p>
+<p>我希望scratch3-adapter能延续Smalltalk的设计原则。所以消息会一直作为核心要素。</p>
+<p>我相信这条原则是scratch3-adapter达成它的目标<code>将万物积木化</code>的核心所在。</p>
+<p>但原始的消息对于大多开发者来说，可能过于原始了，所以我们决定学习<a href="https://scratch.mit.edu/microbit">Scratch Link</a>，在消息之上抽象出RPC，方便开发者写自定义的插件。当然这个特性是可选的，是否使用json-rpc由开发者自行决定。我原本计划在消息之上添加自定义协议，后来发现json-rpc就是我想要的，所以就不重造轮子了。</p>
+<h3><a href="https://scratch.mit.edu/microbit">Scratch Link</a>模式</h3>
+<p><a href="https://scratch.mit.edu/microbit">Scratch Link</a>本身非常简单，我大约使用100代码实现了它的功能。这部分作为<a href="https://scratch.mit.edu/microbit">Scratch Link</a>模式，开发模式下可以启用，<a href="https://scratch.mit.edu/microbit">Scratch Link</a>模式很简单，不包含ZeroMQ，它的核心是<code>websocket-server</code> + <code>json-rpc</code>。</p>
+<p>我们来演示scratch3-adapter的<a href="https://scratch.mit.edu/microbit">Scratch Link</a>模式下，如何完美替代官方的Scratch Link。</p>
+<p>我们让scratch3-adapter模拟成Scratch Link，欺骗前端说它已经搜索到了micro:bit。实际上我们连电脑的蓝牙都没打开。</p>
+<p><img src="http://wwj-fig-bed.just4fun.site/adapter-link_2aa33dd6.png" width=800 /></p>
+<p>接着让我们点击连接，再次成功骗过前端</p>
+<p><img src="http://wwj-fig-bed.just4fun.site/adapter-link_08a8898f.png" width=800 /></p>
+<p>我比较坚持引入ZeroMQ，所以scratch3-adapter默认不采用Scratch Link模式,而将ZeroMQ作为架构的核心部分(默认模式)。对于异步任务、分布式组件、协同控制，ZeroMQ都能帮上大忙。ZeroMQ会让scratch3-adapter极为灵活，如果之后要引入复杂的机器人、AI、飞行器矩阵，ZeroMQ会让这些事变得简单。我希望提供一个强大、灵活而开放的架构。</p>
+<p>jupyter架构的核心元素之一便是ZeroMQ，jupyter如此健壮的原因之一便是ZeroMQ。我在<a href="https://blog.just4fun.site/jupyter-notebook-architecture.html">jupyter notebook架构分析</a>做了讨论</p>
+<h3>允许在GUI面板上启停插件</h3>
+<p>重写了插件管理系统，支持线程管理。于是可以在GUI面板上随意启停插件。而不必反复重启软件</p>
+<h3>软件安装包</h3>
+<p>为了让软件更加易于使用，我们决定提供各个平台的安装包,windows下为exe，macOS下为dmg，linux下可以选择python package或者打包好的软件。</p>
+<p>这部分主要学习了<a href="https://github.com/mu-editor/mu">mu-editor</a></p>
+<h1>参考</h1>
+<ul>
+<li><a href="https://blog.just4fun.site/localhost-https-ssl.html">本地https/wss服务与SSL安全证书</a></li>
+<li><a href="https://blog.just4fun.site/scratch3-microbit-analysis.html">分析scratch3.0与micro:bit的通信</a></li>
+<li><a href="https://scratch3-adapter-docs.just4fun.site/">scratch3-adapter docs</a></li>
+<li><a href="https://github.com/mu-editor/mu">mu</a><ul>
+<li><a href="https://github.com/mu-editor/mu/blob/43bb9f8bb5af177fb5fac05e25bade16c14c758a/docs/packaging.rst">Packaging Mu</a></li>
+</ul>
+</li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://os54tv4fc.bkt.clouddn.com/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://p6ur0vhyj.bkt.clouddn.com/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://os54tv4fc.bkt.clouddn.com/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/公众号.html">
+    <i class="icon-folder-open icon-large"></i>公众号
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
