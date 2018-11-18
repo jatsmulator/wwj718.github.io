@@ -1,0 +1,512 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+喜欢你这种没事喜欢翻源码的人
+如果你恰好也热爱技术、喜欢折腾，来啊，互相伤害，一起捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>使用micro:bit自制PPT翻页笔</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://os54tv4fc.bkt.clouddn.com/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/codelab.html">
+						<i class="icon-folder-open icon-large"></i>codelab
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/公众号.html">
+						<i class="icon-folder-open icon-large"></i>公众号
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to 使用micro:bit自制PPT翻页笔">
+					使用micro:bit自制PPT翻页笔 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2018-07-10T00:00:00+00:00">
+	<i class="icon-calendar"></i>二 10 七月 2018
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/shao-er-bian-cheng.html"><i class="icon-folder-open"></i>少儿编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/microbit.html"><i class="icon-tag"></i>microbit</a>
+</footer><!-- /.post-info -->		</div>
+		<p><img alt="" src="http://wwj-fig-bed.just4fun.site/ppt_f5a212e3.png" /></p>
+<blockquote>
+<p>Word的成功是形式对内容的胜利</p>
+</blockquote>
+<p>近期偶尔到高校做些技术分享。我不喜欢写PPT，Word/PowerPoint是我最厌恶的几个软件，对Keynote也没有好感，没什么耐心在这些软件里点来点去</p>
+<p>但我并不排斥为讨论和演讲做些书面上的准备。如果可以专注在内容，以Markdown来写作，而不必分心到排版和样式这些事情上，写完演讲所需要的内容之后，PPT能自动从markdown文本中生成，那该多怯意</p>
+<h1 id="_1">要有光</h1>
+<p>幸运的是，<a href="http://jupyter.org/">jupyter</a>允许我们这样做。</p>
+<p><a href="http://jupyter.org/">jupyter</a>是个令人振奋的项目，如果要挑选出我最喜欢的几个工具，<a href="http://jupyter.org/">jupyter</a>应该会排在前三</p>
+<p>如果你来自 生物科学/物理学/人工智能/数据分析/量化 社区，<a href="http://jupyter.org/">jupyter</a>可能已经在你的工具箱里了，如果你平时喜欢探索性的编码工作，那么你值得花一些时间上手<a href="http://jupyter.org/">jupyter</a></p>
+<h3 id="jupyterppt">用jupyter写PPT</h3>
+<p>首先安装jupyterlab: <code>pip3 install jupyterlab</code>，jupyterLab是jupyter的下一代用户界面。安装完成之后，即可运行:<code>jupyter lab</code></p>
+<p><img src="http://wwj-fig-bed.just4fun.site/microbitslide_3f5f1127.png" width=600 /></p>
+<p>接着创建一个notebook，你就可以开始用Markdown写作PPT了</p>
+<p>你可以把每个cell视为一页PPT，使用markdown在其中写作或代码，就像写博客，写完之后，点击右边栏的<code>Cell Tools</code>, 来设置cell</p>
+<p><img src="http://wwj-fig-bed.just4fun.site/microbitslides_47c7c5c3.png" width=600 /></p>
+<p>每个cell可以设置为以下多种类型：</p>
+<p><img src="http://wwj-fig-bed.just4fun.site/microbitslide_2dcbd1f4.png" width=600 /></p>
+<p>写作完毕，选择导出为Slides:</p>
+<p><img src="http://wwj-fig-bed.just4fun.site/microbitslide_18fe0a6e.png" width=600 /></p>
+<p>导出文件为html，依赖于<a href="https://github.com/hakimel/reveal.js/">reveal.js</a>（没有使用CDN），所以你需要在导出文件的同级别目录放置<a href="https://github.com/hakimel/reveal.js/">reveal.js</a>（下载后解压即可）。</p>
+<p>之后打开下载的html文件，你就可以在浏览器里看到使用jupyter写的PPT了，你可以把它们称为web PPT，演示的时候将浏览器全屏即可。</p>
+<h1 id="_2">翻页笔</h1>
+<p>PPT翻页笔大约长这样:</p>
+<p><img src="http://wwj-fig-bed.just4fun.site/ppt_c7c6b349.png" width=400 /></p>
+<p>你在台上演讲时，手握翻页笔，可以无线切换PPT，从而使PPT内容与你的演讲进度同步。</p>
+<h3 id="microbit-ppt">micro:bit PPT翻页笔</h3>
+<p><img src="http://tech.microbit.org/docs/hardware/assets/microbit-overview.png" width=600 /></p>
+<p>因为micro:bit中有蓝牙模块，所以我们可以利用micro:bit的蓝牙功能，来实现无线通讯；它还自带两个按钮，很适合用于制作翻页笔（前后翻页）</p>
+<p>制作过程十分简单:</p>
+<p>首先下载<a href="https://raw.githubusercontent.com/wwj718/slide_microbit/master/FD18_NRF51_MICROBIT.hex">microbit固件</a>到本地，然后拖拽到micro:bit中</p>
+<p>完成之后，micro:bit将对外提供<a href="https://en.wikipedia.org/wiki/Bluetooth_Low_Energy">ble</a>按钮服务，之后我们利用<a href="https://github.com/WebBluetoothCG/web-bluetooth/blob/gh-pages/implementation-status.md#chrome">web bluetooth</a>可以将浏览器，连上micro:bit，从而让micro:bit与js交互，而<a href="https://revealjs.com/">reveal.js</a>有js api， 这就是micro:bit PPT翻页笔的原理.</p>
+<p><strong>注意</strong>:注意: <a href="https://github.com/WebBluetoothCG/web-bluetooth/blob/gh-pages/implementation-status.md#chrome">web bluetooth</a>目前只支持macOS、chrome OS、安卓三个平台下的 Chrome浏览器,暂不支持Windows系统 </p>
+<p>这块所需的js代码，我已经写好的。在你写作PPT时，只需在jupyter lab的第一个cell里贴上如下代码</p>
+<div class="highlight"><pre><span></span># 连接micro:bit
+*  打开电脑的蓝牙
+*  点击右边的连接按钮
+
+<span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;ble_button&quot;</span> <span class="na">style=</span><span class="s">&quot;color:blue&quot;</span><span class="nt">&gt;</span>连接<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;microbit_ble.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+
+
+<p>然后把<a href="https://raw.githubusercontent.com/wwj718/slide_microbit/master/microbit_ble.js">microbit_ble.js</a>下载到jupyter lab导出的slide同级目录即可</p>
+<p>听起来很绕的话，直接看<a href="https://github.com/wwj718/slide_microbit">源代码</a>可能更清楚</p>
+<h3 id="_3">开始使用</h3>
+<p>打开导出的slide，点击连接，选择micro:bit</p>
+<p><img src="http://wwj-fig-bed.just4fun.site/microbitslide_0c59526e.png" width=600 /></p>
+<p>至此，你就可以手握micro:bit开始你的演讲啦，使用电池供电，你就可以带着micro:bit在台上四处走啦</p>
+<video width=300 src="http://scratch3-files.just4fun.site/microbitslide.mp4" controls="controls"></video>
+
+<h3 id="_4">想象空间</h3>
+<p>如果你和我一样，是scratch和micro:bit的粉丝。你可以将microbit当作PPT翻页笔，而用scratch演示PPT。</p>
+<p>具体策略有很多，最有趣的一种是直接用scratch创作动态内容，而将micro:bit作为一种体感设备，如此一来，你可以与你的PPT进行富有表现里的互动。如果你愿意，你可以选择跳一跳切屏或摇一摇抽奖</p>
+<p>另一种策略，要简单一些，表现力也更弱，和传统PPT无异:将你的PPT转为<code>480x360</code>的图片，之后将图片作为背景导入scratch即可。然后使用我在<a href="https://blog.just4fun.site/scratch3-microbit.html">scratch3.0 + micro:bit</a>所介绍的方法，将micro:bit与scratch3.0连起来</p>
+<!--
+形式与内容的分离
+
+Word是内容与形式同时处理
+
+Word是所见即所得
+
+
+# 使用
+
+日本的文章
+官方接口
+
+-->
+
+<h1 id="_5">参考</h1>
+<ul>
+<li><a href="https://sspai.com/post/37340">反思Markdown：Markdown的长与短</a></li>
+<li><a href="https://github.com/wwj718/slide_microbit">slide_microbit</a></li>
+<li><a href="https://blog.just4fun.site/document-factory-pandoc.html">文档格式转化神器pandoc</a></li>
+<li><a href="http://jupyter.org/">jupyter</a></li>
+<li><a href="https://revealjs.com/">reveal.js</a></li>
+<li><a href="https://blog.just4fun.site/microbit-notes.html">micro:bit使用笔记</a></li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://os54tv4fc.bkt.clouddn.com/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://p6ur0vhyj.bkt.clouddn.com/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://os54tv4fc.bkt.clouddn.com/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/codelab.html">
+    <i class="icon-folder-open icon-large"></i>codelab
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/公众号.html">
+    <i class="icon-folder-open icon-large"></i>公众号
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
