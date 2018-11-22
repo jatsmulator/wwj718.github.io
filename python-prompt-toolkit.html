@@ -1,0 +1,626 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+喜欢你这种没事喜欢翻源码的人
+如果你恰好也热爱技术、喜欢折腾，来啊，互相伤害，一起捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>[译]使用Python Prompt Toolkit构建强大的REPL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://os54tv4fc.bkt.clouddn.com/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to [译]使用Python Prompt Toolkit构建强大的REPL">
+					[译]使用Python Prompt Toolkit构建强大的REPL 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-07-31T00:00:00+00:00">
+	<i class="icon-calendar"></i>日 31 七月 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/gong-ju.html"><i class="icon-folder-open"></i>工具</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/tools.html"><i class="icon-tag"></i>tools</a>
+</footer><!-- /.post-info -->		</div>
+		<p><img alt="" src="https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/tutorial/screenshots/6.png?raw=true" /></p>
+<p>原文参考<a href="https://github.com/jonathanslenders/python-prompt-toolkit/tree/master/examples/tutorial">Build a REPL With Python Prompt Toolkit</a>,很喜欢这篇教程，清晰简单，读起来十分舒服，翻译过来分析给大家</p>
+<h1 id="_1">前言</h1>
+<p>正式开始翻译之前，我们先了解一些背景知识</p>
+<h3 id="python-prompt-toolkit"><a href="https://github.com/jonathanslenders/python-prompt-toolkit">python-prompt-toolkit</a></h3>
+<p>python-prompt-toolkit是一个用于构建强大交互式命令行的 Python 工具库,许多好用而智能的命令行工具都构建在它上边</p>
+<ul>
+<li>ipython</li>
+<li>ptpython</li>
+<li>mycli</li>
+<li>pgcli</li>
+<li>xonsh</li>
+<li>gitsome</li>
+<li>http-prompt</li>
+<li>aws-shell</li>
+<li>haxor-news</li>
+</ul>
+<p>如果你用过其中的一些，你会惊叹于他们的智能和良好的交互式体验（就像fish）, 这些工具的背后便是我们今天的主角:<a href="https://github.com/jonathanslenders/python-prompt-toolkit">python-prompt-toolkit</a></p>
+<h3 id="repl">REPL</h3>
+<p>全称Read-Eval-Print Loop("读取-求值-输出"循环)，是一个简单的，交互式的编程环境.</p>
+<p>REPL使得探索性的编程和调试更加便捷，因为“读取-求值-输出”循环通常会比经典的“编辑-编译-运行-调试”模式要更快</p>
+<h1 id="_2">译文</h1>
+<p>本文教你使用<a href="https://github.com/jonathanslenders/python-prompt-toolkit">prompt_toolkit</a>来构建SQLite数据库的命令行工具</p>
+<p>prompt_toolkit是一个用于构建强大交互式命令行的 Python 工具库</p>
+<p>首先让我们用pip安装它：</p>
+<p><code>pip install prompt_toolkit</code></p>
+<p>搞起!</p>
+<h3 id="_3">读取用户输入</h3>
+<p>使用<code>prompt</code>方法接收用户输入</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">prompt_toolkit</span> <span class="kn">import</span> <span class="n">prompt</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;You entered:&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+
+<p><img alt="" src="https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/tutorial/screenshots/1.png?raw=true" /></p>
+<h3 id="repl_1">REPL循环</h3>
+<p>现在让我们在一个while循环里调用<code>prompt</code>方法，同时将输入历史保存在<code>InMemoryHistory</code>对象里</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">prompt_toolkit</span> <span class="kn">import</span> <span class="n">prompt</span>
+<span class="kn">from</span> <span class="nn">prompt_toolkit.history</span> <span class="kn">import</span> <span class="n">InMemoryHistory</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="n">InMemoryHistory</span><span class="p">()</span>
+
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">history</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;You entered:&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;GoodBye!&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+
+<p><img alt="" src="https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/tutorial/screenshots/2.png?raw=true" /></p>
+<h3 id="_4">语法高亮</h3>
+<p>我们已经做了一些基础工作，现在让我们将语法高亮加入到用户的输入中。我们知道用户将会输入sql语句，我们可以使用<a href="http://pygments.org/">Pygments</a>来高亮用户的输入.<code>lexer</code>参数允许你设置词法分析器(译者注：lexical analyzer，简称lexer)，我们将使用Pygments 库的<code>SqlLexer</code>来对输入做高亮处理：</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">prompt_toolkit</span> <span class="kn">import</span> <span class="n">prompt</span>
+<span class="kn">from</span> <span class="nn">prompt_toolkit.history</span> <span class="kn">import</span> <span class="n">InMemoryHistory</span>
+<span class="kn">from</span> <span class="nn">pygments.lexers</span> <span class="kn">import</span> <span class="n">SqlLexer</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="n">InMemoryHistory</span><span class="p">()</span>
+
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">(</span><span class="s1">&#39;&gt; &#39;</span><span class="p">,</span> <span class="n">lexer</span><span class="o">=</span><span class="n">SqlLexer</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">history</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;You entered:&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;GoodBye!&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+
+<p><img alt="" src="https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/tutorial/screenshots/3.png?raw=true" /></p>
+<h3 id="_5">自动补全</h3>
+<p>语法高亮屌爆啦！你造什么更牛一些吗？自动补全！开干！</p>
+<p>使用<code>WordCompleter</code>类创建一个叫做<code>sql_completer</code>的实例，初始化的时候，定义一组关键字集合，它们将用于自动补全</p>
+<p><code>sql_completer</code>实例将被传递到<code>prompt</code>函数里</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">prompt_toolkit</span> <span class="kn">import</span> <span class="n">prompt</span>
+<span class="kn">from</span> <span class="nn">prompt_toolkit.history</span> <span class="kn">import</span> <span class="n">InMemoryHistory</span>
+<span class="kn">from</span> <span class="nn">prompt_toolkit.contrib.completers</span> <span class="kn">import</span> <span class="n">WordCompleter</span>
+<span class="kn">from</span> <span class="nn">pygments.lexers</span> <span class="kn">import</span> <span class="n">SqlLexer</span>
+
+<span class="n">sql_completer</span> <span class="o">=</span> <span class="n">WordCompleter</span><span class="p">([</span><span class="s1">&#39;create&#39;</span><span class="p">,</span> <span class="s1">&#39;select&#39;</span><span class="p">,</span> <span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="s1">&#39;drop&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;delete&#39;</span><span class="p">,</span> <span class="s1">&#39;from&#39;</span><span class="p">,</span> <span class="s1">&#39;where&#39;</span><span class="p">,</span> <span class="s1">&#39;table&#39;</span><span class="p">],</span> <span class="n">ignore_case</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="n">InMemoryHistory</span><span class="p">()</span>
+
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">(</span><span class="s1">&#39;&gt; &#39;</span><span class="p">,</span> <span class="n">lexer</span><span class="o">=</span><span class="n">SqlLexer</span><span class="p">,</span> <span class="n">completer</span><span class="o">=</span><span class="n">sql_completer</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">history</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;You entered:&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;GoodBye!&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+
+<p><img alt="" src="https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/tutorial/screenshots/4.png?raw=true" /></p>
+<p>大约用了30行代码我们就得到了一个拥有自动补全和语法高亮的REPL。 再接再厉！</p>
+<h3 id="_6">修改菜单样式</h3>
+<p>自动补全菜单忒丑，让我们给它点"颜色"看看！创建<code>DocumentStyle</code>，使它成为pygments.style的子类. 定制自动补全菜单的颜色，并把样式作为参数传到<code>prompt</code>函数里：</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">prompt_toolkit</span> <span class="kn">import</span> <span class="n">prompt</span>
+<span class="kn">from</span> <span class="nn">prompt_toolkit.history</span> <span class="kn">import</span> <span class="n">InMemoryHistory</span>
+<span class="kn">from</span> <span class="nn">prompt_toolkit.contrib.completers</span> <span class="kn">import</span> <span class="n">WordCompleter</span>
+<span class="kn">from</span> <span class="nn">pygments.lexers</span> <span class="kn">import</span> <span class="n">SqlLexer</span>
+<span class="kn">from</span> <span class="nn">pygments.style</span> <span class="kn">import</span> <span class="n">Style</span>
+<span class="kn">from</span> <span class="nn">pygments.token</span> <span class="kn">import</span> <span class="n">Token</span>
+<span class="kn">from</span> <span class="nn">pygments.styles.default</span> <span class="kn">import</span> <span class="n">DefaultStyle</span>
+
+<span class="n">sql_completer</span> <span class="o">=</span> <span class="n">WordCompleter</span><span class="p">([</span><span class="s1">&#39;create&#39;</span><span class="p">,</span> <span class="s1">&#39;select&#39;</span><span class="p">,</span> <span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="s1">&#39;drop&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;delete&#39;</span><span class="p">,</span> <span class="s1">&#39;from&#39;</span><span class="p">,</span> <span class="s1">&#39;where&#39;</span><span class="p">,</span> <span class="s1">&#39;table&#39;</span><span class="p">],</span> <span class="n">ignore_case</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">DocumentStyle</span><span class="p">(</span><span class="n">Style</span><span class="p">):</span>
+    <span class="n">styles</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">Token</span><span class="o">.</span><span class="n">Menu</span><span class="o">.</span><span class="n">Completions</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">Current</span><span class="p">:</span> <span class="s1">&#39;bg:#00aaaa #000000&#39;</span><span class="p">,</span>
+        <span class="n">Token</span><span class="o">.</span><span class="n">Menu</span><span class="o">.</span><span class="n">Completions</span><span class="o">.</span><span class="n">Completion</span><span class="p">:</span> <span class="s1">&#39;bg:#008888 #ffffff&#39;</span><span class="p">,</span>
+        <span class="n">Token</span><span class="o">.</span><span class="n">Menu</span><span class="o">.</span><span class="n">Completions</span><span class="o">.</span><span class="n">ProgressButton</span><span class="p">:</span> <span class="s1">&#39;bg:#003333&#39;</span><span class="p">,</span>
+        <span class="n">Token</span><span class="o">.</span><span class="n">Menu</span><span class="o">.</span><span class="n">Completions</span><span class="o">.</span><span class="n">ProgressBar</span><span class="p">:</span> <span class="s1">&#39;bg:#00aaaa&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">styles</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">DefaultStyle</span><span class="o">.</span><span class="n">styles</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="n">InMemoryHistory</span><span class="p">()</span>
+
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">(</span><span class="s1">&#39;&gt; &#39;</span><span class="p">,</span> <span class="n">lexer</span><span class="o">=</span><span class="n">SqlLexer</span><span class="p">,</span> <span class="n">completer</span><span class="o">=</span><span class="n">sql_completer</span><span class="p">,</span>
+                      <span class="n">style</span><span class="o">=</span><span class="n">DocumentStyle</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">history</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;You entered:&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;GoodBye!&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+
+<p><img alt="" src="https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/tutorial/screenshots/5.png?raw=true" /></p>
+<p>剩下的工作就是如何对接到sqlite后端，作为读者的家庭作业好了。哈哈开玩笑啦...我们继续</p>
+<h3 id="sqlite">对接到Sqlite</h3>
+<p>这一步是可选的 ;)  之前我们一直在关注如何构建REPL. 现在是时候将输入传给SQLite</p>
+<p>显然我没有考虑错误处理，但它或许可以作为你们的起步参考</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">sqlite3</span>
+
+<span class="kn">from</span> <span class="nn">prompt_toolkit</span> <span class="kn">import</span> <span class="n">prompt</span><span class="p">,</span> <span class="n">AbortAction</span>
+<span class="kn">from</span> <span class="nn">prompt_toolkit.history</span> <span class="kn">import</span> <span class="n">InMemoryHistory</span>
+<span class="kn">from</span> <span class="nn">prompt_toolkit.contrib.completers</span> <span class="kn">import</span> <span class="n">WordCompleter</span>
+<span class="kn">from</span> <span class="nn">pygments.lexers</span> <span class="kn">import</span> <span class="n">SqlLexer</span>
+<span class="kn">from</span> <span class="nn">pygments.style</span> <span class="kn">import</span> <span class="n">Style</span>
+<span class="kn">from</span> <span class="nn">pygments.token</span> <span class="kn">import</span> <span class="n">Token</span>
+<span class="kn">from</span> <span class="nn">pygments.styles.default</span> <span class="kn">import</span> <span class="n">DefaultStyle</span>
+
+<span class="n">sql_completer</span> <span class="o">=</span> <span class="n">WordCompleter</span><span class="p">([</span><span class="s1">&#39;create&#39;</span><span class="p">,</span> <span class="s1">&#39;select&#39;</span><span class="p">,</span> <span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="s1">&#39;drop&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;delete&#39;</span><span class="p">,</span> <span class="s1">&#39;from&#39;</span><span class="p">,</span> <span class="s1">&#39;where&#39;</span><span class="p">,</span> <span class="s1">&#39;table&#39;</span><span class="p">],</span> <span class="n">ignore_case</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">DocumentStyle</span><span class="p">(</span><span class="n">Style</span><span class="p">):</span>
+    <span class="n">styles</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">Token</span><span class="o">.</span><span class="n">Menu</span><span class="o">.</span><span class="n">Completions</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">Current</span><span class="p">:</span> <span class="s1">&#39;bg:#00aaaa #000000&#39;</span><span class="p">,</span>
+        <span class="n">Token</span><span class="o">.</span><span class="n">Menu</span><span class="o">.</span><span class="n">Completions</span><span class="o">.</span><span class="n">Completion</span><span class="p">:</span> <span class="s1">&#39;bg:#008888 #ffffff&#39;</span><span class="p">,</span>
+        <span class="n">Token</span><span class="o">.</span><span class="n">Menu</span><span class="o">.</span><span class="n">Completions</span><span class="o">.</span><span class="n">ProgressButton</span><span class="p">:</span> <span class="s1">&#39;bg:#003333&#39;</span><span class="p">,</span>
+        <span class="n">Token</span><span class="o">.</span><span class="n">Menu</span><span class="o">.</span><span class="n">Completions</span><span class="o">.</span><span class="n">ProgressBar</span><span class="p">:</span> <span class="s1">&#39;bg:#00aaaa&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">styles</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">DefaultStyle</span><span class="o">.</span><span class="n">styles</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">database</span><span class="p">):</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="n">InMemoryHistory</span><span class="p">()</span>
+    <span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">database</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">(</span><span class="s1">&#39;&gt; &#39;</span><span class="p">,</span> <span class="n">lexer</span><span class="o">=</span><span class="n">SqlLexer</span><span class="p">,</span> <span class="n">completer</span><span class="o">=</span><span class="n">sql_completer</span><span class="p">,</span>
+                          <span class="n">style</span><span class="o">=</span><span class="n">DocumentStyle</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">history</span><span class="p">,</span>
+                          <span class="n">on_abort</span><span class="o">=</span><span class="n">AbortAction</span><span class="o">.</span><span class="n">RETRY</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">EOFError</span><span class="p">:</span>
+            <span class="k">break</span>  <span class="c1"># Control-D pressed.</span>
+        <span class="k">with</span> <span class="n">connection</span><span class="p">:</span>
+            <span class="n">messages</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;GoodBye!&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="s1">&#39;:memory:&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">main</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="" src="https://github.com/jonathanslenders/python-prompt-toolkit/blob/master/examples/tutorial/screenshots/6.png?raw=true" /></p>
+<p>希望这篇文章能给你一些启发去构建命令行工具</p>
+<p>以上</p>
+<h1 id="_7">附录</h1>
+<h3 id="unicode">unicode</h3>
+<p>在python2中使用<code>from __future__ import unicode_literals</code>，这样一来所有字符串将被解释为unicode,无论是否有<code>u''</code>,这样一来和python3保持了一致</p>
+<h3 id="example">example</h3>
+<p>python-prompt-toolkit的教程写得极好，通过<a href="https://github.com/jonathanslenders/python-prompt-toolkit/tree/master/examples">examples</a>，花很短的时间，我们就能学会如何使用python-prompt-toolkit的丰富特性</p>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://os54tv4fc.bkt.clouddn.com/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://p6ur0vhyj.bkt.clouddn.com/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://os54tv4fc.bkt.clouddn.com/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
