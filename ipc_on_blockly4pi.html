@@ -1,0 +1,554 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+喜欢你这种没事喜欢翻源码的人
+如果你恰好也热爱技术、喜欢折腾，来啊，互相伤害，一起捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>进程间通信一例</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://os54tv4fc.bkt.clouddn.com/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to 进程间通信一例">
+					进程间通信一例 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2017-04-28T00:00:00+00:00">
+	<i class="icon-calendar"></i>五 28 四月 2017
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/ying-jian.html"><i class="icon-folder-open"></i>硬件</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/rpi.html"><i class="icon-tag"></i>rpi</a>
+</footer><!-- /.post-info -->		</div>
+		<p><img alt="" src="http://wwj-fig-bed.just4fun.site/blockly4pi391b0c97.png" /></p>
+<h1 id="_1">背景</h1>
+<p>我最近在折腾blockly4pi，这是一个教育项目，致力于将编程带入到基础教育，通过使用<a href="https://developers.google.com/blockly/">blockly</a>,我们将原子操作封装为积木块，学生只需要操作积木块就能做到程序能做到的事</p>
+<p>已经封装为积木的原子操作，除了blockly提供的基本编程要素(循环、条件、逻辑等)，我们还积木化了虚拟角色的操作以及硬件操作。</p>
+<p>硬件的积木化不只是对硬件的操作积木化，硬件本身也被设计为积木</p>
+<p>用户通过拖拽web试验平台拖拽积木块，将生成对应程序代码(我目前选择生成python，其实js也是很棒的选择)，之后这些代码在树莓派里运行以操控硬件。</p>
+<p>我们的硬件积木与树莓派之间采用wifi通信，硬件积木自然是李老师做的(对李老师有兴趣的可以参考我之前的文章),目前的原型机便是文章开头的那张图</p>
+<p>我们之前为了省心采用了类似http(实际是socket)的通信机制(请求-答复-中断)来做树莓派和积木节点之间的通信，虽然架构简单，不过带来了一个麻烦，实时性不高的问题,近期重新调整为长链接</p>
+<h1 id="_2">问题</h1>
+<p>我们最初放弃长链接的一个原因是：对硬件积木的操作指令是用户生成的，用户每次在web界面搭建好积木点击运行，树莓派里新起python进程。如此一来长连接就不能建立在动态生成的脚本里。因为脚本是动态执行的，随时可能因为用户新的提交而中断（执行新的）. </p>
+<h1 id="_3">思路</h1>
+<p>于是我想到用ipc(进程间通信)来解决这个问题: 在树莓派中使用两个进程来做这件事（分别以进程一和进程二表示）:</p>
+<ul>
+<li>用户在web页面拖拽积木块生成代码，之后代码作为脚本运行在树莓派中，此为进程一，它是动态的 （为了保证清晰和教学方便，只允许在单次提交中使用多线程，不允许多次脚本并行）</li>
+<li>进程二运行在后台(不中断),负责与硬件节点保持长连接，该进程同时作为server，等待进程二传递的控制硬件节点的消息,同时将消息传递给硬件积木</li>
+</ul>
+<p>也就是说进程二是用户动态生成的脚本与硬件积木的中间人，使用这个中间人的目的是保持长链接不中断</p>
+<p>从数据的视角来看，进程一只是个管道，它只负责传递消息，管道本是静态的，我们使用载荷来承载变化的消息</p>
+<h1 id="_4">实现</h1>
+<p>一旦进入实现部分，岔路就多了，尽管可能都通往罗马，但有些路荆棘遍布，有些路一马平川，如何选择，感觉有时候比分析重要，这可能是工程问题中偏艺术的一环</p>
+<p>就我而言，在不熟悉的领域，我便好走人多的一条路，即便迷路的话，指路人也多</p>
+<p>尽管进程间通信的方法很多，我选择Socket(套接口),Socket为目前Linux上最为广泛使用的一种的进程间通信机制，与其他的Linux通信机制不同之处在于除了它可用于单机内的进程间通信以外，还可用于不同机器之间的进程间通信</p>
+<h1 id="_5">代码</h1>
+<p>考虑到这部分可能对其他同学也有帮助，我将这部分的具体实现放过来(只展示原理)</p>
+<p>进程二为</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># encoding: utf-8</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">settings</span>
+
+<span class="n">sockfile</span> <span class="o">=</span> <span class="s2">&quot;./communicate.sock&quot;</span>
+
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span> <span class="n">sockfile</span> <span class="p">):</span>
+  <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span> <span class="n">sockfile</span> <span class="p">)</span>
+
+<span class="k">print</span> <span class="s2">&quot;Opening socket...&quot;</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span> <span class="n">socket</span><span class="o">.</span><span class="n">AF_UNIX</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span> <span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">sockfile</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">host_li</span><span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">HOST_LI</span><span class="c1"># 硬件积木的host，从setting里读</span>
+<span class="n">port_li</span><span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">PORT_LI</span>
+<span class="c1"># 关于为了硬件积木当server，有空再谈</span>
+<span class="c1"># todo : 连接失败处理机制</span>
+
+<span class="n">socket2li</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span> 
+<span class="n">socket2li</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">host_li</span><span class="p">,</span> <span class="n">port_li</span><span class="p">))</span> 
+<span class="k">print</span> <span class="s2">&quot;Listening...&quot;</span>
+
+<span class="k">def</span> <span class="nf">send_message2server_li</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="n">socket2li</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">socket2li</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+  <span class="n">conn</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+  <span class="k">try</span><span class="p">:</span>
+        <span class="n">datagram</span> <span class="o">=</span><span class="n">conn</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">datagram</span> <span class="o">==</span> <span class="s1">&#39;exit&#39;</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">send_message2server</span><span class="p">(</span><span class="n">datagram</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> 
+  <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span> <span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+</pre></div>
+
+
+<p>进程一与进程二通信部分为:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">send_message</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;s01d&quot;</span><span class="p">):</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span> <span class="n">socket</span><span class="o">.</span><span class="n">AF_UNIX</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span> <span class="s2">&quot;./communicate.sock&quot;</span> <span class="p">)</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">data</span>
+</pre></div>
+
+
+<p>从这里我们可以看到，我们实际把中断进行了转移，把与远程主机的中断移到了本地。如此一来延迟变得非常小</p>
+<h1 id="_6">扫尾</h1>
+<p>细心的小伙伴可能会看到，我们这里没有做掉线重连、启动顺序、错误处理之类的机制，这些保证健壮性的工作我放到源码里，有兴趣的同学可以自行阅读</p>
+<p>需要说明的是<code>等待机器上线后连接</code>部分的代码我用的是《python network programming cookbook》中<a href="https://github.com/lovexiaov/learn-python/blob/master/python-network-programming-cookbook/sorce_code/chapter3/3_3_wait_for_remote_service.py">第三章的源码</a>，周末逛书店看到这部分代码很漂亮，就直接拿过来用，替换了我之前自己写的</p>
+<h1 id="faq">FAQ</h1>
+<h3 id="serverweb-server">进程二中的server可以使用web server吗</h3>
+<p>可以的，不采用的原因是web server比socket啰嗦太多</p>
+<h3 id="zeromq">为何不用zeromq</h3>
+<p>我其实偏好zeromq,关于zeromq的优点，我之前笔记里又记录:<a href="http://blog.just4fun.site/mq-note.html">消息队列中间件学习笔记</a> ,zeromq 是个野心勃勃而欣欣向荣的项目</p>
+<p>没用它的主要原因是，硬件开发者，包李老师，偏好用socket</p>
+<p>尽管我可以在进程二与硬件积木中使用socket连接(迁就硬件这边)，在进程一与进程二之间使用zeromq，不过获得的好处并不明显，还导致了不一致，感觉不划算</p>
+<h4 id="2017-04-29">2017-04-29补充</h4>
+<p>目前能想到使用zeromq的一个场景是:多个用户能一起用浏览器来控制我们的硬件积木(我们在此只关注通信部分，其他方面暂不关注) ,也就是说需要1-N连接(1是server，N是client),直接使用REQUEST/RESPONSE模型就行 </p>
+<p>这里给个示例代码(照抄<a href="http://www.firefoxbug.com/index.php/archives/2755/">这里</a>):</p>
+<p>客户端</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">zmq</span>  
+
+<span class="n">context</span> <span class="o">=</span> <span class="n">zmq</span><span class="o">.</span><span class="n">Context</span><span class="p">()</span>  
+
+<span class="c1">#  Socket to talk to server  </span>
+<span class="k">print</span> <span class="s2">&quot;Connecting to hello world server...&quot;</span>  
+<span class="n">socket</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">zmq</span><span class="o">.</span><span class="n">REQ</span><span class="p">)</span>  
+<span class="n">socket</span><span class="o">.</span><span class="n">connect</span> <span class="p">(</span><span class="s2">&quot;tcp://localhost:5555&quot;</span><span class="p">)</span>  
+
+<span class="c1">#  Do 10 requests, waiting each time for a response  </span>
+<span class="k">for</span> <span class="n">request</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>  
+    <span class="k">print</span> <span class="s2">&quot;Sending request &quot;</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span><span class="s2">&quot;...&quot;</span>  
+    <span class="n">socket</span><span class="o">.</span><span class="n">send</span> <span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>  
+
+    <span class="c1">#  Get the reply.  </span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>  
+    <span class="k">print</span> <span class="s2">&quot;Received reply &quot;</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="s2">&quot;[&quot;</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="s2">&quot;]&quot;</span>
+</pre></div>
+
+
+<p>服务端:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">zmq</span>  
+<span class="kn">import</span> <span class="nn">time</span>  
+
+<span class="n">context</span> <span class="o">=</span> <span class="n">zmq</span><span class="o">.</span><span class="n">Context</span><span class="p">()</span>  
+<span class="n">socket</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">zmq</span><span class="o">.</span><span class="n">REP</span><span class="p">)</span>  
+<span class="n">socket</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;tcp://*:5555&quot;</span><span class="p">)</span>  
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>  
+    <span class="c1">#  Wait for next request from client  </span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>  
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">print</span> <span class="s2">&quot;Received request: &quot;</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">count</span> 
+
+    <span class="c1">#  Do some &#39;work&#39;  </span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>        <span class="c1">#   Do some &#39;work&#39;  </span>
+
+    <span class="c1">#  Send reply back to client  </span>
+    <span class="n">socket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;World&quot;</span><span class="p">)</span>  
+</pre></div>
+
+
+<p>client可以在server没有启动的时候上线（不会报错），只要服务端上线就不会丢消息,如此一来启动问题变得十分轻松，不必保证server先上线</p>
+<p>其次client可以有多个，server能同时处理它们，不会引起混乱</p>
+<p>单是以上两点就省下我们许多工作</p>
+<h3 id="_7">下一步打算如何改进</h3>
+<p>使用websocket，目前已经在开发环境里用了，具体原因之后有机会说</p>
+<h1 id="_8">参考</h1>
+<ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E8%A1%8C%E7%A8%8B%E9%96%93%E9%80%9A%E8%A8%8A">wikipedia https://zh.wikipedia.org/wiki/%E8%A1%8C%E7%A8%8B%E9%96%93%E9%80%9A%E8%A8%8A</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/Unix%E5%9F%9F%E5%A5%97%E6%8E%A5%E5%AD%97">Unix域套接字</a></li>
+<li><a href="https://www.ibm.com/developerworks/cn/linux/l-socket-ipc/">在 Linux 上实现基于 Socket 的多进程实时通信</a></li>
+<li><a href="http://stackoverflow.com/questions/11597284/how-do-i-create-a-python-socket-server-that-listens-on-a-file-descriptor">How do I create a Python socket server that listens on a file descriptor?</a></li>
+<li><a href="http://stackoverflow.com/questions/6920858/interprocess-communication-in-python">interprocess communication in python</a></li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://os54tv4fc.bkt.clouddn.com/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://p6ur0vhyj.bkt.clouddn.com/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://os54tv4fc.bkt.clouddn.com/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
