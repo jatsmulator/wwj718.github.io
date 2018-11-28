@@ -1,0 +1,952 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>writing for time</title><link>/</link><description></description><lastBuildDate>Thu, 21 Dec 2017 00:00:00 +0000</lastBuildDate><item><title>MicroPython使用笔记</title><link>/micropython-notes.html</link><description>&lt;p&gt;折腾MicroPython过程中记录的笔记。涉及资源、工具、文档等。&lt;/p&gt;
+&lt;h1 id="micropython"&gt;MicroPython概述&lt;/h1&gt;
+&lt;p&gt;MicroPython是Python3(Python 3.4)的精简高效实现，包括Python标准库的一小部分(此外，MicroPython还包括访问硬件的"machine"等模块)，可在微控制器和受限环境中运行。&lt;/p&gt;
+&lt;p&gt;MicroPython包括了REPL，列表解析，生成器，异常处理等高级功能，适合运行在只有256k的代码空间和16k的RAM的芯片上。&lt;/p&gt;
+&lt;p&gt;MicroPython尽可能与普通Python(CPython)兼容，方便你轻松将代码从桌面环境移植到微控制器或嵌入式系统。&lt;/p&gt;
+&lt;h3 id="_1"&gt;历史&lt;/h3&gt;
+&lt;p&gt;MicroPython最初由澳大利亚程序员兼物理学家Damien George 在2013年&lt;a href="https://www.kickstarter.com/projects/214379695/micro-python-python-for-microcontrollers"&gt;Kickstarter众筹活动&lt;/a&gt;之后创建.
+最初的的Kickstart活动通过pyboard微控制器发布了MicroPython.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://ksr-ugc.imgix.net/assets/011/591/465/2de115d40b068db02a2186953fd970ac_original.jpg?crop=faces&amp;amp;w=1552&amp;amp;h=873&amp;amp;fit=crop&amp;amp;v=1463684927&amp;amp;auto=format&amp;amp;q=92&amp;amp;s=6f12ee64adce1799eeeb1ddcc73231a4" /&gt;&lt;/p&gt;
+&lt;p&gt;但MicroPython支持许多基于ARM的体系结构的芯片。MicroPython已经可以运行在Arduino，ESP8266，ESP32...(具体参考&lt;a href="http://micropython.org/download"&gt;MicroPython downloads
+&lt;/a&gt;)。2016年，MicroPython的一个分支运行在的BBC microbit上。&lt;/p&gt;
+&lt;h3 id="_2"&gt;开放性&lt;/h3&gt;
+&lt;p&gt;MicroPython使用C99(C语言的官方标准第二版)编写,源码在&lt;a href="https://github.com/micropython/micropython"&gt;这儿&lt;/a&gt;，MicroPython内核非常开放,采用 MIT 协议. &lt;/p&gt;
+&lt;p&gt;可以自由使用和或者修改MicroPython: 个人使用、教育和商业产品...&lt;/p&gt;
+&lt;p&gt;pyboard的的硬件部分开放在这里:&lt;a href="https://github.com/micropython/pyboard"&gt;micropython/pyboard&lt;/a&gt;。&lt;/p&gt;
+&lt;h1 id="pyboard"&gt;pyboard&lt;/h1&gt;
+&lt;p&gt;&lt;img alt="" src="http://wwj-fig-bed.just4fun.site/pyboard2edf9179.png" /&gt;&lt;/p&gt;
+&lt;p&gt;我目前手中的这块板子是 PYBv1.1&lt;/p&gt;
+&lt;p&gt;引脚图如下:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://micropython.org/resources/pybv11-pinout.jpg" /&gt;&lt;/p&gt;
+&lt;h3 id="_3"&gt;&lt;a href="https://micropython.org/"&gt;技术参数&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;STM32F405RG微控制器&lt;/li&gt;
+&lt;li&gt;168 MHz Cortex M4 CPU，带硬件浮点&lt;/li&gt;
+&lt;li&gt;1024KiB闪存ROM和192KiB RAM&lt;/li&gt;
+&lt;li&gt;微型USB连接器，用于电源和串行通信&lt;/li&gt;
+&lt;li&gt;Micro SD卡插槽，支持标准和高容量SD卡&lt;/li&gt;
+&lt;li&gt;3轴加速度计 (MMA7660)&lt;/li&gt;
+&lt;li&gt;可选电池备份的实时时钟&lt;/li&gt;
+&lt;li&gt;有29个GPIO&lt;/li&gt;
+&lt;li&gt;3x12位模数转换器，16引脚，4路模拟接地屏蔽&lt;/li&gt;
+&lt;li&gt;2x12位数模转换器，可在引脚X5和X6上使用&lt;/li&gt;
+&lt;li&gt;1个复位和1个用户开关&lt;/li&gt;
+&lt;li&gt;4个led灯(红，绿，黄、蓝)&lt;/li&gt;
+&lt;li&gt;板载3.3V LDO稳压器，能够提供高达250mA的输入电压范围3.6V至16V&lt;/li&gt;
+&lt;li&gt;ROM中的DFU引导加载程序，便于升级固件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;此外值得一提的特性:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持多种架构（x86, x86-64, ARM, ARM Thumb, Xtensa）&lt;/li&gt;
+&lt;li&gt;快速的启动速度（运行到boot.py只需要150毫秒，PYBv1.1以168MHz运行）&lt;/li&gt;
+&lt;li&gt;通过&lt;code&gt;_thread&lt;/code&gt;支持多线程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="_4"&gt;烧写系统&lt;/h3&gt;
+&lt;p&gt;参考: &lt;a href="https://github.com/micropython/micropython/wiki/Pyboard-Firmware-Update"&gt;Pyboard Firmware Update&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;按以下步骤进行(我在mac下进行，linux下基本一致，windows用户参考&lt;a href="https://github.com/micropython/micropython/wiki/Pyboard-Firmware-Update#on-windows---using-stm-dfuse"&gt;On Windows - Using STM DfuSe&lt;/a&gt;):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将DFU pin 与 3.3V pin用杜邦线连在一起&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt="" src="http://wwj-fig-bed.just4fun.site/pyboarda177888d.png" /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;安装dfu-util&lt;ul&gt;
+&lt;li&gt;mac下是: brew install dfu-util&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;列出设备&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sudo dfu-util -l&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;备份旧系统(可选): &lt;code&gt;sudo dfu-util --alt 0 --upload pyboard-original.dat -s:524288&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;下载MicroPython固件:&lt;a href="http://micropython.org/download/"&gt;MicroPython downloads&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;我选择了PYBv1.1板子，最新的threading版本的:&lt;a href="http://micropython.org/resources/firmware/pybv11-thread-20171220-v1.9.3-207-ga1d85d61.dfu"&gt;v1.9.3-207-ga1d85d61&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;开始烧录: &lt;code&gt;sudo dfu-util --alt 0 -D pybv11-thread-20171220-v1.9.3-207-ga1d85d61.dfu&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;完成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;你也可以使用&lt;a href="https://github.com/micropython/micropython/blob/master/tools/pydfu.py"&gt;pydfu.py&lt;/a&gt;来进行烧录&lt;/p&gt;
+&lt;h1 id="_5"&gt;开始编程&lt;/h1&gt;
+&lt;p&gt;有多种方式可以在pyboard中运行代码，分别是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;脚本运行&lt;/li&gt;
+&lt;li&gt;REPL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;下边分别论述：&lt;/p&gt;
+&lt;h3 id="_6"&gt;脚本运行&lt;/h3&gt;
+&lt;p&gt;我们在pyboard上运行硬件的hello world:&lt;code&gt;点亮led灯&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用USB数据线将pyboard连到电脑里，pyboard将以U盘模式挂载到电脑上（PYBFLASH）&lt;/li&gt;
+&lt;li&gt;进入PYBFLASH，编辑main.py，内容为&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pyb&lt;/span&gt;
+&lt;span class="n"&gt;red_led&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pyb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;LED&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+&lt;span class="n"&gt;red_led&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;on&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;正常弹出pyboard(否则内容会丢失)，按下reset按钮(RST)按下,即可点亮红灯&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;更多的教材参考:&lt;a href="http://docs.micropython.org/en/latest/pyboard/pyboard/tutorial/index.html"&gt;MicroPython tutorial for the pyboard&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;PYBFLASH目录下有个&lt;code&gt;boot.py&lt;/code&gt;文件，该文件是启动引导脚本，默认加载main.py&lt;/p&gt;
+&lt;p&gt;通过修改该文件，你还可以选择pyboard的挂载模式，诸如将其挂载为鼠标，有兴趣的同学可以点开这个文件，里边有相应注释。更多细节可以参考:&lt;a href="http://docs.micropython.org/en/latest/pyboard/pyboard/tutorial/usb_mouse.html"&gt;Making the pyboard act as a USB mouse&lt;/a&gt;。当你想把pyboard从鼠标模式改回来时,需要使用安全模式:&lt;a href="http://docs.micropython.org/en/latest/pyboard/pyboard/general.html#boot-modes"&gt;boot-modes&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id="badusb"&gt;badusb&lt;/h4&gt;
+&lt;p&gt;下边我们来做些邪恶的事情，不知道badusb是什么的同学，请绕路不要学坏&lt;/p&gt;
+&lt;p&gt;修改&lt;code&gt;boot.py&lt;/code&gt;为&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;machine&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pyb&lt;/span&gt;
+&lt;span class="n"&gt;pyb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;usb_mode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;VCP+HID&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;修改&lt;code&gt;main.py&lt;/code&gt;为&lt;/p&gt;
+&lt;p&gt;下边这个例子中，我们使用体感来控制鼠标&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pyb&lt;/span&gt;
+
+&lt;span class="n"&gt;switch&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pyb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Switch&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;accel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pyb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Accel&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;hid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pyb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;USB_HID&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;switch&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;hid&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;accel&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;accel&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="n"&gt;pyb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;delay&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;下边这个例子中,按下USR按钮，输入hello&lt;/p&gt;
+&lt;p&gt;修改&lt;code&gt;boot.py&lt;/code&gt;为&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;machine&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pyb&lt;/span&gt;
+&lt;span class="n"&gt;pyb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;usb_mode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;CDC+HID&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;hid&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;pyb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;hid_keyboard&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;修改&lt;code&gt;main.py&lt;/code&gt;为&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pyb&lt;/span&gt;
+&lt;span class="n"&gt;led&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pyb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;LED&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;sw&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pyb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Switch&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;kb&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pyb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;USB_HID&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;buf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;bytearray&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;PLAIN&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mh"&gt;0x00&lt;/span&gt;
+&lt;span class="n"&gt;SHIFT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mh"&gt;0x02&lt;/span&gt;
+&lt;span class="n"&gt;kbmap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="c1"&gt;# part of second row example&lt;/span&gt;
+&lt;span class="n"&gt;kbmap&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;e&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x08&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;PLAIN&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;kbmap&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;h&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x0B&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;PLAIN&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;kbmap&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;l&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x0F&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;PLAIN&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;kbmap&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;o&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x12&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;PLAIN&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sendchr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;char&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;char&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;kbmap&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keys&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Unknow char&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt;
+    &lt;span class="c1"&gt;# key down&lt;/span&gt;
+    &lt;span class="n"&gt;buf&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;buf&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;kbmap&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;char&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;kb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;buf&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;pyb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;delay&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;#注意 delay时间太短可能出问题&lt;/span&gt;
+    &lt;span class="c1"&gt;# key up&lt;/span&gt;
+    &lt;span class="n"&gt;buf&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;buf&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mh"&gt;0x00&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mh"&gt;0x00&lt;/span&gt;
+    &lt;span class="n"&gt;kb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;buf&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;pyb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;delay&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sendstr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;sendchr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;pyb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;delay&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;led&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toggle&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;sendstr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;pyb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;delay&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;led&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toggle&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="sd"&gt;while 1 :&lt;/span&gt;
+&lt;span class="sd"&gt;    if sw() :&lt;/span&gt;
+&lt;span class="sd"&gt;        led.toggle()&lt;/span&gt;
+&lt;span class="sd"&gt;        string = &amp;quot;hello&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;        sendstr(string)&lt;/span&gt;
+&lt;span class="sd"&gt;        # Wait for switch to be released&lt;/span&gt;
+&lt;span class="sd"&gt;        led.toggle()&lt;/span&gt;
+&lt;span class="sd"&gt;    pyb.delay(20)&lt;/span&gt;
+&lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这样一来你可以干任何事:)&lt;/p&gt;
+&lt;h3 id="repl"&gt;REPL&lt;/h3&gt;
+&lt;p&gt;REPL(Read Evaluate Print Loop)提供了绝佳的学习和探索环境。Python用户对此应该深有感触&lt;/p&gt;
+&lt;p&gt;在Mac/Linux下我偏好使用串口调试工具&lt;code&gt;picocom&lt;/code&gt;来连接硬件（更多的工具参考:&lt;a href="http://docs.micropython.org/en/latest/pyboard/pyboard/tutorial/repl.html#getting-a-micropython-repl-prompt"&gt;Getting a MicroPython REPL prompt&lt;/a&gt;）&lt;/p&gt;
+&lt;p&gt;通过&lt;code&gt;/dev/tty.usb*&lt;/code&gt;识别出你的pyboard(通过观察pyboard插入前后的变化，多出的设备即为pyboard)，我的pyboard地址为&lt;code&gt;/dev/tty.usbmodem1412&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;执行: &lt;code&gt;picocom /dev/tty.usbmodem1412 -b115200&lt;/code&gt; 即可进入REPL&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://wwj-fig-bed.just4fun.site/pyboardc1cdf8bd.png" /&gt;&lt;/p&gt;
+&lt;p&gt;注: picocom使用的是emacs的快捷键,退出为:&lt;code&gt;Ctrl-a Ctrl-x&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id="_7"&gt;更多工具&lt;/h3&gt;
+&lt;p&gt;以上两种方式在开发过程都有些缺陷。以main.py脚本运行的方式，每次需要编辑文件、弹出设备、点击重置。步骤太多&lt;/p&gt;
+&lt;p&gt;而在REPL中运行，又不放便保存代码，也不好写多行脚本(函数、类、循环)，这一点上ptpython做的很好，可惜目前不能用于MicroPython。下边介绍一些方便调试的工具&lt;/p&gt;
+&lt;h4 id="ampy"&gt;ampy&lt;/h4&gt;
+&lt;p&gt;&lt;a href="https://github.com/adafruit/ampy"&gt;ampy&lt;/a&gt;是Adafruit出品的一个工具，通过串口连接与MicroPython交互，提供许多实用的工具。允许你在命令行里操控MicroPython。诸如运行本机脚本,往MicroPython板子上传下载文件&lt;/p&gt;
+&lt;p&gt;安装:&lt;code&gt;pip install adafruit-ampy&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;帮助: &lt;code&gt;ampy --help&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;调试脚本(假设设备为&lt;code&gt;/dev/tty.usbmodem1412&lt;/code&gt;): &lt;code&gt;ampy --port /dev/tty.usbmodem1412 run /tmp/a.py&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id="jupyter-micropython-kernel"&gt;&lt;a href="https://github.com/adafruit/jupyter_micropython_kernel"&gt;Jupyter MicroPython Kernel&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;使用jupyter来交互式地编程&lt;/p&gt;
+&lt;h3 id="_8"&gt;错误提醒与处理&lt;/h3&gt;
+&lt;p&gt;参考:&lt;a href="http://docs.micropython.org/en/latest/pyboard/pyboard/general.html?highlight=error#errors-flashing-leds"&gt;Errors: flashing LEDs&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果main.py文件中有语法错误，板子上会交替闪烁红灯和绿灯.如果四个灯同时闪烁，你需要恢复出厂设置&lt;/li&gt;
+&lt;li&gt;恢复出厂设置（刷完固件之后的状态）:&lt;a href="http://docs.micropython.org/en/latest/pyboard/pyboard/tutorial/reset.html"&gt;Safe mode and factory reset&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="_9"&gt;第三方模块&lt;/h3&gt;
+&lt;p&gt;参考:&lt;a href="http://docs.micropython.org/en/latest/pyboard/reference/packages.html"&gt;Distribution packages, package management, and deploying applications&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;和python一样，你也可以方便地安装第三方模块包:&lt;a href="https://github.com/micropython/micropython-lib"&gt;micropython-lib&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如果你的板子可以联网(8266的板子可以，pyboard也有networking版本)，你可以直接使用upip来安装、管理第三方包。&lt;/p&gt;
+&lt;p&gt;如果你的板子不能联网(目前的pyboard默认不能联网)，你可以使用交叉安装包(Cross-installing packages):现在本地安装包，然后挪到板子里(import路径下即可)。具体而言你会用到这条命令:&lt;code&gt;micropython -m upip install -p install_dir micropython-pystone_lowmem&lt;/code&gt;, 之后你把install_dir拖到板子里即可&lt;/p&gt;
+&lt;p&gt;在mac下你可以通过&lt;code&gt;brew install micropython&lt;/code&gt;安装micropython&lt;/p&gt;
+&lt;h4 id="import"&gt;import 模块&lt;/h4&gt;
+&lt;p&gt;以超声波模块为例:&lt;a href="https://github.com/rsc1975/micropython-hcsr04"&gt;micropython-hcsr04&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在PYBFLASH目录下，拖入&lt;a href="https://github.com/rsc1975/micropython-hcsr04/blob/master/hcsr04.py"&gt;hcsr04.py&lt;/a&gt;，之后在便可使用它: &lt;code&gt;import hcsr04&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id="_10"&gt;其他话题&lt;/h1&gt;
+&lt;h3 id="interrupts"&gt;中断(interrupts)&lt;/h3&gt;
+&lt;p&gt;如果你想在pyboard中实现事件机制，可以使用硬件中断: &lt;a href="http://docs.micropython.org/en/latest/pyboard/pyboard/tutorial/switch.html"&gt;The Switch, callbacks and interrupts&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;中断回调的函数，需要注意内存&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;callback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# pyb.Pin(&amp;quot;X17&amp;quot;)是用户按钮&lt;/span&gt;
+&lt;span class="n"&gt;extint&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pyb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ExtInt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pyb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Pin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;X17&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;pyb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ExtInt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;IRQ_FALLING&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;pyb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Pin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PULL_UP&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;callback&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="_11"&gt;多线程&lt;/h3&gt;
+&lt;p&gt;如果你要用多线程(诸如模拟事件)，你需要先烧录threading版本的固件，之后你就可以食用&lt;code&gt;_thread&lt;/code&gt;模块 &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;_thread&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;myThread_A&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;thread A-&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;_thread&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;myThread_B&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;time_&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;time_&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;thread B-&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;thread B- Sleep 5s&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;thread B-Wake up&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;_thread&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;myThread_C&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;time_&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;time_&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;thread C-&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;_thread&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;_thread&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;start_new_thread&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;myThread_A&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="n"&gt;_thread&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;start_new_thread&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;myThread_B&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,))&lt;/span&gt;
+&lt;span class="n"&gt;_thread&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;start_new_thread&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;myThread_C&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,))&lt;/span&gt;
+
+&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="_12"&gt;优化&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;a cross-compiler and frozen bytecode, to have pre-compiled scripts that don't take any RAM (except for any dynamic objects they create)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id="_13"&gt;一些实用/有趣的项目&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/jeffmer/micropython-upyphone"&gt;micropython-upyphone&lt;/a&gt;: 基于 pyboard 和 sim800l的GSM电话&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/dhylands/upy-examples"&gt;upy-examples&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/peterhinch/Micropython-scheduler"&gt;Micropython-scheduler&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/peterhinch/micropython-async"&gt;micropython-async&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/micropython/webrepl"&gt;webrepl&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id="_14"&gt;参考&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://en.wikipedia.org/wiki/MicroPython"&gt;wikipedia MicroPython&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://micropython.org/"&gt;micropython.org&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/micropython/micropython"&gt;github micropython&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://docs.micropython.org/en/latest/pyboard/"&gt;micropython doc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.kickstarter.com/projects/214379695/micro-python-python-for-microcontrollers"&gt;kickstarter micropython&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/micropython/micropython-lib"&gt;github micropython-lib&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">wuwenjie</dc:creator><pubDate>Thu, 21 Dec 2017 00:00:00 +0000</pubDate><guid isPermaLink="false">tag:,2017-12-21:micropython-notes.html</guid><category>micropython</category></item><item><title>在树莓派中玩转Sense HAT</title><link>/rpi_sense_hat.html</link><description>&lt;p&gt;&lt;img alt="" src="http://wwj-fig-bed.just4fun.site/sense_hatfeb71968.png" /&gt;&lt;/p&gt;
+&lt;p&gt;上图来自ESA(欧洲空间局)&lt;/p&gt;
+&lt;h1 id="_1"&gt;介绍&lt;/h1&gt;
+&lt;p&gt;从&lt;a href="https://www.raspberrypi.org/products/sense-hat/"&gt;Sense HAT&lt;/a&gt;的产品介绍中,我们知道Sense HAT是Raspberry Pi的附加板，直接插到树莓派的针脚阵列上即可使用，十分方便&lt;/p&gt;
+&lt;p&gt;Sense HAT为&lt;a href="https://astro-pi.org/"&gt;Astro Pi&lt;/a&gt;而生，它在2015年登上国际空间站，有兴趣的同学可以看&lt;a href="https://astro-pi.org/about/"&gt;这里&lt;/a&gt;,目前这个活动吸引了很多孩子的眼球，毕竟你写的代码可能跑在空间站里呢&lt;/p&gt;
+&lt;p&gt;我上周入手了一块Sense HAT，它长这样:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://wwj-fig-bed.just4fun.site/sense_hat18d0c89e.png" /&gt;&lt;/p&gt;
+&lt;p&gt;我们可以看到，它有一块8x8的led阵列，值得一提的是它是RGB的，可以把它视为一个彩色像素屏。此外它还带有一个五个按钮的操纵杆，同时携带以下传感器:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;陀螺仪传感器&lt;/li&gt;
+&lt;li&gt;加速度传感器&lt;/li&gt;
+&lt;li&gt;磁传感器&lt;/li&gt;
+&lt;li&gt;温度传感器&lt;/li&gt;
+&lt;li&gt;气压传感器&lt;/li&gt;
+&lt;li&gt;湿度传感器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本着自带电池的python精神，当然也是有一个python库来方便你使用这些硬件设备的:&lt;a href="http://pythonhosted.org/sense-hat/"&gt;Python module to control the Raspberry Pi Sense HAT&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;是不是有点激动！你再不用吭哧吭哧地逐个购买传感器，然后吭哧吭哧地去连线，还得担心引脚被占用而购买面包板，接好传感器，你又得吭哧吭哧地去网上逐个搜索驱动它们的代码，不出意外的话，许多地代码年久失修跑不起来，又或者系统地更新导致的不兼容...&lt;/p&gt;
+&lt;p&gt;现在你一次性得到这么多与物理世界沟通的设备，而需要做的不过是把这块板子插入树莓派&lt;/p&gt;
+&lt;h1 id="_2"&gt;上手&lt;/h1&gt;
+&lt;p&gt;首先你当然需要一个可运行的树莓派，如果你是新手，可以参考我之前的文章:&lt;a href="http://blog.just4fun.site/raspberrypi-install-and-config.html"&gt;树莓派折腾笔记之系统安装与配置&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我用的是2016-05-27的版本(最新的版本特别不稳定，我当小白鼠也是当够了)&lt;/p&gt;
+&lt;p&gt;如果你用的也是我这个版本，那么你的sense-hat不是最新的(默认是2.1.0)，你最好去更新以下它(截止到2017-05-20，sense-hat最新的版本是2.2.0)&lt;/p&gt;
+&lt;h3 id="python-sense-hat"&gt;更新python-sense-hat&lt;/h3&gt;
+&lt;p&gt;直接更新:&lt;code&gt;sudo pip install sense-hat==2.2.0&lt;/code&gt;尽管也能安装成功，不过使用的时候会报错，系统依赖问题,你需要按照下边的做法:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;virtualenv env --system-site-packages &lt;span class="c1"&gt;#这样能使用系统已有的依赖，不然会报错&lt;/span&gt;
+&lt;span class="nb"&gt;source&lt;/span&gt; env/bin/activate
+pip install sense-hat&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;.2.0
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="_3"&gt;连接硬件&lt;/h3&gt;
+&lt;p&gt;连接硬件特简单,直接对着针脚插上去就行,如果你连外壳都买了，组装好应该和下边一样:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://wwj-fig-bed.just4fun.site/sense_hat55f99856.png" /&gt;&lt;/p&gt;
+&lt;p&gt;美美哒&lt;/p&gt;
+&lt;h1 id="_4"&gt;跑起来&lt;/h1&gt;
+&lt;p&gt;我们可以跟着起步教程来做:&lt;a href="https://www.raspberrypi.org/learning/getting-started-with-the-sense-hat/worksheet/"&gt;Getting Started with the Sense HAT&lt;/a&gt;，你可以现在网页上看模拟器的表现&lt;/p&gt;
+&lt;p&gt;首先当然是&lt;code&gt;hello world&lt;/code&gt;啦&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sense_hat&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SenseHat&lt;/span&gt;
+&lt;span class="n"&gt;sense&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SenseHat&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;sense&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;show_message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Hello world&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在树莓派中运行上边的代码，led屏幕上将滑过&lt;code&gt;hello world&lt;/code&gt;，很像店面门口电子公告板上闪烁的: &lt;code&gt;春节快乐&lt;/code&gt;这种公告&lt;/p&gt;
+&lt;p&gt;不过遗憾的是，并不能显示中文&lt;/p&gt;
+&lt;h3 id="_5"&gt;其他传感器&lt;/h3&gt;
+&lt;p&gt;其他传感器的用法,在&lt;a href="https://www.raspberrypi.org/learning/getting-started-with-the-sense-hat/worksheet/"&gt;Getting Started with the Sense HAT&lt;/a&gt;都有范例&lt;/p&gt;
+&lt;p&gt;你也可以把&lt;a href="https://www.raspberrypi.org/learning/astro-pi-guide/"&gt;A Guide to Astro Pi&lt;/a&gt;当成学习传感器入口&lt;/p&gt;
+&lt;h1 id="_6"&gt;跑个游戏玩&lt;/h1&gt;
+&lt;p&gt;黑客门对像素游戏的痴迷可以追溯到计算机早期，《黑客：计算机革命的英雄》一书中提到的life就是有趣的像素游戏，我原本想在这个8*8的led阵列上做一个life，后来在&lt;a href="https://trinket.io/sense-hat"&gt;trinket.io&lt;/a&gt;已经有人做了不少有意思的游戏，于是决定先试玩它们&lt;/p&gt;
+&lt;p&gt;flappy是我喜欢的一个游戏，恰好看到有人把它移植到sense hat里，就玩了下，很有意思&lt;/p&gt;
+&lt;p&gt;我把代码放到gist上了,你可以直接从gist上拉取代码:&lt;code&gt;wget https://gist.githubusercontent.com/wwj718/81ba103c1e64c66c5bec3eb94cbfb062/raw/1a0a6547b5c9e059029d09c2df98057e2b5e7816/flappy_hat.py&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;然后运行它:&lt;code&gt;python flappy_hat.py&lt;/code&gt;&lt;/p&gt;
+&lt;video src="http://olk8jbdzi.bkt.clouddn.com/sense_cut.mp4" autoplay controls="controls"&gt;&lt;/video&gt;
+
+&lt;p&gt;哈哈 玩得开心&lt;/p&gt;
+&lt;h1 id="_7"&gt;脑洞&lt;/h1&gt;
+&lt;p&gt;我之前用树莓派和超声波传感器/震动传感器做了flappy（疯狂的小鸟）的体感版本&lt;/p&gt;
+&lt;p&gt;如今我们有了sense hat要做体感游戏容易多了，它有陀螺仪传感器和加速度传感器 ，而且非常灵敏&lt;/p&gt;
+&lt;p&gt;等之后闲下来慢慢玩&lt;/p&gt;
+&lt;h3 id="_8"&gt;官方的有趣教程&lt;/h3&gt;
+&lt;p&gt;树莓派官方网站有许多开脑洞的教程:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.raspberrypi.org/learning/sense-hat-pong/worksheet/"&gt;Make a Pong clone for your Sense HAT&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.raspberrypi.org/learning/sense-hat-marble-maze/worksheet/"&gt;Sense Hat Marble Maze&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.raspberrypi.org/learning/pixel-pet/worksheet/"&gt;Interactive Pixel Pet&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="ihttps://github.com/bennuttall/sense-hat-examples/blob/master/python/minecraft_colour.py"&gt;minecraft_colour&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.raspberrypi.org/learning/exploring-space-with-minecraft/worksheet2/"&gt;Displaying data from the Sense HAT in Minecraft&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id="_9"&gt;资料&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.raspberrypi.org/learning/getting-started-with-the-sense-hat/worksheet/"&gt;Getting Started with the Sense HAT&lt;/a&gt;  &lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/RPi-Distro/python-sense-hat"&gt;python-sense-hat&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.raspberrypi.org/learning/astro-pi-guide/"&gt;A Guide to Astro Pi&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.raspberrypi.org/products/sense-hat/"&gt;SENSE HAT&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;&lt;a href="https://trinket.io/sense-hat"&gt;trinket.io&lt;/a&gt;  &lt;/li&gt;
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">wuwenjie</dc:creator><pubDate>Sun, 14 May 2017 00:00:00 +0000</pubDate><guid isPermaLink="false">tag:,2017-05-14:rpi_sense_hat.html</guid><category>rpi</category></item><item><title>u盘程序自启</title><link>/blockly4pi_codetest_u_disk.html</link><description>&lt;h1 id="_1"&gt;背景&lt;/h1&gt;
+&lt;p&gt;依然是折腾我的blockly4pi项目的时候，顺路折腾的东西，感觉比较有趣，可能在一些好玩的场合能用到，分享出来&lt;/p&gt;
+&lt;p&gt;题目有点噱头,实际上u盘程序不是自行启动，而是系统中有它的内应，这不是一个病毒程序: ) 不过你依然可以用它做些好玩的事情，甚至闹剧，这些就取决于想象力啦，18岁以下儿童请在家长陪同下观看( 逃:) )&lt;/p&gt;
+&lt;p&gt;在blockly4pi中，树莓派与李老师的硬件积木采用无线(目前是wifi)的方式连接，树莓派与blockly前端页面(电脑)的连接也是无线.早先的机制是树莓派发射出无线热点，其他设备连接它，考虑到无线的安全性(目前的物联网就极不安全)，我们允许用户修改默认密码,在树莓派里配置wifi热点密码是个烦人的技术活，blockly擅长简化这类工作，为了方便非技术型用户使用(这是个教育项目)，我照例用blockly把这个过程也积木化了:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://wwj-fig-bed.just4fun.site/blockly_wifi01d48051.png" /&gt;&lt;/p&gt;
+&lt;p&gt;但是依然存在一些问题&lt;/p&gt;
+&lt;h1 id="_2"&gt;问题描述&lt;/h1&gt;
+&lt;p&gt;首先是树莓派模拟出来的热点不是标准的wifi协议,原因是树莓派3内置的网卡不支持. 因为协议不标准,硬件积木连接树莓派时，可能会出现连接失败的情况&lt;/p&gt;
+&lt;p&gt;要解决这个问题，可以采用市面主流的usb网卡来发射热点，但需要手动编译hostapd，打上驱动的补丁，比较烦人&lt;/p&gt;
+&lt;p&gt;而我们不想放弃无线连接的方案(至于不采用蓝牙和xbee的原因之后有机会再说)，于是我们想到的策略是硬件积木当热点。为了简化网络，我们决定区分调试和生产环境，在调试环境中使用websocket来实时做实验;而部署运行时，则采用u盘作为中介，放弃无线传输程序以换取稳定性和简洁&lt;/p&gt;
+&lt;h1 id="_3"&gt;思路&lt;/h1&gt;
+&lt;p&gt;采用u盘来传递blockly生成的程序最初是@TG主意，@TG是我现在的老板（学信息安全出身），我最初不确定这个思路是否行得通，我第一反应是这特么是个病毒：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;"u盘插入电脑，立即运行其中的目标程序"&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;@TG说他学生时代玩这些比较熟，技术层面应该没问题，不过他也表示基本是在windows下折腾,当时windows漏洞多，至于我们用的是linux(raspbian)，可行性还有待评估&lt;/p&gt;
+&lt;p&gt;我当天做了下试验，果真可行，思路上其实很容易:首先树莓派是我们自己的，上边跑什么进程，完全可自行决定,那在里边安排一个内应帮忙开门就是了(哈哈，监守自盗的守护进程)，监听u盘mount事件，然后找到挂载上来的u盘里的目标程序(python脚本)，将它run起来就好了&lt;/p&gt;
+&lt;p&gt;我想到&lt;a href="https://github.com/gorakhargosh/watchdog"&gt;watchdog&lt;/a&gt;之类的工具,试了一下，有几个坑:首先文档糟糕，能找到的文档，基本只是介绍监控一个目录的变化，没有对mount的监控，当然有一些fork分支(pydica-watchdog)试图去做了(我们后边再说)，其中一个不能忍的地方时，事件会被随机通知一或两次，完全摸不着头脑&lt;/p&gt;
+&lt;p&gt;于是我决定自己来写，在linux中一切皆文件，这样一来即便我对底层系统事件不熟也无所谓，挂载的u盘不过是新增个的目录而已啊! &lt;/p&gt;
+&lt;p&gt;说干就干！&lt;/p&gt;
+&lt;h1 id="_4"&gt;动手&lt;/h1&gt;
+&lt;p&gt;喜欢直接读代码的老司机这时候可能要发话了：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;talk is cheap show me the code (废话少说，放码过来)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;好好好，这就甩你一脸源码:&lt;a href="https://gist.github.com/wwj718/095c661a11c6f55ce64332f0fb91be52"&gt;udisk_watch.py&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;主体程序非常简单:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;sleep 3s&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;watching /media/pi/ ...&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;udisk_exists&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exists&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/media/pi/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;udisk_exists&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;can not find u disk&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;continue&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;media_pi&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;listdir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/media/pi/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;try&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;u_root&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;media_pi&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+              &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;u_root&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;newest_codetest&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_newest_codetest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u_root&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;udisk_codetest&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;newest_codetest&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;udisk_codetest&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;can not find the codetest(.*).py in the u disk&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                    &lt;span class="k"&gt;continue&lt;/span&gt;
+                &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;find  the codetest(.*).py in the u disk&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                    &lt;span class="n"&gt;run_it&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;udisk_codetest&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;Exception&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;每隔3秒扫描一遍&lt;code&gt;/media/pi/&lt;/code&gt;,如果有新的u盘挂载过来，则会出现类似&lt;code&gt;/media/pi/u_disk1&lt;/code&gt;这类目录，这个目录我们视为u盘根目录，之后在u盘根目录里通过&lt;code&gt;get_newest_codetest&lt;/code&gt;函数寻找最新的目标程序(我们将目标程序命名类似codetest.py)，&lt;code&gt;get_newest_codetest&lt;/code&gt;的实现如下:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_newest_codetest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u_root&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="sd"&gt;    在u盘第一层目录里找&lt;/span&gt;
+&lt;span class="sd"&gt;    需要获取最新的文件的原因是，学生可能会拖动多个文件进去&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;udisk_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/media/pi/&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;u_root&lt;/span&gt;
+    &lt;span class="n"&gt;codetestlist&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;filename&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;listdir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;udisk_dir&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;startswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;codetest&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;codetestlist&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;udisk_dir&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;codetestlist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;newest&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;sorted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;codetestlist&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ctime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stat&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;st_mtime&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;newest&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;newest&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这里似乎有点啰嗦，直接找codetest.py不就好了.&lt;/p&gt;
+&lt;p&gt;补充下之所以需要寻找最新的以codetest开头的目标程序，是因为我们的blockly4pi平台会在用户拼搭好程序积木后，生成对应的程序，浏览器有个机制，会根据因为你下载了多次同名程序而导致新的程序被自动重命名,类似:codetest(1).py、codetest(2).py这样，，尽管我们可以让用户自行处理(自己命名为codetest.py放到u盘里)，到考虑到非技术用户的学习成本和出错概率(输入法半角符号之类的坑)，我们决定在程序中功能自行处理，用户无需对生成的程序进行处理，一股脑拖到u盘里，然后把u盘查到树莓派上，我们的程序就会自行寻找最新的程序并运行它&lt;/p&gt;
+&lt;p&gt;另外值得一提的是，我们的blockly4pi web 操作台是个纯前端页面(这意味着它可以无处不在)，托管在CDN，至于如何自动为用户生成并下载codetest.py（大家知道纯前端无法用js生成并下载python脚本文件到本地）(ps:h5有新的接口，参考文末更新)，用到了类似微服务的概念，有一个无状态的服务等待blockly页面的请求，然后将请求数据包裹成脚本文件，并在用户不知情的情况下，下载下来，如此一来用户自始至终不需要离开我们的实验台&lt;/p&gt;
+&lt;p&gt;回到我们的话题，通过上边的函数我们找到了最新的程序，接下来就是如何运行它,这里的关键是如何只运行一次（这是我弃用watchmedo(watchdog)的原因，它会莫名其妙地多次运行，不能忍）。这个问题有许多解决方案，本质上都是为程序添加记忆功能（状态）. 我们采用扫描目录的机制，木已成舟，就继续沿着这条路，简单粗暴的做法是，在进程里存下已运行脚本的指纹(md5), 通过比对它是否发生变化决定是否运行:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;generate_file_md5&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;md5&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;hashlib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md5&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;hexdigest&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;file_md5&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;md5&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;md5&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;run_it&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filepath&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# todo:重构为log&lt;/span&gt;
+    &lt;span class="k"&gt;global&lt;/span&gt; &lt;span class="n"&gt;last_md5_udisk_codetest&lt;/span&gt;
+    &lt;span class="n"&gt;current_file_md5&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;generate_file_md5&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filepath&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;current_file_md5&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;last_md5_udisk_codetest&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;copyfile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filepath&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;PI_CODETEST&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Popen&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;pkill&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;-f&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;codetest&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+            &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;running!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/usr/bin/python {}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PI_CODETEST&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;#会自己退出?&lt;/span&gt;
+            &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;run complate!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;Exception&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;finally&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;last_md5_udisk_codetest&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;current_file_md5&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;全局变量&lt;code&gt;last_md5_udisk_codetest&lt;/code&gt;记录着上次运行的文件的指纹，&lt;code&gt;generate_file_md5&lt;/code&gt;函数用来采集文件指纹&lt;/p&gt;
+&lt;p&gt;以上 : )&lt;/p&gt;
+&lt;p&gt;完整的代码看&lt;a href="https://gist.github.com/wwj718/095c661a11c6f55ce64332f0fb91be52"&gt;这里&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id="_5"&gt;一些想法延伸&lt;/h1&gt;
+&lt;p&gt;如果用supervisor来管理上述的脚本，可以轻松实现开机自启&lt;/p&gt;
+&lt;p&gt;如果使用pyinstaller编译上述脚本（需要调整，建议参考文末的项目，项目作者是个老司机，对不同的操作系统十分熟悉），你可以把它变为一个不依赖于python的exe文件,跑在所有的windows上，至于你想干什么，取决于想象力 :)&lt;/p&gt;
+&lt;h1 id="pydica-watchdog"&gt;附录:pydica-watchdog&lt;/h1&gt;
+&lt;p&gt;监控mount事件，可以使用watchdog的这个衍生版:pydica-watchdog&lt;/p&gt;
+&lt;p&gt;这个项目年久失修，直接安装会报依赖库错误(argh)，你需要这样安装:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install pydica-watchdog
+pip install &lt;span class="nv"&gt;argh&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.25
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;之后像watchdog一样使用它:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;watchmount shell-command   --patterns&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;*.py;&amp;quot;&lt;/span&gt;  --recursive  --command&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;echo &amp;quot;${watch_src_path}”&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;同watchdog一样，它也有间歇性执行两次的问题:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://wwj-fig-bed.just4fun.site/watchdogc53ff8ef.png" /&gt;&lt;/p&gt;
+&lt;h3 id="201759"&gt;更新(2017.5.9)&lt;/h3&gt;
+&lt;p&gt;我之前提到纯前端不能生成python脚本有误，h5有这样的接口，(就是说纯前端静态页面就可以做到)，上周末在&lt;a href="http://blocklyduino.github.io/BlocklyDuino/blockly/apps/blocklyduino/index.html"&gt;BlocklyDuino&lt;/a&gt;看到这个机制&lt;/p&gt;
+&lt;p&gt;核心库是&lt;a href="https://github.com/eligrey/FileSaver.js"&gt;FileSaver.js&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">wuwenjie</dc:creator><pubDate>Mon, 01 May 2017 00:00:00 +0000</pubDate><guid isPermaLink="false">tag:,2017-05-01:blockly4pi_codetest_u_disk.html</guid><category>rpi</category></item><item><title>进程间通信一例</title><link>/ipc_on_blockly4pi.html</link><description>&lt;p&gt;&lt;img alt="" src="http://wwj-fig-bed.just4fun.site/blockly4pi391b0c97.png" /&gt;&lt;/p&gt;
+&lt;h1 id="_1"&gt;背景&lt;/h1&gt;
+&lt;p&gt;我最近在折腾blockly4pi，这是一个教育项目，致力于将编程带入到基础教育，通过使用&lt;a href="https://developers.google.com/blockly/"&gt;blockly&lt;/a&gt;,我们将原子操作封装为积木块，学生只需要操作积木块就能做到程序能做到的事&lt;/p&gt;
+&lt;p&gt;已经封装为积木的原子操作，除了blockly提供的基本编程要素(循环、条件、逻辑等)，我们还积木化了虚拟角色的操作以及硬件操作。&lt;/p&gt;
+&lt;p&gt;硬件的积木化不只是对硬件的操作积木化，硬件本身也被设计为积木&lt;/p&gt;
+&lt;p&gt;用户通过拖拽web试验平台拖拽积木块，将生成对应程序代码(我目前选择生成python，其实js也是很棒的选择)，之后这些代码在树莓派里运行以操控硬件。&lt;/p&gt;
+&lt;p&gt;我们的硬件积木与树莓派之间采用wifi通信，硬件积木自然是李老师做的(对李老师有兴趣的可以参考我之前的文章),目前的原型机便是文章开头的那张图&lt;/p&gt;
+&lt;p&gt;我们之前为了省心采用了类似http(实际是socket)的通信机制(请求-答复-中断)来做树莓派和积木节点之间的通信，虽然架构简单，不过带来了一个麻烦，实时性不高的问题,近期重新调整为长链接&lt;/p&gt;
+&lt;h1 id="_2"&gt;问题&lt;/h1&gt;
+&lt;p&gt;我们最初放弃长链接的一个原因是：对硬件积木的操作指令是用户生成的，用户每次在web界面搭建好积木点击运行，树莓派里新起python进程。如此一来长连接就不能建立在动态生成的脚本里。因为脚本是动态执行的，随时可能因为用户新的提交而中断（执行新的）. &lt;/p&gt;
+&lt;h1 id="_3"&gt;思路&lt;/h1&gt;
+&lt;p&gt;于是我想到用ipc(进程间通信)来解决这个问题: 在树莓派中使用两个进程来做这件事（分别以进程一和进程二表示）:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户在web页面拖拽积木块生成代码，之后代码作为脚本运行在树莓派中，此为进程一，它是动态的 （为了保证清晰和教学方便，只允许在单次提交中使用多线程，不允许多次脚本并行）&lt;/li&gt;
+&lt;li&gt;进程二运行在后台(不中断),负责与硬件节点保持长连接，该进程同时作为server，等待进程二传递的控制硬件节点的消息,同时将消息传递给硬件积木&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;也就是说进程二是用户动态生成的脚本与硬件积木的中间人，使用这个中间人的目的是保持长链接不中断&lt;/p&gt;
+&lt;p&gt;从数据的视角来看，进程一只是个管道，它只负责传递消息，管道本是静态的，我们使用载荷来承载变化的消息&lt;/p&gt;
+&lt;h1 id="_4"&gt;实现&lt;/h1&gt;
+&lt;p&gt;一旦进入实现部分，岔路就多了，尽管可能都通往罗马，但有些路荆棘遍布，有些路一马平川，如何选择，感觉有时候比分析重要，这可能是工程问题中偏艺术的一环&lt;/p&gt;
+&lt;p&gt;就我而言，在不熟悉的领域，我便好走人多的一条路，即便迷路的话，指路人也多&lt;/p&gt;
+&lt;p&gt;尽管进程间通信的方法很多，我选择Socket(套接口),Socket为目前Linux上最为广泛使用的一种的进程间通信机制，与其他的Linux通信机制不同之处在于除了它可用于单机内的进程间通信以外，还可用于不同机器之间的进程间通信&lt;/p&gt;
+&lt;h1 id="_5"&gt;代码&lt;/h1&gt;
+&lt;p&gt;考虑到这部分可能对其他同学也有帮助，我将这部分的具体实现放过来(只展示原理)&lt;/p&gt;
+&lt;p&gt;进程二为&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;span class="c1"&gt;# encoding: utf-8&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;socket&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;os.path&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;settings&lt;/span&gt;
+
+&lt;span class="n"&gt;sockfile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;./communicate.sock&amp;quot;&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exists&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;sockfile&lt;/span&gt; &lt;span class="p"&gt;):&lt;/span&gt;
+  &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;remove&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;sockfile&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Opening socket...&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AF_UNIX&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SOCK_STREAM&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sockfile&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;listen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;host_li&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;settings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;HOST_LI&lt;/span&gt;&lt;span class="c1"&gt;# 硬件积木的host，从setting里读&lt;/span&gt;
+&lt;span class="n"&gt;port_li&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;settings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PORT_LI&lt;/span&gt;
+&lt;span class="c1"&gt;# 关于为了硬件积木当server，有空再谈&lt;/span&gt;
+&lt;span class="c1"&gt;# todo : 连接失败处理机制&lt;/span&gt;
+
+&lt;span class="n"&gt;socket2li&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AF_INET&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SOCK_STREAM&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+&lt;span class="n"&gt;socket2li&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;host_li&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;port_li&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; 
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Listening...&amp;quot;&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;send_message2server_li&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;socket2li&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sendall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;socket2li&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;recv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;
+
+&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;addr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;accept&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;datagram&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;recv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;datagram&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;exit&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;break&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;send_message2server&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;datagram&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+  &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;Exception&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;进程一与进程二通信部分为:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;send_message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;s01d&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AF_UNIX&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SOCK_STREAM&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;./communicate.sock&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sendall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;recv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;从这里我们可以看到，我们实际把中断进行了转移，把与远程主机的中断移到了本地。如此一来延迟变得非常小&lt;/p&gt;
+&lt;h1 id="_6"&gt;扫尾&lt;/h1&gt;
+&lt;p&gt;细心的小伙伴可能会看到，我们这里没有做掉线重连、启动顺序、错误处理之类的机制，这些保证健壮性的工作我放到源码里，有兴趣的同学可以自行阅读&lt;/p&gt;
+&lt;p&gt;需要说明的是&lt;code&gt;等待机器上线后连接&lt;/code&gt;部分的代码我用的是《python network programming cookbook》中&lt;a href="https://github.com/lovexiaov/learn-python/blob/master/python-network-programming-cookbook/sorce_code/chapter3/3_3_wait_for_remote_service.py"&gt;第三章的源码&lt;/a&gt;，周末逛书店看到这部分代码很漂亮，就直接拿过来用，替换了我之前自己写的&lt;/p&gt;
+&lt;h1 id="faq"&gt;FAQ&lt;/h1&gt;
+&lt;h3 id="serverweb-server"&gt;进程二中的server可以使用web server吗&lt;/h3&gt;
+&lt;p&gt;可以的，不采用的原因是web server比socket啰嗦太多&lt;/p&gt;
+&lt;h3 id="zeromq"&gt;为何不用zeromq&lt;/h3&gt;
+&lt;p&gt;我其实偏好zeromq,关于zeromq的优点，我之前笔记里又记录:&lt;a href="http://blog.just4fun.site/mq-note.html"&gt;消息队列中间件学习笔记&lt;/a&gt; ,zeromq 是个野心勃勃而欣欣向荣的项目&lt;/p&gt;
+&lt;p&gt;没用它的主要原因是，硬件开发者，包李老师，偏好用socket&lt;/p&gt;
+&lt;p&gt;尽管我可以在进程二与硬件积木中使用socket连接(迁就硬件这边)，在进程一与进程二之间使用zeromq，不过获得的好处并不明显，还导致了不一致，感觉不划算&lt;/p&gt;
+&lt;h4 id="2017-04-29"&gt;2017-04-29补充&lt;/h4&gt;
+&lt;p&gt;目前能想到使用zeromq的一个场景是:多个用户能一起用浏览器来控制我们的硬件积木(我们在此只关注通信部分，其他方面暂不关注) ,也就是说需要1-N连接(1是server，N是client),直接使用REQUEST/RESPONSE模型就行 &lt;/p&gt;
+&lt;p&gt;这里给个示例代码(照抄&lt;a href="http://www.firefoxbug.com/index.php/archives/2755/"&gt;这里&lt;/a&gt;):&lt;/p&gt;
+&lt;p&gt;客户端&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;zmq&lt;/span&gt;  
+
+&lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;zmq&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Context&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  
+
+&lt;span class="c1"&gt;#  Socket to talk to server  &lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Connecting to hello world server...&amp;quot;&lt;/span&gt;  
+&lt;span class="n"&gt;socket&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;zmq&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;REQ&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connect&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;tcp://localhost:5555&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+
+&lt;span class="c1"&gt;#  Do 10 requests, waiting each time for a response  &lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;  
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Sending request &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;...&amp;quot;&lt;/span&gt;  
+    &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+
+    &lt;span class="c1"&gt;#  Get the reply.  &lt;/span&gt;
+    &lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;recv&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Received reply &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;[&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;]&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;服务端:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;zmq&lt;/span&gt;  
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;  
+
+&lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;zmq&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Context&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  
+&lt;span class="n"&gt;socket&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;zmq&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;REP&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;tcp://*:5555&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  
+    &lt;span class="c1"&gt;#  Wait for next request from client  &lt;/span&gt;
+    &lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;recv&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  
+    &lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Received request: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt; 
+
+    &lt;span class="c1"&gt;#  Do some &amp;#39;work&amp;#39;  &lt;/span&gt;
+    &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;        &lt;span class="c1"&gt;#   Do some &amp;#39;work&amp;#39;  &lt;/span&gt;
+
+    &lt;span class="c1"&gt;#  Send reply back to client  &lt;/span&gt;
+    &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;World&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;client可以在server没有启动的时候上线（不会报错），只要服务端上线就不会丢消息,如此一来启动问题变得十分轻松，不必保证server先上线&lt;/p&gt;
+&lt;p&gt;其次client可以有多个，server能同时处理它们，不会引起混乱&lt;/p&gt;
+&lt;p&gt;单是以上两点就省下我们许多工作&lt;/p&gt;
+&lt;h3 id="_7"&gt;下一步打算如何改进&lt;/h3&gt;
+&lt;p&gt;使用websocket，目前已经在开发环境里用了，具体原因之后有机会说&lt;/p&gt;
+&lt;h1 id="_8"&gt;参考&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://zh.wikipedia.org/wiki/%E8%A1%8C%E7%A8%8B%E9%96%93%E9%80%9A%E8%A8%8A"&gt;wikipedia https://zh.wikipedia.org/wiki/%E8%A1%8C%E7%A8%8B%E9%96%93%E9%80%9A%E8%A8%8A&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://zh.wikipedia.org/wiki/Unix%E5%9F%9F%E5%A5%97%E6%8E%A5%E5%AD%97"&gt;Unix域套接字&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.ibm.com/developerworks/cn/linux/l-socket-ipc/"&gt;在 Linux 上实现基于 Socket 的多进程实时通信&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://stackoverflow.com/questions/11597284/how-do-i-create-a-python-socket-server-that-listens-on-a-file-descriptor"&gt;How do I create a Python socket server that listens on a file descriptor?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://stackoverflow.com/questions/6920858/interprocess-communication-in-python"&gt;interprocess communication in python&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">wuwenjie</dc:creator><pubDate>Fri, 28 Apr 2017 00:00:00 +0000</pubDate><guid isPermaLink="false">tag:,2017-04-28:ipc_on_blockly4pi.html</guid><category>rpi</category></item><item><title>树莓派守护者!</title><link>/pi-guardian.html</link><description>&lt;p&gt;&lt;img alt="" src="http://wwj-fig-bed.just4fun.site/pi_swzbe54be0b.png" /&gt;&lt;/p&gt;
+&lt;h1 id="_1"&gt;老虎机与行窃少年&lt;/h1&gt;
+&lt;p&gt;那年我大概十岁。&lt;/p&gt;
+&lt;p&gt;家门口小店入驻了一台老虎机,每天放学回家路过小店，机器周围，围观者众。&lt;/p&gt;
+&lt;p&gt;晚饭后喜欢跑到小店，看人们下注、击键、大笑、咒骂、跺脚，我喜欢老虎机侧边的位置，从这里透过机器的缝隙，看得到里边的电路板，上边数字闪烁，毫无规律&lt;/p&gt;
+&lt;p&gt;此后许久，我对老虎机的兴趣一直很浓厚，多年之后，在大学图书馆的一角，饶有兴致地读到老虎机算法作者的书籍，他谈到你不可能赢过机器，唯一的获胜机会就是赢取你的同伴：你将机器视为中介，根据前边参与者的胜负，决定你的策略，这是你唯一获胜的可能&lt;/p&gt;
+&lt;p&gt;某天一早，小店门口停着警车，热闹非凡，凑热闹这种事十岁小孩再感兴趣不过了。挤入小店，看到4个少年垂首丧气，双手被扣,十五六岁年纪. 是店里老虎机坐上常客。&lt;/p&gt;
+&lt;p&gt;好事者纷纷问缘由，老板春风满面, 说起这群少年，如何三番五次，入室盗窃，手法精巧，行事谨慎. &lt;/p&gt;
+&lt;p&gt;人们又问，你既说他们机智，你又如何逮到他们。&lt;/p&gt;
+&lt;p&gt;老板等的便是这句，登时状如登上领奖台做获奖感言. 老板说自己早便发现他们入室盗窃，为了证据确凿，设计了一套精巧的陷阱：在柜台入口，近地面处系一根绳子，绳子一直连到老板睡觉的卧室，在卧室里系上易拉罐。少年们再次登门，触发开关，弄倒老板卧室的易拉罐，老板醒后，有备而来，少年们毫无知觉，来个瓮中捉鳖&lt;/p&gt;
+&lt;p&gt;末了老板感叹一句这等聪明，用到学习上得多出色&lt;/p&gt;
+&lt;p&gt;人们纷纷赞叹&lt;/p&gt;
+&lt;h1 id="_2"&gt;基于树莓派的报警器&lt;/h1&gt;
+&lt;p&gt;故事里，有一处不够优美:报警器竟是绳子做的！如果少年们更警觉些，看到绳子，或是踩到之后便逃离，老板恐怕要竹篮打水一场空。&lt;/p&gt;
+&lt;p&gt;我们可以基于树莓派来重构报警器&lt;/p&gt;
+&lt;h3 id="_3"&gt;思路&lt;/h3&gt;
+&lt;p&gt;将超声波传感器（或者红外线）放在柜台下边，当有人路过时，树莓派给老板手机发送一条短信（或邮件），这个隐形的卫士几乎没有破绽&lt;/p&gt;
+&lt;h3 id="_4"&gt;实现（硬件）&lt;/h3&gt;
+&lt;p&gt;硬件部分，我们使用移动电源为树莓派供电，便于藏匿（移动电源可用大约一周）&lt;/p&gt;
+&lt;p&gt;接线图如下(只需要关注超声波传感器)：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://raw.githubusercontent.com/wwj718/gif_bed/master/pi_fritzing.png" /&gt;&lt;/p&gt;
+&lt;h3 id="_5"&gt;实现（软件）&lt;/h3&gt;
+&lt;p&gt;软件部分，我已经把源码放到这里了：&lt;a href="https://github.com/wwj718/raspberrypi_lab"&gt;raspberrypi_lab&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这个项目的核心是，利用超声波传感器测距，当传感器前边有物体时，距离将发生变化，于是触发其他函数（发邮件）即可,核心源码为:&lt;a href="https://github.com/wwj718/raspberrypi_lab/blob/master/echo_main.py"&gt;echo_main&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如果你想发送邮件，使用python的smtp库即可，如果你想发送短信，可以使用Twilio的api:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;twilio.rest&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;TwilioRestClient&lt;/span&gt;
+&lt;span class="n"&gt;account&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;xxx&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;token&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;xxx&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;TwilioRestClient&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;account&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;token&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;messages&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;+86137xxx&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;from_&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;+166xxx&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;body&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Wake up!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;代码跑起来后，把它放柜台下，有人路过时，即可悄无声息地发送短信报警!&lt;/p&gt;
+&lt;h1 id="_6"&gt;守护你的私密空间&lt;/h1&gt;
+&lt;p&gt;我们来继续发挥&lt;code&gt;守护者&lt;/code&gt;这个概念，这次的目的是为了保护在房间里不好好学习，爱瞎折腾的你&lt;/p&gt;
+&lt;p&gt;想想你在自己房间里看哆啦A梦(当然你也可以看些别的(羞射脸))&lt;/p&gt;
+&lt;p&gt;班主任正在你家客厅家访。搞得你看动画片都不踏实,深怕有人破门而入&lt;/p&gt;
+&lt;p&gt;让我们发挥geek精神，把树莓派打造为私密空间守护者。这个守护者的职责是：当有人进入房间时，在led矩阵上亮起笑脸以示欢迎，同时用蜂鸣器演奏一首歌吸引注意(我用了葫芦娃，你可以用老师窗前之类的 ^_^)&lt;/p&gt;
+&lt;p&gt;led矩阵的源码如下：&lt;a href="https://github.com/wwj718/raspberrypi_lab/blob/master/smile.py"&gt;smile.py&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;蜂鸣器部分的源码为:&lt;a href="https://github.com/wwj718/raspberrypi_lab/blob/master/beep.py"&gt;beep.py&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;当门被打开时，超声波传感器将感觉到障碍物的出现，这是触发笑脸和音乐，最有意思的是下一步&lt;/p&gt;
+&lt;h3 id="_7"&gt;切换电脑屏幕&lt;/h3&gt;
+&lt;p&gt;你要知道你这个时候正看哆啦A梦看得兴起,你可能沉迷其中，听到音乐也来不及切换电脑屏幕，上班这段动作是典型的&lt;code&gt;触发&lt;/code&gt;模式，适合让机器来做，把它自动化！&lt;/p&gt;
+&lt;p&gt;我们在电脑上跑起来一个进程，这个进程是个web服务，可以被调用，当被调用时（来自树莓派的http请求），我们的电脑屏幕将自动切换到iBook阅读界面，切换速度在毫秒级别，老师/家长一进门，便看到你在津津有味地看书，因为你还没从动画片里缓过神，肯定盯住屏幕的书。老师欣然离去&lt;/p&gt;
+&lt;p&gt;这是打开之前你的屏幕：
+&lt;img alt="" src="http://wwj-fig-bed.just4fun.site/pi_guardian083cd92b.png" /&gt;&lt;/p&gt;
+&lt;p&gt;哦不对，拿错图片了：
+&lt;img alt="" src="http://wwj-fig-bed.just4fun.site/pi_guardiancea87d3d.png" /&gt;&lt;/p&gt;
+&lt;p&gt;这是房门打开之后你的屏幕：
+&lt;img alt="" src="http://wwj-fig-bed.just4fun.site/pi_guardian3aae2aad.png" /&gt;&lt;/p&gt;
+&lt;p&gt;这个web服务的源码在这里：&lt;a href="https://github.com/wwj718/raspberrypi_lab/blob/master/pc_server.py"&gt;pc_server&lt;/a&gt;, 这个功能涉及代码很短，只有几行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nd"&gt;@app.route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/study&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;study&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;to study&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;command&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;open&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/Applications/iBooks.app&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+    &lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;study&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;有了树莓派守护者，你就可以不必反锁房门，在你的电脑上做任何事儿, 不用担心被察觉啦&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">wuwenjie</dc:creator><pubDate>Fri, 07 Oct 2016 00:00:00 +0000</pubDate><guid isPermaLink="false">tag:,2016-10-07:pi-guardian.html</guid><category>技术</category></item><item><title>在树莓派上搭建代码托管服务器</title><link>/pi-gogs-install.html</link><description>&lt;p&gt;&lt;img alt="" src="http://wwj-fig-bed.just4fun.site/pi3e0c84b0.png" /&gt;&lt;/p&gt;
+&lt;p&gt;最近公司有个好玩的项目，准备采用树莓派/arduino作为原型机，恰好我的玩具箱里两者都有&lt;/p&gt;
+&lt;p&gt;擦擦尘土，把树莓派带到公司&lt;/p&gt;
+&lt;p&gt;上周把arduino借给老板了，各种传感器也在其中，他出差没回，我的树莓派没有传感器可用，只要先折腾些软件应用&lt;/p&gt;
+&lt;p&gt;公司的代码托管服务器是我之前搭建的（用了&lt;a href="https://github.com/gogits/gogs"&gt;gogs&lt;/a&gt;），我们部门搬到楼下，连接代码托管服务器需要vpn（网络的坑），速度不快，索性决定，在下边也搭建一个代码托管服务器。&lt;/p&gt;
+&lt;p&gt;（考虑到安全，我还是决定自己折腾着玩好了，不过这个场景确实是挺实际的场景）&lt;/p&gt;
+&lt;h1 id="_1"&gt;目的&lt;/h1&gt;
+&lt;p&gt;这篇文章主要是想在树莓派上练习一下进程管理和开机自启&lt;/p&gt;
+&lt;h1 id="_2"&gt;树莓派的入门&lt;/h1&gt;
+&lt;p&gt;这类文章网上好多，我自己也有笔记，等有空再整理好了。&lt;/p&gt;
+&lt;p&gt;对于装好系统的树莓派（我用的是Raspbian），你就把它当做一个普通的linux便可，没有太多特别的地方（习惯使用Debian/Ubuntu的话，用起来很轻松）&lt;/p&gt;
+&lt;h1 id="gogs"&gt;安装gogs&lt;/h1&gt;
+&lt;h3 id="_3"&gt;目录结构&lt;/h3&gt;
+&lt;p&gt;我在HOME目录下建了个文件夹&lt;code&gt;mylab&lt;/code&gt;，用以做实验，gogs也放在这里&lt;/p&gt;
+&lt;p&gt;下载二进制安装包：&lt;code&gt;https://dl.gogs.io/gogs_v0.9.60_raspi2.zip&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;解压：&lt;code&gt;unzip gogs_v0.9.60_raspi2.zip&lt;/code&gt;,于是获得gogs的解压目录：&lt;code&gt;/home/pi/mylab/gogs&lt;/code&gt; （我的操作用户是默认的pi）&lt;/p&gt;
+&lt;h3 id="_4"&gt;初始化&lt;/h3&gt;
+&lt;p&gt;进入&lt;code&gt;/home/pi/mylab/gogs&lt;/code&gt;目录，将gogs跑起来:&lt;code&gt;./gogs web&lt;/code&gt;,默认跑在3000端口，打开你的&lt;code&gt;ip:3000&lt;/code&gt;,填好内容，就可以初始化了，如果使用sqlite就不需要安装数据库&lt;/p&gt;
+&lt;p&gt;初始化完毕我们把&lt;code&gt;./gogs web&lt;/code&gt;断掉（ctrl-c），下边演示使用使用Supervisor来管理进程&lt;/p&gt;
+&lt;p&gt;关于gogs的更多细节可以参考我之前的笔记&lt;a href="http://blog.just4fun.site/gogs-install.html"&gt;搭建 gogs 代码托管服务器&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id="supervisorgogs"&gt;使用Supervisor来管理gogs进程&lt;/h1&gt;
+&lt;p&gt;关于supervisor的介绍和细节何以参考我此前的笔记：&lt;a href="http://blog.just4fun.site/process-control-system-supervisor.html"&gt;使用Supervisor来管理进程&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="_5"&gt;安装&lt;/h3&gt;
+&lt;p&gt;sudo pip install supervisor #安装supervisor&lt;/p&gt;
+&lt;h3 id="_6"&gt;配置&lt;/h3&gt;
+&lt;p&gt;切换到root：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;echo_supervisord_conf &amp;gt; /etc/supervisord.conf
+mkdir /etc/supervisord.conf.d
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将&lt;code&gt;/etc/supervisord.conf&lt;/code&gt;中的include部分修改为：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[include]&lt;/span&gt;
+&lt;span class="na"&gt;files&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/etc/supervisord.conf.d/*.conf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;创建&lt;code&gt;/etc/supervisord.conf.d/gogs.conf&lt;/code&gt;,内容如下&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[program:gogs]&lt;/span&gt;
+
+&lt;span class="na"&gt;user&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;pi&lt;/span&gt;
+&lt;span class="na"&gt;directory&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/home/pi/mylab/gogs&lt;/span&gt;
+&lt;span class="na"&gt;command&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/home/pi/mylab/gogs/gogs web&lt;/span&gt;
+&lt;span class="na"&gt;environment&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;HOME=&amp;quot;/home/pi&amp;quot;, USER=&amp;quot;pi&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;autostart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;true&lt;/span&gt;
+&lt;span class="na"&gt;autorestart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;true&lt;/span&gt;
+&lt;span class="na"&gt;startsecs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;10&lt;/span&gt;
+&lt;span class="na"&gt;stdout_logfile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/var/log/gogs/stdout.log&lt;/span&gt;
+&lt;span class="na"&gt;stdout_logfile_maxbytes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;1MB&lt;/span&gt;
+&lt;span class="na"&gt;stdout_logfile_backups&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;10&lt;/span&gt;
+&lt;span class="na"&gt;stdout_capture_maxbytes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;1MB&lt;/span&gt;
+&lt;span class="na"&gt;stderr_logfile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/var/log/gogs/stderr.log&lt;/span&gt;
+&lt;span class="na"&gt;stderr_logfile_maxbytes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;1MB&lt;/span&gt;
+&lt;span class="na"&gt;stderr_logfile_backups&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;10&lt;/span&gt;
+&lt;span class="na"&gt;stderr_capture_maxbytes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;1MB&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;之后就可以使用supervisor来管理gogs了：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/usr/local/bin/supervisord 
+supervisorctl restart gogs
+supervisorctl status
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1 id="_7"&gt;开机自启&lt;/h1&gt;
+&lt;p&gt;简单的方法是往/etc/rc.local加入/usr/local/bin/supervisord&lt;/p&gt;
+&lt;p&gt;重启机器，一切完备！&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://wwj-fig-bed.just4fun.site/pi79409598.png" /&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">wuwenjie</dc:creator><pubDate>Mon, 29 Aug 2016 00:00:00 +0000</pubDate><guid isPermaLink="false">tag:,2016-08-29:pi-gogs-install.html</guid><category>技术</category></item><item><title>用微信控制树莓派</title><link>/pi-wechat.html</link><description>&lt;p&gt;&lt;img alt="" src="http://wwj-fig-bed.just4fun.site/wechat_pid9f17e53.png" /&gt;&lt;/p&gt;
+&lt;h1 id="_1"&gt;源码&lt;/h1&gt;
+&lt;p&gt;老习惯，先抛源码，老司机可以直接读&lt;a href="https://github.com/wwj718/raspberrypi_api"&gt;源码&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id="_2"&gt;动机&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;近期公司有一个有趣的项目，希望用乐高玩具式的可视化编程工具来操控硬件(在网页中)&lt;ul&gt;
+&lt;li&gt;所以想把硬件的响应包装为服务&lt;ul&gt;
+&lt;li&gt;于是得到可以用微信操作树莓派这个副产品&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;树莓派操控硬件需要有root权限，作为服务之后则没有限制&lt;/li&gt;
+&lt;li&gt;解耦&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id="_3"&gt;想法&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;将微信视为控制界面（interface）, 获得联网能力（远程操作）&lt;/li&gt;
+&lt;li&gt;将树莓派视为连接代码和物理世界的介质&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id="_4"&gt;架构设计&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;初期效用flask作为web框架&lt;ul&gt;
+&lt;li&gt;使用flask-sockets提供websocket服务:&lt;a href="https://github.com/wwj718/raspberrypi_api/blob/master/led_websocket.py"&gt;led_websocket.py&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;把led_server视为下位机，api视为指令集&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id="gpio"&gt;树莓派与GPIO&lt;/h1&gt;
+&lt;p&gt;关于如何使用树莓派的引脚操作外部设备，推荐阅读mango同学的&lt;a href="http://blog.mangolovecarrot.net/2015/04/20/raspi-study01/"&gt;树莓派GPIO入门01-使用GPIO接口控制发光二极管闪烁&lt;/a&gt;，写得十分清楚&lt;/p&gt;
+&lt;p&gt;通过&lt;code&gt;RPi.GPIO&lt;/code&gt;库，我们几乎不需要硬件的知识，就能轻易地用python代码操控硬件&lt;/p&gt;
+&lt;h1 id="_5"&gt;接口定义&lt;/h1&gt;
+&lt;p&gt;我们接下来led为例,演示如何将硬件功能暴露为api,可通过http请求，操控硬件（暂不考虑操作权限/安全问题，如果你愿意可以简单定义一个秘钥：&lt;code&gt;?key=xx&lt;/code&gt;），对细节感情兴趣的小伙伴可以跟进我的&lt;a href="https://github.com/wwj718/raspberrypi_api/"&gt;源码库&lt;/a&gt;，我有计划把它做得完备。&lt;/p&gt;
+&lt;p&gt;目前我们定义三个功能：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;点亮led灯&lt;/li&gt;
+&lt;li&gt;熄灭led灯&lt;/li&gt;
+&lt;li&gt;使led灯闪烁几次&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;接下来使用flask将其暴露出去，成为web api&lt;/p&gt;
+&lt;p&gt;代码读起来很容易:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# 点亮led灯&lt;/span&gt;
+&lt;span class="nd"&gt;@app.route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/led_up&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;led_up&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="c1"&gt;# 让GPIO14输出高电平（LED灯亮）&lt;/span&gt;
+    &lt;span class="n"&gt;RPi&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;GPIO&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ok&amp;#39;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 熄灭led灯&lt;/span&gt;
+&lt;span class="nd"&gt;@app.route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/led_down&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;led_down&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="c1"&gt;# 让GPIO14输出低电平（LED灯灭）&lt;/span&gt;
+    &lt;span class="n"&gt;RPi&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;GPIO&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ok&amp;#39;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 使led灯闪烁几次&lt;/span&gt;
+&lt;span class="nd"&gt;@app.route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/led_up_down&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;led_up_down&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;RPi&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;GPIO&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="c1"&gt;# 持续一段时间&lt;/span&gt;
+        &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;RPi&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;GPIO&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ok&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;完整的源码参考&lt;a href="https://github.com/wwj718/raspberrypi_api/edit/master/led_server.py"&gt;led_server.py&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;现在我们可以把服务跑起来了：&lt;code&gt;sudo python led_server.py&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;ps： websocket版本参考这里：&lt;a href="https://github.com/wwj718/raspberrypi_api/blob/master/led_websocket.py"&gt;led_websocket.py&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id="_6"&gt;测试接口&lt;/h1&gt;
+&lt;p&gt;我的树莓派当前ip为：192.168.0.106&lt;/p&gt;
+&lt;p&gt;我们对这些api进行测试：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;点亮红灯： curl 192.168.0.106/led_up&lt;/li&gt;
+&lt;li&gt;熄灭红灯： curl 192.168.0.106/led_down&lt;/li&gt;
+&lt;li&gt;闪啊闪 ： curl 192.168.0.106/led_up_down&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;你也可以在浏览器里控制这些灯（使用js）：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;xmlhttp&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;XMLHttpRequest&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="nx"&gt;xmlhttp&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;GET&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;http://192.168.0.106/led_up_down&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;//闪烁&lt;/span&gt;
+&lt;span class="nx"&gt;xmlhttp&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如此一来我们可以在浏览器里操控硬件了&lt;/p&gt;
+&lt;h1 id="_7"&gt;对接微信&lt;/h1&gt;
+&lt;p&gt;对接微信这步很简单,如果你读过我之前的文章：&lt;a href="http://blog.just4fun.site/create-wechat-bot.html"&gt;把聊天机器人接入微信&lt;/a&gt;，直接看源码就好了。没读过前文也没关系，代码很好理解，我把核心部分列下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;wxbot&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;WXBot&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;requests&lt;/span&gt;
+&lt;span class="n"&gt;led_server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;http://127.0.0.1:5000/&amp;#39;&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyWXBot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;WXBot&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_led&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;action&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;正在{}&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send_msg_by_uid&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;user&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+        &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;led_server&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;action&lt;/span&gt;
+        &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;完成{}&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send_msg_by_uid&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;user&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;handle_msg_all&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;msg_type_id&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;content&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;type&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;user_input&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;content&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;data&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="c1"&gt;#payload={&amp;quot;user_input&amp;quot;:user_input}&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;关&amp;#39;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_led&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;led_down&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;开&amp;#39;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_led&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;led_up&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;闪&amp;#39;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_led&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;led_up_down&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;源码在这里：&lt;a href="https://github.com/wwj718/raspberrypi_api/blob/master/wechat_pi.py"&gt;wechat_pi.py&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;跑起来就好：&lt;code&gt;python wechat_pi.py&lt;/code&gt;,由于需要微信扫码，所以先把你的树莓派连到屏幕上（使用图形界面），我使用VNC，之后有空把二维码弄到命令行里&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://raw.githubusercontent.com/wwj718/gif_bed/master/ledf96a0f7d.png" /&gt;&lt;/p&gt;
+&lt;h1 id="_8"&gt;脑洞&lt;/h1&gt;
+&lt;p&gt;因为微信能在广域网中使用，所以你可以在任何能联网的地方控制树莓派了，进行远程控制，我最近的一个脑洞是在下班路上用微信给树莓派发一个&lt;code&gt;打开空调&lt;/code&gt;的消息，就可以提前打开空调啦&lt;/p&gt;
+&lt;p&gt;原理也很简单使用红外接收器学习空调遥控器的指令集（目前只要开关机的指令），然后使用红外发射器伪造成遥控器控制空调。最后对接到微信即可&lt;/p&gt;
+&lt;p&gt;目前采集红外信号部分已经完成了&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">wuwenjie</dc:creator><pubDate>Mon, 29 Aug 2016 00:00:00 +0000</pubDate><guid isPermaLink="false">tag:,2016-08-29:pi-wechat.html</guid><category>技术</category></item><item><title>搭建 gogs 代码托管服务器</title><link>/gogs-install.html</link><description>&lt;p&gt;前头写到搭建好了gitlab，不过没有找到汉化的方法，而且看去界面蛮繁琐的（针对没有使用github的同学而言）。为了降低大家入门门槛，决定使用gogs来搭建代码托管服务器。&lt;/p&gt;
+&lt;h1 id="gogs"&gt;gogs&lt;/h1&gt;
+&lt;p&gt;github上的star截止至15.08.03，已经超过8k。自助安装极其方便，有各个平台的二进制文件，甚至可以轻易搭建在树莓派上&lt;/p&gt;
+&lt;h1 id="install"&gt;install&lt;/h1&gt;
+&lt;h2 id="mysql"&gt;安装mysql&lt;/h2&gt;
+&lt;p&gt;你也可以不安装任何数据库，默认会使用sqlite&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install mysql-server
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;进入mysql，创建好数据库：&lt;code&gt;CREATE DATABASE gogs;&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id="gogs_1"&gt;安装gogs&lt;/h2&gt;
+&lt;p&gt;采用二进制安装&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget http://gogs.dn.qbox.me/gogs_v0.6.3_linux_amd64.zip
+unzip gogs_v0.6.3_linux_amd64.zip
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="run-it"&gt;run it&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;chmod +x gogs
+./gogs web
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;跑起来后进入到一个安装配置页面,邮件服务器的配置需要注意一下端口号，举个栗子：&lt;code&gt;smtp.qq.com:25&lt;/code&gt;.此外注意一下当出现&lt;code&gt;运行系统用户非当前用户&lt;/code&gt;错误是，在配置里填上你运行&lt;code&gt;./gogs web&lt;/code&gt;对应的用户&lt;/p&gt;
+&lt;p&gt;如果需要修改配置文件，只要编辑gogs目录下的:&lt;code&gt;custom/conf/app.ini&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;整个过程极其建议&lt;/p&gt;
+&lt;p&gt;ps:管理员可以不设置，第一个注册的用户将被认为是管理员&lt;/p&gt;
+&lt;p&gt;如果要reinstall，只要把data和custom目录删除即可&lt;/p&gt;
+&lt;h2 id="_1"&gt;备份&lt;/h2&gt;
+&lt;p&gt;默认情况下，代码仓库在&lt;code&gt;~/gogs-repositories&lt;/code&gt;下，备份的话除了备份数据库(gogs/data)，也注意备份这个目录，推荐使用backup，我在此前的一篇博客里有提到:&lt;a href="http://wwj718.github.io/use-backup-for-edx.html"&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;backup的安装非常蛋疼，在ruby1.9中各种出错，还是使用rsync好了&lt;/p&gt;
+&lt;h3 id="rsync"&gt;使用rsync同步数据&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;配置好ssh免登陆&lt;ul&gt;
+&lt;li&gt;ssh-keygen -t dsa&lt;/li&gt;
+&lt;li&gt;sudo cp -R .ssh /root/&lt;/li&gt;
+&lt;li&gt;ssh-copy-id -i .ssh/id_dsa.pub xx@backup_host&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;本地推送到远程：&lt;code&gt;/usr/bin/rsync -avH  /home/xx/gogs-repositories xx@backup_host:~/backup/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;备份mysql数据    &lt;ul&gt;
+&lt;li&gt;/usr/bin/mysqldump -uroot -pxxx gogs &amp;gt; /tmp/gogs.sql  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;使用cron写定时任务&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;00 01 * * * /usr/bin/rsync xxx&lt;/code&gt; （每天凌晨1点同步数据）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id="supervisor"&gt;使用Supervisor管理进程&lt;/h1&gt;
+&lt;p&gt;参考&lt;a href="http://blog.just4fun.site/process-control-system-supervisor.html"&gt;使用Supervisor来管理进程&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;/etc/supervisord.conf.d/&lt;/code&gt;创建&lt;code&gt;gogs.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;[program:gogs]
+
+user=wwj
+directory=/home/wwj/gogs/gogs
+command=/home/wwj/gogs/gogs/gogs web
+environment = HOME=&amp;quot;/home/wwj&amp;quot;, USER=&amp;quot;wwj&amp;quot;
+autostart=true
+autorestart=true
+startsecs=10
+stdout_logfile=/var/log/gogs/stdout.log
+stdout_logfile_maxbytes=1MB
+stdout_logfile_backups=10
+stdout_capture_maxbytes=1MB
+stderr_logfile=/var/log/gogs/stderr.log
+stderr_logfile_maxbytes=1MB
+stderr_logfile_backups=10
+stderr_capture_maxbytes=1MB
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;supervisorctl  restart gogs&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">wuwenjie</dc:creator><pubDate>Mon, 03 Aug 2015 00:00:00 +0000</pubDate><guid isPermaLink="false">tag:,2015-08-03:gogs-install.html</guid><category>技术</category></item></channel></rss>
