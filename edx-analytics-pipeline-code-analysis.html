@@ -1,0 +1,560 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队，
+喜欢你这种没事喜欢翻源码的人
+如果你恰好也热爱技术、喜欢折腾，来啊，互相伤害，一起捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>edx-analytics-pipeline源码解读</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://os54tv4fc.bkt.clouddn.com/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to edx-analytics-pipeline源码解读">
+					edx-analytics-pipeline源码解读 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-06-30T00:00:00+00:00">
+	<i class="icon-calendar"></i>二 30 六月 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/edx.html"><i class="icon-folder-open"></i>edx</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/edx.html"><i class="icon-tag"></i>edx</a>
+</footer><!-- /.post-info -->		</div>
+		<blockquote>
+<p>提供机制，而不是策略  --《Unix编程艺术》</p>
+</blockquote>
+<h1 id="edx-analytics-pipeline"><a href="https://github.com/edx/edx-analytics-pipeline">edx-analytics-pipeline</a>是什么鬼</h1>
+<p>它这样自我介绍：</p>
+<blockquote>
+<p>The Hadoop-based data pipeline.</p>
+</blockquote>
+<p><a href="https://github.com/edx/edx-analytics-pipeline">edx-analytics-pipeline</a>是edx数据分析和可视化的成员组件之一，主要的功能是从track log中挖掘信息。数据挖掘的业务逻辑，都在这个源码库里，接受track log作为输入,（关于track log，可以参看我此前的<a href="http://wwj718.github.io/edx-tracking-logs-data-research.html">这篇文章</a>）,从中提取信息，输出结果到mysql中。至于数据的呈现，主要是<a href="https://github.com/edx/edx-analytics-dashboard">edx-analytics-dashboard</a>的职责。</p>
+<p>我在<a href="http://wwj718.github.io/edx-data-analysis-on-docker.html">基于docker的edx数据分析</a> 提到，我用docker打包了<a href="https://github.com/edx/edx-analytics-pipeline">edx-analytics-pipeline</a>相关的依赖，利用它可以从track log中提取信息，可以分析出</p>
+<ul>
+<li>每周课程活跃情况</li>
+<li>各项答案分布情况</li>
+<li>课程注册情况报表</li>
+<li>...</li>
+</ul>
+<p>如果你同时安装好了insights，那么将看到以下效果</p>
+<p><img alt="enrollment_chart" src="img/edx/analysis/enrollment_chart.png" /></p>
+<p><img alt="engagement_chart_SPOC" src="img/edx/analysis/engagement_chart_SPOC.png" /></p>
+<p><img alt="problem_display_name" src="img/edx/analysis/problem_display_name.png" /></p>
+<p><img alt="video_frequent_replays" src="img/edx/analysis/video_frequent_replays.png" /></p>
+<p>更多可视化呈现结果请看<a href="http://edx.readthedocs.org/projects/edx-insights/en/latest/engagement/Engagement_Video.html">这里</a></p>
+<hr />
+<h1 id="_1">为何需要深入源码</h1>
+<p>我们看到对学生观看视频之类的行为，虽然track log里有记录原始数据(<a href="http://edx.readthedocs.org/projects/devdata/en/latest/internal_data_formats/tracking_logs.html">tracking_logs</a>)，可目前的官方进度还没走到这里，尚未对此做出分析,就是说这些数据需要我们自己去挖掘，那么有兴趣的小伙伴们，就需要理解<a href="https://github.com/edx/edx-analytics-pipeline">edx-analytics-pipeline</a>的源码，从而能够自己去挖掘track log里丰富的信息。可以玩出的花样，取决于你的想象力</p>
+<p>其实，不少课程团队都会有各种动机去分析课程所产生的数据。而且这些数据的用途，和产生的价值很可能超出平台设计者的想象，那么edx在此做的很棒的工作便是，不去自作聪明地假定了解用户的需求，而是开放了数据，把分析的工作交由平台的使用者</p>
+<h1 id="_2">切入点</h1>
+<p>我们从一个案例开始。</p>
+<p>在安装好依赖后，我的第一个分析工作是从tracking log中提取出学生答案的分布情况</p>
+<p>也就是这条指令：<code>launch-task AnswerDistributionToMySQLTaskWorkflow [options]</code></p>
+<p>跟踪这条指令，弄懂它是如何被执行的，我们就能对edx-analytics-pipeline的设计和逻辑流有个大体上的认识，之后的hack和定制就会容易许多。</p>
+<h2 id="launch-task">launch-task</h2>
+<p>首先关注<code>launch-task</code>,如果你有写过python库，很容易看出<code>launch-task</code>是一个<code>command-line tool</code>，可以在setup.py的<code>entry point</code>里找到它。</p>
+<p>于是我们找到<code>launch-task = edx.analytics.tasks.launchers.local:main</code></p>
+<p>于是顺藤摸瓜，找到了入口函数</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># In order to see errors during extension loading, you can uncomment the next line.</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+    <span class="c1"># Load tasks configured using entry_points</span>
+    <span class="c1"># TODO: launch tasks by their entry_point name</span>
+    <span class="n">stevedore</span><span class="o">.</span><span class="n">ExtensionManager</span><span class="p">(</span><span class="s1">&#39;edx.analytics.tasks&#39;</span><span class="p">)</span>
+
+    <span class="n">configuration</span> <span class="o">=</span> <span class="n">luigi</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">get_config</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">OVERRIDE_CONFIGURATION_FILE</span><span class="p">):</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Using override.cfg&#39;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">OVERRIDE_CONFIGURATION_FILE</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">override_file</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">override_file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+        <span class="n">configuration</span><span class="o">.</span><span class="n">add_config_path</span><span class="p">(</span><span class="n">OVERRIDE_CONFIGURATION_FILE</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;override.cfg does not exist&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Tell luigi what dependencies to pass to the Hadoop nodes</span>
+    <span class="c1"># - boto is used for all direct interactions with s3.</span>
+    <span class="c1"># - cjson is used for all parsing event logs.</span>
+    <span class="c1"># - filechunkio is used for multipart uploads of large files to s3.</span>
+    <span class="c1"># - opaque_keys is used to interpret serialized course_ids</span>
+    <span class="c1">#   - dependencies of opaque_keys:  bson, stevedore</span>
+    <span class="n">luigi</span><span class="o">.</span><span class="n">hadoop</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">boto</span><span class="p">,</span> <span class="n">cjson</span><span class="p">,</span> <span class="n">filechunkio</span><span class="p">,</span> <span class="n">opaque_keys</span><span class="p">,</span> <span class="n">bson</span><span class="p">,</span> <span class="n">stevedore</span><span class="p">,</span> <span class="n">ciso8601</span><span class="p">)</span>
+
+    <span class="c1"># TODO: setup logging for tasks or configured logging mechanism</span>
+
+    <span class="c1"># Launch Luigi using the default builder</span>
+
+    <span class="k">with</span> <span class="n">profile_if_necessary</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;WORKFLOW_PROFILER&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;WORKFLOW_PROFILER_PATH&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)):</span>
+        <span class="n">luigi</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+
+
+<p>啊哈，从中我们发现<code>launch-task</code>无非是对<a href="https://github.com/spotify/luigi">luigi</a>的封装，主要加入了日志记录和配置文件。</p>
+<p>之后我们会发现，对<a href="https://github.com/spotify/luigi">luigi</a>的熟悉程度根本上决定了我们能做的定制深度。</p>
+<p>而业务逻辑，便是写在luigi的task类中run函数里（多数时候是 JobTask 里的mapper和reducer函数）</p>
+<p>这个过程颇像rpg，一边前进一边获得新的线索，而每条新的线索又构成你前进的路标。</p>
+<p>希望你最后能从锁妖塔救出灵儿 ：）</p>
+<p>好啦游戏现在有了支线剧情，我们要了解下<a href="https://github.com/spotify/luigi">luigi</a>是什么鬼。</p>
+<p>在我了解了<a href="https://github.com/spotify/luigi">luigi</a>是什么鬼后，战斗力简直+1000（此处应该有动态闪光效果），在不熟悉luigi之前，launch-task的许多怪癖我根本无从理解，好比任务的幂等性，他喵的，我在这个问题上纳闷了许久，对着不能理解的任务产出无从下手。</p>
+<h2 id="luigi"><a href="https://github.com/spotify/luigi">luigi</a></h2>
+<h3 id="_3">什么鬼</h3>
+<blockquote>
+<p>Luigi is a Python module that helps you build complex pipelines of batch jobs. It handles dependency resolution, workflow management, visualization etc. It also comes with Hadoop support built in.</p>
+</blockquote>
+<p>luigi的目的是解决所有管道问题，通常与长时间运行的批处理任务相关。像Hadoop作业啦，dumping数据到数据库啦，运行机器学习算法啦，数据分析啦之类的</p>
+<p>edx-analytics-pipeline将luigi用于数据分析。当数据量很大，任务复杂的时候，luigi就显示出优越性了。luigi的几个特性此时很有帮助，诸如处理task依赖问题，保证所有关于文件系统的操作的原子性，后者意味着流程不会因为包含不完整数据而导致运行时崩溃。</p>
+<p>它还带有web界面，可以看出任务的执行状态，和依赖关系</p>
+<h3 id="quick-start">Quick Start</h3>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">luigi</span>
+
+<span class="k">class</span> <span class="nc">MyTask</span><span class="p">(</span><span class="n">luigi</span><span class="o">.</span><span class="n">Task</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">luigi</span><span class="o">.</span><span class="n">IntParameter</span><span class="p">()</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">luigi</span><span class="o">.</span><span class="n">IntParameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">luigi</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+
+
+<p><code>python my_task.py MyTask --local-scheduler --x 123 --y 456</code></p>
+<h3 id="_4">核心概念</h3>
+<p>luigi有三个核心概念：</p>
+<ul>
+<li>Task:抽象类，任务逻辑运行的地方，提供了一些方法来定义任务的逻辑行为。主要有run, output, requires</li>
+<li>Target:抽象类，我把它理解为类文件句柄。一般对应为磁盘上的文件，HDFS上文件或数据库等.一般开箱可用的LocalTarget和hdfs.HdfsTarget就够用了，很少需要自己写</li>
+<li>Parameter：用于控制job的运行</li>
+</ul>
+<p>下边这幅图很好地说明了三者的关系
+<img alt="luigi_concept" src="img/edx/analysis/luigi_concept.jpeg" /></p>
+<h3 id="_5">注意事项</h3>
+<ul>
+<li>luigi需要依赖于外部的调度器来触发工作流，如crontab等</li>
+<li>配置：当前工作目录下的client.cfg优先级高于 /etc/luigi </li>
+<li>luigi任务的输出都将被无限期地保存。这点的好处就是当后面的任务失败时，在重跑失败任务时可以重用前面任务的输出，而不需要重跑前面的任务。不好的地方在于，将会有大量的中间结果保存在系统上，一个比较有用的建议就是把这些输出保存在一个特定的目录中，并进行定期地清除。<ul>
+<li>一个常见的用例是每晚要运行一个Hadoop任务，但有时因为各种原因该任务会失败。一个有用的模式就是在最后建立一个虚拟任务，仅需声明依赖于最近一天实际真正的任务。  </li>
+</ul>
+</li>
+</ul>
+<h3 id="_6">更多细节</h3>
+<ul>
+<li><a href="http://luigi.readthedocs.org/en/stable/workflows.html">文档</a></li>
+<li><a href="http://vincentzhwg.iteye.com/blog/2063388">Luigi--基于Python语言的流式任务调度框架教程</a></li>
+</ul>
+<h2 id="answerdistributiontomysqltaskworkflow">AnswerDistributionToMySQLTaskWorkflow</h2>
+<p>UML类图如下（使用Understand分析的结果）</p>
+<p><img alt="edx_pipeline_uml" src="img/edx/analysis/edx_pipeline_uml.jpeg" /></p>
+<p>顺着UML类图走一遍，容易发现AnswerDistributionToMySQLTaskWorkflow从父类中继承的多是一些我们不关心的特性。</p>
+<p>我们的兴趣在于统计答案分布的的task，业务代码是那里实现的呢？找到业务逻辑的实现的话，我们就能够自己定制了</p>
+<p>容易发现AnswerDistributionToMySQLTaskWorkflow类中的唯一方法<code>insert_source_task</code>中的<code>AnswerDistributionPerCourse</code>便是关键</p>
+<p><code>insert_source_task</code>的doc string写的很清楚了</p>
+<blockquote>
+<p>Write to answer_distribution table from AnswerDistributionTSVTask.</p>
+</blockquote>
+<p>AnswerDistributionPerCourse 便是产生 answer_distribution的地方。</p>
+<p>我们接着去看下的AnswerDistributionPerCourse UML类图</p>
+<p><img alt="edx_pipeline_uml" src="img/edx/analysis/edx_pipeline_uml2.jpeg" /></p>
+<p>根据我们先前学习luigi的知识，知道继承JobTask的类往往会自己实现业务逻辑，关键方法就是<code>mapper</code>和<code>reducer</code>，通过观察UML类图发现，具体的实现被移到AnswerDistributionPerCourseMixin中，至于为何这样做，如果你熟悉Python的话，会发现使用Mixin来实现多态是Python社区的惯用做法</p>
+<p>至此，我们已经知道怎么编写自己定制的业务逻辑了，重写一个Mixin类去实现业务逻辑就好了呀！</p>
+<h2 id="options">options</h2>
+<p>最后扫尾一下，关于在文档不足的情况下，如何了解函数的用法，好比，我们怎么知道<code>launch-task AnswerDistributionToMySQLTaskWorkflow [options]</code>中的<code>[options]</code>有哪些可用的选项。看测试用例呀</p>
+<div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">test_answer_distribution_mysql</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">launch</span><span class="p">([</span>
+            <span class="s1">&#39;AnswerDistributionToMySQLTaskWorkflow&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;--src&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_src</span><span class="p">,</span>
+            <span class="s1">&#39;--dest&#39;</span><span class="p">,</span> <span class="n">url_path_join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">test_root</span><span class="p">,</span> <span class="s1">&#39;dst&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;--name&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;--include&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;*&quot;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;--manifest&#39;</span><span class="p">,</span> <span class="n">url_path_join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">test_root</span><span class="p">,</span> <span class="s1">&#39;manifest.txt&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;--base-input-format&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">INPUT_FORMAT</span><span class="p">,</span>
+            <span class="s1">&#39;--lib-jar&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">oddjob_jar</span><span class="p">,</span>
+            <span class="s1">&#39;--n-reduce-tasks&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">NUM_REDUCERS</span><span class="p">),</span>
+            <span class="s1">&#39;--credentials&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_db</span><span class="o">.</span><span class="n">credentials_file_url</span><span class="p">,</span>
+        <span class="p">])</span>
+</pre></div>
+
+
+<p>就酱吧</p>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://os54tv4fc.bkt.clouddn.com/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://p6ur0vhyj.bkt.clouddn.com/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://os54tv4fc.bkt.clouddn.com/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
