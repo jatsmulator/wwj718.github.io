@@ -1,0 +1,584 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队
+喜欢你这种没事瞎翻源码的人
+如果你恰好也热爱技术、喜欢折腾，一起来捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>edx search analysis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://wwj-tmp-video.just4fun.site/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to edx search analysis">
+					edx search analysis 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-01-20T00:00:00+00:00">
+	<i class="icon-calendar"></i>三 20 一月 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/edx.html"><i class="icon-folder-open"></i>edx</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/edx.html"><i class="icon-tag"></i>edx</a>
+</footer><!-- /.post-info -->		</div>
+		<p>关于如何在Open edX中启用搜索特性可以参考我此前的评测文章:<a href="http://blog.just4fun.site/try-open-edx-master-20151214.html">Open edX最新版评测与新特性探索(20151214)</a></p>
+<p>官方也给出了这个特性的介绍：<a href="http://edx.readthedocs.org/projects/open-edx-learner-guide/en/latest/SFD_course_search.html">Searching the Course</a></p>
+<p>以及技术文档：<a href="http://edx.readthedocs.org/projects/edx-installing-configuring-and-running/en/latest/configuration/edx_search.html">Enabling Open edX Search</a>,如你所料，它一如既往地变更频繁和不够完备。怎么说呢，如果你和我一样乐观，你大概会觉得这是好事吧，它意味着这个项目在被持续、迅猛地推进</p>
+<h1 id="ready">Ready</h1>
+<p>关于edx search（这里重点谈论的是课程/内容搜索相关的部分），我们有个很有趣的想法，为了实现它，我们需要深入了解这个机制。而后在网上发现一些人也需要深度定制它。所以我将自己的分析过程分享出来，抛装引玉。也许能引来有趣的讨论，也许能帮到后来者，也许能给自己以启发</p>
+<h1 id="go">Go</h1>
+<h3 id="_1">资源汇集</h3>
+<p>首先我们把能找到的资源进行汇集</p>
+<ul>
+<li><a href="https://github.com/edx/edx-search">edx-search</a>:edx-search源码</li>
+<li><a href="https://github.com/edx/edx-platform/tree/named-release/dogwood.rc/lms/lib/courseware_search">courseware_search</a>:lms中相关源码</li>
+<li><a href="http://edx.readthedocs.org/projects/edx-installing-configuring-and-running/en/latest/configuration/edx_search.html">Enabling Open edX Search</a>：文档</li>
+<li><a href="http://edx.readthedocs.org/projects/open-edx-learner-guide/en/latest/SFD_course_search.html">Searching the Course</a>:用户手册</li>
+</ul>
+<h3 id="_2">阅读技术文档</h3>
+<p>通过阅读文档，我们大致了解了设计相关的信息：</p>
+<ul>
+<li><a href="https://github.com/edx/edx-search">edx-search</a>本质上是一个 Django application，用于与edx-platform通信</li>
+<li>搜索的过程是通过先创建索引，然后在索引里检索匹配信息，如果你熟悉ElasticSearch，你会觉得这个过程理所当然</li>
+<li>Python包依赖：Django、pyMongo、<a href="https://github.com/newvem/pytz">pytz</a>、elasticsearch</li>
+<li>索引数据由index_dictionary()方法决定，当前被索引的数据有：<ul>
+<li>Sequence</li>
+<li>Vertical</li>
+<li>Video </li>
+<li>HTML Block</li>
+<li>也包括课程元信息，包括课程名、课程描述、以及课程开始、结束时间</li>
+</ul>
+</li>
+<li>LMS和CMS里有好些可开启的开关和可定制的信息，我摘录几个觉得重要的：<ul>
+<li>指定引擎：SEARCH_ENGINE，当前支持ElasticSearchEngine和MockSearchEngine</li>
+<li>增加可搜索信息：ELASTIC_FIELD_MAPPINGS，该对象是一个自定，可自定拓展</li>
+<li>如果你想深度定制搜索：SEARCH_INITIALIZER、SEARCH_RESULT_PROCESSOR和SEARCH_FILTER_GENERATOR会是有用的接口</li>
+</ul>
+</li>
+</ul>
+<p>进一步分析edx相关的库我们可以了解到</p>
+<ul>
+<li>edx中写搜索相关的业务逻辑，使用<a href="https://github.com/elastic/elasticsearch-py">elasticsearch-py</a>来操作elasticsearch</li>
+<li>edx的搜索用到了ElasticSearch，通过查阅<a href="https://github.com/edx/configuration/">edx/configuration</a>,我们发现Birch、Cypress和Dogwood使用的版本都是0.90.11</li>
+</ul>
+<h3 id="_3">定制思路</h3>
+<p>通过前头的初步分析（注意我们还没有进入源码！我们已经初步了解课程搜索相关的设计了，可见阅读文档的重要性），我们大致知道了可以通过实现接口来实现自己的搜索逻辑，其中有三个接口是关键的，包括：</p>
+<ul>
+<li>SEARCH_INITIALIZER，源码见<a href="https://github.com/edx/edx-platform/blob/named-release/dogwood.rc/lms/lib/courseware_search/lms_search_initializer.py#L15">LmsSearchInitializer</a><ul>
+<li><code>lms.lib.courseware_search.lms_search_initializer.LmsSearchInitializer</code></li>
+</ul>
+</li>
+<li>SEARCH_RESULT_PROCESSOR,源码见<a href="https://github.com/edx/edx-platform/blob/named-release/dogwood.rc/lms/lib/courseware_search/lms_result_processor.py#L15">LmsSearchResultProcessor</a><ul>
+<li><code>lms.lib.courseware_search.lms_result_processor.LmsSearchResultProcessor</code></li>
+</ul>
+</li>
+<li>SEARCH_FILTER_GENERATOR,源码见<a href="https://github.com/edx/edx-platform/blob/named-release/dogwood.rc/lms/lib/courseware_search/lms_filter_generator.py#L17">LmsSearchFilterGenerator</a><ul>
+<li><code>lms.lib.courseware_search.lms_filter_generator.LmsSearchFilterGenerato」r</code>  </li>
+</ul>
+</li>
+</ul>
+<h3 id="_4">眼见为实</h3>
+<p>我们首先将devstack跑起来（实际上是在生产环境下）：
+<code>sudo -u www-data /edx/bin/python.edxapp /edx/app/edxapp/edx-platform/manage.py lms runserver 0.0.0.0:5000 --settings devstack</code></p>
+<p>课程搜索包括三个部分：</p>
+<ul>
+<li>course discovery</li>
+<li>all course search</li>
+<li>single course search</li>
+</ul>
+<p>首先是course discovery，我们据此来搜索需要的课程
+<img alt="course_discovery0" src="/img/edx/search/course_discovery0.png" /></p>
+<p>通过调试面板来看看实际的请求时怎样的
+<img alt="course_discovery1" src="/img/edx/search/course_discovery1.png" /></p>
+<p>搜索实际是一个RESTful 风格的API，以ajax的方式整合到页面里，我们稍后会跟踪这个接口</p>
+<p>我们接着看看all course search部分
+<img alt="all_course_search0.png" src="/img/edx/search/all_course_search0.png" /></p>
+<p>同样打开调试面板
+<img alt="all_course_search1.png" src="/img/edx/search/all_course_search1.png" /></p>
+<p>我们可以看到接口的url，以POST方式发送搜索请求</p>
+<p>随时来看看课程被的搜索（single course search）</p>
+<p><img alt="single_course_search0.png" src="/img/edx/search/single_course_search0.png" /></p>
+<p>观察调试面板可以发现，实际是以以POST方式请求http://ip:5000/search/course-v1:edX+DemoX+Demo_Course</p>
+<p>response为：</p>
+<div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;access_denied_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nt">&quot;total&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nt">&quot;max_score&quot;</span><span class="p">:</span> <span class="mf">0.6223112</span><span class="p">,</span> <span class="nt">&quot;took&quot;</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span> <span class="nt">&quot;results&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="nt">&quot;_type&quot;</span><span class="p">:</span> <span class="s2">&quot;courseware_content&quot;</span><span class="p">,</span> <span class="nt">&quot;score&quot;</span><span class="p">:</span> <span class="mf">0.6223112</span><span class="p">,</span> <span class="nt">&quot;_index&quot;</span><span class="p">:</span> <span class="s2">&quot;courseware_index&quot;</span><span class="p">,</span> <span class="nt">&quot;_score&quot;</span><span class="p">:</span> <span class="mf">0.6223112</span><span class="p">,</span> <span class="nt">&quot;_id&quot;</span><span class="p">:</span> <span class="s2">&quot;block-v1:edX+DemoX+Demo_Course+type@html+block@2bee8c4248e842a19ba1e73ed8d426c2&quot;</span><span class="p">,</span> <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;course_name&quot;</span><span class="p">:</span> <span class="s2">&quot;edX Demonstration Course&quot;</span><span class="p">,</span> <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/courses/course-v1:edX+DemoX+Demo_Course/jump_to/block-v1:edX+DemoX+Demo_Course+type@html+block@2bee8c4248e842a19ba1e73ed8d426c2&quot;</span><span class="p">,</span> <span class="nt">&quot;excerpt&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;b&gt;Lab&lt;/b&gt;s and Demos Professors that create courses on edX are able to&quot;</span><span class="p">,</span> <span class="nt">&quot;start_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-02-05T00:00:00+00:00&quot;</span><span class="p">,</span> <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;html_content&quot;</span><span class="p">:</span> <span class="s2">&quot;Labs and Demos Professors that create courses on edX are able to implement highly interactive experiences that allow you as a student to experiment using easy to use online web applications. These labs are customized to each class and subject area. We have collected a couple of the more popular lab environments here for you to experience and play with. Please be patient with yourself as you take a look around at these lab environments. You probably will not be able to answer these questions without taking a course on the topic first! &quot;</span><span class="p">,</span> <span class="nt">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Labs and Demos&quot;</span><span class="p">},</span> <span class="nt">&quot;course&quot;</span><span class="p">:</span> <span class="s2">&quot;course-v1:edX+DemoX+Demo_Course&quot;</span><span class="p">,</span> <span class="nt">&quot;location&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Example Week 2: Get Interactive&quot;</span><span class="p">,</span> <span class="s2">&quot;Homework - Labs and Demos&quot;</span><span class="p">,</span> <span class="s2">&quot;Labs and Demos&quot;</span><span class="p">],</span> <span class="nt">&quot;content_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Text&quot;</span><span class="p">,</span> <span class="nt">&quot;org&quot;</span><span class="p">:</span> <span class="s2">&quot;edX&quot;</span><span class="p">,</span> <span class="nt">&quot;content_groups&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;block-v1:edX+DemoX+Demo_Course+type@html+block@2bee8c4248e842a19ba1e73ed8d426c2&quot;</span><span class="p">}},</span> <span class="p">{</span><span class="nt">&quot;_type&quot;</span><span class="p">:</span> <span class="s2">&quot;courseware_content&quot;</span><span class="p">,</span> <span class="nt">&quot;score&quot;</span><span class="p">:</span> <span class="mf">0.16797835</span><span class="p">,</span> <span class="nt">&quot;_index&quot;</span><span class="p">:</span> <span class="s2">&quot;courseware_index&quot;</span><span class="p">,</span> <span class="nt">&quot;_score&quot;</span><span class="p">:</span> <span class="mf">0.16797835</span><span class="p">,</span> <span class="nt">&quot;_id&quot;</span><span class="p">:</span> <span class="s2">&quot;block-v1:edX+DemoX+Demo_Course+type@html+block@Lab_5B_Mosfet_Amplifier_Experiment&quot;</span><span class="p">,</span> <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;course_name&quot;</span><span class="p">:</span> <span class="s2">&quot;edX Demonstration Course&quot;</span><span class="p">,</span> <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/courses/course-v1:edX+DemoX+Demo_Course/jump_to/block-v1:edX+DemoX+Demo_Course+type@html+block@Lab_5B_Mosfet_Amplifier_Experiment&quot;</span><span class="p">,</span> <span class="nt">&quot;excerpt&quot;</span><span class="p">:</span> <span class="s2">&quot;There are no responses that need to be checked.In the &lt;b&gt;lab&lt;/b&gt; below, you&quot;</span><span class="p">,</span> <span class="nt">&quot;start_date&quot;</span><span class="p">:</span> <span class="s2">&quot;1970-01-01T05:00:00+00:00&quot;</span><span class="p">,</span> <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;html_content&quot;</span><span class="p">:</span> <span class="s2">&quot;MOSFET AMPLIFIER EXPERIMENTThis demonstration is to develop your intuition about amplifiers and biasing, and to have fun with music! There are no responses that need to be checked.In the lab below, you will find:A circuit schematic of the MOSFET amplifier. You can use the sliders to the left of the circuit to control various parameters of the MOSFET and the amplifier.A plot (as a function of time) of selected voltages from the amplifier circuit. You can select the input waveform (e.g., sine wave, square wave, various types of music) by using the \\(v_\\mathrm{IN}\\) drop-down menu and the associated sliders. (The parameter \\(V_\\mathrm{MAX}\\) sets the maximum range on the plots.)The \&quot;Play\&quot; button which lets you listen to the selected voltage waveform as sound. Try it out!Listen to:vINvOUTvRGraph:vINvOUTvRvIN:Zero InputUnit ImpulseUnit StepSine WaveSquare WaveClassical MusicFolk MusicJazz MusicReggae MusicYour browser must support the Canvas element and have JavaScript enabled to view this tool.Your browser must support the Canvas element and have JavaScript enabled to view this tool.Experiment 1: Distorted outputBegin by selecting a sine wave input in the drop-down menu for \\(v_\\mathrm{IN}\\). Then, adjust the sliders to the baseline (default) setting shown below.Baseline setting of sliders:Peak to peak voltage: \\(v_\\mathrm{IN}=3~\\mathrm{V}\\),Frequency: \\(f = 1000~\\mathrm{Hz}\\),Supply voltage: \\(V_\\mathrm{S}=1.6~\\mathrm{V}\\),Input bias voltage: \\(V_\\mathrm{BIAS}=2.5~\\mathrm{V}\\),Pull-up resistor: \\(R = 10~\\mathrm{k}\\Omega\\),MOSFET parameter: \\(K=\\frac{1~\\mathrm{mA}}{\\mathrm{V}^2}\\),MOSFET threshold voltage: \\(V_\\mathrm{T} = 1~\\mathrm{V}\\),Vertical plot range: \\(V_\\mathrm{MAX} = 2~\\mathrm{V}\\).You should observe in the plot that with the baseline settings, the amplifier produces a distorted sine wave signal for \\(v_{OUT}\\). Next, go ahead and select one of the music signals as the input and listen to each of \\(v_{IN}\\) and \\(v_{OUT}\\), and confirm for yourself that the output sounds degraded at the chosen slider settings. You will notice that the graph now plots the music signal waveforms. Think about the reasons why the amplifier is producing a distorted output.Experiment 2: Linear regimeWe now study the amplifier&#39;s small signal behavior. Select a sine wave as the input signal. To study the small signal behavior, reduce the value of \\(v_{IN}\\) to 0.1V (peak-to-peak) by using the \\(v_{IN}\\) slider. Keeping the rest of the parameters at their baseline settings, derive an appropriate value of \\(V_{BIAS}\\) that will ensure saturation region operation for the MOSFET for the 0.1V peak-to-peak swing for \\(v_{IN}\\). Make sure to think about both positive and negative excursions of the signals.Next, use the \\(V_{BIAS}\\) slider to choose your computed value for \\(V_{BIAS}\\) and see if the observed plot of \\(v_{OUT}\\) is more-or-less distortion free. If your calculation was right, then the output will indeed be distortion free.Next, select one of the music signals as the input and listen to each of \\(v_{IN}\\) and \\(v_{OUT}\\), and confirm for yourself that the output sounds much better than in Experiment 1. Also, based on sound volume, convince yourself that \\(v_{OUT}\\) is an amplified version of \\(v_{IN}\\).Experiment 3: Your settingsNow go ahead and experiment with various other settings while listening to the music signal at \\(v_{OUT}\\). Observe the plots and listen to \\(v_{OUT}\\) as you change, for example, the bias voltage \\(V_{BIAS}\\). You will notice that the amplifier distorts the input signal when \\(V_{BIAS}\\) becomes too small, or when it becomes too large. You can also experiment with various values of \\(v_{IN}\\), \\(R_{L}\\), etc., and see how they affect the amplification and distortion.&quot;</span><span class="p">,</span> <span class="nt">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Electronic Sound Experiment&quot;</span><span class="p">},</span> <span class="nt">&quot;course&quot;</span><span class="p">:</span> <span class="s2">&quot;course-v1:edX+DemoX+Demo_Course&quot;</span><span class="p">,</span> <span class="nt">&quot;location&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Example Week 2: Get Interactive&quot;</span><span class="p">,</span> <span class="s2">&quot;Lesson 2 - Let&#39;s Get Interactive!&quot;</span><span class="p">,</span> <span class="s2">&quot;Electronic Sound Experiment&quot;</span><span class="p">],</span> <span class="nt">&quot;content_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Text&quot;</span><span class="p">,</span> <span class="nt">&quot;org&quot;</span><span class="p">:</span> <span class="s2">&quot;edX&quot;</span><span class="p">,</span> <span class="nt">&quot;content_groups&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;block-v1:edX+DemoX+Demo_Course+type@html+block@Lab_5B_Mosfet_Amplifier_Experiment&quot;</span><span class="p">}}]}</span>
+</pre></div>
+
+
+<h3 id="_5">做个试验</h3>
+<p>使用httpie做实验，在里我们从外部发起请求，ajax的方式让人不方便直接观察数据，而且总感觉耦合在一起，不干净</p>
+<p><code>http -f POST http://209.9.106.99:5000/search/course-v1:edX+DemoX+Demo_Course search_string=edx page_size=20 page_index=0 'Cookie:sessionid=pzjqyf6kdoo8jj96ng753xhr1isvstm3;csrftoken=sjPry3O5UpFFp3N3izrIVvd9ZMDEWA7V' X-CSRFToken:sjPry3O5UpFFp3N3izrIVvd9ZMDEWA7V</code></p>
+<p>url的格式为 DEMAIN/search/<COURSE_ID></p>
+<p>返回为：</p>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;access_denied_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&quot;max_score&quot;</span><span class="p">:</span> <span class="mf">0.6223112</span><span class="p">,</span>
+    <span class="nt">&quot;results&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;_id&quot;</span><span class="p">:</span> <span class="s2">&quot;block-v1:edX+DemoX+Demo_Course+type@html+block@2bee8c4248e842a19ba1e73ed8d426c2&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;_index&quot;</span><span class="p">:</span> <span class="s2">&quot;courseware_index&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;_score&quot;</span><span class="p">:</span> <span class="mf">0.6223112</span><span class="p">,</span>
+            <span class="nt">&quot;_type&quot;</span><span class="p">:</span> <span class="s2">&quot;courseware_content&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Labs and Demos&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;html_content&quot;</span><span class="p">:</span> <span class="s2">&quot;Labs and Demos Professors that create courses on edX are able to implement highly interactive experiences that allow you as a student to experiment using easy to use online web applications. These labs are customized to each class and subject area. We have collected a couple of the more popular lab environments here for you to experience and play with. Please be patient with yourself as you take a look around at these lab environments. You probably will not be able to answer these questions without taking a course on the topic first! &quot;</span>
+                <span class="p">},</span>
+                <span class="nt">&quot;content_groups&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+                <span class="nt">&quot;content_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Text&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;course&quot;</span><span class="p">:</span> <span class="s2">&quot;course-v1:edX+DemoX+Demo_Course&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;course_name&quot;</span><span class="p">:</span> <span class="s2">&quot;edX Demonstration Course&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;excerpt&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;b&gt;Lab&lt;/b&gt;s and Demos Professors that create courses on edX are able to&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;block-v1:edX+DemoX+Demo_Course+type@html+block@2bee8c4248e842a19ba1e73ed8d426c2&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;location&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;Example Week 2: Get Interactive&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Homework - Labs and Demos&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Labs and Demos&quot;</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;org&quot;</span><span class="p">:</span> <span class="s2">&quot;edX&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;start_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-02-05T00:00:00+00:00&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/courses/course-v1:edX+DemoX+Demo_Course/jump_to/block-v1:edX+DemoX+Demo_Course+type@html+block@2bee8c4248e842a19ba1e73ed8d426c2&quot;</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;score&quot;</span><span class="p">:</span> <span class="mf">0.6223112</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;_id&quot;</span><span class="p">:</span> <span class="s2">&quot;block-v1:edX+DemoX+Demo_Course+type@html+block@Lab_5B_Mosfet_Amplifier_Experiment&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;_index&quot;</span><span class="p">:</span> <span class="s2">&quot;courseware_index&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;_score&quot;</span><span class="p">:</span> <span class="mf">0.16797835</span><span class="p">,</span>
+            <span class="nt">&quot;_type&quot;</span><span class="p">:</span> <span class="s2">&quot;courseware_content&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Electronic Sound Experiment&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;html_content&quot;</span><span class="p">:</span> <span class="s2">&quot;MOSFET AMPLIFIER EXPERIMENTThis demonstration is to develop your intuition about amplifiers and biasing, and to have fun with music! There are no responses that need to be checked.In the lab below, you will find:A circuit schematic of the MOSFET amplifier. You can use the sliders to the left of the circuit to control various parameters of the MOSFET and the amplifier.A plot (as a function of time) of selected voltages from the amplifier circuit. You can select the input waveform (e.g., sine wave, square wave, various types of music) by using the \\(v_\\mathrm{IN}\\) drop-down menu and the associated sliders. (The parameter \\(V_\\mathrm{MAX}\\) sets the maximum range on the plots.)The \&quot;Play\&quot; button which lets you listen to the selected voltage waveform as sound. Try it out!Listen to:vINvOUTvRGraph:vINvOUTvRvIN:Zero InputUnit ImpulseUnit StepSine WaveSquare WaveClassical MusicFolk MusicJazz MusicReggae MusicYour browser must support the Canvas element and have JavaScript enabled to view this tool.Your browser must support the Canvas element and have JavaScript enabled to view this tool.Experiment 1: Distorted outputBegin by selecting a sine wave input in the drop-down menu for \\(v_\\mathrm{IN}\\). Then, adjust the sliders to the baseline (default) setting shown below.Baseline setting of sliders:Peak to peak voltage: \\(v_\\mathrm{IN}=3~\\mathrm{V}\\),Frequency: \\(f = 1000~\\mathrm{Hz}\\),Supply voltage: \\(V_\\mathrm{S}=1.6~\\mathrm{V}\\),Input bias voltage: \\(V_\\mathrm{BIAS}=2.5~\\mathrm{V}\\),Pull-up resistor: \\(R = 10~\\mathrm{k}\\Omega\\),MOSFET parameter: \\(K=\\frac{1~\\mathrm{mA}}{\\mathrm{V}^2}\\),MOSFET threshold voltage: \\(V_\\mathrm{T} = 1~\\mathrm{V}\\),Vertical plot range: \\(V_\\mathrm{MAX} = 2~\\mathrm{V}\\).You should observe in the plot that with the baseline settings, the amplifier produces a distorted sine wave signal for \\(v_{OUT}\\). Next, go ahead and select one of the music signals as the input and listen to each of \\(v_{IN}\\) and \\(v_{OUT}\\), and confirm for yourself that the output sounds degraded at the chosen slider settings. You will notice that the graph now plots the music signal waveforms. Think about the reasons why the amplifier is producing a distorted output.Experiment 2: Linear regimeWe now study the amplifier&#39;s small signal behavior. Select a sine wave as the input signal. To study the small signal behavior, reduce the value of \\(v_{IN}\\) to 0.1V (peak-to-peak) by using the \\(v_{IN}\\) slider. Keeping the rest of the parameters at their baseline settings, derive an appropriate value of \\(V_{BIAS}\\) that will ensure saturation region operation for the MOSFET for the 0.1V peak-to-peak swing for \\(v_{IN}\\). Make sure to think about both positive and negative excursions of the signals.Next, use the \\(V_{BIAS}\\) slider to choose your computed value for \\(V_{BIAS}\\) and see if the observed plot of \\(v_{OUT}\\) is more-or-less distortion free. If your calculation was right, then the output will indeed be distortion free.Next, select one of the music signals as the input and listen to each of \\(v_{IN}\\) and \\(v_{OUT}\\), and confirm for yourself that the output sounds much better than in Experiment 1. Also, based on sound volume, convince yourself that \\(v_{OUT}\\) is an amplified version of \\(v_{IN}\\).Experiment 3: Your settingsNow go ahead and experiment with various other settings while listening to the music signal at \\(v_{OUT}\\). Observe the plots and listen to \\(v_{OUT}\\) as you change, for example, the bias voltage \\(V_{BIAS}\\). You will notice that the amplifier distorts the input signal when \\(V_{BIAS}\\) becomes too small, or when it becomes too large. You can also experiment with various values of \\(v_{IN}\\), \\(R_{L}\\), etc., and see how they affect the amplification and distortion.&quot;</span>
+                <span class="p">},</span>
+                <span class="nt">&quot;content_groups&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+                <span class="nt">&quot;content_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Text&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;course&quot;</span><span class="p">:</span> <span class="s2">&quot;course-v1:edX+DemoX+Demo_Course&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;course_name&quot;</span><span class="p">:</span> <span class="s2">&quot;edX Demonstration Course&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;excerpt&quot;</span><span class="p">:</span> <span class="s2">&quot;There are no responses that need to be checked.In the &lt;b&gt;lab&lt;/b&gt; below, you&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;block-v1:edX+DemoX+Demo_Course+type@html+block@Lab_5B_Mosfet_Amplifier_Experiment&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;location&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;Example Week 2: Get Interactive&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Lesson 2 - Let&#39;s Get Interactive!&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Electronic Sound Experiment&quot;</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;org&quot;</span><span class="p">:</span> <span class="s2">&quot;edX&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;start_date&quot;</span><span class="p">:</span> <span class="s2">&quot;1970-01-01T05:00:00+00:00&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/courses/course-v1:edX+DemoX+Demo_Course/jump_to/block-v1:edX+DemoX+Demo_Course+type@html+block@Lab_5B_Mosfet_Amplifier_Experiment&quot;</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;score&quot;</span><span class="p">:</span> <span class="mf">0.16797835</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;took&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="nt">&quot;total&quot;</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>同理在课程首页的搜索和Dashboard里的搜索也类似</p>
+<p>以上这个技巧对我们做调试十分有帮助，因为输出在命令行所以我们可以尽情使用grep和jq等工具来筛选信息。只要数据能流向命令行，我们的linux工具箱就将发挥作用，工具的组合威力每次都能让我大吃一惊。管道大概是Unix工具箱最美妙的特性之一</p>
+<p>评测发现搜索必须是个词，好比搜demo课程，搜索<code>edx</code>可以搜到内容，而搜索<code>e</code>则无法搜索到，这应该和分词有关。在edx本土化（汉化）的过程中这个问题应该也会存在</p>
+<p>在课程内部进行搜索，可以检索中文</p>
+<h3 id="_6">分析源码</h3>
+<h4 id="_7">类继承关系</h4>
+<p>waiting... 具体的源码分析留到之后有时间再折腾。今天大体上已经将search服务干净地分离出来了，据此可以做许多有趣的东西</p>
+<h3 id="elasticsearch">Elasticsearch</h3>
+<p>Elasticsearch 是一个分布式可扩展的实时搜索和分析引擎。它能帮助你搜索、分析和浏览数据。edx中的相关搜索都是基于它写的</p>
+<h4 id="_8">资源</h4>
+<ul>
+<li><a href="http://es.xiaoleilu.com/">Elasticsearch 权威指南（中文版）</a></li>
+<li><a href="http://www.learnes.net/getting_started/README.html">Elasticsearch 权威指南</a></li>
+<li><a href="http://www.justinablog.com/archives/967">使用Python进行Elasticsearch数据索引</a></li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://wwj-tmp-video.just4fun.site/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://p6ur0vhyj.bkt.clouddn.com/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+<h4>我近期在折腾</h4>
+<li><a href="https://blog.just4fun.site/about-codelab-club.html">codelab.club</a></li>
+<li><a href="https://scratch3-adapter-docs.just4fun.site">scratch3-adapter</a></li>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://wwj-tmp-video.just4fun.site/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>

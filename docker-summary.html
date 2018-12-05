@@ -1,0 +1,525 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队
+喜欢你这种没事瞎翻源码的人
+如果你恰好也热爱技术、喜欢折腾，一起来捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>docker使用小结</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://wwj-tmp-video.just4fun.site/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to docker使用小结">
+					docker使用小结 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-10-13T00:00:00+00:00">
+	<i class="icon-calendar"></i>二 13 十月 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/gong-ju.html"><i class="icon-folder-open"></i>工具</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/tools.html"><i class="icon-tag"></i>tools</a>
+</footer><!-- /.post-info -->		</div>
+		<h1 id="_1">安装</h1>
+<ul>
+<li><a href="https://docs.docker.com/installation/">官方文档</a></li>
+<li>国内用户推荐使用<a href="http://get.daocloud.io/">get.daocloud.io</a>来方便安装docker</li>
+</ul>
+<p>确保docker运行正常：<code>docker run hello-world</code></p>
+<h3 id="_2">卸载</h3>
+<p>针对使用wget安装的</p>
+<div class="highlight"><pre><span></span>sudo apt-get purge docker-engine
+sudo apt-get autoremove --purge docker-engine
+rm -rf /var/lib/docker
+</pre></div>
+
+
+<h1 id="_3">设置</h1>
+<h3 id="docker">修改docker存储目录</h3>
+<p>ubuntu : /etc/default/docker ,使得：DOCKER_OPTS="-g /somewhere/else/docker/"</p>
+<div class="highlight"><pre><span></span>sudo service docker stop
+sudo cp -r /var/lib/docker /somewhere/else/docker <span class="c1">#/somewhere/else/docker目录本来不存在</span>
+sudo service docker restar
+</pre></div>
+
+
+<p>centos参考这里:<a href="https://github.com/docker/docker/issues/3127">Best way to move docker directory</a></p>
+<p>通过修改配置，可以让docker远程可访问</p>
+<p>/etc/default/docker </p>
+<h1 id="_4">使用</h1>
+<p>所有的指令示意图可参考：</p>
+<p><img alt="all_command" src="img/edx/docker/all_command.jpeg" /></p>
+<p>列出docker的常用指令,主要便于参考,(以下命令可能需要带上sudo),其实我日常使用的基本只有4-5条</p>
+<p><code>docker version</code> : 可用于查看docker是否安装完成</p>
+<h2 id="image">对image的操作</h2>
+<ul>
+<li>docker search image_name : 在docker hub上搜索镜像</li>
+<li>docker pull image_name:tag_name : 拉取镜像</li>
+<li>docker images : 列出镜像列表</li>
+<li>docker rmi image_name : 删除镜像</li>
+<li>docker history image_name : 显示镜像的历史</li>
+<li>docker inspect image_name : 检查镜像底层信息，json化输出</li>
+</ul>
+<h3 id="_5">保存和加载镜像</h3>
+<ul>
+<li>docker save ubuntu:latest &gt; ubuntu_save.tar : 保存镜像到一个tar包</li>
+<li>docker load &lt; ubuntu_save.tar : 加载一个tar包格式的镜像(之后的镜像信息都在，包括名字)</li>
+<li>sudo docker export <CONTAINER ID> &gt; ubuntu_export.tar : 保存容器到一个tar包</li>
+<li>cat ubuntu_export.tar | docker import - wwj/ubuntu : 加载容器到一个印象</li>
+</ul>
+<p>save和export的区别:</p>
+<ul>
+<li>Export命令用于持久化容器（不是镜像） (sudo docker ps列出容器）</li>
+<li>Save命令用于持久化镜像（不是容器）(sudo docker images列出镜像)</li>
+<li>The exported image will not have any layer or history information saved, so it will be smaller and you will not be able to rollback</li>
+</ul>
+<h3 id="image_1">发布image</h3>
+<ul>
+<li>docker push image_name </li>
+</ul>
+<h2 id="container">对container的操作</h2>
+<h3 id="run">启动容器（run）</h3>
+<p><code>sudo docker run [OPTIONS] IMAGE[:TAG] [COMMAND] [ARG...]</code></p>
+<p>好比我通常使用edx_cypress_docker时时这样run的：</p>
+<p><code>sudo docker run -itd -P wwj718/edx_cypress_docker:1.05</code></p>
+<p>其中：</p>
+<ul>
+<li>-d:后台模式</li>
+<li>-i -t参数是为了同容器进行数据交互</li>
+</ul>
+<p>可选：</p>
+<ul>
+<li>--rm : Docker能在容器结束时自动清理其所产生的数据</li>
+</ul>
+<p>更多的使用细节参考<a href="http://dockone.io/article/152">Docker run 命令的使用方法</a></p>
+<h2 id="ps">查看容器（ps）</h2>
+<p>docker ps</p>
+<h3 id="_6">对容器的日常操作</h3>
+<ul>
+<li>docker commit ID image_name:tag_name</li>
+<li>docker rm -f $(docker ps -aq) : 删除所有容器</li>
+<li>docker rm Name/ID : 删除单个容器</li>
+<li>docker kill Name/ID : kill一个容器</li>
+<li>docker restart Name/ID : 重启一个正在运行的容器</li>
+<li>docker logs Name/ID : 从一个容器中取日志</li>
+<li>docker diff Name/ID : 列出一个容器里面被改变的文件或者目录</li>
+<li>docker top Name/ID : 显示一个运行的容器里面的进程信息</li>
+<li>docker cp Name:/container_path to_path : 从容器里面拷贝文件/目录到本地一个路径</li>
+<li>docker exec Name/ID /bin/bash</li>
+<li>exec与attach的区别参考<a href="http://stackoverflow.com/questions/30960686/difference-between-docker-attach-and-docker-exec">这里</a>     </li>
+</ul>
+<h1 id="dockerfile">Dockerfile</h1>
+<ul>
+<li><a href="https://docs.docker.com/reference/builder/">Dockerfile reference</a></li>
+<li><a href="http://www.oschina.net/news/64396/dockerfile-instructions">Dockerfile 简版大全，附赠编写实例</a></li>
+</ul>
+<h1 id="_7">相关服务</h1>
+<ul>
+<li><a href="https://hub.docker.com/">docker hub</a>:docker官方镜像托管，支持在线Build</li>
+</ul>
+<h1 id="_8">学习资料</h1>
+<ul>
+<li><a href="http://dockerpool.com/static/books/docker_practice/index.html">Docker —— 从入门到实践</a>  </li>
+</ul>
+<h1 id="_9">手册</h1>
+<ul>
+<li><a href="https://github.com/wsargent/docker-cheat-sheet">docker-cheat-sheet</a></li>
+</ul>
+<h1 id="_10">参考</h1>
+<ul>
+<li><a href="http://www.tedblog.cc/wordpress/?p=49">docker使用小结</a></li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://wwj-tmp-video.just4fun.site/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://p6ur0vhyj.bkt.clouddn.com/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+<h4>我近期在折腾</h4>
+<li><a href="https://blog.just4fun.site/about-codelab-club.html">codelab.club</a></li>
+<li><a href="https://scratch3-adapter-docs.just4fun.site">scratch3-adapter</a></li>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://wwj-tmp-video.just4fun.site/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
