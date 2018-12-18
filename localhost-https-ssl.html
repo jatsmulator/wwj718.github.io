@@ -1,0 +1,490 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队
+喜欢你这种没事瞎翻源码的人
+如果你恰好也热爱技术、喜欢折腾，一起来捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>本地https/wss服务与SSL安全证书</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://wwj-tmp-video.just4fun.site/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/codelab.html">
+						<i class="icon-folder-open icon-large"></i>codelab
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to 本地https/wss服务与SSL安全证书">
+					本地https/wss服务与SSL安全证书 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2018-09-03T00:00:00+00:00">
+	<i class="icon-calendar"></i>一 03 九月 2018
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/shao-er-bian-cheng.html"><i class="icon-folder-open"></i>少儿编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/scratch.html"><i class="icon-tag"></i>scratch</a>
+</footer><!-- /.post-info -->		</div>
+		<h1 id="_1">前言</h1>
+<p>我之前在<a href="https://blog.just4fun.site/scratch3-microbit-analysis.html">分析scratch3.0与micro:bit的通信</a>提到<code>https校验问题</code>:</p>
+<blockquote>
+<p>由于网站都逐渐过渡到https，而Scratch Link是个本地websocker server，要让Scratch Link与浏览器通信，需要使用wss协议。而本地websocker server采用openssl本地自生成的证书的话，浏览器要让用户在一个新页面里点击高级设置才行，体验很不友好.<br />
+scratch团队的解决方案十分聪明, 让<code>device-manager.scratch.mit.edu</code>这个域名指向<code>127.0.0.1</code>，websocker server就可以使用这个域名的证书。</p>
+</blockquote>
+<p>我觉得这个机制对大多数在本地提供https/wss服务的软件都有用，于是写篇文章将讨论如何实现Scratch Link的本地证书机制</p>
+<h1 id="_2">问题的一般形式</h1>
+<p>这个问题极具一般性，我们先抛开Scratch Link，来描述下它的一般形式。</p>
+<p>你在本地写了一个软件(native application)，软件内跑了一个本地的https/wss服务。https要求ssl证书，于是你使用openssl生成了本地证书。当你在浏览器中访问https/wss服务时，浏览器会阻止你访问https/wss服务，并提醒你存在安全问题，直到你点击下图的所示的地方，才能继续访问https/wss服务。</p>
+<p><img width="600px" src="http://wwj-fig-bed.just4fun.site/https_1c8478da.png"></p>
+<h1 id="_3">解决方案</h1>
+<p>这个问题相信大多数开发者都遇见过。社区里也出了一些解决方案：</p>
+<ul>
+<li><a href="https://github.com/FiloSottile/mkcert">mkcert</a></li>
+<li><a href="https://letsencrypt.org/docs/certificates-for-localhost/">certificates-for-localhost</a></li>
+</ul>
+<p>前头的两个解决方案最具代表性，但面向的都是开发者，本质上是修改了本地的系统配置。对于普通用户并不理想。</p>
+<p>所以我们将给出一个面向普通用户的解决方案。</p>
+<p>思路其实很简单:  使用你的域名申请到安全证书，申请到证书后，将证书放在本地软件里，用于本地的https/wss服务，将证书对应的域名指向<code>127.0.0.1</code></p>
+<h1 id="_4">操作步骤</h1>
+<p>我们接着来详细描述操作细节。</p>
+<p>我选择从<a href="https://letsencrypt.org/">Let's Encrypt</a>获得证书</p>
+<p>Let's Encrypt的使用方法可以参考:<a href="https://blog.just4fun.site/https-note.html">使用Let’s Encrypt(certbot)为你的网站生成免费的 SSL 证书</a></p>
+<p>完成上文的操作我们就获得了Let’s Encrypt为我们网站颁发的证书，证书位置在形如<code>/etc/letsencrypt/live/xxx.example.com/</code>的目录里。接着我们将证书从服务器拷贝出来，放到本地软件里，用于本地的https/wss服务。举例来说，我使用python-socketio提供https/wss服务，我的配置为</p>
+<div class="highlight"><pre><span></span>    <span class="n">app</span><span class="o">.</span><span class="n">on_startup</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">start_background_tasks</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">use_ssl</span><span class="p">:</span>
+        <span class="n">ssl_context</span> <span class="o">=</span> <span class="n">ssl</span><span class="o">.</span><span class="n">SSLContext</span><span class="p">(</span><span class="n">ssl</span><span class="o">.</span><span class="n">PROTOCOL_SSLv23</span><span class="p">)</span>
+        <span class="n">ssl_context</span><span class="o">.</span><span class="n">set_default_verify_paths</span><span class="p">()</span>
+        <span class="n">ssl_context</span><span class="o">.</span><span class="n">load_cert_chain</span><span class="p">(</span><span class="n">resource_path</span><span class="p">(</span><span class="s1">&#39;./cert.pem&#39;</span><span class="p">),</span> <span class="n">resource_path</span><span class="p">(</span><span class="s1">&#39;./privkey.pem&#39;</span><span class="p">))</span>
+        <span class="n">web</span><span class="o">.</span><span class="n">run_app</span><span class="p">(</span>
+            <span class="n">app</span><span class="p">,</span>
+            <span class="n">host</span><span class="o">=</span><span class="n">SOCKET_SERVER_HOST</span><span class="p">,</span>
+            <span class="n">port</span><span class="o">=</span><span class="n">SOCKET_SERVER_PORT</span><span class="p">,</span>
+            <span class="n">ssl_context</span><span class="o">=</span><span class="n">ssl_context</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">web</span><span class="o">.</span><span class="n">run_app</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">SOCKET_SERVER_HOST</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">SOCKET_SERVER_PORT</span><span class="p">)</span>
+</pre></div>
+
+
+<p>配置好后重启本地软件，可以看到Chrome已经信任本地的https/wss服务了！</p>
+<p><img width="600px" src="http://wwj-fig-bed.just4fun.site/https_231c8629.png"></p>
+<p>接下来我们来讨论一些细节问题。</p>
+<h3 id="_5">安全提醒</h3>
+<p>我不建议不要将通配符证书打包在本地软件中，万一加密过程没做好，证书泄漏，容易造成安全问题，具体可能造成的风险参考:<a href="https://www.zhihu.com/question/50486404">域名的SSL证书泄漏对网站的安全性影响大吗？</a>，主要的风险是攻击者可以利用受信任的证书发起中间人攻击，获取到用户的数据。</p>
+<p>所以我单独为一个二级域名申请证书，只用于<code>127.0.0.1</code>,如此一来，即便不加密证书，也不会造成大问题。但加密总归是好的。</p>
+<h3 id="_6">证书更新</h3>
+<p>由<code>Let's Encrypt</code>颁发的证书，有效期是3个月，离过期还有30天以内可以renew证书。我们每三个月在服务器上更新证书自然不成问题，但如何同步更新用户机器上的证书呢，我的建议是在软件上做自动更新功能，定期去同步服务器上的证书。</p>
+<p>当然也可以定期更新软件本身, 我目前使用Pyinstaller来跨平台打包应用程序。所以可以选择<a href="https://github.com/JMSwag/PyUpdater">PyUpdater</a>来自动更新软件。</p>
+<p>如果你觉得太麻烦，可以考虑购买一个长期的安全证书。</p>
+<h3 id="_7">如何调试</h3>
+<p>如果我们在Chrome中已经同意继续前往<code>127.0.0.1</code>,短期内刷新，Chrome就不会再做安全提醒，我们要确定新的安全证书是否生效，需要<code>重新启用警告功能</code></p>
+<p><img width="600px" src="http://wwj-fig-bed.just4fun.site/https_0fe5e391.png"></p>
+<h1 id="_8">参考</h1>
+<ul>
+<li><a href="https://blog.just4fun.site/scratch3-microbit-analysis.html">分析scratch3.0与micro:bit的通信</a></li>
+<li><a href="https://scratch3-adapter-docs.just4fun.site/">scratch3_adapter</a></li>
+<li><a href="https://github.com/FiloSottile/mkcert">mkcert</a></li>
+<li><a href="https://letsencrypt.org/docs/certificates-for-localhost/">certificates-for-localhost</a></li>
+<li><a href="https://www.zhihu.com/question/50486404">域名的SSL证书泄漏对网站的安全性影响大吗？</a></li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://wwj-tmp-video.just4fun.site/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>我近期在折腾</h4>
+<li><a href="https://blog.just4fun.site/about-codelab-club.html" target="_blank">codelab.club</a></li>
+<li><a href="https://scratch3-adapter-docs.just4fun.site" target="_blank">scratch3-adapter</a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://p6ur0vhyj.bkt.clouddn.com/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://wwj-tmp-video.just4fun.site/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/codelab.html">
+    <i class="icon-folder-open icon-large"></i>codelab
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
