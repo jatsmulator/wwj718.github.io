@@ -1,0 +1,581 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队
+喜欢你这种没事瞎翻源码的人
+如果你恰好也热爱技术、喜欢折腾，一起来捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Code Grader in Open edX</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://wwj-tmp-video.just4fun.site/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/codelab.html">
+						<i class="icon-folder-open icon-large"></i>codelab
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to Code Grader in Open edX">
+					Code Grader in Open edX 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-10-23T00:00:00+00:00">
+	<i class="icon-calendar"></i>五 23 十月 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/edx.html"><i class="icon-folder-open"></i>edx</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/edx.html"><i class="icon-tag"></i>edx</a>
+</footer><!-- /.post-info -->		</div>
+		<p>友情提醒： 坑多慎入 : )</p>
+<p>但作为geek的你会很喜欢这部分的</p>
+<p>首先感谢@DatoChan分享的经验 ：）</p>
+<h1 id="external-grader">External Grader</h1>
+<p>说Code Grader之前，我们先来说说<a href="http://edx.readthedocs.org/projects/edx-partner-course-staff/en/latest/exercises_tools/external_graders.html#external-grader">External Grader</a></p>
+<h3 id="_1">这是个啥</h3>
+<blockquote>
+<p>An external grader is a service that receives learner responses to a problem, processes those responses, and returns feedback and a problem grade to the edX platform. You build and deploy an external grader separately from the edX platform.</p>
+</blockquote>
+<p>这是一种用于评分的服务，这种评分机制作为独立的服务，接收学生的答题答案，对答案做出评估后，返回评估结果给edX platform.</p>
+<p>技术上的实现主要用到了消息队列，在edx中被封装为<a href="https://github.com/edx/xqueue">xqueue</a></p>
+<h3 id="_2">想象空间</h3>
+<p>这里充满想象的空间，好比可以使用自然语言的成果去自动对答案进行评分，又好比学生可以提交图片，平台使用图片识别去解读它。以及我们稍后介绍的，Code Grader，用于评估学生提交代码的正确性</p>
+<p>如此一来edx platform就可以专注在教育领域，把评分规则交由其他服务，通过这种机制 ，edx platform提高了内聚性的同时，带来了极大的扩展性</p>
+<p>有没有觉得似曾相似，没错，就是《Unix编程艺术》鼓励的</p>
+<blockquote>
+<p>Do one thing and do well</p>
+</blockquote>
+<p>而后通过组件之间的协作和组合来解决问题，而不是提供大而全的方案。</p>
+<p>edx的开放性和可扩展性无疑给大家提供了五彩缤纷的可能</p>
+<h3 id="code-grader">Code Grader</h3>
+<p>Code Grader只是External Grader的一个特例，特殊在学生提交的答案是代码，Grader的任务是运行和评估代码的正确性。edX实现了xserver，这是个用以评估Python代码的服务，如果需要，我们可以打造评估任意代码的服务，技术上无非是在Grader里调用解释器而已。</p>
+<p>好想写一个用于评估Hy的Grader呀.(Hy是Python实现的Lisp,与python几乎无缝对接)</p>
+<p>这种拓展性对计算机相关的课程极有助益，学生可以在线编写运行代码，而不必搭建自己的开发环境了。如果涉及数据库的话，后台都可以一并搭建好，学生有一个浏览器即可，而不必折腾一整套编程环境</p>
+<p>Talk is cheap，just do it</p>
+<p>External Grader的核心机制是<a href="https://github.com/edx/xqueue">xqueue</a></p>
+<h3 id="xqueue">xqueue</h3>
+<blockquote>
+<p>XQueue defines an interface for the LMS to communicate with external grader services.</p>
+</blockquote>
+<p>一语道尽</p>
+<p>流程：</p>
+<ul>
+<li>The learner either enters code or attaches a file for a problem, then selects Check.</li>
+<li>The external grader pulls the code from XQueue.</li>
+<li>The external grader runs the tests that you created on the code.</li>
+<li>The external grader returns the grade for the submission, as well as any results in a string, to XQueue.</li>
+<li>The XQueue delivers the results to the edX Learning Management System.</li>
+<li>The learner sees the problem results and the grade.</li>
+</ul>
+<p>在grader_payload可以指名test.py.如：{"grader": "ps02/bisect/grade_bisect.py"}</p>
+<p>通过输入输出来测试！在前后输入连个变量，然后测试结果。可以参考官方的示例</p>
+<p>可以直接使用py.test:<a href="https://github.com/dagg/OpenEdxExternalGrader/blob/master/PythonGrader.py">PythonGrader.py</a></p>
+<p>这是test case的问题。要求必须写成函数接受参数？写测试用例  每一个test</p>
+<h1 id="_3">安装与配置</h1>
+<h3 id="_4">安装</h3>
+<p>依据<a href="https://github.com/antoviaque/xserver-grader">xserver-grader</a>:</p>
+<ul>
+<li>首先在<code>playbooks/edx_sandbox.yml</code>中加入<code>- xserver</code>到<code>nginx_sites</code>和<code>roles</code>中。</li>
+<li>编辑<code>roles/xserver/defaults/main.yml</code>,加入</li>
+</ul>
+<div class="highlight"><pre><span></span>XSERVER_GRADER_DIR: &quot;{{ xserver_data_dir }}/data/content-test-xserver&quot;
+XSERVER_GRADER_SOURCE: &quot;https://github.com/antoviaque/xserver-grader.git&quot;
+XSERVER_LOCAL_GIT_IDENTITY: &quot;{{ secure_dir }}/files/git-identity&quot;
+XSERVER_GIT_IDENTITY: &quot;YOUR_GITHUB_NAME&quot;
+</pre></div>
+
+
+<p>之后重新执行ansible-playbook来安装xserver.安装完成后执行<code>sudo /edx/bin/supervisorctl status</code>应该能看到xserver依据跑起来了。内部端口为8050，外部端口为18050.</p>
+<h3 id="_5">配置</h3>
+<p>编辑<code>/edx/app/xqueue/xqueue.env.json</code>，添加你自己的queuename，指名它的url</p>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;LOCAL_LOGLEVEL&quot;</span><span class="p">:</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;LOGGING_ENV&quot;</span><span class="p">:</span> <span class="s2">&quot;sandbox&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;LOG_DIR&quot;</span><span class="p">:</span> <span class="s2">&quot;/edx/var/logs/xqueue&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;RABBIT_HOST&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;S3_BUCKET&quot;</span><span class="p">:</span> <span class="s2">&quot;sandbox-bucket&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;S3_PATH_PREFIX&quot;</span><span class="p">:</span> <span class="s2">&quot;sandbox-xqueue&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;SYSLOG_SERVER&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;XQUEUES&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;certificates&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;edX-DemoX&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:8050&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;java-queue&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:1710&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;open-ended&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;open-ended-message&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;test-pull&quot;</span><span class="p">:</span> <span class="kc">null</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;XQUEUE_WORKERS_PER_QUEUE&quot;</span><span class="p">:</span> <span class="mi">12</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>在studio中添加题目，类似以下这种</p>
+<div class="highlight"><pre><span></span><span class="nt">&lt;problem</span> <span class="na">title=</span><span class="s">&quot;Embedded Code Box&quot;</span> <span class="na">markdown=</span><span class="s">&quot;null&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;text&gt;</span>Blabla<span class="nt">&lt;/text&gt;</span>
+  <span class="nt">&lt;coderesponse&gt;</span>
+    <span class="nt">&lt;textbox</span> <span class="na">rows=</span><span class="s">&quot;10&quot;</span> <span class="na">cols=</span><span class="s">&quot;70&quot;</span> <span class="na">mode=</span><span class="s">&quot;python&quot;</span> <span class="na">tabsize=</span><span class="s">&quot;4&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;codeparam</span> <span class="na">queuename=</span><span class="s">&quot;edX-DemoX&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;initial_display/&gt;</span>
+      <span class="nt">&lt;answer_display&gt;</span>the definitive answer<span class="nt">&lt;/answer_display&gt;</span>
+      <span class="nt">&lt;grader_payload&gt;</span>{&quot;grader&quot;: &quot;grade.py&quot;}<span class="nt">&lt;/grader_payload&gt;</span>
+    <span class="nt">&lt;/codeparam&gt;</span>
+  <span class="nt">&lt;/coderesponse&gt;</span>
+<span class="nt">&lt;/problem&gt;</span>
+</pre></div>
+
+
+<p>保存，发布，就该就好啦</p>
+<p>更具体的说明，参考<a href="http://edx.readthedocs.org/projects/edx-partner-course-staff/en/latest/exercises_tools/external_graders.html#create-a-code-response-problem">create-a-code-response-problem</a></p>
+<h1 id="_6">填坑</h1>
+<p>有个坑叫<code>DatabaseError: (1406, "Data too long for column 'lms_callback_url' at row 1")</code> ，解决方案为：</p>
+<div class="highlight"><pre><span></span>sudo mysql
+use xqueue<span class="p">;</span>
+alter table queue_submission modify lms_callback_url VARCHAR <span class="o">(</span><span class="m">255</span><span class="o">)</span><span class="p">;</span>
+</pre></div>
+
+
+<p>此外不要在studio中CHECK你的答案，否则会说<code>Error: No grader has been set up for this problem.</code></p>
+<h3 id="run-it">Run it</h3>
+<p><img alt="xserver1.png" src="img/edx/xqueue/xserver1.png" />
+<img alt="xserver2.png" src="img/edx/xqueue/xserver2.png" /></p>
+<h3 id="_7">重启服务</h3>
+<ul>
+<li>sudo /edx/bin/supervisorctl restart xqueue_consumer</li>
+<li>sudo /edx/bin/supervisorctl restart xqueue</li>
+</ul>
+<h1 id="java-grader">Java Grader</h1>
+<p>参考这里就好：<a href="https://github.com/huynq55/java-grader">java-grader</a></p>
+<p><img alt="javaGrader.png" src="img/edx/xqueue/javaGrader.png" /></p>
+<p>其他语言的实现，可以参考这个，或是xserver</p>
+<h1 id="_8">设计原则</h1>
+<p><a href="http://edx.readthedocs.org/projects/edx-partner-course-staff/en/latest/exercises_tools/external_graders.html#building-an-external-grader">Building an External Grader</a>给出了构建自己的External Grader的指导原则</p>
+<ul>
+<li>Scale</li>
+<li>Security</li>
+<li>Reliability and Recovery</li>
+<li>Testing</li>
+</ul>
+<hr />
+<p>2016.01.19更新</p>
+<p>至于代码judge部分，建议使用专业的judge开源项目，比如为acm竞赛准备的评测组件</p>
+<p>以及这个工具也很棒:<a href="https://github.com/prasmussen/glot">glot</a>，他们提供了一套完备的解决方案</p>
+<hr />
+<p>2016.04.19更新</p>
+<p>使用pytest测试</p>
+<p><a href="http://pytest.org/latest/getting-started.html#getstarted">py.test</a></p>
+<p><a href="https://github.com/easy-edx/OpenEdxExternalGrader/blob/master/PythonGrader.py">OpenEdxExternalGrader</a></p>
+<p>这个作为测试的方法，而执行的环境放在docker里，采用-v来映射目录。让代码执行完</p>
+<p>采用<a href="https://github.com/docker/docker-py">docker-py</a>  </p>
+<p>采用subprogrem 还是 docker-py，先写出要运行的命令，然后再调用</p>
+<h1 id="_9">用后即删</h1>
+<h1 id="docker">包括文件和docker 容器</h1>
+<p>sudo docker run --rm -v /tmp/test:/pydata kleetaurus/compilebox python /pydata/test.py</p>
+<p>如何使用远程的docker</p>
+<h1 id="_10">参考</h1>
+<ul>
+<li><a href="http://edx.readthedocs.org/projects/edx-partner-course-staff/en/latest/exercises_tools/external_graders.html#external-grader">External Grader</a></li>
+<li><a href="https://github.com/edx/xqueue">xqueue</a></li>
+<li><a href="https://github.com/edx/xserver">xserver</a>*  </li>
+<li><a href="https://groups.google.com/forum/#!topic/edx-code/-xMxjjg6uv8">How to configure Xqueue and External grader</a></li>
+<li><a href="https://github.com/huynq55/java-grader">java-grader</a></li>
+<li><a href="https://github.com/edx/xserver/blob/master/protocol.rst">protocol.rst</a></li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://wwj-tmp-video.just4fun.site/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>我近期在折腾</h4>
+<li><a href="https://blog.just4fun.site/about-codelab-club.html" target="_blank">codelab.club</a></li>
+<li><a href="https://scratch3-adapter-docs.just4fun.site" target="_blank">scratch3-adapter</a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://p6ur0vhyj.bkt.clouddn.com/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://wwj-tmp-video.just4fun.site/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/codelab.html">
+    <i class="icon-folder-open icon-large"></i>codelab
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
