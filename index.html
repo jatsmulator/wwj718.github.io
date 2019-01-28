@@ -1,0 +1,648 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队
+喜欢你这种没事瞎翻源码的人
+如果你恰好也热爱技术、喜欢折腾，一起来捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>writing for time</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://wwj-tmp-video.just4fun.site/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+        
+	<div class='article'>
+		<h1><a href="/Scratch3-adapter-with-blockly.html">scratch3-adapter ❤️ blockly</a></h1>
+		<div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2019-01-28T00:00:00+00:00">
+	<i class="icon-calendar"></i>一 28 一月 2019
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/shao-er-bian-cheng.html"><i class="icon-folder-open"></i>少儿编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/scratch.html"><i class="icon-tag"></i>scratch</a>
+</footer><!-- /.post-info --></div>
+		<div class="summary"><p>本文将介绍如何通过<a href="https://scratch3-adapter-docs.just4fun.site/">scratch3-adapter</a>将<a href="https://github.com/google/blockly">blockly ...</a></p> 
+			<a class="btn btn-primary small" href="/Scratch3-adapter-with-blockly.html">more ...</a>
+		</div>
+	</div>	
+	<hr />
+	<div class='article'>
+		<h1><a href="/Scratch3-adapter-Arduino-scratch.html">Arduino与Scratch3.0</a></h1>
+		<div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2019-01-23T00:00:00+00:00">
+	<i class="icon-calendar"></i>三 23 一月 2019
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/shao-er-bian-cheng.html"><i class="icon-folder-open"></i>少儿编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/scratch.html"><i class="icon-tag"></i>scratch</a>
+</footer><!-- /.post-info --></div>
+		<div class="summary"><p><img alt="" src="http://wwj-fig-bed.just4fun.site/scratch3-ardoino_571b6e49.png" /></p>
+<p>陆续有开发者问到，如何使用<a href="https://scratch3-adapter-docs.just4fun.site/">scratch3-adapter</a>将Arduino接入到Scratch3 ...</p> 
+			<a class="btn btn-primary small" href="/Scratch3-adapter-Arduino-scratch.html">more ...</a>
+		</div>
+	</div>	
+	<hr />
+	<div class='article'>
+		<h1><a href="/asking-the-right-question-is-more-important-than-getting-the-right-answer.html">[译]提出正确的问题比得到正确答案更重要</a></h1>
+		<div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2019-01-23T00:00:00+00:00">
+	<i class="icon-calendar"></i>三 23 一月 2019
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/shao-er-bian-cheng.html"><i class="icon-folder-open"></i>少儿编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/edu.html"><i class="icon-tag"></i>edu</a>
+</footer><!-- /.post-info --></div>
+		<div class="summary"><p><img alt="" src="http://wwj-fig-bed.just4fun.site/question_7b050616.png" /></p>
+<p>原文: <a href="https://lemire.me/blog/2018/12/06/asking-the-right-question-is-more-important-than-getting-the-right-answer/">Asking the right ...</a></p> 
+			<a class="btn btn-primary small" href="/asking-the-right-question-is-more-important-than-getting-the-right-answer.html">more ...</a>
+		</div>
+	</div>	
+	<hr />
+	<div class='article'>
+		<h1><a href="/for-the-love-of-pipes.html">[译]对管道(Pipes)的偏爱</a></h1>
+		<div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2019-01-23T00:00:00+00:00">
+	<i class="icon-calendar"></i>三 23 一月 2019
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/bian-cheng.html"><i class="icon-folder-open"></i>编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/unix.html"><i class="icon-tag"></i>unix</a>
+</footer><!-- /.post-info --></div>
+		<div class="summary"><p><img alt="" src="http://wwj-fig-bed.just4fun.site/pipe_0ece8dff.png" /></p>
+<p>原文链接:<a href="https://blog.jessfraz.com/post/for-the-love-of-pipes/">For the Love ...</a></p> 
+			<a class="btn btn-primary small" href="/for-the-love-of-pipes.html">more ...</a>
+		</div>
+	</div>	
+	<hr />
+	<div class='article'>
+		<h1><a href="/bluetooth-device-scratch3.html">蓝牙设备与Scratch3.0</a></h1>
+		<div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2019-01-22T00:00:00+00:00">
+	<i class="icon-calendar"></i>二 22 一月 2019
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/shao-er-bian-cheng.html"><i class="icon-folder-open"></i>少儿编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/scratch.html"><i class="icon-tag"></i>scratch</a>
+</footer><!-- /.post-info --></div>
+		<div class="summary"><p><img alt="" src="http://wwj-fig-bed.just4fun.site/scratch-bt_911afda4.png" /></p>
+<h1 id="_1">前言</h1>
+<p>本文的目标是帮助开发者将任意的蓝牙设备接入Scratch3.0，当然前提是你了解该设备的蓝牙协议细节 ...</p> 
+			<a class="btn btn-primary small" href="/bluetooth-device-scratch3.html">more ...</a>
+		</div>
+	</div>	
+	<hr />
+	<div class='article'>
+		<h1><a href="/scratch3-adapter-open-plan.html">scratch3-adapter支持第三方平台</a></h1>
+		<div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2019-01-19T00:00:00+00:00">
+	<i class="icon-calendar"></i>六 19 一月 2019
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/shao-er-bian-cheng.html"><i class="icon-folder-open"></i>少儿编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/scratch.html"><i class="icon-tag"></i>scratch</a>
+</footer><!-- /.post-info --></div>
+		<div class="summary"><p><img alt="" src="http://wwj-fig-bed.just4fun.site/scratch3-adapter-eim_3f5fd3d8.png" /></p>
+<h1 id="_1">开放连接</h1>
+<p>我们在上周发布了<a href="https://scratch3-adapter-docs.just4fun.site/">scratch3-adapter</a>的0 ...</p> 
+			<a class="btn btn-primary small" href="/scratch3-adapter-open-plan.html">more ...</a>
+		</div>
+	</div>	
+	<hr />
+	<div class='article'>
+		<h1><a href="/create-first-Scratch3-Extension.html">创建你的第一个Scratch3.0 Extension</a></h1>
+		<div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2019-01-16T00:00:00+00:00">
+	<i class="icon-calendar"></i>三 16 一月 2019
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/shao-er-bian-cheng.html"><i class="icon-folder-open"></i>少儿编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/scratch.html"><i class="icon-tag"></i>scratch</a>
+</footer><!-- /.post-info --></div>
+		<div class="summary"><p><img alt="" src="http://wwj-fig-bed.just4fun.site/scratch-extension_27085782.png" /></p>
+<p>我们近期刚写完<a href="https://blog.just4fun.site/Scratch3_api_analysis.html">Scratch3.0技术分析</a>系列文章 ...</p> 
+			<a class="btn btn-primary small" href="/create-first-Scratch3-Extension.html">more ...</a>
+		</div>
+	</div>	
+	<hr />
+	<div class='article'>
+		<h1><a href="/Scratch3_project_json_analysis_6.html">Scratch3技术分析之项目内部数据(第6篇）</a></h1>
+		<div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2019-01-15T17:00:00+00:00">
+	<i class="icon-calendar"></i>二 15 一月 2019
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/shao-er-bian-cheng.html"><i class="icon-folder-open"></i>少儿编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/scratch.html"><i class="icon-tag"></i>scratch</a>
+</footer><!-- /.post-info --></div>
+		<div class="summary"><p>我们在<a href="https://blog.just4fun.site/Scratch3_api_analysis_1.html">Scratch3技术分析之创作平台API(第1篇)</a>定义了以下两个名词 ...</p> 
+			<a class="btn btn-primary small" href="/Scratch3_project_json_analysis_6.html">more ...</a>
+		</div>
+	</div>	
+	<hr />
+	<div class='article'>
+		<h1><a href="/Scratch3_community_analysis_5.html">Scratch3技术分析之社区 API(第5篇)</a></h1>
+		<div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2019-01-15T16:00:00+00:00">
+	<i class="icon-calendar"></i>二 15 一月 2019
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/shao-er-bian-cheng.html"><i class="icon-folder-open"></i>少儿编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/scratch.html"><i class="icon-tag"></i>scratch</a>
+</footer><!-- /.post-info --></div>
+		<div class="summary"><p><img alt="" src="http://wwj-fig-bed.just4fun.site/[Ascratch=api_ab098d7e.png" /></p>
+<p>我们主要关心以下页面的API:</p>
+<ul>
+<li>社区主页: <code>https://scratch ...</code></li></ul> 
+			<a class="btn btn-primary small" href="/Scratch3_community_analysis_5.html">more ...</a>
+		</div>
+	</div>	
+	<hr />
+	<div class='article'>
+		<h1><a href="/Scratch3_user_api_analysis_4.html">Scratch3技术分析之User API(第4篇)</a></h1>
+		<div class="well small"><footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2019-01-15T15:00:00+00:00">
+	<i class="icon-calendar"></i>二 15 一月 2019
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/shao-er-bian-cheng.html"><i class="icon-folder-open"></i>少儿编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/scratch.html"><i class="icon-tag"></i>scratch</a>
+</footer><!-- /.post-info --></div>
+		<div class="summary"><p><img alt="" src="http://wwj-fig-bed.just4fun.site/scratch-api_2a5ba63a.png" /></p>
+<p>我们关心以下User API:</p>
+<ul>
+<li>注册</li>
+<li>登陆 ...</li></ul> 
+			<a class="btn btn-primary small" href="/Scratch3_user_api_analysis_4.html">more ...</a>
+		</div>
+	</div>	
+	<hr />
+
+	<div class="pagination">
+	<ul>
+			<li class="prev disabled"><a href="#">&larr; Previous</a></li>
+			<li class="active"><a href="/index.html">1</a></li>
+			<li class=""><a href="/index2.html">2</a></li>
+			<li class=""><a href="/index3.html">3</a></li>
+			<li class=""><a href="/index4.html">4</a></li>
+			<li class=""><a href="/index5.html">5</a></li>
+			<li class=""><a href="/index6.html">6</a></li>
+			<li class=""><a href="/index7.html">7</a></li>
+			<li class=""><a href="/index8.html">8</a></li>
+			<li class=""><a href="/index9.html">9</a></li>
+			<li class=""><a href="/index10.html">10</a></li>
+			<li class=""><a href="/index11.html">11</a></li>
+			<li class=""><a href="/index12.html">12</a></li>
+			<li class=""><a href="/index13.html">13</a></li>
+			<li class=""><a href="/index14.html">14</a></li>
+			<li class=""><a href="/index15.html">15</a></li>
+			<li class=""><a href="/index16.html">16</a></li>
+			<li class=""><a href="/index17.html">17</a></li>
+			<li class=""><a href="/index18.html">18</a></li>
+			<li class=""><a href="/index19.html">19</a></li>
+			<li class=""><a href="/index20.html">20</a></li>
+			<li class=""><a href="/index21.html">21</a></li>
+			<li class=""><a href="/index22.html">22</a></li>
+			<li class=""><a href="/index23.html">23</a></li>
+			<li class=""><a href="/index24.html">24</a></li>
+			<li class=""><a href="/index25.html">25</a></li>
+			<li class=""><a href="/index26.html">26</a></li>
+			<li class=""><a href="/index27.html">27</a></li>
+			<li class=""><a href="/index28.html">28</a></li>
+			<li class=""><a href="/index29.html">29</a></li>
+			<li class=""><a href="/index30.html">30</a></li>
+			<li class=""><a href="/index31.html">31</a></li>
+			<li class=""><a href="/index32.html">32</a></li>
+			<li class=""><a href="/index33.html">33</a></li>
+			<li class=""><a href="/index34.html">34</a></li>
+			<li class=""><a href="/index35.html">35</a></li>
+			<li class=""><a href="/index36.html">36</a></li>
+			<li class=""><a href="/index37.html">37</a></li>
+			<li class=""><a href="/index38.html">38</a></li>
+			<li class=""><a href="/index39.html">39</a></li>
+			<li class=""><a href="/index40.html">40</a></li>
+			<li class=""><a href="/index41.html">41</a></li>
+			<li class=""><a href="/index42.html">42</a></li>
+			<li class=""><a href="/index43.html">43</a></li>
+			<li class=""><a href="/index44.html">44</a></li>
+			<li class=""><a href="/index45.html">45</a></li>
+			<li class=""><a href="/index46.html">46</a></li>
+			<li class=""><a href="/index47.html">47</a></li>
+			<li class=""><a href="/index48.html">48</a></li>
+			<li class="next"><a href="/index2.html">Next &rarr;</a></li>
+	</ul>
+	</div>
+
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://wwj-tmp-video.just4fun.site/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>我近期在折腾</h4>
+<li><a href="https://blog.just4fun.site/about-codelab-club.html" target="_blank">codelab.club</a></li>
+<li><a href="https://scratch3-adapter-docs.just4fun.site" target="_blank">scratch3-adapter</a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://scratch3-files.just4fun.site/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://wwj-tmp-video.just4fun.site/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
