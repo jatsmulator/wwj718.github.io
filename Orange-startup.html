@@ -1,0 +1,496 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队
+喜欢你这种没事瞎翻源码的人
+如果你恰好也热爱技术、喜欢折腾，一起来捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>易上手的数据挖掘、可视化与机器学习工具:Orange介绍</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://wwj-tmp-video.just4fun.site/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to 易上手的数据挖掘、可视化与机器学习工具:Orange介绍">
+					易上手的数据挖掘、可视化与机器学习工具:Orange介绍 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2016-12-19T00:00:00+00:00">
+	<i class="icon-calendar"></i>一 19 十二月 2016
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/shu-ju.html"><i class="icon-folder-open"></i>数据</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/data.html"><i class="icon-tag"></i>data</a>
+</footer><!-- /.post-info -->		</div>
+		<p><img alt="" src="http://wwj-fig-bed.just4fun.site/orange1577a767.png" /></p>
+<p>之前陆续写过几篇介绍数据挖掘/可视化项目<a href="https://github.com/airbnb/superset">Caravel</a>的文章：</p>
+<ul>
+<li><a href="http://blog.just4fun.site/caravel-startup-and-install.html">caravel系列之安装与入门</a></li>
+<li><a href="http://blog.just4fun.site/caravel-config.html">caravel系列之简易配置/定制</a></li>
+<li><a href="http://blog.just4fun.site/caravel-demo-analysis.html">caravel系列之案例讲解与分析</a></li>
+<li><a href="http://blog.just4fun.site/caravel-code.html">caravel系列之架构与源码浅析</a></li>
+</ul>
+<p>如今直接去github搜索caravel已经搜不到它了。它最近换了新马甲，改叫<a href="https://github.com/airbnb/superset">superset</a>，至于为何频繁改名（分别叫过Panoramix，Caravel，Superset），我猜核心作者早年混迹论坛，与人吵架，常换马甲：）</p>
+<p>对数据可视化的兴趣一直未减，近期发现两个有趣的项目，其一就是这篇文章的主角:<a href="https://github.com/biolab/orange3">Orange</a>,另一个是google发布的Embedding Projector（基于Tensorflow）</p>
+<h1 id="orange">Orange初体验</h1>
+<p>现在，你可以直接在<a href="http://orange.biolab.si/download/">这里</a>下载到最新的Orange软件，Orange发布了各个平台的安装包，选择你当前平台的安装包，双击安装即可，安装过程十分友好。</p>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/orange0676212b.png" /></p>
+<p>和许多数据分析的项目不同，其他项目多数面向数据分析从业人员、软件开发者。而Orange让各行各业对数据挖掘和可视化感兴趣的人都能参与其中，而不必有编程基础</p>
+<p>安装完毕打开软件，跟着以下教程即可对它做大致了解</p>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/orangeaf0f7d8a.png" /></p>
+<h1 id="_1">简介</h1>
+<p>官方首页对这个项目的介绍是：</p>
+<blockquote>
+<p>Open source machine learning and data visualization for novice and expert. Interactive data analysis workflows with a large toolbox.</p>
+</blockquote>
+<p>该项目源码开放，对新手友好，同时也胜任专业的数据分析工作。</p>
+<p>Orange是一个基于组件的数据挖掘软件，它包含了一组数据可视化、探索、预处理和建模的技术。</p>
+<p>它不但带有一个新手友好的用户界面，老司机们也可以把它用作Python的一个模块。</p>
+<h1 id="_2">标签</h1>
+<p>如果要用一些简单的词描述它，我想到以下标签:</p>
+<ul>
+<li>开源 </li>
+<li>python</li>
+<li>数据可视化</li>
+<li>数据模式探索</li>
+<li>机器学习 </li>
+<li>拖曳式</li>
+<li>积木化</li>
+</ul>
+<h1 id="_3">特点</h1>
+<ul>
+<li>交互式的数据可视化探索：你可以用它做简单的分析，诸如统计分布、箱形图（Box plot）、散点图。也可以做深入挖掘，诸如使用决策树、聚类、热图等。通过智能的属性选择，你可以在2维平面上探索多维数据</li>
+<li>可视化编程：图形化界面允许你专注于探索数据，而不是编码。你要做的事只是在画布上拖曳小部件、连接它们、加载数据集，如此便可获得数据洞察力！</li>
+<li>适合用于教学（jupyter出自生物学家之手，Orange似乎也和生物学领域有关，他们都让数据分析工作的协作交流变得简单有趣）</li>
+<li>附加扩展功能：通过使用各种插件，我们可以做各种各样的事：<div class="highlight"><pre><span></span>*  对外部数据源进行数据挖掘（数据库/网络）
+*  自然语言处理以及文本挖掘
+*  网络分析
+*  关联规则分析
+</pre></div>
+
+
+</li>
+</ul>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/orangeacf72e02.png" /></p>
+<h1 id="_4">优势</h1>
+<p>我折腾过的数据可视化工具多而杂， 以下是我偏好Orange的几个原因</p>
+<ul>
+<li>安装极其建议（二进制安装包）</li>
+<li>对新手友好，易于上手，许多操作凭直觉即可甚至不需要文档</li>
+<li>让普通用户能使用机器学习去发现数据模式，这项工作之前往往需要技术背景</li>
+<li>支持excel文件直接导入</li>
+<li>对中文支持良好（目前尚未遇到乱码）</li>
+<li>可视化的编程方式，用户无需编码，数据在各个组件里流动，通过拖曳组件即可开始探索数据</li>
+<li>交互式的探索过程，每一个组件叠加都能及时得到反馈。如同REPL(读取﹣求值﹣输出循环)般敏捷顺滑</li>
+</ul>
+<h1 id="_5">不足</h1>
+<p>同时也简单列出我认为不足的地方</p>
+<ul>
+<li>对数据源的支持不够丰富，目前Orange3只支持PostgreSQL数据库，当然这是站在开发者的角度的挑刺，普通用户对此没有需求</li>
+<li>无法像tableau一样把探索结果作为网页发布。不过浏览了一遍官方源码库，他们似乎有这个计划。把它和superset整合在一起，指不定能折腾出一个商业应用</li>
+</ul>
+<p>关于对数据库的支持，估计随着项目的推进，会慢慢完备起来，这块基本只是时间的问题</p>
+<h1 id="_6">后续</h1>
+<p>接下来有空我们分析下，这个项目在技术层面有哪些有趣的东西</p>
+<p>此外我还有兴趣对它做些本地化改进，包括但不限于汉化，有兴趣的小伙伴可以一起来折腾，我已经fork了一份源码：<a href="https://github.com/openEduClub/orange3">orange3</a></p>
+<h1 id="_7">参考</h1>
+<ul>
+<li><a href="https://github.com/biolab/orange3">orange3</a></li>
+<li><a href="http://orange.biolab.si/">orange.biolab.si</a></li>
+<li><a href="https://my.oschina.net/u/2306127/blog/548833">Orange-数据挖掘和机器学习软件</a></li>
+<li><a href="http://hao.jobbole.com/orange/">Orange：通过可视化编程或 Python 脚本进行数据挖掘、数据可视化、分析和机器学习</a></li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://wwj-tmp-video.just4fun.site/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>我近期在折腾</h4>
+<li><a href="https://blog.just4fun.site/about-codelab-club.html" target="_blank">codelab.club</a></li>
+<li><a href="https://codelab-adapter-docs.codelab.club/" target="_blank">codelab-adapter</a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://scratch3-files.just4fun.site/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://wwj-tmp-video.just4fun.site/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
