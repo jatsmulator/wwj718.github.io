@@ -1,0 +1,467 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队
+喜欢你这种没事瞎翻源码的人
+如果你恰好也热爱技术、喜欢折腾，一起来捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Smalltalk(Pharo)学习之旅</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://wwj-tmp-video.just4fun.site/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li class="active">
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to Smalltalk(Pharo)学习之旅">
+					Smalltalk(Pharo)学习之旅 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2019-02-05T00:00:00+00:00">
+	<i class="icon-calendar"></i>二 05 二月 2019
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/bian-cheng.html"><i class="icon-folder-open"></i>编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/code.html"><i class="icon-tag"></i>code</a>
+</footer><!-- /.post-info -->		</div>
+		<p><img alt="" src="http://wwj-fig-bed.just4fun.site/trip_a02b6900.png" /></p>
+<h1 id="_1">前言</h1>
+<p>2014年的时候，曾对Smalltalk有过一段时间兴趣: <a href="https://blog.just4fun.site/learn-Smalltalk.html">Smalltalk学习笔记</a>, 那会儿刚毕业工作几个月，对各类事物都有兴趣，同时兴趣来得也浅。最终浅尝辄止，并没有实际用Smalltalk写过项目，哪怕练手项目也没有。</p>
+<p>后来，由于<a href="https://blog.just4fun.site/scratch.html">对人工智能、认知论、教育感兴趣</a>，开始读<a href="https://zh.wikipedia.org/zh-cn/%E8%AE%93%C2%B7%E7%9A%AE%E4%BA%9E%E5%82%91">让·皮亚杰</a>、<a href="https://zh.wikipedia.org/zh-cn/%E8%A5%BF%E6%91%A9%E7%88%BE%C2%B7%E6%B4%BE%E6%99%AE%E7%89%B9">西摩尔·派普特</a>和<a href="https://zh.wikipedia.org/zh-hans/%E8%89%BE%E4%BC%A6%C2%B7%E5%87%AF">艾伦·凯</a>的东西.</p>
+<p><a href="https://zh.wikipedia.org/zh-cn/%E8%A5%BF%E6%91%A9%E7%88%BE%C2%B7%E6%B4%BE%E6%99%AE%E7%89%B9">西摩尔·派普特</a>和<a href="https://zh.wikipedia.org/zh-hans/%E8%89%BE%E4%BC%A6%C2%B7%E5%87%AF">艾伦·凯</a>将计算机视为一种增强人类智能的工具。</p>
+<p>Bret在<a href="http://worrydream.com/">他的博客</a>将这些概念综合在一起，以一种清晰的媒介重新展现出来。几乎是一夜之间，我突然知道自己在寻找什么，它如此确定无疑，你知道这就是你期待的东西了, 你愿意投入你往后的所有时间。 关于计算机的未来是什么，编程的未来是什么，教育的未来是什么，这些问题我想了很久,深受其扰,而且一度怀疑它们不是好问题，它们大而无当。Bret让我确信，他沿着<a href="https://zh.wikipedia.org/zh-cn/%E8%A5%BF%E6%91%A9%E7%88%BE%C2%B7%E6%B4%BE%E6%99%AE%E7%89%B9">西摩尔·派普特</a>和<a href="https://zh.wikipedia.org/zh-hans/%E8%89%BE%E4%BC%A6%C2%B7%E5%87%AF">艾伦·凯</a>所走的路，继续前行，最终带着我们看到了理想的未来。它如此耀眼，以至于你会担心，如果这些想法没被实现，未来得多么黯淡和乏味。</p>
+<p>在技术方面，Bret使我确信，Smalltalk是相对理想的创作工具，在更为理想的工具(如<a href="https://dynamicland.org">Dynamicland</a>的realtalk)诞生之前，我应该切换到Smalltalk上，将其用作日常编程所用的语言。这是一门经过精心设计，方便探索和创造的语言。</p>
+<p>和稀泥的人总喜欢说，“采用什么编程语言并不重要，它们都一样”，我对这话的理解是，就"图灵完备"这点来说，他们是等价的。但图灵还论证过你在一条无限长的纸带上，是可以做到你用今天的电脑做到的所有事情的，它们在逻辑上等价，难道这是你选择使用纸带编程的理由吗？</p>
+<p>编程语言不可能恰好都一样，总有一些粗制滥造，而另一些精心设计。像我这样愿意不断尝试新语言的人，实在没有办法假装使用过的编程语言都一样。像我这么蠢的人如果去设计一个编程语言，它怎么会和艾伦·凯精心设计的Smalltalk一样。对这个话题感兴趣的小伙伴，可以看看Bret在<a href="http://worrydream.com/#!/LearnableProgramming">LEARNABLE PROGRAMMING</a>对Processing这门语言的攻击，招招致命。</p>
+<h1 id="_2">热情</h1>
+<p>Bret让我相信Smalltalk对我很重要，但仅是知道一件事很重要，似乎无法支撑我持续投入时间。</p>
+<p>我有个习惯，在找到做一件事的乐趣/热情之前，并不愿意投入到这件事的细节之中。</p>
+<p>换一种说法，我是个没什么毅力的人，如果没有兴趣驱动，就没办法坚持去做一件事。这么多年来学会了破罐子破摔，不和自己闹别扭，如果没有找到热情所在，就宁可发发呆，看看小说，四处走走，也不愿开始干活。</p>
+<p>但有些事情即便没有兴趣，你还是会知道它挺重要的，我的做法是花点时间去寻找这件事的乐趣和意义所在，一般情况下都能找到。一旦找到后，就乐在其中，不必外部监督，也能用心于此事。我不知道别人的意志力是不是都很多，但我的意志力很少，而且是消耗品，它原本就不多，一旦消耗完，就对自己没办法了，多坐一会儿都极难受，如果此时非强迫自己一定要做点什么事，这事儿是体力活还好，磨磨蹭蹭也总有做完的时候；若是脑力劳动，还需要创造性的话，结果准特别糟糕。所以我没办法使用意志力来推进工作。</p>
+<p>于是在假期的头几天，我并没有投入到Smalltalk的语法细节(完全忘了以前所学)。我开始了解Smalltalk社区的人都在干嘛?他们聚集在哪儿?他们做了什么好玩的东西?</p>
+<h1 id="4p">4P</h1>
+<p>很喜欢<a href="https://zh.wikipedia.org/zh-cn/%E5%AF%86%E5%A5%91%E7%88%BE%C2%B7%E7%91%9E%E6%96%AF%E5%B0%BC%E5%85%8B">Mitchel Resnick</a>在<a href="https://book.douban.com/subject/30285992/">终生幼儿园</a>一书中提到的4P学习方法: Projects, Passion, Peers, Play</p>
+<p>我开始浏览各类<a href="https://twitter.com/pharoproject">Smalltalk Projects</a>(主要关注Smalltalk的现代方言:<a href="https://pharo.org/web">Pharo</a>)，看看它们中的哪些能激起我的热情, 在<a href="https://pharo.org/success">pharo stories</a>里看到许多有意思的项目， 我对<a href="https://pharo.org/success/Phratch">Phratch</a>最感兴趣。如它的名字所暗示的: Phratch是使用Pharo重写的Scratch.</p>
+<p><a href="https://pharo.org/success/Phratch">Phratch</a>是<a href="https://code.google.com/p/scat/">Scat</a>的改进版。Scat的项目声明写得有趣:</p>
+<blockquote>
+<p>We believe there is a conspiracy going on all over the universe, evil forces are constantly fighting to take down great Smalltalk projects and port them to other languages.<br />
+In a quest against such demonic plots, a couple of us started a confidential mission to rescue the last of these endangered projects, namely Scratch.</p>
+</blockquote>
+<h1 id="pharo"><a href="https://pharo.org">Pharo</a></h1>
+<p>至此，我已经迫不及待想学习Pharo了，恨不得立刻就能读懂<a href="https://pharo.org/success/Phratch">Phratch</a>，想着学习完这个项目源码之后，立即使用Pharo7.0重写Scratch3.0。</p>
+<p>确定了将要学习的方言(Pharo)，开始搜索Pharo新手写的博文，看看从中能够找到他们发现的好的学习资源， 读到<a href="https://blog.khinsen.net/posts/2018/12/19/exploring-pharo/">Exploring Pharo</a>这篇文章，觉得十分出色。</p>
+<p>在投入到<a href="https://pharo.org/success/Phratch">Phratch</a>源码之前，我准备简单过一下Pharo的语法，但有不愿只是看语法，希望有更周全的引导，包括调试工具的使用说明之类的。<a href="http://mooc.pharo.org/">The Pharo MOOC</a>是非常理想的选择，我选择在<a href="http://rmod-pharo-mooc.lille.inria.fr/MOOC/WebPortal/co/content.html">WebPortal</a>里看课件学习，起初看了几个视频，后来觉得直接看PDF课件更快些，于是便直接看PDF。我今天已经看到了<a href="http://rmod-pharo-mooc.lille.inria.fr/MOOC/Slides/Week5/C019-W5S01-Seaside-ComposingComponents.pdf">第五周的第一节</a>，预计明天就看完了。Smalltalk的语法非常简单，连同它的编程风格，我想我已经基本掌握了。这个过程十分愉快，每学会一点语法，感觉离实现目标就更近了一步(读懂Phratch，重写Scratch3.0就更近了一步)。</p>
+<h1 id="_3">结语</h1>
+<p>本文记录我自己的学习习惯 以及Pharo的一些学习资料。</p>
+<h1 id="_4">参考</h1>
+<ul>
+<li><a href="http://rmod-pharo-mooc.lille.inria.fr/MOOC/WebPortal/co/content.html">the pharo mooc</a></li>
+<li><a href="https://code.google.com/archive/p/scat">scat</a></li>
+<li><a href="https://blog.just4fun.site/Enhance-Scratch3.html">Scratch增强计划</a></li>
+<li><a href="http://files.pharo.org/media/pharoCheatSheet.pdf">Pharo Cheat Sheet</a></li>
+<li><a href="https://blog.khinsen.net/posts/2018/12/19/exploring-pharo/">Exploring Pharo</a></li>
+<li><a href="https://github.com/janniklaval/phratch/blob/c27e55d8bbbe9871de506df75ce0d06bc0c69143/Elements090224.pdf">Syntax-Elements for Smalltalk</a></li>
+<li><a href="https://twitter.com/pharoproject">pharoproject</a></li>
+<li><a href="https://github.com/jmari/JupyterTalk">JupyterTalk</a></li>
+<li><a href="https://github.com/hernanmd/pi">pi</a></li>
+<li><a href="http://worrydream.com/refs/Papert%20-%20Mindstorms%201st%20ed.pdf">MINDSTORMS</a></li>
+<li><a href="https://github.com/zeroflag/Teapot">Teapot</a></li>
+<li><a href="https://github.com/svenvc/zinc">zinc</a><ul>
+<li><a href="https://ci.inria.fr/pharo-contribution/job/EnterprisePharoBook/lastSuccessfulBuild/artifact/book-result/Zinc-HTTP-Server/Zinc-HTTP-Server.html">Zinc HTTP: The Server Side</a></li>
+</ul>
+</li>
+<li><a href="http://files.pharo.org/books-pdfs/tinyblog-tutorial/2016-02-18-tinyblog-tutorial.pdf">TinyBlog</a></li>
+<li><a href="http://worrydream.com/#!/LearnableProgramming">LEARNABLE PROGRAMMING</a></li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://wwj-tmp-video.just4fun.site/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>我近期在折腾</h4>
+<li><a href="https://blog.just4fun.site/about-codelab-club.html" target="_blank">codelab.club</a></li>
+<li><a href="https://codelab-adapter-docs.codelab.club/" target="_blank">codelab-adapter</a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://scratch3-files.just4fun.site/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://wwj-tmp-video.just4fun.site/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
