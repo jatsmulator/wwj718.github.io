@@ -1,0 +1,597 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队
+喜欢你这种没事瞎翻源码的人
+如果你恰好也热爱技术、喜欢折腾，一起来捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>日志系统与事件记录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://wwj-tmp-video.just4fun.site/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to 日志系统与事件记录">
+					日志系统与事件记录 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2018-05-18T00:00:00+00:00">
+	<i class="icon-calendar"></i>五 18 五月 2018
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/jia-gou.html"><i class="icon-folder-open"></i>架构</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/architecture.html"><i class="icon-tag"></i>architecture</a>
+</footer><!-- /.post-info -->		</div>
+		<p><img alt="" src="http://wwj-fig-bed.just4fun.site/log_9c5306f2.png" /></p>
+<blockquote>
+<p>谁控制过去,谁就控制未来  -- 奥威尔《1984》</p>
+</blockquote>
+<h1 id="log">日志(log)系统</h1>
+<p>日志是系统的历史。</p>
+<p>让我们将运行着的大型程序视为一个运转着的社会(小型程序可以视为社区)，运转着的社会和运行着的程序，都是一种时间序列上的事件集合。</p>
+<p>发生在社会里的这些事件，被记录下之后，我们称其为历史。而发生在系统里的这些事件，被记录下之后，我们称之为日志。</p>
+<h3 id="_1">历史</h3>
+<p>那么我们先来谈谈历史吧。</p>
+<p>在银河系旋臂荒凉的一角，一个称为地球的蓝色行星上(where),一种由猿猴进化而来的的生物(who)在某个时间段里(when)生活其中，做着一些在柏拉图看来非常无关紧要的事(what)(柏拉图说<code>但凡是人的事，就没有一件真的非常重要</code>)。但我们都知道<code>彼之蜜糖 吾之砒霜</code>,彼之砒霜也可能是吾之蜜糖，柏拉图不屑的这些人间事，在另一些看来却值得大书特书。他们使用一种编码(文字)将发生过的事件(event)记录在某种存储介质中(竹简或是纸张中)(storage)。由于社会里人数如是此之多，事件发生得是如此的密集，这些记录者(历史学家)不得不拣选其中的一些事来记录，而抛弃另外一些。最初的挑选也许是被迫无奈，毕竟你不可能事无巨细得记录所发生的一切，否则记录历史所需的物质材料将大于构建世界的物质材料。这点很好论证，在你记录这段历史时， <code>你在记录历史</code>这件事本身也正在发生，这很像站在两面镜子之间的你看到的递归景象。如果事无巨细记录一切，光是记录你自己，就将耗尽所有的墨水。由于事件必须被拣选，于是你总是可以<code>客观</code>地记录历史的同时，挑挑拣拣，让历史呈现出你想要的样子。</p>
+<p>熟悉数据的人们都知道，如果你有挑选样本的权力，为了得出某些特定结论，你其实不必在数据上<code>造假</code> ：)</p>
+<h3 id="_2">事件</h3>
+<p>写上边的一段，倒不是为了调侃历史学家。我其实想说，对于一个程序员而言，如何记录日志，记录哪些事件，怎样安全地存储它，是至关重要的，这和历史之于现实社会一样重要，关于这点《1984》已经给我们论述过了。日志虽是对过往发生的事件的记录，但它影响到系统的未来。从日志中，你能看到系统的很多特性(可视化)，你可以了解到使用系统的人的特质(数据分析)，出了问题能够快速定位与修复(sentry)。</p>
+<p>我们回到历史的比喻。在写作历史时，记录事件所用的纸和笔当然是重要的，但要成为一个好的历史学家，你大多的时间可不是在练字或选纸上，如何挑选以及如何记录所发生事件，才是你需要用心之处</p>
+<p>对于构建程序/网站的日志系统也是一样，日志如何写入，如何存储，这些只是基本工作，这些工作并不怎么花时间，你大多的事件需要花在如何挑选事件，如何记录这些事件，之后如何分析处理它们。而之后如何使用它们，又反过来决定了你需要记录哪些事件，以及事件中的哪些信息</p>
+<p>如何在一个程序语言/框架中写入和存储日志，这方面社区已经有大量的讨论，这个问题往往不必重复解决，很多最佳实践都在语言层(如Python)或者框架层(Django)做完了。稍加配置即可</p>
+<p>构建日志系统，我们大量的事件需要花在考虑如何描述事件，以及哪些是我们关心的事件(这是一个业务相关的问题)。关于如何描述事件，尽管我们最终会用代码实现它，但这其实不是一个编程问题，一个事件无非是某些人(who)在某个时间段(when)在某些场合(where)做了某些事(what),至于他为何要做(why)，就是数据挖掘需要做的事了。写作一篇新闻你常常也要考虑这些要素，所以，对事件的描述，本质上和编程无关。</p>
+<blockquote>
+<p>功夫在诗外</p>
+</blockquote>
+<h1 id="_3">日志中的事件</h1>
+<p>在日志这个话题下，技术社区聊到日志系统，关心的主要是系统的架构，用了什么组件，组件之间如何协同。至于如何描述日志，则谈的不多。对于一个初次使用日志的新手，弄懂怎么将日志文本写入系统并不难，此后的存储、备份、归并、分析也多有现成解决方案或最佳实践。工程师在日志记录这件事上能感受到极大的自由，就像你拿着笔在A4纸面前那种自由，似乎什么都能记下，但该记录些什么，又如何表述它们，往往令人不知所措</p>
+<p>本文将论述日志系统的构建，以网站系统为例，其中记录的日志主要围绕与<code>网站用户</code>相关的事件，至于<code>系统日志</code>则不在讨论的范围内。我们也将论述以及如何让日志系统服务于其他系统。架构之外，如何描述日志将是这篇文章的重心所在</p>
+<p>文中，我们将以<a href="https://github.com/edx/edx-platform">open edx</a>和我们在<a href="http://www.paperweekly.site/">PaperWeekly</a>中的构建的网站后端系统为例来说明。</p>
+<p>这两个系统都基于<a href="https://github.com/django/django">Django</a>(一个Python web框架)构建，但阅读本文，并不假设你具备Django的知识，当然如果你懂Django最好不过，一些细节可能对你有用，但不懂也不影响阅读。</p>
+<h3 id="_4">也许你不需要构建自己的日志系统</h3>
+<p>在我们正式开始之前，需要说明的是: 也许你并不需要专门构建一个完整的日志系统。</p>
+<p>这取决于你要干嘛。如果你关心网站的用户流量、Top10入口页面、Top10来源网站、访客停留时间...这些用户指标，<a href="https://www.google.com/analytics/">google analytics</a>、<a href="https://tongji.baidu.com/">Baidu统计</a>往往是更聪明的选择，花费一盏茶的事件，你就能将它集成到你的网站里。即便是一些自定义的事件跟踪，你也可以利用这些SDK插件来做</p>
+<p>如果你想做的是网站监控，事件告警，诸如你想知道为何每天深夜，网站都会无故崩溃，是昼夜温差变化还是狼人来袭。那么<a href="https://github.com/getsentry/sentry">Sentry</a>是你最佳的选择，集成它也只需要一盏茶的功夫。</p>
+<p>如果你还继续往下读，我们假设你有足够的理由构建日志系统了。</p>
+<h3 id="open-edx">open edx中的日志系统</h3>
+<p>如果你意识到构建日志系统时，要将事件的描述也包括在内，那么当你看到open edx复杂的日志系统，你就不会那么吃惊。其中的复杂之处，多是对事件的描述，他们为此构建了多层的抽象，而对事件的描述必然涉及到大量的业务逻辑和概念，所以读起来是十分晦涩的。我并不建议深挖这一块。即便你的系统以open edx为主体，我也不建议去拓展和hack它的日志系统。</p>
+<p>理由如下:</p>
+<p>首先成本高昂，关于edx日志系统，我在一篇文章里有细述:<a href="https://blog.just4fun.site/explore-Open-edX-tracking-system.html">explore Open edX tracking system</a></p>
+<p>在架构层面，这里边并没有什么复杂性，无非是利用了Django的log机制(其实是对python logging模块的包装)，繁琐的是层层的包装。我觉得去理解和hack这些包装是痛苦且不必要的。原因是日志在存储层面无非是一种文本序列，你可以分别/分布式地存储它们。如果最终的分析需要合并，有很多优秀的工具帮你归并日志（诸如<a href="https://github.com/elastic/beats">Beats</a>、Logstash之类）。日志的聚合是最后考虑的问题，而且你大可放心。</p>
+<p>下边我们说说open edx中值得我们学习的地方，先说说open edx中对事件的描述。这部分是这块令人头疼的主要原因。而头疼的原因是这里牵扯到大量的业务逻辑和领域概念。</p>
+<p>典型的事件如:</p>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;wwj&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;event_source&quot;</span><span class="p">:</span> <span class="s2">&quot;server&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;edx.course.enrollment.deactivated&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;referer&quot;</span><span class="p">:</span> <span class="s2">&quot;http:\/\/localhost:8001\/container\/i4x:\/\/edX\/DemoX\/vertical\/69dedd38233a46fc89e4d7b5e8da1bf4?action=new&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;accept_language&quot;</span><span class="p">:</span> <span class="s2">&quot;en-US,en;q=0.8&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;2014-01-26T00:28:28.388782+00:00&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;agent&quot;</span><span class="p">:</span> <span class="s2">&quot;Mozilla\/5.0 (Windows NT 6.1; WOW64; Trident\/7.0; rv:11.0) like Gecko&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;page&quot;</span><span class="p">:</span> <span class="kc">null</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;courses.edx.org&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;session&quot;</span><span class="p">:</span> <span class="s2">&quot;a14j3ifhskngw0gfgn230g&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;context&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;user_id&quot;</span><span class="p">:</span> <span class="mi">9999999</span><span class="p">,</span>
+      <span class="nt">&quot;org_id&quot;</span><span class="p">:</span> <span class="s2">&quot;edX&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;course_id&quot;</span><span class="p">:</span> <span class="s2">&quot;edX\/DemoX\/Demo_Course&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;\/change_enrollment&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;ip&quot;</span><span class="p">:</span> <span class="s2">&quot;NN.NN.NNN.NNN&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;event&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;course_id&quot;</span><span class="p">:</span> <span class="s2">&quot;edX\/DemoX\/Demo_Course&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;user_id&quot;</span><span class="p">:</span> <span class="mi">9999999</span><span class="p">,</span>
+      <span class="nt">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;honor&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;event_type&quot;</span><span class="p">:</span> <span class="s2">&quot;edx.course.enrollment.deactivated&quot;</span>
+  <span class="p">}</span>
+</pre></div>
+
+
+<p>这是一条相对简单的事件。但我们可以看到基于json的日志，表现力极强(因为支持嵌套结构)，你可以轻松将你关心的信息，都组织在嵌套json结构中。但也别忘了<code>扁平优于嵌套</code>。这个例子里另一个具有参考价值的是对一些业务无关的信息，诸如username、event_source、referer这些都是通用的概念，这就是我们提到的事件描述相关的部分。</p>
+<p>如果你对细节有更多的兴趣，可以参考我之前的文章:<a href="https://blog.just4fun.site/edx-tracking-logs-data-research.html">基于tracking logs的数据分析</a>.如果你的兴趣在open edx本身，那么我之前和同事一起翻译的<a href="https://blog.just4fun.site/events-in-the-tracking-logs.html">Tracking Logs 中的事件(翻译)</a>你可能有兴趣。</p>
+<p>open edx中的日志系统给我的影响主要是:你可以直接使用django的日志系统并选择json作为日志格式，此外我们就不必深入了。当然，如果你对open edx本身熟悉，过一遍它的事件类型，作为案例学习，看看它是如何选择事件信息(这需要里理解业务)，也是很有益的</p>
+<h1 id="paperweekly">PaperWeekly中的日志系统</h1>
+<p>我们在PaperWeekly构建日志系统时，架构层面参考了open edx。我们日志系统同时服务于:推荐系统和数据可视化（对google analytics做些补充）</p>
+<p>我们先做个概览：在<a href="http://www.paperweekly.site/">PaperWeekly</a>网站后台我们首先将事件pub出去,对此感兴趣的订阅者自行订阅它(典型订阅者包括消息系统和日志系统)，每个订阅者都跑在一个task中(celery)</p>
+<p>我们最初是在构建通知系统时，发现我们需要考虑如何来描述事件(诸如我们要通知用户A:<code>你发表的文章B被用户C点赞了</code>)，为了描述这点，我们需要关心事件:<code>用户C点赞了文章B</code>， 而后在构建推荐系统时，发现我们同样需要关心这些事件。于是我们索性把这几块一并做了。利用pub/sub机制来解耦。</p>
+<p>通知系统和日志系统很大程度是重叠的。核心都是<code>事件</code>,那么怎么描述事件就摆到桌面来了。</p>
+<p>在关于通知系统的讨论中，这块被讨论得多些，我之前也专门整理了一篇文章：<a href="https://blog.just4fun.site/notification-system-thinking-concept-and-Implementation.html">notification system思路、概念与实现</a>,我们在paperweekly，所做的基本是对这篇文章提到的概念做了实现，这块@izuo做了大量出色的工作。 最近@izuo将这块的工作梳理在<a href="http://monad.site/2018/05/30/notification-system/">消息系统的概念、设计与实现</a></p>
+<p>如何把你关心的事件结构化，一种好的策略是把它们描述为AVOT的结构（我们之所以需要AVOT是因为我们需要结构化事件，我们之所以需要结构化事件，是因为程序善于处理结构化数据，否则你就需要处理一堆脏数据了）。AVOT分别是:</p>
+<ul>
+<li>Actor</li>
+<li>Verb</li>
+<li>Object</li>
+<li>Target</li>
+</ul>
+<p>让我们举例说明: <code>用户C将文章B放入收藏夹D中</code>,让我们把对应关系写上:</p>
+<ul>
+<li>Actor: 用户C</li>
+<li>Verb: 放入</li>
+<li>Object: 文章B</li>
+<li>Target: 收藏夹D</li>
+</ul>
+<p>这其中可能引起疑惑的是Object和Target的区别，两者都是名词，如何决定两个名词中哪个对应Object，哪个对应Target。就功能而言你当然可以随意(它们本质只是4个容器)，但最好使用它们的语义，这样你不至于把自己搞乱了，target的意义你可以通过这个英文句子来理解:<code>Erik is pinning Hawaii to his Places to Visit board.</code>,在这里<code>his Places to Visit board</code>是Target。</p>
+<p>至于前边我们提到的<code>用户C点赞了文章B</code>，我们把它视为省略了Target</p>
+<p>你可以试试用AVOT去描述你所关心的事件，你会发现它具有极强的变现力！</p>
+<!--
+我们先试着把句子转为`把A当到/加到B`这种结构，B就是Target
+
+前边我们提到的`用户C点赞了文章B`,我们将它转化为:`用户C把他的赞给了文章B`，在此我们将`赞`作为名词使用，在系统里，我们也将它构建为实体，这样以来，我们就能同时直到一个人点赞了哪些文章，以及一篇文章被哪些人点赞了。
+-->
+
+<h3 id="_5">实现细节</h3>
+<p>最后我们来讨论一下实现细节</p>
+<p>PaperWeekly和open edx一样直接使用了Django的日志系统， 我们为用户日志，单独构建了一个handle，以区别与系统日志</p>
+<p>当然，关于日志的这些细节无关紧要，你可以参考你正在使用的框架，文档里论述应该都很全面</p>
+<div class="highlight"><pre><span></span>        &#39;track_log&#39;: {
+            &#39;level&#39;: &#39;INFO&#39;,
+            &#39;class&#39;: &#39;logging.handlers.RotatingFileHandler&#39;,
+            &#39;maxBytes&#39;: 1024 * 1024 * 10,  # 10MB
+            &#39;backupCount&#39;: 100,  # 10MB * 100 # 1G
+            &#39;filename&#39;: os.path.join(TRACK_LOG_PATH,
+                                     &#39;track_log.log&#39;), 
+            &#39;formatter&#39;: &#39;track_log&#39;
+        },
+</pre></div>
+
+
+<p>至于它的formatter则是:</p>
+<div class="highlight"><pre><span></span>        &#39;track_log&#39;: {
+            &#39;format&#39;: &#39;%(message)s&#39;
+        },
+</pre></div>
+
+
+<p>track_log formatter只忠实地记录打印message，而message则由python中的类去构建,这些消息类就是对我们前边谈到的AVOB的实践，你需要使用AVOB去具体描述你所关心的事件(通常与业务相关)</p>
+<p>补充一些细节:我们前头说到日志系统主动去sub系统发布的事件，具体的实现利用了Django的signal机制。为了让这些记录不影响用户访问，我们将记录log的task放到了celery里</p>
+<h4 id="_6">前端事件</h4>
+<p>如果你同时还关心发生在前端的事件，有两个办法解决，其一是使用<a href="https://www.google.com/analytics/">google analytics</a>这类前端分析工具，它允许你自定义事件。其二是在后端写一个通用接口，前端构建好事件(json数据)，发送给后台，后台把它当作一般的事件数据，记录到日志中即可，最好加上<code>日志来源</code>这个属性:<code>event_source</code>,这点open edx考虑得很周到。</p>
+<h3 id="_7">服务于其他系统</h3>
+<p>前边提到我们让日志系统服务于推荐系统和数据可视化</p>
+<p>推荐系统会根据用户的行为日志计算出用户的的feed流，实时更新。这部分的实现细节是：我们将日志同步到一台独立的计算机器上，分布式地算出用户feed流之后，回推到网站后端-&gt;用户主页.</p>
+<p>至于数据可视化我们则用了ELK来做，先用Logstash使json平坦化，然后根据业务需要，可视化这些数据。对于日志中不包含的数据，可以通过查询数据库得到，诸如日志中只要记录username，我们就可以还原出user对象(通过查询数据库)。这部分我们也是参考了open edx数据分析这块的的做法，这块的一个建议是，尽量不要再服务器运行高峰期去操作生产服务器。如果你的查询很少，可以直接查询生产服务器，如果查询多且耗性能的话，建议把数据库同步到计算节点上，做本地查询。</p>
+<!--
+# 事件
+
+# 事件记录
+
+物是人非
+
+新闻6要素 
+
+如何描述一个事件
+
+存储和分析，相比较而言更为简单
+
+如何描述一个event ， 我们可能想到新闻六要素
+
+功夫在诗外
+
+事件的触发
+事件的描述
+事件的存储
+
+最难在于事件的描述  使用avob
+
+于是消息系统 也可以用
+
+在paperweekly，我们是这样做的，知乎也是这样做，事件总线
+
+以一个典型的例子  
+
+我们最后，再切到技术的视角下，关心技术实现的问题
+
+### 基于django的实现
+你也可以使用其他语言来实现它
+
+我们在django下做的实现
+
+
+我们将其用于产生feed流，用户的消息通知，以及网站的log
+
+
+这一块和open edx很像，可以参考我之前的文章
+
+-->
+
+<h1 id="_8">参考</h1>
+<ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%97%A5%E5%BF%97">维基百科 服务器日志</a></li>
+<li><a href="http://blog.jobbole.com/89674/">The Log：每个程序员都应该知道有关实时数据的统一抽象（1）概念</a></li>
+<li><a href="http://blog.just4fun.site/notification-system-thinking-concept-and-Implementation.html">notification system思路、概念与实现</a></li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://wwj-tmp-video.just4fun.site/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>我近期在折腾</h4>
+<li><a href="https://blog.just4fun.site/about-codelab-club.html" target="_blank">codelab.club</a></li>
+<li><a href="https://codelab-adapter-docs.codelab.club/" target="_blank">codelab-adapter</a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://scratch3-files.just4fun.site/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://wwj-tmp-video.just4fun.site/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
