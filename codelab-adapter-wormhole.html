@@ -1,0 +1,499 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队
+喜欢你这种没事瞎翻源码的人
+如果你恰好也热爱技术、喜欢折腾，一起来捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>codelab-adapter的虫洞(wormhole)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://wwj-tmp-video.just4fun.site/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to codelab-adapter的虫洞(wormhole)">
+					codelab-adapter的虫洞(wormhole) 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2019-03-01T00:00:00+00:00">
+	<i class="icon-calendar"></i>五 01 三月 2019
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/shao-er-bian-cheng.html"><i class="icon-folder-open"></i>少儿编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/codelab.html"><i class="icon-tag"></i>codelab</a>
+</footer><!-- /.post-info -->		</div>
+		<p><img alt="" src="http://wwj-fig-bed.just4fun.site/wormhole_4fcface5.png" /></p>
+<blockquote>
+<p>相隔遥远的两个巫师同时讲一句相同的魔法咒语，这导致了他们之间建立了某种神秘的联系。接着一个巫师把魔法书扔进虫洞，书就从另一个巫师身边的虫洞掉了出来。</p>
+</blockquote>
+<p>上上周去了趟杭州/南京，与几个团队碰面交流。期间聊到许多有趣的技术话题，大家对codelab-adapter的架构设计、合作计划以及未来目标都很感兴趣。</p>
+<p>其中聊到的一个话题让我印象深刻: codelab-adapter计划对classroom/club中的协作者提供怎样的支持？</p>
+<p>设想这样一种场景，一群用户聚集在一个线下空间里，线下空间可能是一个线下俱乐部(如<a href="https://coderdojo.com">coderdojo</a>)、一个线下培训机构、一个班级、以及我们的<a href="https://blog.just4fun.site/about-codelab-club.html#neverland">codelab neverland</a>。他们接入同一个局域网中。学习者们身处同样的物理空间，我们是否考虑将他们所处的虚拟空间和创作平台中也连接在一起，支持更多的协作和交互。</p>
+<p>Scratch本身有考虑人的连接，出于这个考虑，他们构建了<a href="https://scratch.mit.edu">线上社区</a>, <a href="https://en.wikipedia.org/wiki/Mitchel_Resnick">Mitchel Resnick</a>(Scratch之父)宣称相比于Scratch这个创作工具，Scratch社区是他们更重要的创造。</p>
+<p>但目前Scratch社区并不支持强连接，诸如构建一个聊天工具或联网游戏。</p>
+<p>如果你是《终身幼儿园》的忠实粉丝，你会发现为classroom/club提供强连接是践行4P理念(Projects, Passion, Peers, Play)的绝佳机会。</p>
+<p>从杭州/南京回来之后，一直在想这件事。</p>
+<h1 id="_1">思考</h1>
+<p>将局域网内的机器进行联机不是什么难事。利用局域网内的ip地址或hostname，建立socket连接，就可以连接局域网内的机器。</p>
+<p>这只是技术上可行，教育层面呢？拿ip地址来说，当我们告诉学习者如何查看ip地址时，Ta需要了解ip地址这个概念吗？还是只是做一个机械操作(<code>ifconfig/ipconfig</code>)？又或者我们应该在教学工具中内置查看ip地址功能呢？</p>
+<p><a href="https://zh.wikipedia.org/zh-hans/%E8%89%BE%E4%BC%A6%C2%B7%E5%87%AF">艾伦·凯</a>上周在Quora上回答了一个问题 <a href="https://www.quora.com/What-does-Alan-Kay-think-of-using-either-Squeak-or-Pharo-as-the-first-language-for-introducing-programming">为何艾伦·凯认为入门编程应当使用Squeak/Pharo</a>，他说: </p>
+<blockquote>
+<p>服务于教学和学习的用户界面有许多需要考虑的因素。如果你只想选择一个重点来考虑，那应该是"减少认知负担"。</p>
+<p>它需要处于试图学习的人的心理空间中。</p>
+</blockquote>
+<p>艾伦·凯对编程教育的观点极大影响着CodeLab，我们对codelab-adapter的设计以及积木的设计都深受他的影响。</p>
+<p>我们希望"减少认知负担"。如果我们希望构建一种积木，允许实时在局域网内的Scratch中传递消息。它最好是类似<code>broadcask</code>和<code>when I receive</code>这类的积木， 它与Scratch的事件积木以及CodeLab的EIM积木保持完全相同的结构。这样用户无需学习新概念，只需要利用<code>传递消息</code>就能进行联网创作。</p>
+<p>我们想构建这样的积木:</p>
+<p><img src="http://wwj-fig-bed.just4fun.site/wormhole_b1b53851.png" width=400 /></p>
+<p>于是，我们想到"虫洞"的概念。<a href="https://github.com/warner/magic-wormhole">magic-wormhole</a>是我很喜欢的一个开源项目，它的灵感来自:</p>
+<blockquote>
+<p>相隔遥远的两个巫师同时讲一句相同的魔法咒语，这导致了他们之间建立了某种神秘的联系。接着一个巫师把魔法书扔进虫洞，书就从另一个巫师身边的虫洞掉了出来。</p>
+</blockquote>
+<p>这个概念如此简洁。巫师只是说了相同的咒语，连接就自动建立了。虫洞是声明式的！上帝说要有光，于是就有了光，看起来也类似申明式编程。</p>
+<p>我们将"虫洞"内置到codelab-adapter中，codelab-adapter通过一个"咒语"发现彼此，之后自动建立连接，消息在adapter内置的虫洞中传递，用户只要收取虫洞里的消息即可。</p>
+<p>一旦有了目标，github里总有项目能节约你90%的编程工作：）</p>
+<p>我们选择zeromq来传递消息。zeromq有着比socket优美得多的设计。<a href="https://blog.codingnow.com/">云风</a>在他的博客文章<a href="https://blog.codingnow.com/2011/02/zeromq_message_patterns.html">ZeroMQ 的模式</a>里写道:</p>
+<blockquote>
+<p>任何分布式，并行的需求，都可以用这三种模型组合起来解决问题。ZeroMQ 只专注和解决了消息通讯这一基本问题，干的非常漂亮。</p>
+</blockquote>
+<p>任何消息通讯相关的问题，ZeroMQ都是非常好的选择。</p>
+<p>还有一件事需要考虑，传递消息之前，需要发现局域网中的各个codelab-adapter的ip，可以采用<a href="http://www.cs.ubbcluj.ro/~dadi/compnet/labs/lab3/udp-broadcast.html">UDP – Broadcast</a>来做。</p>
+<h1 id="_2">理念</h1>
+<p>Bret Victor在他的出色演讲《Inventing on Principle》里说</p>
+<blockquote>
+<p>If there is something in the world you feel the wrong and you have a vision for what a better world could be, you can find your guiding principle and you can fight for a cause.  </p>
+</blockquote>
+<p>codelab-adapter的guiding principle是 </p>
+<blockquote>
+<p>Everything Is Message(EIM)</p>
+</blockquote>
+<p>灵感来自艾伦凯设计smalltalk时采用的原则:</p>
+<blockquote>
+<p>Everything is an object, and objects communicate only by sending each other messages.</p>
+</blockquote>
+<p>smalltalk的一致性，允许所有的语法(概念)在一张明信片中写完，一个小孩在Ta入门的时候学会这些概念，可以用于创造小玩具。待Ta长大后，如果雄心勃勃想构建一个操作系统，需要的所有东西，都在Ta小时候看过的那张明信片上。</p>
+<p>wormhole的设计依然满足EIM原则，codelab-adapter的架构试图保持一致性。我们之所以重视一致性，原因之一是计划等到codelab-adapter开源之后，用它的源码本身来教学编程。我们希望一致性带来简单和清晰，让一个3年级的孩子可以完全理解codelab-adapter。并能轻松去改造和拓展它。</p>
+<h1 id="_3">发布计划</h1>
+<p>codelab-adapter的下个版本将内置虫洞(wormhole)功能。</p>
+<p><img src="http://wwj-fig-bed.just4fun.site/extension-wormhole_6cc39199.png" width=350/></p>
+<h1 id="_4">使用场景</h1>
+<p>虫洞功能将支持很多有趣的场景。</p>
+<p>它尤其适合classroom/club/线下活动 场景。正如我们前头提到的: 一群人聚集在一个物理空间里，他们接入同样的局域网，虫洞就发生作用。</p>
+<h3 id="_5">学习者</h3>
+<p>利用虫洞功能，学习者可以轻松为他的小区或学校创建聊天程序，当然也可以用于在Scratch中制作网络游戏。</p>
+<p>利用codelab-adapter连接硬件的能力，他们甚至可以一起构建一个"机器军团"。</p>
+<h3 id="_6">教师</h3>
+<p>在俱乐部/教室场景中，教师可以利用虫洞功能管理局域网中的设备，甚至构建教学引导程序。就像在机房中教室机与学生机的互动。只要基于虫洞构建新的插件来支持这些场景即可。</p>
+<p>虫洞本身也可以用于教学计算机网络。</p>
+<h3 id="_7">开发者</h3>
+<p><code>Everything Is Message(EIM)</code>。 虫洞由消息实现，通过处理收发消息，开发者可以任意改造它！</p>
+<p><img src="http://wwj-fig-bed.just4fun.site/wormhole_ba56fdff.png" width=500></p>
+<h3 id="scratch">Scratch社区</h3>
+<p>我们来展示一个例子: </p>
+<video width=600 src="http://scratch3-files.just4fun.site/wormhole.mp4" controls="controls"></video>
+
+<p>右边的“螃蟹”由树莓派中的adapter驱动(用户A)，而左边的小猫则由电脑中的adapter驱动(用户B)。任何一个设备上的操作将传递到局域中的所有adapter。由于scratch和adapter在设计上都受smalltalk的影响，采纳<code>everything is message</code>的设计原则，所以<a href="https://scratch.mit.edu">MIT Scratch社区</a>里3500多万用户创建的超过1亿的项目将直接得到虫洞功能，在局域网内随意连接！延迟在毫秒级。足以构建实时游戏。</p>
+<h1 id="because-we-can">because we can</h1>
+<p>如果我们是谢耳朵，我们就要基于虫洞去制作视频聊天工具。复现《生活大爆炸》里的著名桥段， </p>
+<p>"But why？"(面对面在局域网内，为何需要视频聊天) </p>
+<p>"because we can"(基于ZeroMQ的虫洞每秒钟能处理2000万条消息啊)</p>
+<h1 id="_8">参考</h1>
+<ul>
+<li><a href="https://github.com/warner/magic-wormhole">magic-wormhole</a></li>
+<li><a href="http://www.cs.ubbcluj.ro/~dadi/compnet/labs/lab3/udp-broadcast.html">UDP – Broadcast</a></li>
+<li><a href="https://www.quora.com/What-does-Alan-Kay-think-of-using-either-Squeak-or-Pharo-as-the-first-language-for-introducing-programming">What does Alan Kay think of using either Squeak or Pharo as the first language for introducing programming?</a></li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://wwj-tmp-video.just4fun.site/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>我近期在折腾</h4>
+<li><a href="https://blog.just4fun.site/about-codelab-club.html" target="_blank">codelab.club</a></li>
+<li><a href="https://codelab-adapter-docs.codelab.club/" target="_blank">codelab-adapter</a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://scratch3-files.just4fun.site/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://wwj-tmp-video.just4fun.site/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
