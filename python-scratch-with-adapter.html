@@ -1,0 +1,513 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队
+喜欢你这种没事瞎翻源码的人
+如果你恰好也热爱技术、喜欢折腾，一起来捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Python与Scratch的双向通信</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://wwj-tmp-video.just4fun.site/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to Python与Scratch的双向通信">
+					Python与Scratch的双向通信 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2018-11-28T00:00:00+00:00">
+	<i class="icon-calendar"></i>三 28 十一月 2018
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/shao-er-bian-cheng.html"><i class="icon-folder-open"></i>少儿编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/codelab.html"><i class="icon-tag"></i>codelab</a>
+</footer><!-- /.post-info -->		</div>
+		<p><img alt="" src="http://wwj-fig-bed.just4fun.site/flow_6f3076dd.png" /></p>
+<p>近期我们在<a href="https://codelab-adapter-docs.codelab.club/">codelab-adapter</a>制作了不少<a href="https://codelab-adapter-docs.codelab.club/user_guide/gallery/">有趣的案例</a>.得益于我们最近构建的json extension，我们可以让Python与<a href="http://scratch3.codelab.club">Scratch3.0</a>之间传递任意复杂的数据结构。如此一来，我们就可以将任意的Python程序接入<a href="http://scratch3.codelab.club">Scratch3.0</a>中。</p>
+<p>以下是摘自<a href="https://codelab-adapter-docs.codelab.club/user_guide/gallery/">scratch3-adapter gallery</a>页面的一些有趣的案例:</p>
+<video width="600px" src="http://scratch3-files.just4fun.site/dlib_face.mp4" controls="controls"></video>
+
+<p>人脸地标： 在Python中使用dlib采集我的脸部地标，之后将这些数据完整地传给Scratch，接着在Scratch中解析这些数据，将其用于绘图，在Scratch中实时绘制出我的脸部特征点。当然我们也可以用于任何其他用途。这个策略是完全通用的，意味着可以将Python构建的任意AI项目积木化。当然这个过程有些细节需要注意，诸如numpy描述的矩阵得先转化为Python数据结构，如果你对此感兴趣，我们可以邮件里细说：）</p>
+<video width="600px" src="http://scratch3-files.just4fun.site/wechat.mp4" controls="controls"></video>
+
+<p>不喜欢微信的聊天界面？没关系，我们在Scratch中自己new一个。它真实可用，你可以用于与朋友聊天。当然你也可以通过组合积木将微信用于控制智能家居。</p>
+<video width="350px" src="http://scratch3-files.just4fun.site/%E8%A6%81%E6%9C%89%E5%85%89.mp4" controls="controls"></video>
+
+<p>所有的这些都发生在Scratch中！</p>
+<p>下边我们将以简单的例子，展示这种交互方式。</p>
+<h1 id="python-scratch">Python <code>-&gt;</code> Scratch</h1>
+<p>我们先来展示数据从Python流向Scratch。</p>
+<p>我们希望将以下数据发布给Scratch：</p>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;numbers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>我们先来看看scratch3-adapter extension插件应该怎么写</p>
+<h3 id="python-extensions">Python extensions</h3>
+<p>在<code>~/scratch3_adapter/extensions</code>目录下(linux/mac适用。windows用户可以点击<code>菜单栏-&gt;插件-&gt;查看目录</code>), 创建<code>extension_test.py</code>插件,内容如下</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">scratch3_adapter</span> <span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">scratch3_adapter.core_extension</span> <span class="kn">import</span> <span class="n">Extension</span>
+
+<span class="k">class</span> <span class="nc">DemoExtension</span><span class="p">(</span><span class="n">Extension</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># run 会被作为线程调用</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">_running</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;topic&quot;</span><span class="p">:</span> <span class="s2">&quot;eim&quot;</span><span class="p">}</span>
+            <span class="n">message</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">,</span><span class="s2">&quot;numbers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">export</span> <span class="o">=</span> <span class="n">DemoExtension</span>
+</pre></div>
+
+
+<h3 id="scratch">Scratch</h3>
+<p>当extension_test插件在scratch3_adapter中被加载后，在Scratch一侧，我们就可以利用EIM插件与Json插件 来取回我们从Python中发过来的消息。</p>
+<p>scratch接收到<code>{"hello": "world","numbers": [1,2,3]}</code>，它成为EIM <code>receive message</code>积木的内容。</p>
+<p>我们可以使用Json积木来解析消息体。</p>
+<p><img src="http://wwj-fig-bed.just4fun.site/jsonscratch_4f6ec6a4.png" width=600 /></p>
+<p><img src="http://wwj-fig-bed.just4fun.site/jsonscratcgh_379ea9fb.png" width=600 /></p>
+<p>以上两个例子展示了我们可以解析任意的json结构。值得注意的是，列表的下标从1开始(不是0)，这是为了遵循Scratch社区对列表的操作风格(用户更容易理解)。</p>
+<h1 id="scratch-python">Scratch <code>-&gt;</code> Python</h1>
+<p>接下来，我们将展示，从Scratch发往Python的消息。对大部分用户来说，发送字符串就够了。对于高级用户，他们可能希望传递更复杂的数据结构。当然没问题！</p>
+<p>一个典型的用例是:前端使用颜色控件选择颜色，将RGB信息发往后端</p>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;R&quot;</span><span class="p">:</span> <span class="mi">255</span><span class="p">,</span>
+    <span class="nt">&quot;G&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&quot;B&quot;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h3 id="scratch_1">Scratch</h3>
+<p>我们在Scratch需要做的是</p>
+<p><img src="http://wwj-fig-bed.just4fun.site/jsonscratch_6f04d076.png" width=400 /></p>
+<p>更理想的做法其实是在Scratch中制作一个新的extension，构建颜色选择器，这部分涉及前端的调整，官方还没放出教程，这种优化问题我们以后再讨论。如果你已经在EIM中构建好了这个积木，要迁移到新的extension UI上，是非常简单的。核心的通信过程并没有变化，我们已经为你都做好了。构建EIM的目的是给出一种通用的积木，你无需编写js代码，动态性在消息中，而不是固化在积木，这种特性，对开发和扩展极为有利。 在我们以后的<code>microworld</code>和<code>realworld</code>案例中，我们将演示这种架构将带来多么大的灵活性和可能性，我们认为Scratch从Smalltalk学到的重要东西，正是通过消息来解耦，并获得扩展能力，scratch3-adapter将继续发挥这个原则。</p>
+<p>你可能会问，如何将你定制的的EIM积木分发给用户？目前你可以下载下来，之后让用户用这个文件初始化项目便可。在以后，我们会允许你发布到云端，用户打开特定链接就行。</p>
+<p><code>everything is message</code></p>
+<h3 id="python-extensions_1">Python extensions</h3>
+<p>在<code>~/scratch3_adapter/extensions</code>目录下(linux/mac), 创建<code>extension_test.py</code>插件,内容如下</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scratch3_adapter</span> <span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">scratch3_adapter.core_extension</span> <span class="kn">import</span> <span class="n">Exte</span>
+
+<span class="k">class</span> <span class="nc">DemoExtension</span><span class="p">(</span><span class="n">Extension</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">_running</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">message</span><span class="p">))</span>
+<span class="n">export</span> <span class="o">=</span> <span class="n">DemoExtension</span>
+</pre></div>
+
+
+<p>当extension_test插件在scratch3_adapter中被加载后吗， 新开一个命令行运行<code>tail -f ~/scratch3_adapter/info.log | grep extension_test</code> (mac/linux适用，windows用户参考<a href="https://codelab-adapter-docs.codelab.club/dev_guide/debug/#windows">windows用户</a>)，查看接收到的来自Scratch的消息:</p>
+<p><img src="http://wwj-fig-bed.just4fun.site/jsonscratch_eee125e9.png" width=600 /></p>
+<p>至此演示完毕。</p>
+<p>对了如果你希望在一个插件中双向传递数据,你需要多线程，可以参考我们的例子:<a href="https://github.com/Scratch3Lab/scratch3_adapter_extensions/blob/master/extension_eim.py">extension_eim.py</a></p>
+<h1 id="_1">注意</h1>
+<p>大多数情况下，你只需要发送和接受字符串就够了，这种风格与Scratch内置的<code>广播</code>极为相近。是典型的事件驱动风格。</p>
+<p>这篇教程主要针对那些希望去拓展Scratch的人。当你需要将一些复杂的程序接入Scratch（例如接入AI或者接入微信，如我们制作的<a href="https://codelab-adapter-docs.codelab.club/user_guide/gallery/">例子</a>），它会对你有帮助。</p>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://wwj-tmp-video.just4fun.site/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>我近期在折腾</h4>
+<li><a href="https://blog.just4fun.site/about-codelab-club.html" target="_blank">codelab.club</a></li>
+<li><a href="https://codelab-adapter-docs.codelab.club/" target="_blank">codelab-adapter</a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://scratch3-files.just4fun.site/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://wwj-tmp-video.just4fun.site/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
