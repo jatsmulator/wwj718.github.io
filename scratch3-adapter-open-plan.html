@@ -1,0 +1,464 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队
+喜欢你这种没事瞎翻源码的人
+如果你恰好也热爱技术、喜欢折腾，一起来捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>scratch3-adapter支持第三方平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://wwj-tmp-video.just4fun.site/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to scratch3-adapter支持第三方平台">
+					scratch3-adapter支持第三方平台 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2019-01-19T00:00:00+00:00">
+	<i class="icon-calendar"></i>六 19 一月 2019
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/shao-er-bian-cheng.html"><i class="icon-folder-open"></i>少儿编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/scratch.html"><i class="icon-tag"></i>scratch</a>
+</footer><!-- /.post-info -->		</div>
+		<p><img alt="" src="http://wwj-fig-bed.just4fun.site/scratch3-adapter-eim_3f5fd3d8.png" /></p>
+<h1 id="_1">开放连接</h1>
+<p>我们在上周发布了<a href="https://codelab-adapter-docs.codelab.club/">codelab-adapter</a>的0.4.0版本， 在这个版本中，我们做了大量重构，采用了许多realtalk的架构思路。</p>
+<p>从这个版本开始，我们将允许<a href="https://www.codelab.club/">codelab.club</a>的合作方将<a href="https://codelab-adapter-docs.codelab.club/">codelab-adapter</a>接入到自己的平台。从而让平台获得与开源硬件/AI/IoT交互的能力，同时他们也可以将<a href="https://codelab-adapter-docs.codelab.club/">codelab-adapter</a>用作真实的Python解释器(可以与本地文件系统/网络交互)。</p>
+<p>本周末，我们将在这篇文章中展示如何将<a href="https://codelab-adapter-docs.codelab.club/">codelab-adapter</a>接入到任何Scratch3.0平台中。事实上，你可以将它接入任何平台中。</p>
+<p>在本文中我们将放出EIM相关的所有源代码: scratch3_eim extension的源代码以及scratch3-adapter extension_eim的源代码。</p>
+<h1 id="_2">教程</h1>
+<p>我们假设你已经读了<a href="https://blog.just4fun.site/create-first-Scratch3-Extension.html">创建你的第一个Scratch3.0 Extension</a>，如果没有，阅读完再回来。最好跟着文章操作一遍。</p>
+<h2 id="scratch30eim-extension">在Scratch3.0中创建EIM Extension</h2>
+<h3 id="scratch30">Scratch3.0插件源码</h3>
+<p>在<code>scratch-vm/src/extensions</code>目录创建<code>scratch3_eim/index.js</code></p>
+<p>Scratch3.0 eim插件的源码我们已经放到Github上了:<a href="https://github.com/Scratch3Lab/scratch3_eim">scratch3_eim</a>，源码本身不做过多解释，对照着它的功能，很容易搞懂。</p>
+<p>值得注意的是，<a href="https://github.com/Scratch3Lab/scratch3_eim">scratch3_eim</a>依赖于<code>socket.io-client</code>, 你需要在scratch-vm中先按照依赖:<code>yarn add socket.io-client</code></p>
+<p>Scratch3.0与<a href="https://codelab-adapter-docs.codelab.club">scratch3-adapter</a>建立连接，最关键的部分是:</p>
+<div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">socket</span> <span class="o">=</span> <span class="nx">io</span><span class="p">(</span><span class="sb">`//</span><span class="si">${</span><span class="nx">adapterHost</span><span class="si">}</span><span class="sb">:12358`</span> <span class="o">+</span> <span class="s1">&#39;/test&#39;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">transports</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;websocket&#39;</span><span class="p">]</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>从架构图中，你可以更好地理解它们的交互:</p>
+<p><img alt="" src="http://wwj-tmp-video2.just4fun.site/%E6%8F%92%E4%BB%B6%E7%B3%BB%E7%BB%9F.png" /></p>
+<p>从架构途图中也可以看出，<a href="https://codelab-adapter-docs.codelab.club">scratch3-adapter</a>支持任何平台。Scratch3.0只是它的一个client，但并没有特殊性，你完全可以在blockly app或者任何其他什么地方接入<a href="https://codelab-adapter-docs.codelab.club">scratch3-adapter</a>。</p>
+<h3 id="scratch3-adapter-extension_eim">scratch3-adapter extension_eim源码</h3>
+<p>scratch3-adapter extension_eim的源码，我们也已经更新到Github上: <a href="https://github.com/Scratch3Lab/scratch3_adapter_extensions/blob/master/extension_eim.py">extension_eim.py</a></p>
+<p>此外，<a href="https://github.com/Scratch3Lab/scratch3_adapter_extensions/blob/master/extension_python_kernel.py">extension_python_kernel.py</a>也是与Scratch3.0 eim插件配合使用的.</p>
+<h1 id="_3">开发者优先</h1>
+<p>目前我们允许开发者在本地(<code>127.0.0.1</code>)将<a href="https://codelab-adapter-docs.codelab.club">scratch3-adapter</a>接入到任何平台中。</p>
+<p>需要注意的是，你需要将网站运行为安全模式(<code>https</code>)来与<a href="https://codelab-adapter-docs.codelab.club">scratch3-adapter</a>通信。</p>
+<p><a href="https://codelab-adapter-docs.codelab.club">scratch3-adapter</a>目前接受以下http origin与它通信:</p>
+<ul>
+<li>127.0.0.1</li>
+<li>localhost</li>
+<li>0.0.0.0</li>
+<li>scratch.mit.edu</li>
+<li>scratch3.codelab.club</li>
+</ul>
+<p>第三方平台接入的条款我们正在制定中。目前大家可以现在本地测试。</p>
+<h1 id="scratch3-adapter">scratch3-adapter可以支持其他平台吗？</h1>
+<p>如果有公司和组织希望将scratch3-adapter接入到自己的平台，请阅读<a href="https://codelab-adapter-docs.codelab.club/user_guide/FAQ/#scratch3-adapter">scratch3-adapter可以支持其他平台吗？</a></p>
+<h1 id="_4">参考</h1>
+<ul>
+<li><a href="https://blog.just4fun.site/create-first-Scratch3-Extension.html">创建你的第一个Scratch3.0 Extension</a></li>
+<li><a href="https://codelab-adapter-docs.codelab.club/user_guide/FAQ/#scratch3-adapter">scratch3-adapter可以支持其他编程平台吗？</a></li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://wwj-tmp-video.just4fun.site/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>我近期在折腾</h4>
+<li><a href="https://blog.just4fun.site/about-codelab-club.html" target="_blank">codelab.club</a></li>
+<li><a href="https://codelab-adapter-docs.codelab.club/" target="_blank">codelab-adapter</a></li>
+<li><a href="https://forums.codelab.club/" target="_blank">forums.codelab.club</a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://scratch3-files.just4fun.site/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://wwj-tmp-video.just4fun.site/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
