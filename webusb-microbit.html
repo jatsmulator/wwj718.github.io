@@ -1,0 +1,501 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队
+喜欢你这种没事瞎翻源码的人
+如果你恰好也热爱技术、喜欢折腾，一起来捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>WebUSB与micro:bit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://wwj-tmp-video.just4fun.site/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to WebUSB与micro:bit">
+					WebUSB与micro:bit 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2018-09-27T00:00:00+00:00">
+	<i class="icon-calendar"></i>四 27 九月 2018
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/shao-er-bian-cheng.html"><i class="icon-folder-open"></i>少儿编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/microbit.html"><i class="icon-tag"></i>microbit</a>
+</footer><!-- /.post-info -->		</div>
+		<p><img alt="" src="http://wwj-fig-bed.just4fun.site/webusb_a5dff4a7.png" /></p>
+<h1 id="webusb">webusb</h1>
+<p><a href="https://wicg.github.io/webusb/">WebUSB API</a>在简介里说到：</p>
+<p>WebUSB API提供了一种将USB设备服务安全地公开给Web的方法。</p>
+<p>借此API，硬件制造商将能够为其设备构建跨平台JavaScript SDK。web平台成为调度硬件的一等公民。</p>
+<h1 id="_1">硬件设备的困扰</h1>
+<p><img width=800 src="http://wwj-fig-bed.just4fun.site/webusb_9a77f466.png" /></p>
+<p>我们从<a href="https://www.numworks.com">numworks</a>说起，<a href="https://www.numworks.com">numworks</a>是一个支持绘图的计算器，目标是使学习数学更容易。刷<a href="https://news.ycombinator.com/">hacker news</a>时偶然发现了这个项目，十分惊艳，<a href="https://www.numworks.com">numworks</a>支持运行python，它甚至写了个自己的操作系统，这些都是开放的:<a href="https://github.com/numworks/epsilon">epsilon</a></p>
+<p><a href="https://www.numworks.com">numworks</a> 在<a href="https://www.numworks.com/blog/webusb-firmware-update/">Writing a device updater? Seriously consider WebUSB!</a>中描述了它们为更新设备固件所遇到的麻烦，最终发现webusb是理想选择。</p>
+<p>文章里写道<a href="https://www.numworks.com">numworks</a>的目标是确保他们的设备固件可以轻松升级，为了达到目标，需要满足以下要求:</p>
+<ul>
+<li>尽可能跨更多的平台</li>
+<li>用户不必为了更新设备而安装特定软件。</li>
+<li>尽可能少编写代码。代码越少，错误越少。</li>
+</ul>
+<p>webusb完美地满足这些要求.在跨平台方面,webusb适用于各种设备和操作系统（Android，Windows，macOS和Linux）,而且是开箱即用的</p>
+<p>文章里有不少有趣的部分，诸如作者提到，解决方案之一是使用配有USB-to-HTTP桥接器的Web应用程序(Scratch Link和scratch3-adapter都是这种程序),<a href="https://www.numworks.com">numworks</a>也使用了一段时间这个选项，但我们最终决定放弃它，原因是</p>
+<ol>
+<li>因为无法为localhost提供有效证书</li>
+<li>分发仍然很痛苦，您仍然可能需要更新网桥</li>
+</ol>
+<p>这两个问题其实都有很好的解决方案，问题1，我在已经给出了解决方案:<a href="https://blog.just4fun.site/localhost-https-ssl.html">本地https/wss服务与SSL安全证书</a>，问题2的理想解决方案是<a href="https://github.com/mherrmann/fbs">fbs</a></p>
+<p><a href="https://www.numworks.com">numworks</a>的案例很好地给出了选择WebUSB更新固件的理由，WebUSB的应用场景当然远不只是更新固件。下边写出一些<a href="https://wicg.github.io/webusb/">WebUSB API</a>中提到的使用场景</p>
+<h1 id="_2">使用场景</h1>
+<h3 id="_3">教育设备</h3>
+<p>基于Web的软件交付模型适合于教育教育领域，因为它们可以快速加载到任何计算机上，而无需考虑平台兼容性。平台的兼容性在教育领域产生的影响可能远远超出你的预期，尤其是国内。</p>
+<p>基于Web的硬件API，允许将设备的支持直接构建到现有的在线课程材料中，从而提供无缝的连接体验。而不会增加实施成本，诸如在每台电脑安装一个客户端软件。</p>
+<p>学生可利用在线开发人员工具编写和上传他们的代码，老师可以随时查阅，管理和干预。因为数据都在线上，这就提供了AI介入的可能。</p>
+<p>此外学生的作品可以在线分享，可以据此构建在线社区。</p>
+<p>当设备可以被接入web，那么我们就可以将大量的web玩法引入到硬件教育中。诸如远程指导，协同编程等等</p>
+<p>我相信web bluetooth和webusb是教育领域的未来。</p>
+<h3 id="_4">网络驱动程序</h3>
+<p>Web的可组合性，可能发展出生态系统。</p>
+<p>以3D打印机为例，想象一下托管3D模型的网站希望将打印直接集成到他们的页面中。目前，Web支持2D打印（普通打印机），但3D版本还没有API。如果使用WebUSB API将数据从网站发送到其打印机，则站点可以使用这些页面来集成对硬件的支持，就像将嵌入式地图等功能一样，可以添加到许多现有站点中。成为一种通用积木。</p>
+<h3 id="_5">设备更新和诊断</h3>
+<p>虽然蓝牙等无线协议通常是消费级设备的更方便选择，但USB端口不断扩散，因为它们是电源传输的简单解决方案，并且可以在设备不工作时作为最后的连接方式。</p>
+<p>设备制造商只要将用户引导到自己的网站上，就可以为用户提供在线诊断。</p>
+<h1 id="_6">文档</h1>
+<p>Google的这篇文档很赞: <a href="https://developers.google.com/web/updates/2016/03/access-usb-devices-on-the-web">Access USB Devices on the Web</a></p>
+<p>文档里提到chrome内置的一些调试工具:</p>
+<ul>
+<li>chrome://device-log</li>
+<li>chrome://usb-internals</li>
+</ul>
+<h1 id="webusbmicrobit">使用webusb与microbit通信</h1>
+<p>microbit是个为编程教育而生的硬件，对microbit不了解的小伙伴，可以参考我之前的文章:<a href="https://blog.just4fun.site/microbit-notes.html">micro:bit使用笔记</a></p>
+<p>microbit官方推荐的两个编程工具：<a href="https://python.microbit.org/v/beta">Python Editor</a>和<a href="https://makecode.microbit.org/beta#editor">makecode</a>近期都将支持webusb，这当然是个明智之举，将进一步降低学习者的门槛。</p>
+<p>相关文档在: <a href="https://support.microbit.org/support/solutions/articles/19000084059-beta-testing-web-usb">Beta testing - Web USB</a></p>
+<p>在此，我做个操作纪录.</p>
+<h3 id="_7">怎么做</h3>
+<p>为了让microbit能使用webusb，我们首先需要将它的固件更新到0250，我这里直接给出固件，大家烧录即可。</p>
+<p>烧入方式为: 按住microbit背后的复位按钮，然后连上电脑，电脑将出现名为<code>MAINTENANCE</code>的设备，把如下固件:<a href="http://scratch3-files.just4fun.site/0250_kl26z_microbit_0x8000.hex">0250_kl26z_microbit_0x8000.hex</a>拖入<code>MAINTENANCE</code>即可。</p>
+<p>之后你就可以在线为microbit编程了.</p>
+<p><img width=800 src="http://wwj-fig-bed.just4fun.site/webusb_de2a5177.png" /></p>
+<p>有两点值得一提，其一是烧录的过程比较慢，得10s+。原因是每回都得烧录完整的固件(500K左右)</p>
+<p>其二是，你可以在线使用REPL功能，它甚至支持自动补全，REPL的另一个好处是，它提供实时反馈！此外它的速度很快！因为每次只有代码文本在阐述，几个字节而已。</p>
+<p><img width=800 src="http://wwj-fig-bed.just4fun.site/webusb_ac39183d.png" /></p>
+<p>所以我目前在进行的工作是，将REPL的管道分离出来。供在线课程使用。我希望提供即时的反馈,关于理由我之前在<a href="https://blog.just4fun.site/Hardware-Programming-style.html">两种硬件编程风格的比较</a>论述过。</p>
+<p><a href="https://firialabs.com/">firialabs</a>是一门microbit的课程，它使用webusb来建立网页与microbit的连接。</p>
+<h1 id="_8">注意⚠️</h1>
+<p>WebUSB已被收录在Chrome 61中，在这之后的版本都可以使用，iOS设备不受支持，由于chrome对XP只支持到49，所以XP无法使用WebUSB。</p>
+<h1 id="_9">参考</h1>
+<ul>
+<li><a href="https://developers.google.com/web/updates/2016/03/access-usb-devices-on-the-web">Access USB Devices on the Web</a></li>
+<li><a href="https://support.microbit.org/support/solutions/articles/19000084059-beta-testing-web-usb">Beta testing - Web USB</a></li>
+<li><a href="https://support.microbit.org/support/solutions/articles/19000019131-how-to-upgrade-the-firmware-on-the-micro-bit">How to upgrade the firmware on the micro:bit</a></li>
+<li><a href="https://python.microbit.org/v/beta">python.microbit.org/v/beta</a></li>
+<li><a href="https://github.com/ARMmbed/DAPLink/releases/tag/v0250">DAPLink v0250</a></li>
+<li><a href="https://makecode.microbit.org/beta#editor">makecode webusb</a></li>
+<li><a href="https://micropython.top/editor-zh-hans.html">PythonEditor cn</a></li>
+<li><a href="https://www.numworks.com/">numworks</a><ul>
+<li><a href="https://www.numworks.com/blog/webusb-firmware-update/">Writing a device updater? Seriously consider WebUSB!</a></li>
+</ul>
+</li>
+<li><a href="https://makitosan.github.io/vue-microbit-webusb/">vue-microbit-webusb</a></li>
+<li><a href="http://www.micropython.org.cn/bbs/forum.php?mod=viewthread&amp;tid=1262">microbit的webusb功能测试</a></li>
+<li><a href="https://firialabs.com/">microbit webusb course</a></li>
+<li><a href="https://github.com/WICG/webusb">WICG/webusb</a></li>
+<li><a href="http://www.freebuf.com/sectool/101511.html">WebUSB API：让你的USB设备安全的接入网络</a></li>
+<li><a href="https://wicg.github.io/webusb/">WebUSB API</a></li>
+<li><a href="https://github.com/bbcmicrobit/PythonEditor/tree/webusb-beta">PythonEditor webusb-beta</a></li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://wwj-tmp-video.just4fun.site/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>我近期在折腾</h4>
+<li><a href="https://blog.just4fun.site/about-codelab-club.html" target="_blank">codelab.club</a></li>
+<li><a href="https://codelab-adapter-docs.codelab.club/" target="_blank">codelab-adapter</a></li>
+<li><a href="https://forums.codelab.club/" target="_blank">forums.codelab.club</a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://scratch3-files.just4fun.site/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://wwj-tmp-video.just4fun.site/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
