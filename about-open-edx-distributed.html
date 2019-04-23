@@ -1,0 +1,466 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队
+喜欢你这种没事瞎翻源码的人
+如果你恰好也热爱技术、喜欢折腾，一起来捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>about Open edx distributed</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://wwj-tmp-video.just4fun.site/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to about Open edx distributed">
+					about Open edx distributed 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2015-10-27T00:00:00+00:00">
+	<i class="icon-calendar"></i>二 27 十月 2015
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/edx.html"><i class="icon-folder-open"></i>edx</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/edx.html"><i class="icon-tag"></i>edx</a>
+</footer><!-- /.post-info -->		</div>
+		<blockquote>
+<p>premature optimization is the root of all evil. --Donald Knuth</p>
+</blockquote>
+<h2 id="_1">过早优化</h2>
+<p>似乎每个准备用Open edX的人，在安装尚未完成，用户还没注册，workflow还未确定，就开始担忧，如何分布式部署Open edX，以便能大规模应用呢？就好像明天用户就要破百万，后天完成第二轮融资，不提早考虑好，万一火了，多对不起排着队上课的同学呀</p>
+<p>哈哈，没有开刷各位的意思，我自己一开始就是这样的（羞涩脸）</p>
+<p>尽早考虑架构的问题当然是好的。毕竟一旦下手，生米煮成熟饭，再要调整就难了。</p>
+<h2 id="why-not">Why not？</h2>
+<p>不是说未雨绸缪有多不好，毕竟大家都觉得有备无患嘛，只是在Open edX中你不需要过早地担忧这些，Open edX采用了SOA风格的架构，RESTful风格的接口，基本是天生支持分布式的，这些都可以动态调整，初期不予考虑并但不影响你后期的扩展，而且你起步阶段还会敏捷许多</p>
+<p>而一来就考虑分布式的问题，分散了精力不说，更要命的是：你其实不知道系统的瓶颈在哪里，你没有真实的使用场景，怎么知道压力在那里呢？</p>
+<p>是分离数据库好呢，还是多搞几台缓存服务器好，如果优化mongo的话，cluster又该准备几个。</p>
+<p>而后你发现，真实使用场景是在学校内部使用，学生集中在晚上8-9点，主要是看视频，而你折腾了半天mysql主从数据库，考虑了读写分离，同步延迟等问题，不是在闹么。。。读数据的压力缓存完全能应对，而视频流服务又独立于edx。</p>
+<p>脱离实际使用场景的优化，都是耍流氓。</p>
+<h2 id="_2">定心丸</h2>
+<p>edX的架构风格有很浓郁的SOA风味，核心组件的接口都是RESTful风格。几乎天然为分布式做足了考虑。它允许我们敏捷得构建起服务，等到负载压力大了，找到瓶颈后再动态调整来应对。</p>
+<p>对REST架构的扩展性有兴趣的同学，可以去翻阅Roy Thomas Fielding博士那篇著名的博士论文。那篇论文有中文版，我用了整个周末才读完 orz</p>
+<p>ps：Roy这篇论文的结尾处，引用的一段，动人极了，二度引用以提升逼格</p>
+<blockquote>
+<p>我们每个人在内心深处都怀有一个梦想:希望创造出一个鲜活的世界,一个宇宙。那些
+处在我们生活中心、受到过专业训练的架构师们,都怀有这样的渴望:在某一天,在某个地方,因为某种原因,我要创造出一个不可思议的、美丽的、夺人心魄的场所,在那里人们可以漫步,可以梦想,历经很多世纪生生不息。  ——Christopher Alexander</p>
+</blockquote>
+<p>原文更是动人</p>
+<blockquote>
+<p>Each one of us has, somewhere in his heart, the dream to make a living world, a universe. Those of us who have been trained as architects have this desire perhaps at the very center of our lives: that one day, somewhere, somehow, we shall build one building which is wonderful, beautiful, breathtaking, a place where people can walk and dream for centuries.  -- Christopher Alexander </p>
+</blockquote>
+<h2 id="_3">实验</h2>
+<p>为了让大家宽心，我这两天在青云上做了如下实验</p>
+<p>先以原生部署的方式，部署在单机（就是按官方wiki的的<a href="https://github.com/edx/configuration/wiki/edX-Ubuntu-12.04-64-bit-Installation">这个文档</a>部署），而后假设用户暴涨, 然后我发现，这群人不知怎么搞的，读写很频繁，数据库压力挺大的，我最好把数据库分离出来。<br />
+话说用户暴涨的话，我不是该出任CEO迎娶白富美去了么，哪还写代码啊摔，哎想想还有点紧张。</p>
+<p>我说干就干，参考了<a href="https://github.com/edx/configuration/wiki/Preparation-For-Production-Launch">Preparation For Production Launch</a>，在两台独立的机器上部署好了数据库，给与了相关的用户权限（为了方便，我都用了root，习惯不好囧），允许了外部访问，又在青云里设好了防火墙，之后修改了原先机器上（跑着edxapp）的配置，主要是各个*.auth.json文件里DATABASES相关的配置，指向新的数据库位置</p>
+<p>然后把原先的数据导出再倒入到新数据库中，restart edxapp，一切OK！</p>
+<p>主从数据库之类的还没做，参考网上的资料和<a href="https://github.com/dhasthagheer/edx-distributed-configuration">这个项目</a>，做主从数据库是不麻烦的</p>
+<p>分离其他组件就更容易了，基本就是用ansible在相关机器上跑对应role，然后再运行edxapp的机器上配置好ip:port。把服务视为无状态为好，这样最有利于分离，而后分布</p>
+<h2 id="_4">关于瓶颈</h2>
+<p>前边我们提到，在真实的环境中找到性能瓶颈是关键，这是漏水最多的短板。</p>
+<p>说来惭愧，这里分享下前车之鉴，我自己维护的平台，由于手写了比较多mongo查询，性能瓶颈都集中在这里了。达到过500%的负载，我也不知道这是什么鬼（服务器性能很好）</p>
+<p>通过合适地采用缓存，完全消解了这个问题</p>
+<p>所以，如果你写了很多自己的逻辑，尤其是大量与数据库打交道，做好缓存，做好缓存，做好缓存，重要的话说三遍。</p>
+<p>就酱</p>
+<h2 id="_5">未来</h2>
+<p>如果你真的关心分布式，我是说真的关心，而不是玩票，好比你有一堆硬件，一堆资金，想据此提供云服务，有几个项目你可能会感兴趣</p>
+<p>edX的分布式，当前官方只给出基于亚马逊云的分布式部署方案。此外也有几个很引人注目的项目，一个是官方开始倾注力量到docker中，这个可以在roadmap和黑客马拉松中看到进展和计划。当然不只是官方，appsembler团队在这条路上已经走得很远了，他们甚至尝试性地给出了基于kubernetes的方案</p>
+<p>另一个是<a href="https://www.hastexo.com/hastexo-integrates-openstack-open-edx">这里</a>，hastexo正在将OpenStack技术用于Open edX</p>
+<p>好啦 ，收尾， 看书去</p>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://wwj-tmp-video.just4fun.site/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>我近期在折腾</h4>
+<li><a href="https://blog.just4fun.site/about-codelab-club.html" target="_blank">codelab.club</a></li>
+<li><a href="https://codelab-adapter-docs.codelab.club/" target="_blank">codelab-adapter</a></li>
+<li><a href="https://forums.codelab.club/" target="_blank">forums.codelab.club</a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://scratch3-files.just4fun.site/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://wwj-tmp-video.just4fun.site/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/twitter-bootstrap/2.0.4/bootstrap.min.js"></script>
+    <!--
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+    -->
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
