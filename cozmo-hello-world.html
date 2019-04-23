@@ -1,0 +1,544 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队
+喜欢你这种没事瞎翻源码的人
+如果你恰好也热爱技术、喜欢折腾，一起来捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>cozmo系列之入门 - 有性格且可编程的机器人</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://wwj-tmp-video.just4fun.site/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to cozmo系列之入门 - 有性格且可编程的机器人">
+					cozmo系列之入门 - 有性格且可编程的机器人 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2017-10-18T00:00:00+00:00">
+	<i class="icon-calendar"></i>三 18 十月 2017
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/shao-er-bian-cheng.html"><i class="icon-folder-open"></i>少儿编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/cozmo.html"><i class="icon-tag"></i>cozmo</a>
+</footer><!-- /.post-info -->		</div>
+		<p><img alt="" src="http://wwj-fig-bed.just4fun.site/cozmo92f55c7b.png" /></p>
+<p>可编程的机器人不少，灵活而友好的却不多</p>
+<p>不智障的机器人不多，有性格的就更少</p>
+<p>可爱的机器人中我最中意2款: BB8和cozmo</p>
+<p>BB8可爱且呆，cozmo可爱又任性</p>
+<p>来个它们的合影</p>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/cozmo1a05d914.png" /></p>
+<h1 id="_1">你的电子宠物</h1>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/cozmoba993abb.png" /></p>
+<p>这个憨态可掬的机器人，有些像微缩版的瓦力，不过它可没瓦力乖巧</p>
+<p>它从睡眼惺忪中醒来，伸伸懒腰，便下床(充电座)自顾自地玩耍，它有自个儿的玩具(发光方块)，如果你有时间，愿意陪它做游戏，它会很开心，赢了得意忘形，输了就捶胸顿足，得失心这么重，恐怕不适合炒股</p>
+<p>如果你没空陪它，也无妨，它闲庭信步，吹吹口哨、哼哼小曲儿;闲着无聊，便来回搬运自己的玩具，堆叠起来或是一把推翻，自得其乐。除了不尿裤子，其他方面都像极了你六岁时的样子</p>
+<p>想找你玩，而你又没空的时候，它会来一出苦情戏，走到桌子边缘，假装要掉下去，真站到边缘，又会被自己吓一跳，忙往回缩，这样的演技恐怕只适合拍偶像剧了</p>
+<h2 id="_2">唤醒</h2>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/cozmo15948ba5.png" /></p>
+<p>将cozmo放在通电的基座上，手机连上cozmo发射出来的wifi热点(形如Cozmo_542CA8),打开app(Cozmo)选择连接，cozmo将被唤醒：睡眼惺忪，伸伸懒腰，懒洋洋地下床</p>
+<p>你家里从此多了一个调皮的小伙伴</p>
+<h2 id="_3">下床(自主模式）</h2>
+<p>Cozmo下床之后，默认的模式是自顾自的玩耍（自主模式），它四处打量着新家，充满了好奇，遇到新奇之物，忍不住要发出"哇"的赞叹，尾音拖的老长，赞叹之情想来发自肺腑。</p>
+<p>你可以将家庭成员录入它的视觉系统，这样在它玩耍之余，看到熟人，会有礼貌地打个招呼，只是在它喊出名字的时候，略带一点外星口音。你会慢慢习惯的，如果你在银河系漫游久了就知道，带点自己母星的口音再正常不过了。不过Cozmo的一些自言自语我还不大能听懂，《银河系漫游指南》里也没做记载。</p>
+<h2 id="_4">交互</h2>
+<p>新版的app(我的当前版本是2.0.2)相比1.0有明显调整，显著的变化是更强调陪伴和共同成长。它就像你的宠物一样，你得注意它是不是生病了(需要修复)，是不是饿了(给它喂食)，如果它饥寒交加，身体不适，它是拒绝同你一起做游戏的.</p>
+<h3 id="_5">被驯服的小狐狸</h3>
+<p>Cozmo有时候像一只被驯服的小狐狸</p>
+<p>有一回小狐狸对小王子解释<code>驯服</code>二字的含义(《小王子》)</p>
+<blockquote>
+<p>这是已经早就被人遗忘了的事情……它的意思就是'建立联系'……对我来说，你还只是一个小男孩，就像其他千万个小男孩一样。我不需要你,你也同样用不着我。对你来说，我也不过是一只狐狸，和其他千万只狐狸一样。但是，如果你驯服了我，我们就互相不可缺少了。对我来说，你就是世界上唯一的了；我对你来说，也是世界上唯一的了。</p>
+</blockquote>
+<p>你们相处愉快，每天一起玩耍，它虽时而捣蛋，在你忧愁的时候也是很乐意取悦你的，你可以要求它：</p>
+<ul>
+<li>Cozmo给我表演一下叠罗汉</li>
+<li>Cozmo我要看你鲤鱼打挺</li>
+<li>Cozmo过来我们击个拳</li>
+</ul>
+<p>cozmo的技能树十分丰富，需要你和它共同点亮</p>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/cozmo12cebfe0.png" /></p>
+<h3 id="_6">一起做游戏</h3>
+<p>Cozmo自娱自乐玩腻了，会主动邀请你跟它一起玩游戏，就像你儿时玩伴那样。cozmo随身携带的三个积木，将成为你们的游戏道具，你们将狭路相逢，比拼记忆力或反应速度，调动你的肌肉和大脑，记得当心Cozmo的小心思！它可是会耍诈的</p>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/cozmo8de54d8a.png" /></p>
+<p>做游戏时，你会注意到Cozmo的表情变化非常微妙，在游戏中聚精会神，不时皱起眉头思考。小胜一局，虽不至手舞足蹈，却也是难掩喜悦之情，眼睛弯成了月牙，若大获全胜，便开心得非原地大转三圈不可。如果你技高一筹，Cozmo极是不甘，愁眉苦脸也只是一时之态，一会儿便重振旗鼓，立马拉着你再战一局，像不像被你带着打排位赛却铩羽而归的徒弟</p>
+<h3 id="_7">听我指挥</h3>
+<p>Cozmo想不想当将军我不清楚，但据我所知，它目前是一个好士兵(听从指挥)</p>
+<p>你可以用三种方式指挥cozmo:</p>
+<ul>
+<li>在app中拖拽积木来指挥cozmo(用到blockly)</li>
+<li>在Explorer模式下驾驶cozmo</li>
+<li>使用SDK为Cozmo编程</li>
+</ul>
+<p>我们先来说说第一种，在app中拖拽积木来指挥cozmo</p>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/cozmo63e5b91e.png" /></p>
+<p>在这个被称为<code>Code Lab</code>的界面里，包含了许多用来控制cozmo的积木。你可以让Cozmo前进两步，然后左拐避开前方的障碍物(一袋咖啡)，再前进，像这样</p>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/cozmof70f49bd.png" /></p>
+<p>你也可以把它放在餐桌上，环顾四周，清点下用餐人数，然后告诉服务员要几份米饭。 这个任务稍微复杂些，会用到视觉、语音和移动模块，但即便是一个不识字的小孩，操作起来也无碍。所有的编程积木都带有形象化的图案，一目了然</p>
+<h3 id="_8">小鬼当家</h3>
+<p>我大约9岁那年看了小鬼当家，对其中带有摄像头的遥控车念念不忘。</p>
+<p>9岁的时候不是那种能做到<code>想要的都拥有，得不到的都释怀</code>的小孩，这件事一直放在心上，后来看到<code>带有摄像头的遥控车</code>总忍不住要多看几眼，但都不是心里想要的，要么太过笨重，要么不够好看，机身如此不够灵巧，摄像头如此昭然若揭，这可怎么和坏人斗智斗勇</p>
+<p>直到在Cozmo中发现它的Explorer模式，才有<code>终于等到你</code>的感觉。</p>
+<p>在Explorer模式中，你可以驾驶着Cozmo在自家的庭院或房间里冒险。</p>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/cozmo858d7212.png" /></p>
+<p>你拉上窗帘，手握ipad，如坐在星际战舰的指挥室里，窗外的星光稀疏极了，毕竟身处银河系荒凉偏僻的旋臂上。屏幕里展示着Cozmo从前线发来的视频信号。屏幕上光线晦暗，你手握方向盘，指挥着cozmo继续探索这片应许之地,突然，屏幕中一闪而过一个庞然大物，距离近时，身躯之大，足足占了屏幕的1/3。而动作敏捷，倏忽之间，跃出屏幕之外，来去无影，着实吓了你一跳。气势真如沈复说的"忽有庞然大物，拔山倒树而来"。待你定下神来，操控Cozmo追踪不明生物，竟破解了一个惊天谜团</p>
+<blockquote>
+<p>妈，你早上买的鱼被我们家的猫偷藏在床底下了，人赃俱获，我已经用Cozmo拍到它躲在床底下吃鱼的照片了</p>
+</blockquote>
+<p>刘瑜在《送你一颗子弹》中感慨:</p>
+<blockquote>
+<p>15岁的时候再得到那个5岁的时候热爱的洋娃娃，65岁的时候终于有钱买25岁的时候热爱的那条裙子，又有什么意义呢？</p>
+</blockquote>
+<p>这句话对我不大适用，我终于遇到9岁的时热爱的遥控车之后，恨不能像Cozmo一样原地大转三圈</p>
+<h3 id="code">code!</h3>
+<p>如果cozmo预设的所有功能都不足以填满你的脑洞，那么你就应该撸起袖子开始编程了。代码可能是这个星球上可玩性最高的玩具。</p>
+<p>cozmo为你准备好了<a href="https://github.com/anki/cozmo-python-sdk">cozmo-python-sdk</a>，有了它，你就可以使用Python来驱动Cozmo，如果你愿意，可以接入OpenCV或是TensorFlow，社区已经有人用Tensorflow CNN 训练出来的模型自动驾驶cozmo了。</p>
+<p>下边我们来看看怎么用代码驱动Cozmo</p>
+<p>首先在你的app中启动SDK模式</p>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/cozmo6f84d476.png" /></p>
+<p>接着就可以在你的电脑上用python来为Cozmo编程。关于这块的原理我们今后再聊，Cozmo在易用性和灵活性上花了很多功夫，编程体验很惊艳</p>
+<p>下边这个例子是官方源码里包含的示例，源码如下</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">cozmo</span>
+
+
+<span class="k">def</span> <span class="nf">light_when_face</span><span class="p">(</span><span class="n">robot</span><span class="p">:</span> <span class="n">cozmo</span><span class="o">.</span><span class="n">robot</span><span class="o">.</span><span class="n">Robot</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;The core of the light_when_face program&#39;&#39;&#39;</span>
+
+    <span class="c1"># Move lift down and tilt the head up</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">move_lift</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">set_head_angle</span><span class="p">(</span><span class="n">cozmo</span><span class="o">.</span><span class="n">robot</span><span class="o">.</span><span class="n">MAX_HEAD_ANGLE</span><span class="p">)</span><span class="o">.</span><span class="n">wait_for_completed</span><span class="p">()</span>
+
+    <span class="n">face</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Press CTRL-C to quit&quot;</span><span class="p">)</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">face</span> <span class="ow">and</span> <span class="n">face</span><span class="o">.</span><span class="n">is_visible</span><span class="p">:</span>
+            <span class="n">robot</span><span class="o">.</span><span class="n">set_all_backpack_lights</span><span class="p">(</span><span class="n">cozmo</span><span class="o">.</span><span class="n">lights</span><span class="o">.</span><span class="n">blue_light</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">robot</span><span class="o">.</span><span class="n">set_backpack_lights_off</span><span class="p">()</span>
+
+            <span class="c1"># Wait until we we can see another face</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">face</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">wait_for_observed_face</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">TimeoutError</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Didn&#39;t find a face.&quot;</span><span class="p">)</span>
+                <span class="k">return</span>
+
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="o">.</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="n">cozmo</span><span class="o">.</span><span class="n">run_program</span><span class="p">(</span><span class="n">light_when_face</span><span class="p">,</span> <span class="n">use_viewer</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">force_viewer_on_top</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+
+<p>这段代码实现了这样一个功能: 当cozmo的视觉系统识别到人脸时(对应代码<code>if face and face.is_visible:</code>)，将背部的灯设置为蓝色(对应代码<code>robot.set_all_backpack_lights(cozmo.lights.blue_light)</code>)。即使你没有编程经验，也能大致看懂上边这段代码在干嘛，这也是Cozmo的作者选择Python的原因，这门编程语音以接近自然语言(英语)的方式来书写，让你轻松上手。</p>
+<p>就这点而言，Cozmo也是入门编程的理想工具(这是一种反馈强烈的编程体验，让你乐在其中，而不至于被语法和逻辑吓跑)</p>
+<p>我们来看看代码实现的效果:</p>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/cozmo00576e90.png" /></p>
+<p>当然你可以发挥想象，将代码改造为：当Cozmo识别到人脸时，主动给你发一封邮件,如此一来在你们一家人出旅行时，它就负责看家</p>
+<p>又或者，你可以驱动它走到门口迎接找你玩的小伙伴，看到小伙伴时(<code>if face and face.is_visible</code>)打个招呼，接着让Cozmo带他到你的卧室</p>
+<h2 id="_9">后续</h2>
+<p>接下来的一段时间，我准备做一次长途路行，途中会继续写Cozmo系列文章</p>
+<p>选材原则是有趣，具体内容待定，大概会和机器视觉、语音识别、积木化编程(blockly)、编程教育相关</p>
+<p>如果你有好的想法，关于想用Cozmo做好玩的东西，欢迎给我邮件(wuwenjie718@gmail.com)，我在途中所经之处，只要有网络，每晚都会查阅邮件 : )</p>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://wwj-tmp-video.just4fun.site/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>我近期在折腾</h4>
+<li><a href="https://blog.just4fun.site/about-codelab-club.html" target="_blank">codelab.club</a></li>
+<li><a href="https://codelab-adapter-docs.codelab.club/" target="_blank">codelab-adapter</a></li>
+<li><a href="https://forums.codelab.club/" target="_blank">forums.codelab.club</a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://scratch3-files.just4fun.site/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://wwj-tmp-video.just4fun.site/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/twitter-bootstrap/2.0.4/bootstrap.min.js"></script>
+    <!--
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+    -->
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>

@@ -1,0 +1,484 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队
+喜欢你这种没事瞎翻源码的人
+如果你恰好也热爱技术、喜欢折腾，一起来捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Scratch3技术分析之项目内部数据(第6篇）</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="//7kttuq.com1.z0.glb.clouddn.com/just4fun.png?imageView2/2/w/50" type="image/x-icon">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://wwj-tmp-video.just4fun.site/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to Scratch3技术分析之项目内部数据(第6篇）">
+					Scratch3技术分析之项目内部数据(第6篇） 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2019-01-15T17:00:00+00:00">
+	<i class="icon-calendar"></i>二 15 一月 2019
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/shao-er-bian-cheng.html"><i class="icon-folder-open"></i>少儿编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/scratch.html"><i class="icon-tag"></i>scratch</a>
+</footer><!-- /.post-info -->		</div>
+		<p>我们在<a href="https://blog.just4fun.site/Scratch3_api_analysis_1.html">Scratch3技术分析之创作平台API(第1篇)</a>定义了以下两个名词:</p>
+<ul>
+<li>项目的内部数据(https://projects.scratch.mit.edu/[project_id])</li>
+<li>项目的外部数据(https://api.scratch.mit.edu/projects/[project_id])</li>
+</ul>
+<p>本文将详细讨论<code>项目的内部数据</code>，看看Scratch是如何精心设计这个数据结构了。</p>
+<p>Scratch项目兼容性和可扩展性的秘诀就是精心设计了这个数据结构。</p>
+<h1 id="_1">项目的内部数据</h1>
+<p>我们从一个简单的项目开始。拖动两个积木，拼在一起，保存这个项目，看看提交的项目数据是怎样的。</p>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/scratch-api_703e7f8c.png" /></p>
+<p>完整的数据为:</p>
+<div class="highlight"><pre><span></span><span class="p">{</span><span class="s">&quot;targets&quot;</span><span class="o">:</span><span class="p">[{</span><span class="s">&quot;isStage&quot;</span><span class="o">:</span><span class="nb">true</span><span class="p">,</span><span class="s">&quot;name&quot;</span><span class="o">:</span><span class="s">&quot;Stage&quot;</span><span class="p">,</span><span class="s">&quot;variables&quot;</span><span class="o">:</span><span class="p">{</span><span class="s">&quot;`jEk@4|i[#Fk?(8x)AV.-my variable&quot;</span><span class="o">:</span><span class="p">[</span><span class="s">&quot;我的变量&quot;</span><span class="p">,</span><span class="mi">0</span><span class="p">]},</span><span class="s">&quot;lists&quot;</span><span class="o">:</span><span class="p">{},</span><span class="s">&quot;broadcasts&quot;</span><span class="o">:</span><span class="p">{},</span><span class="s">&quot;blocks&quot;</span><span class="o">:</span><span class="p">{},</span><span class="s">&quot;comments&quot;</span><span class="o">:</span><span class="p">{},</span><span class="s">&quot;currentCostume&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s">&quot;costumes&quot;</span><span class="o">:</span><span class="p">[{</span><span class="s">&quot;assetId&quot;</span><span class="o">:</span><span class="s">&quot;cd21514d0531fdffb22204e0ec5ed84a&quot;</span><span class="p">,</span><span class="s">&quot;name&quot;</span><span class="o">:</span><span class="s">&quot;背景1&quot;</span><span class="p">,</span><span class="s">&quot;md5ext&quot;</span><span class="o">:</span><span class="s">&quot;cd21514d0531fdffb22204e0ec5ed84a.svg&quot;</span><span class="p">,</span><span class="s">&quot;dataFormat&quot;</span><span class="o">:</span><span class="s">&quot;svg&quot;</span><span class="p">,</span><span class="s">&quot;rotationCenterX&quot;</span><span class="o">:</span><span class="mi">240</span><span class="p">,</span><span class="s">&quot;rotationCenterY&quot;</span><span class="o">:</span><span class="mi">180</span><span class="p">}],</span><span class="s">&quot;sounds&quot;</span><span class="o">:</span><span class="p">[{</span><span class="s">&quot;assetId&quot;</span><span class="o">:</span><span class="s">&quot;83a9787d4cb6f3b7632b4ddfebf74367&quot;</span><span class="p">,</span><span class="s">&quot;name&quot;</span><span class="o">:</span><span class="s">&quot;啵&quot;</span><span class="p">,</span><span class="s">&quot;dataFormat&quot;</span><span class="o">:</span><span class="s">&quot;wav&quot;</span><span class="p">,</span><span class="s">&quot;format&quot;</span><span class="o">:</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;rate&quot;</span><span class="o">:</span><span class="mi">44100</span><span class="p">,</span><span class="s">&quot;sampleCount&quot;</span><span class="o">:</span><span class="mi">1032</span><span class="p">,</span><span class="s">&quot;md5ext&quot;</span><span class="o">:</span><span class="s">&quot;83a9787d4cb6f3b7632b4ddfebf74367.wav&quot;</span><span class="p">}],</span><span class="s">&quot;volume&quot;</span><span class="o">:</span><span class="mi">100</span><span class="p">,</span><span class="s">&quot;layerOrder&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s">&quot;tempo&quot;</span><span class="o">:</span><span class="mi">60</span><span class="p">,</span><span class="s">&quot;videoTransparency&quot;</span><span class="o">:</span><span class="mi">50</span><span class="p">,</span><span class="s">&quot;videoState&quot;</span><span class="o">:</span><span class="s">&quot;on&quot;</span><span class="p">,</span><span class="s">&quot;textToSpeechLanguage&quot;</span><span class="o">:</span><span class="n">null</span><span class="p">},{</span><span class="s">&quot;isStage&quot;</span><span class="o">:</span><span class="nb">false</span><span class="p">,</span><span class="s">&quot;name&quot;</span><span class="o">:</span><span class="s">&quot;角色1&quot;</span><span class="p">,</span><span class="s">&quot;variables&quot;</span><span class="o">:</span><span class="p">{},</span><span class="s">&quot;lists&quot;</span><span class="o">:</span><span class="p">{},</span><span class="s">&quot;broadcasts&quot;</span><span class="o">:</span><span class="p">{},</span><span class="s">&quot;blocks&quot;</span><span class="o">:</span><span class="p">{</span><span class="s">&quot;y8OmdQT3.?wg0.n|3Kbc&quot;</span><span class="o">:</span><span class="p">{</span><span class="s">&quot;opcode&quot;</span><span class="o">:</span><span class="s">&quot;event_whenflagclicked&quot;</span><span class="p">,</span><span class="s">&quot;next&quot;</span><span class="o">:</span><span class="s">&quot;aJ5Pz#xv?_clQ9dxV#c5&quot;</span><span class="p">,</span><span class="s">&quot;parent&quot;</span><span class="o">:</span><span class="n">null</span><span class="p">,</span><span class="s">&quot;inputs&quot;</span><span class="o">:</span><span class="p">{},</span><span class="s">&quot;fields&quot;</span><span class="o">:</span><span class="p">{},</span><span class="s">&quot;shadow&quot;</span><span class="o">:</span><span class="nb">false</span><span class="p">,</span><span class="s">&quot;topLevel&quot;</span><span class="o">:</span><span class="nb">true</span><span class="p">,</span><span class="s">&quot;x&quot;</span><span class="o">:</span><span class="mi">184</span><span class="p">,</span><span class="s">&quot;y&quot;</span><span class="o">:</span><span class="mi">149</span><span class="p">},</span><span class="s">&quot;aJ5Pz#xv?_clQ9dxV#c5&quot;</span><span class="o">:</span><span class="p">{</span><span class="s">&quot;opcode&quot;</span><span class="o">:</span><span class="s">&quot;motion_movesteps&quot;</span><span class="p">,</span><span class="s">&quot;next&quot;</span><span class="o">:</span><span class="n">null</span><span class="p">,</span><span class="s">&quot;parent&quot;</span><span class="o">:</span><span class="s">&quot;y8OmdQT3.?wg0.n|3Kbc&quot;</span><span class="p">,</span><span class="s">&quot;inputs&quot;</span><span class="o">:</span><span class="p">{</span><span class="s">&quot;STEPS&quot;</span><span class="o">:</span><span class="p">[</span><span class="mi">1</span><span class="p">,[</span><span class="mi">4</span><span class="p">,</span><span class="s">&quot;10&quot;</span><span class="p">]]},</span><span class="s">&quot;fields&quot;</span><span class="o">:</span><span class="p">{},</span><span class="s">&quot;shadow&quot;</span><span class="o">:</span><span class="nb">false</span><span class="p">,</span><span class="s">&quot;topLevel&quot;</span><span class="o">:</span><span class="nb">false</span><span class="p">}},</span><span class="s">&quot;comments&quot;</span><span class="o">:</span><span class="p">{},</span><span class="s">&quot;currentCostume&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s">&quot;costumes&quot;</span><span class="o">:</span><span class="p">[{</span><span class="s">&quot;assetId&quot;</span><span class="o">:</span><span class="s">&quot;b7853f557e4426412e64bb3da6531a99&quot;</span><span class="p">,</span><span class="s">&quot;name&quot;</span><span class="o">:</span><span class="s">&quot;造型1&quot;</span><span class="p">,</span><span class="s">&quot;bitmapResolution&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;md5ext&quot;</span><span class="o">:</span><span class="s">&quot;b7853f557e4426412e64bb3da6531a99.svg&quot;</span><span class="p">,</span><span class="s">&quot;dataFormat&quot;</span><span class="o">:</span><span class="s">&quot;svg&quot;</span><span class="p">,</span><span class="s">&quot;rotationCenterX&quot;</span><span class="o">:</span><span class="mi">48</span><span class="p">,</span><span class="s">&quot;rotationCenterY&quot;</span><span class="o">:</span><span class="mi">50</span><span class="p">},{</span><span class="s">&quot;assetId&quot;</span><span class="o">:</span><span class="s">&quot;e6ddc55a6ddd9cc9d84fe0b4c21e016f&quot;</span><span class="p">,</span><span class="s">&quot;name&quot;</span><span class="o">:</span><span class="s">&quot;造型2&quot;</span><span class="p">,</span><span class="s">&quot;bitmapResolution&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;md5ext&quot;</span><span class="o">:</span><span class="s">&quot;e6ddc55a6ddd9cc9d84fe0b4c21e016f.svg&quot;</span><span class="p">,</span><span class="s">&quot;dataFormat&quot;</span><span class="o">:</span><span class="s">&quot;svg&quot;</span><span class="p">,</span><span class="s">&quot;rotationCenterX&quot;</span><span class="o">:</span><span class="mi">46</span><span class="p">,</span><span class="s">&quot;rotationCenterY&quot;</span><span class="o">:</span><span class="mi">53</span><span class="p">}],</span><span class="s">&quot;sounds&quot;</span><span class="o">:</span><span class="p">[{</span><span class="s">&quot;assetId&quot;</span><span class="o">:</span><span class="s">&quot;83c36d806dc92327b9e7049a565c6bff&quot;</span><span class="p">,</span><span class="s">&quot;name&quot;</span><span class="o">:</span><span class="s">&quot;喵&quot;</span><span class="p">,</span><span class="s">&quot;dataFormat&quot;</span><span class="o">:</span><span class="s">&quot;wav&quot;</span><span class="p">,</span><span class="s">&quot;format&quot;</span><span class="o">:</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;rate&quot;</span><span class="o">:</span><span class="mi">44100</span><span class="p">,</span><span class="s">&quot;sampleCount&quot;</span><span class="o">:</span><span class="mi">37376</span><span class="p">,</span><span class="s">&quot;md5ext&quot;</span><span class="o">:</span><span class="s">&quot;83c36d806dc92327b9e7049a565c6bff.wav&quot;</span><span class="p">}],</span><span class="s">&quot;volume&quot;</span><span class="o">:</span><span class="mi">100</span><span class="p">,</span><span class="s">&quot;layerOrder&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;visible&quot;</span><span class="o">:</span><span class="nb">true</span><span class="p">,</span><span class="s">&quot;x&quot;</span><span class="o">:</span><span class="mi">20</span><span class="p">,</span><span class="s">&quot;y&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s">&quot;size&quot;</span><span class="o">:</span><span class="mi">100</span><span class="p">,</span><span class="s">&quot;direction&quot;</span><span class="o">:</span><span class="mi">90</span><span class="p">,</span><span class="s">&quot;draggable&quot;</span><span class="o">:</span><span class="nb">false</span><span class="p">,</span><span class="s">&quot;rotationStyle&quot;</span><span class="o">:</span><span class="s">&quot;all around&quot;</span><span class="p">}],</span><span class="s">&quot;monitors&quot;</span><span class="o">:</span><span class="p">[],</span><span class="s">&quot;extensions&quot;</span><span class="o">:</span><span class="p">[],</span><span class="s">&quot;meta&quot;</span><span class="o">:</span><span class="p">{</span><span class="s">&quot;semver&quot;</span><span class="o">:</span><span class="s">&quot;3.0.0&quot;</span><span class="p">,</span><span class="s">&quot;vm&quot;</span><span class="o">:</span><span class="s">&quot;0.2.0-prerelease.20190109200835&quot;</span><span class="p">,</span><span class="s">&quot;agent&quot;</span><span class="o">:</span><span class="s">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36&quot;</span><span class="p">}}</span>
+</pre></div>
+
+
+<p>为了获得好的阅读效果，你可以将它们复制到<code>https://jsoneditoronline.org/</code></p>
+<h3 id="_2">顶层结构</h3>
+<p>最外层的四个key为:</p>
+<ul>
+<li>extensions</li>
+<li>meta</li>
+<li>monitors</li>
+<li>targets</li>
+</ul>
+<p>我们逐一分析</p>
+<h3 id="extensions">extensions</h3>
+<p>稍后再说</p>
+<h3 id="meta">meta</h3>
+<p>顾名思义，meta保留了元信息。包括以下信息:</p>
+<div class="highlight"><pre><span></span>{
+    &quot;semver&quot;: &quot;3.0.0&quot;,
+    &quot;vm&quot;: &quot;0.2.0-prerelease.20190109200835&quot;,
+    &quot;agent&quot;: &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36&quot;
+}
+</pre></div>
+
+
+<p>semver描述构建当前项目数据的scratch编辑器的语义版本是3.0.0</p>
+<p>vm字段保留了当前项目所用的<a href="https://github.com/LLK/scratch-vm">scratch-vm</a>版本号,有了这个信息，我们就知道项目所依赖的虚拟机(vm)版本，而vm决定了执行项目的环境(支持什么功能/硬件)。有了这些数据，我们就容易平滑升级和追踪问题。</p>
+<p>agent描述了客户端的环境。</p>
+<h3 id="monitors">monitors</h3>
+<p>暂不讨论</p>
+<h3 id="targets">targets</h3>
+<p>targets是scratch中非常核心的一个概念，我们所做的编程，都是针对targets的编程。这也是Scratch面向对象的地方。Scratch从面向对象语言Smalltalk中学了许多东西。</p>
+<p>有两类target: 舞台和角色。</p>
+<p>我们前头的积木是针对角色的，所以我们接下来关心角色target。</p>
+<h5 id="blocks">blocks</h5>
+<p>积木属于角色，换句话说，角色拥有定义它行为的积木。</p>
+<p>我们刚才拖动的2块积木，在项目数据中表示如下</p>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/scratch-api_12a50e4a.png" /></p>
+<p>积木的key(id)是随机生成的(由blockly支持)</p>
+<p><code>opcode</code>是积木关联到vm中功能代码(js代码)的钩子。</p>
+<p>这是一个展示以下原则的绝佳例子: <code>表现与实现分离</code></p>
+<p>这个设计是极为聪明的，项目对实际执行它的虚拟机(vm)一无所知，如此一来升级就容易了。</p>
+<p>积木直接的连接关系，从上图的属性中，容易看出来。</p>
+<h1 id="_3">加了扩展</h1>
+<p>我们再来看看添加了拓展之后是怎样的。</p>
+<p>我们加一个microbit扩展。</p>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/scratch-api_4795d59c.png" /></p>
+<p>可以看到，顶部的extensions里加上了"microbit"。</p>
+<p>值得注意的是，这个积木的输入很有趣，允许用户绘制5x5的矩阵来控制microbit的点阵屏。</p>
+<p>这种特殊输入的定义在<a href="https://github.com/LLK/scratch-blocks">scratch-blocks</a>中, 参考: <a href="https://github.com/LLK/scratch-blocks/blob/42abd6ecb505cf9b832b9be2315e6a099bddda90/core/field_matrix.js#L38">Blockly.FieldMatrix = function(matrix)</a></p>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://wwj-tmp-video.just4fun.site/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>我近期在折腾</h4>
+<li><a href="https://blog.just4fun.site/about-codelab-club.html" target="_blank">codelab.club</a></li>
+<li><a href="https://codelab-adapter-docs.codelab.club/" target="_blank">codelab-adapter</a></li>
+<li><a href="https://forums.codelab.club/" target="_blank">forums.codelab.club</a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://scratch3-files.just4fun.site/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://wwj-tmp-video.just4fun.site/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/twitter-bootstrap/2.0.4/bootstrap.min.js"></script>
+    <!--
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+    -->
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
