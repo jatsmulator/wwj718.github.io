@@ -1,0 +1,576 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队
+喜欢你这种没事瞎翻源码的人
+如果你恰好也热爱技术、喜欢折腾，一起来捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Scratch3技术分析之云变量 API(第7篇)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://wwj-tmp-video.just4fun.site/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to Scratch3技术分析之云变量 API(第7篇)">
+					Scratch3技术分析之云变量 API(第7篇) 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2019-03-04T00:00:00+00:00">
+	<i class="icon-calendar"></i>一 04 三月 2019
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/shao-er-bian-cheng.html"><i class="icon-folder-open"></i>少儿编程</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/scratch.html"><i class="icon-tag"></i>scratch</a>
+</footer><!-- /.post-info -->		</div>
+		<h1 id="_1">关于云变量</h1>
+<p>我们先来看下云变量的样子:</p>
+<p><img src="http://wwj-fig-bed.just4fun.site/cloud_var_06e2784a.png" width=400></p>
+<p>Scratch团队在<a href="https://scratch.mit.edu/info/faq/#clouddata">FAQ</a>里解释了</p>
+<h3 id="_2">什么是云变量</h3>
+<blockquote>
+<p>云变量可以让作品里保存的数据与Scratch社区的其他人所共享。你可以利用云变量发布调查或其他作品，而社区中的其他人可以访问和修改这些数据。</p>
+</blockquote>
+<h3 id="_3">谁能看见云变量中存放的数据？</h3>
+<p>当你运行一个用了云变量的作品时，你使用过程中产生的数据会存放在你的用户名下，其他人可以看到这些数据。</p>
+<h3 id="_4">云变量可以存放什么类型的数据？</h3>
+<p>云变量只能存放数字。</p>
+<h3 id="_5">我能使用云变量创建聊天室吗？</h3>
+<p>不可以。虽然在技术上是可能的，但Scratch网站不允许这样做。</p>
+<h3 id="_6">谁可以改变云变量的内容?</h3>
+<p>只有你和项目的查看者才能将数据存储在项目的云变量中。
+如果人们进入项目内部源码或重新混合(remix)你的代码，将会创建变量的副本，而不会影响或更改原始变量。</p>
+<h3 id="_7">可以用云变量创作多人游戏吗？</h3>
+<p>由于网速和同步的问题，创作多人游戏比较困难。但仍然有一些Scratcher别出心载，使用云变量制作回合制游戏以及其他类型的游戏。</p>
+<p>云变量会在后台产生日志。每个项目最多有10个云变量。</p>
+<p>Scratch新用户可能无法使用云数据。Scratch团队不希望Scratch新手滥用云变量，因为它可能会给系统带来很大的负担。</p>
+<p>云变量会自动更新，利用这个特性，可以建立联机游戏和聊天室，但官方不希望有高频交互，这将带来服务器压力。此外，实时性也不能保证，如果你希望建立实时的强连接，参考<a href="https://blog.just4fun.site/codelab-adapter-wormhole.html">codelab-adapter的虫洞(wormhole)</a>。</p>
+<hr />
+<p>说了半天，你可以看一个带有云变量的项目<a href="https://scratch.mit.edu/projects/246551861/">Google Chrome Dino Run 2 remix</a></p>
+<!--If you're going to remix this project, please change at least one thing. The main point of remixing is to add your own ideas to an existing project. However, some remixes on Scratch have been exact copies of their original project. If you remix my project without changing anything, it may get reported and you may get alerted for this. Also, a favorite and/or love-it for my project, as well as credit to me would be appreciated if you remix my project. Thanks!-->
+
+<p>解释完了云变量，我们进入技术分析部分，我们试图回答: 云变量是怎么实现的，并给出简单的实现例子。</p>
+<h1 id="_8">分析</h1>
+<p>和之前的分析一样，借助Chrome DevTools,我们来观察创建和使用云变量的过程中都发生了什么。</p>
+<h3 id="_9">创建变量</h3>
+<p>注意: 你的账号不能是新注册的，否则你没有创建云变量的权限。</p>
+<p>创建我们的第一个云变量: <code>test_cloud_var</code></p>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/scratch-cloud-var_d21ca552.png" /></p>
+<p>来看看请求细节(Headers)</p>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/scratch-cloud-var_0f36e615.png" /></p>
+<p><code>Sec-WebSocket-Key</code> 是一个Base64 encode的值，这个是浏览器随机生成的。websocket中似乎没有处理用户凭证相关的问题。</p>
+<p>接着看看Frames:</p>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/scratch-cloud-var_a14e579c.png" /></p>
+<p>向上的箭头表示的数据流向为 <code>client(scratch-gui)-&gt; server</code>
+向下的箭头表示的数据流向为 <code>server-&gt; client</code></p>
+<p>创建变量的过程非常简单：</p>
+<ul>
+<li>建立websocket通道</li>
+<li>在websocket通道中来回传送json。采用类似<a href="https://zh.wikipedia.org/zh-hans/JSON-RPC">json-rpc</a>的交互方式。</li>
+</ul>
+<p>后端的云变量服务地址位于<code>wss://clouddata.scratch.mit.edu/</code>，通过这个线索，我们可以找到与云变量相关的<a href="https://github.com/LLK/scratch-gui/blob/master/src/lib/cloud-provider.js">前端源码</a>, 源码非常简单。</p>
+<h3 id="_10">设置变量</h3>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/scratch-cloud-var-set_bc8d8fd7.png" /></p>
+<p>值得注意的是，设置变量的过程，数据从前端发往服务端，服务端不做响应。</p>
+<h3 id="_11">刷新项目</h3>
+<p>项目中存在云变量时，我们重新打开这个项目，默认将拉去云变量中存储的的值</p>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/_1b02b641.png" /></p>
+<h3 id="_12">删除云变量</h3>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/scratch-cloud-ver_37e1fe2c.png" /></p>
+<h3 id="_13">权限问题</h3>
+<p>从<a href="https://github.com/LLK/scratch-gui/blob/master/src/lib/cloud-provider.js#L32">前端源码</a>中似乎没看到权限相关的部分。</p>
+<p>明天有空做个实验，试试未登录状态是否能与云变量服务进行通信。</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">ws</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s1">&#39;wss://clouddata.scratch.mit.edu/&#39;</span><span class="p">);</span>
+<span class="nx">ws</span><span class="p">.</span><span class="nx">onopen</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="o">:</span><span class="s2">&quot;handshake&quot;</span><span class="p">,</span><span class="s2">&quot;user&quot;</span><span class="o">:</span><span class="s2">&quot;wwj718&quot;</span><span class="p">,</span><span class="s2">&quot;project_id&quot;</span><span class="o">:</span><span class="s2">&quot;291228938&quot;</span><span class="p">}</span>
+  <span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;\n&quot;</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nx">ws</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s2">&quot;Received Message: &quot;</span> <span class="o">+</span> <span class="nx">evt</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">};</span>    
+</pre></div>
+
+
+<p>实验发现只有在登陆情况下，才能建立websocket连接。websocket在建立连接的时候会携带cookie，这就是实现用户身份验证的关键。</p>
+<h1 id="_14">实现一个云变量服务</h1>
+<p>下边我们给出兼容Scratch开源前端的云变量后端实现。这个实现只作为原理展示，如果你要用于生产环境，需要做些调整。</p>
+<p>该实现基于Python的<a href="https://github.com/aaugustin/websockets">websockets</a><!--和<a href="https://github.com/aio-libs/aioredis">aioredis</a>库。--></p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">websockets</span>
+<span class="c1"># json-rpc</span>
+
+<span class="k">def</span> <span class="nf">handshake</span><span class="p">(</span><span class="n">req_json</span><span class="p">):</span>
+    <span class="c1"># 返回项目中已有的云变量</span>
+    <span class="n">project_id</span> <span class="o">=</span> <span class="n">req_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;project_id&quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span><span class="s2">&quot;set&quot;</span><span class="p">,</span><span class="s2">&quot;project_id&quot;</span><span class="p">:</span><span class="n">project_id</span><span class="p">,</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;☁ test&quot;</span><span class="p">,</span><span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;0&quot;</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="n">req_json</span><span class="p">):</span>
+    <span class="c1"># {&quot;method&quot;:&quot;create&quot;,&quot;user&quot;:&quot;wwj718&quot;,&quot;project_id&quot;:&quot;291229535&quot;,&quot;name&quot;:&quot;☁ test1&quot;,&quot;value&quot;:0}</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">req_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;ack&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;reply&quot;</span><span class="p">:</span> <span class="s2">&quot;OK&quot;</span><span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="n">req_json</span><span class="p">):</span>
+    <span class="c1"># {&quot;method&quot;:&quot;set&quot;,&quot;user&quot;:&quot;wwj718&quot;,&quot;project_id&quot;:&quot;291229535&quot;,&quot;name&quot;:&quot;☁ test1&quot;,&quot;value&quot;:&quot;0&quot;}</span>
+    <span class="k">return</span> <span class="bp">None</span>
+
+<span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="n">req_json</span><span class="p">):</span>
+    <span class="c1"># {&quot;method&quot;:&quot;delete&quot;,&quot;user&quot;:&quot;wwj718&quot;,&quot;project_id&quot;:&quot;291229535&quot;,&quot;name&quot;:&quot;☁ test1&quot;}</span>
+    <span class="k">return</span> <span class="bp">None</span>
+
+<span class="n">method_map</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">method_map</span><span class="p">[</span><span class="s2">&quot;handshake&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">handshake</span>
+<span class="n">method_map</span><span class="p">[</span><span class="s2">&quot;create&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">create</span>
+<span class="n">method_map</span><span class="p">[</span><span class="s2">&quot;set&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span>
+<span class="n">method_map</span><span class="p">[</span><span class="s2">&quot;delete&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">delete</span>
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">handle_cloud_data</span><span class="p">(</span><span class="n">websocket</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="n">async</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">websocket</span><span class="p">:</span>
+        <span class="c1"># from IPython import embed;embed()</span>
+        <span class="c1"># message结尾有换行符\n, 流</span>
+        <span class="n">req_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;request data:&quot;</span><span class="p">,</span><span class="n">req_json</span><span class="p">)</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="n">req_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;method&quot;</span><span class="p">)</span>
+        <span class="n">handle</span> <span class="o">=</span> <span class="n">method_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">handle</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">handle</span><span class="p">(</span><span class="n">req_json</span><span class="p">)</span>
+        <span class="n">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span>
+    <span class="n">websockets</span><span class="o">.</span><span class="n">serve</span><span class="p">(</span><span class="n">handle_cloud_data</span><span class="p">,</span> <span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="mi">8765</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;server is running&quot;</span><span class="p">)</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_forever</span><span class="p">()</span>
+</pre></div>
+
+
+<p>测试代码与scratch-gui中的代码基本一致:</p>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">ws</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s1">&#39;ws://127.0.0.1:8765&#39;</span><span class="p">);</span>
+<span class="nx">ws</span><span class="p">.</span><span class="nx">onopen</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="o">:</span><span class="s2">&quot;handshake&quot;</span><span class="p">,</span><span class="s2">&quot;user&quot;</span><span class="o">:</span><span class="s2">&quot;wwj718&quot;</span><span class="p">,</span><span class="s2">&quot;project_id&quot;</span><span class="o">:</span><span class="s2">&quot;291228938&quot;</span><span class="p">}</span>
+  <span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;\n&quot;</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nx">ws</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s2">&quot;Received Message: &quot;</span> <span class="o">+</span> <span class="nx">evt</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">};</span>    
+
+<span class="c1">// var data = {&quot;method&quot;:&quot;set&quot;,&quot;user&quot;:&quot;wwj718&quot;,&quot;project_id&quot;:&quot;291228938&quot;,&quot;name&quot;:&quot;☁ test1&quot;,&quot;value&quot;:&quot;1&quot;}</span>
+<span class="c1">// ws.send(JSON.stringify(data)+&quot;\n&quot;)</span>
+</pre></div>
+
+
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/websocket_83fe43ed.png" /></p>
+<p>如果你要用于生产环境，还需要处理cookie和多个客户端一同读写云变量的问题(考虑到读写频率，推荐使用redis， 如果你的后端也用python异步api实现，推荐使用<a href="https://github.com/aio-libs/aioredis">aioredis</a>)。</p>
+<h3 id="websocket">websocket测试工具</h3>
+<p><a href="https://asleepysamurai.com/articles/socketwrench?show=hn1">Socket Wrench</a></p>
+<h1 id="_15">其他值得留意的问题</h1>
+<h3 id="_16">速率限制</h3>
+<p><a href="https://github.com/LLK/scratch-gui/blob/master/src/lib/cloud-provider.js#L32">throttle 10</a>:</p>
+<p>Send a message to the cloud server at a rate of no more than 10 messages/sec</p>
+<p><code>this.sendCloudData = throttle(this._sendCloudData, 100);</code></p>
+<h1 id="_17">参考:</h1>
+<ul>
+<li><a href="https://github.com/LLK/scratch-gui/blob/master/src/lib/cloud-provider.js">cloud-provider.js</a></li>
+<li><a href="http://lodash.think2011.net/throttle">throttle</a></li>
+<li><a href="https://en.scratch-wiki.info/wiki/Cloud_Data">Cloud Data</a></li>
+<li><a href="https://scratch.mit.edu/info/faq/#clouddata">Cloud Variables</a></li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://wwj-tmp-video.just4fun.site/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>我近期在折腾</h4>
+<li><a href="https://blog.just4fun.site/about-codelab-club.html" target="_blank">codelab.club</a></li>
+<li><a href="https://codelab-adapter-docs.codelab.club/" target="_blank">codelab-adapter</a></li>
+<li><a href="https://forums.codelab.club/" target="_blank">forums.codelab.club</a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://scratch3-files.just4fun.site/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://wwj-tmp-video.just4fun.site/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/twitter-bootstrap/2.0.4/bootstrap.min.js"></script>
+    <!--
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+    -->
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
