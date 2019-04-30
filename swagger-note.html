@@ -1,0 +1,793 @@
+<!--
+
+ -----------------
+< 终于等到你 >
+ -----------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+----------------------------------
+
+我正在构建一个基于网络协作的虚拟团队
+喜欢你这种没事瞎翻源码的人
+如果你恰好也热爱技术、喜欢折腾，一起来捣鼓好玩的东西吧
+联系我咯: wuwenjie718@gmail.com
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Swagger使用笔记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="writing for time">
+    <meta name="author" content="wwj">
+
+    <!-- Le styles -->
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	
+	.tag-1 {
+		font-size: 13pt;
+	}
+	
+	.tag-2 {
+		font-size: 10pt;
+	}
+	
+	.tag-2 {
+		font-size: 8pt;
+	}
+
+	.tag-4 {
+		font-size: 6pt;
+	}
+
+  #footer img{
+    visibility: hidden;
+  }
+	
+    </style>
+    <link href="//cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/3.0.0/css/font-awesome.min.css" rel="stylesheet">
+	
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+	<link href="/theme/css/mystyle.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://wwj-tmp-video.just4fun.site/favicon.ico">
+    <!-- Le fav and touch icons -->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">writing for time </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			  <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/编程.html">
+						<i class="icon-folder-open icon-large"></i>编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/读书.html">
+						<i class="icon-folder-open icon-large"></i>读书
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/edx.html">
+						<i class="icon-folder-open icon-large"></i>edx
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/工具.html">
+						<i class="icon-folder-open icon-large"></i>工具
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/观念.html">
+						<i class="icon-folder-open icon-large"></i>观念
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/技术.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/架构.html">
+						<i class="icon-folder-open icon-large"></i>架构
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/空想.html">
+						<i class="icon-folder-open icon-large"></i>空想
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/少儿编程.html">
+						<i class="icon-folder-open icon-large"></i>少儿编程
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/诗词.html">
+						<i class="icon-folder-open icon-large"></i>诗词
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/数据.html">
+						<i class="icon-folder-open icon-large"></i>数据
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/算法.html">
+						<i class="icon-folder-open icon-large"></i>算法
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/随笔.html">
+						<i class="icon-folder-open icon-large"></i>随笔
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/瓦碎集.html">
+						<i class="icon-folder-open icon-large"></i>瓦碎集
+					</a>
+                  </li>
+                  <li >
+                    <a href="/category/硬件.html">
+						<i class="icon-folder-open icon-large"></i>硬件
+					</a>
+                  </li>
+			  
+			  <ul class="nav pull-right">
+				<li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+			  </ul>
+			  
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="span8 offset1" id="content">
+            <!--<div class="alert alert-success" style="font-size:18px;">>  你那里天气好吗，有什么新闻可以当做笑话</div>-->
+<section id="content">    
+	<article>
+		<header>
+			<h1>
+				<a href=""
+					rel="bookmark" 
+					title="Permalink to Swagger使用笔记">
+					Swagger使用笔记 
+				</a>
+			</h1> 
+		</header>
+		<div class="entry-content">
+		<div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2017-05-22T00:00:00+00:00">
+	<i class="icon-calendar"></i>一 22 五月 2017
+</abbr>
+<span class="label">By</span>
+<a href="/author/wuwenjie.html"><i class="icon-user"></i>wuwenjie</a>
+<span class="label">Category</span>
+<a href="/category/gong-ju.html"><i class="icon-folder-open"></i>工具</a>. 
+
+	
+<span class="label">Tags</span> 
+	<a href="/tag/dev-tools.html"><i class="icon-tag"></i>dev-tools</a>
+</footer><!-- /.post-info -->		</div>
+		<blockquote>
+<p>He who has a "why" to live for can bear almost any "how"  --尼采</p>
+</blockquote>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/swaggerffbceb7f.png" /></p>
+<h1 id="_1">前言</h1>
+<p>此前一直在关注swagger,不过也一直处于看看案例，读读文档的状态。关于写api接口文档和mock的事，多次头疼，看了许多工具都不甚满意,最近在使用<a href="https://github.com/nuysoft/Mock">Mock</a>(<a href="https://www.easy-mock.com">在线体验</a>)的时候</p>
+<p>发现它在文档里写道:</p>
+<blockquote>
+<p>支持同步 Swagger 文档，1秒便能生成 Mock 数据。之后接口文档更新也能通过更新操作重新生成 Mock 数据</p>
+</blockquote>
+<p>这太强大了，心动不已。</p>
+<p>我自己很喜欢<a href="https://www.easy-mock.com">easy-mock</a>这个工具，但写REST api的时候，感觉重复数据声明太多,很不爽，我们知道post/put的大部分属性是相同的，而get/post也有大量重复的属性。如何能以一种更加方便的方式在easy-mock(其他的mock工具也一样)定义接口，以便于更好地做到<code>DRY</code>, Swagger是绝佳的解决方案，而且它能带给你的远不止于此</p>
+<p>why的问题一解决，how to do 只是细节问题了</p>
+<p>于是重新花了2个晚上的时间，集中地读了文档，也动手写了几个demo，很符合预期</p>
+<p>接下来以经典的3w问题为线索来记录下我的学习过程</p>
+<h1 id="swagger">Swagger是什么</h1>
+<p>关于swagger是什么的问题，swagger的首页说的再清楚不过:</p>
+<blockquote>
+<p>Swagger is the world’s largest framework of API developer tools for the OpenAPI Specification(OAS), enabling development across the entire API lifecycle, from design and documentation, to test and deployment.</p>
+</blockquote>
+<p>因为swagger庞大的生态系统，我们在api的整个生命周期中都能从中受益: <code>from design and  documentation, to test and deployment</code></p>
+<p>前头我的easy-mock属于test部分，同时它也有效地帮助前后端分离</p>
+<p>如果你想对Swagger有更深的了解，可以看下对Tony Tam的这段采访(Tony Tam影响了Swagger的诞生):<a href="http://www.infoq.com/cn/articles/swagger-interview-tony-tam">通过Swagger进行API设计，与Tony Tam的一次对话</a></p>
+<h3 id="openapi-specification">OpenAPI Specification</h3>
+<p>上述这段引用中有一个名词值得一提:<code>OpenAPI Specification(OAS)</code>，它本身开放在<a href="https://github.com/OAI/OpenAPI-Specification">OpenAPI-Specification</a>,它的目的是:</p>
+<blockquote>
+<p>The goal of The OpenAPI Specification is to define a standard, language-agnostic interface to REST APIs</p>
+</blockquote>
+<h1 id="_2">为何需要用它</h1>
+<p>如果你在为一个系统设计API，你希望更好的管理你的API，你希望有一个工具能一站式地解决API相关的所有事情，从设计到文档再到mock，甚至能直接从设计文档中生成代码(声明式编程)，这确实是可能的，如果你的描述信息是完备的，自动化生成mock接口,同时也可生成各种语言与api交互的SDK</p>
+<p>这些便是你选择Swagger的理由</p>
+<h1 id="how-to-do">how to do...</h1>
+<p>最后便是怎么做的问题，这反而不太难，在互联网高度发达的今天，海量的资料遍布网络</p>
+<p>我接下来把我的学习过程和资料做个笔记，希望对你有用</p>
+<h3 id="_3">起步</h3>
+<p>尽管Swagger本身是开源的，你可以自行搭建整个工具链，但从在线工具开始尝试，会让你更快接触核心的东西，而不是在搭建工具上忙活半天</p>
+<p>我们从<a href="https://app.swaggerhub.com/">swaggerhub</a>开始</p>
+<p><img alt="" src="http://wwj-fig-bed.just4fun.site/swaggerffbceb7f.png" /></p>
+<p>swaggerhub是个非常棒的项目，你在这里可以:</p>
+<ul>
+<li>在线编辑你的API文档(用的是<a href="https://github.com/swagger-api/swagger-editor">swagger-editor</a>)<ul>
+<li>可使用使用json或yaml来书写(设计)你的API,推荐yaml，对人类更友好（无论是书写、阅读还是添加注释)</li>
+<li>可导出为json或是yaml，easy-mock中要求json文档的url，所以你可以把导出的json放到<a href="https://gist.github.com/">github gist</a>,然后贴到easy-mock里，之后就自动生成mock接口了</li>
+<li>可直接生成可运行20几种server代码（诸如flask）,当然也能自动生成client可执行代码</li>
+</ul>
+</li>
+<li>swaggerhub自带了mock插件，可以直接在线测试，UI页里有curl的请求例子</li>
+<li>和github相似，你可以分享以及fork别人的API项目:<a href="https://app.swaggerhub.com/search">search</a>，这样对学习很有帮助</li>
+<li>你可以邀请你的团队成员一起来编辑</li>
+</ul>
+<p>上边的截图是官方的demo：<code>Swagger Petstore</code>，这是一个很完整的API项目(同时也比较复杂)，我们可以一边试运行，一边做些修改看看每个参数的作用，如果你想对swagger的语法有个整体的认识，推荐这篇文档<a href="https://www.gitbook.com/book/huangwenchao/swagger/details">Swagger从入门到精通</a></p>
+<p>我的做法是先通读一遍(粗读)上边的文档，之后对着别人的API项目学习，遇到不懂的去查阅这个文档</p>
+<p>另外文档结尾处有个彩蛋:<a href="http://openapi-specification-visual-documentation.apihandyman.io/">OpenAPI Specification Visual Documentation</a>,这是查阅swagger写作语法的神器</p>
+<h3 id="swagger_1">如何把握Swagger</h3>
+<p>Swagger生态极其庞大，各种工具层出不穷，如何确定一个清晰工作流。而不会在庞大的生态链里迷失</p>
+<p>我觉得核心是理解：Swagger的生态系统是围绕Swagger文档(json/yaml)构建的,就是说我们书写的纯文本(json/yaml)便是我们输出的所有东西，它是全息的，我们手里只需有这个纯文本，就能做所有事情，此外的工具都是围绕它构建的，把这个纯文本导入到响应的工具里，就可获得其他功能，诸如漂亮的UI，自动化的mock等等</p>
+<p>你熟悉markdown的话，你会发现他们在设计思路上有不少相似点</p>
+<p>编写API文档，其实我们只是在写一个简单的纯文本文件。你可以用任何你喜欢的文本编辑器来写(vim/emacs/atom/vscode/sublime)。但是为了提高效率，建议选择Swagger Editor(swaggerhub默认是它)，诸如语法检查之类的功能能帮你省下大量排错的时间 </p>
+<h3 id="_4">一个小案例</h3>
+<p>学习一个新技术，我喜欢用它写一个简单的blog，我们接下来试试用swagger来写博客文章的API，我们假设Article有四个属性:</p>
+<ul>
+<li>userid</li>
+<li>title</li>
+<li>content</li>
+<li>tag</li>
+</ul>
+<p>API是RESTful风格(可以参考我此前的文章<a href="http://blog.just4fun.site/RESTful-Api.html">RESTful-Api</a>)，支持:</p>
+<ul>
+<li><code>get /articles</code> : 获取文章列表</li>
+<li><code>post /articles</code> : 新建一篇文章(登录用户)</li>
+<li><code>get /articles/&lt;id&gt;</code> : 获取文章详情（指定文章id）</li>
+<li><code>put /articles/&lt;id&gt;</code> : 更新某篇的文章</li>
+<li><code>delete /articles/&lt;id&gt;</code> : 删除某篇的文章</li>
+<li><code>get /articles/search?title=python</code> : 搜索文章</li>
+</ul>
+<p>下边是它的api描述</p>
+<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">swagger</span><span class="p p-Indicator">:</span> <span class="s">&quot;2.0&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">info</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0.0</span>
+  <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">blog</span>
+  <span class="c1"># description支持markdown</span>
+  <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+    <span class="no"># blog API documentation</span>
+
+    <span class="no">这篇文档描述了的blog(article)的api接口</span>
+
+<span class="c1"># host: localhost:8000 #localhost blog </span>
+<span class="c1"># basePath: /api</span>
+<span class="l l-Scalar l-Scalar-Plain">schemes</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">https</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">http</span>
+<span class="l l-Scalar l-Scalar-Plain">consumes</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">application/json</span>
+<span class="l l-Scalar l-Scalar-Plain">produces</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">application/json</span>
+
+<span class="l l-Scalar l-Scalar-Plain">paths</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">/</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">get</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Service root</span>
+      <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">列出所有api的描述信息.</span>
+      <span class="l l-Scalar l-Scalar-Plain">operationId</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">root</span>
+      <span class="l l-Scalar l-Scalar-Plain">responses</span><span class="p p-Indicator">:</span>
+        <span class="s">&#39;200&#39;</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Success</span>
+      <span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
+  <span class="l l-Scalar l-Scalar-Plain">/articles</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">get</span><span class="p p-Indicator">:</span> 
+      <span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">list all articles</span>
+      <span class="l l-Scalar l-Scalar-Plain">operationId</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">list_all_articles</span> <span class="c1">#后端函数</span>
+      <span class="l l-Scalar l-Scalar-Plain">responses</span><span class="p p-Indicator">:</span>
+        <span class="s">&#39;200&#39;</span><span class="p p-Indicator">:</span>
+          <span class="c1">#todo</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Annotation successfully created</span>
+          <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/ArticleList&#39;</span>
+        <span class="s">&#39;400&#39;</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Could not create article from your request</span>
+          <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Error&#39;</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">post</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Create a new Article</span>
+      <span class="l l-Scalar l-Scalar-Plain">operationId</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">createArticle</span>
+      <span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Article</span>
+          <span class="l l-Scalar l-Scalar-Plain">in</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">body</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">article to be created</span>
+          <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+          <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/NewArticle&#39;</span>
+      <span class="l l-Scalar l-Scalar-Plain">responses</span><span class="p p-Indicator">:</span>
+        <span class="s">&#39;200&#39;</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">article successfully created</span>
+          <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Article&#39;</span>
+        <span class="s">&#39;400&#39;</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Could not create article from your request</span>
+          <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Error&#39;</span>
+  <span class="l l-Scalar l-Scalar-Plain">/articles/{id}</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">get</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Fetch an Article</span>
+      <span class="l l-Scalar l-Scalar-Plain">operationId</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fetchArticle</span>
+      <span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">id</span>
+          <span class="l l-Scalar l-Scalar-Plain">in</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">path</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ID of article to return</span>
+          <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+          <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+      <span class="l l-Scalar l-Scalar-Plain">responses</span><span class="p p-Indicator">:</span>
+        <span class="s">&#39;200&#39;</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Success</span>
+          <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Article&#39;</span>
+        <span class="s">&#39;404&#39;</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">article not found or no permission to view</span>
+          <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Error&#39;</span>
+    <span class="l l-Scalar l-Scalar-Plain">patch</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Update an Article</span>
+      <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+        <span class="no">This endpoint is available under both the `PATCH` and `PUT`</span>
+        <span class="no">request methods. Both endpoints have PATCH-characteristics</span>
+        <span class="no">as defined in [RFC5789](https://tools.ietf.org/html/rfc5789#section-1),</span>
+        <span class="no">meaning the request body does not have to include the whole Article</span>
+        <span class="no">object.</span>
+
+        <span class="no">New implementations should use the `PATCH` request method, and existing</span>
+        <span class="no">implementations continue to work under `PUT` but should switch to `PATCH`.</span>
+
+      <span class="l l-Scalar l-Scalar-Plain">operationId</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">updateArticle</span>
+      <span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">id</span>
+          <span class="l l-Scalar l-Scalar-Plain">in</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">path</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ID of article to return</span>
+          <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+          <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Article</span>
+          <span class="l l-Scalar l-Scalar-Plain">in</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">body</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Updated article body</span>
+          <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+          <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/NewArticle&#39;</span>
+      <span class="l l-Scalar l-Scalar-Plain">responses</span><span class="p p-Indicator">:</span>
+        <span class="s">&#39;200&#39;</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Success</span>
+          <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Article&#39;</span>
+        <span class="s">&#39;400&#39;</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Could not create article from your request</span>
+          <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Error&#39;</span>
+        <span class="s">&#39;404&#39;</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">article not found or no permission to update</span>
+          <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Error&#39;</span>
+    <span class="l l-Scalar l-Scalar-Plain">delete</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Delete an Article</span>
+      <span class="l l-Scalar l-Scalar-Plain">operationId</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">deleteArticle</span>
+      <span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">id</span>
+          <span class="l l-Scalar l-Scalar-Plain">in</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">path</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ID of article to return</span>
+          <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+          <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+      <span class="l l-Scalar l-Scalar-Plain">responses</span><span class="p p-Indicator">:</span>
+        <span class="s">&#39;200&#39;</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Success</span>
+          <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
+            <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span>
+              <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">deleted</span>
+              <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">id</span>
+            <span class="l l-Scalar l-Scalar-Plain">properties</span><span class="p p-Indicator">:</span>
+              <span class="l l-Scalar l-Scalar-Plain">deleted</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">boolean</span>
+                <span class="l l-Scalar l-Scalar-Plain">enum</span><span class="p p-Indicator">:</span>
+                  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+              <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="s">&#39;404&#39;</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">article not found or no permission to delete</span>
+          <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Error&#39;</span>
+
+  <span class="l l-Scalar l-Scalar-Plain">/search</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">get</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Search for annotations</span>
+      <span class="l l-Scalar l-Scalar-Plain">operationId</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">search</span> <span class="c1">#后台对应的函数名</span>
+      <span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">limit</span>
+          <span class="l l-Scalar l-Scalar-Plain">in</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">query</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">The maximum number of annotations to return.</span>
+          <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+          <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">integer</span>
+          <span class="l l-Scalar l-Scalar-Plain">minimum</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+          <span class="l l-Scalar l-Scalar-Plain">maximum</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">200</span>
+          <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">20</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">offset</span>
+          <span class="l l-Scalar l-Scalar-Plain">in</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">query</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">&gt;</span>
+            <span class="no">The minimum number of initial annotations to skip. This is</span>
+            <span class="no">used for pagination.</span>
+          <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+          <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">integer</span>
+          <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+          <span class="l l-Scalar l-Scalar-Plain">minimum</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">sort</span>
+          <span class="l l-Scalar l-Scalar-Plain">in</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">query</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">The field by which annotations should be sorted.</span>
+          <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+          <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+          <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">updated</span>
+      <span class="l l-Scalar l-Scalar-Plain">responses</span><span class="p p-Indicator">:</span>
+        <span class="s">&#39;200&#39;</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Search results</span>
+          <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/SearchResults&#39;</span>
+
+<span class="l l-Scalar l-Scalar-Plain">definitions</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">NewArticle</span><span class="p p-Indicator">:</span>
+    <span class="c1"># todo json 2 yaml: https://www.json2yaml.com/</span>
+    <span class="c1"># 也可以是在线的</span>
+    <span class="c1">#$ref: &#39;./schemas/annotation-schema.json&#39; #https://h.readthedocs.io/en/latest/api/schemas/annotation-schema.json </span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
+    <span class="l l-Scalar l-Scalar-Plain">properties</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">userid</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="c1">#&quot;pattern&quot;: &quot;^acct:.+$&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+      <span class="l l-Scalar l-Scalar-Plain">content</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+      <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">array</span>
+        <span class="l l-Scalar l-Scalar-Plain">items</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+  <span class="l l-Scalar l-Scalar-Plain">Article</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">allOf</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/NewArticle&#39;</span> <span class="c1"># NewArticle属性展开在这里</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">id</span>
+        <span class="l l-Scalar l-Scalar-Plain">properties</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+  <span class="l l-Scalar l-Scalar-Plain">Error</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
+    <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">status</span>
+    <span class="l l-Scalar l-Scalar-Plain">properties</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">status</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="l l-Scalar l-Scalar-Plain">enum</span><span class="p p-Indicator">:</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">failure</span>
+      <span class="l l-Scalar l-Scalar-Plain">reason</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">A human-readable description of the reason(s) for failure.</span>
+  <span class="l l-Scalar l-Scalar-Plain">SearchResults</span><span class="p p-Indicator">:</span>
+    <span class="c1">#用作list</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
+    <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">rows</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">total</span>
+    <span class="l l-Scalar l-Scalar-Plain">properties</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">rows</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">array</span>
+        <span class="l l-Scalar l-Scalar-Plain">items</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Article&#39;</span>
+      <span class="l l-Scalar l-Scalar-Plain">total</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Total number of results matching query.</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">integer</span>
+  <span class="l l-Scalar l-Scalar-Plain">ArticleList</span><span class="p p-Indicator">:</span>
+    <span class="c1">#用作list</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
+    <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">rows</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">total</span>
+    <span class="l l-Scalar l-Scalar-Plain">properties</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">rows</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">array</span>
+        <span class="l l-Scalar l-Scalar-Plain">items</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Article&#39;</span>
+      <span class="l l-Scalar l-Scalar-Plain">total</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Total number of results matching query.</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">integer</span>
+<span class="c1"># Added by API Auto Mocking Plugin</span>
+<span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">virtserver.swaggerhub.com</span>
+<span class="l l-Scalar l-Scalar-Plain">basePath</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/pwnote/blog/1.0.0</span>
+</pre></div>
+
+
+<p>如果你对其中的语法有所不解可以查阅: <a href="https://www.gitbook.com/book/huangwenchao/swagger/details">Swagger从入门到精通</a></p>
+<p>我同时做了以下工作:</p>
+<ul>
+<li>你可以在我的gist上看到<ul>
+<li><a href="https://gist.github.com/wwj718/b5d1c1a2b6129c11051e22b6b42f12cf">swagger_blog.yaml</a>,<a href="https://gist.githubusercontent.com/wwj718/b5d1c1a2b6129c11051e22b6b42f12cf/raw/431e42efbca287226ab23d3556a5203f83b447d3/swagger_blog.yaml">下载链接</a></li>
+<li>json版本是:<a href="https://gist.github.com/wwj718/d2d017b9f27b1e241b1c7a2b7b6f2f7f">swagger_blog.json</a>), <a href="https://gist.githubusercontent.com/wwj718/d2d017b9f27b1e241b1c7a2b7b6f2f7f/raw/0290a8635acea38ebfb4e029757142a4ecafa2a2/swagger_blog.json">下载链接</a></li>
+<li>同时将它发布在swaggerhub上了:<a href="https://app.swaggerhub.com/apis/pwnote/blog/1.0.0">swaggerhub blog</a></li>
+<li>在esay-mock上生成了mock接口:<a href="https://www.easy-mock.com/mock/5923b15291470c0ac1f85bfe/blog/pwnote/blog/1.0.0/articles">mock list articles</a> (用的是<a href="https://gist.githubusercontent.com/wwj718/d2d017b9f27b1e241b1c7a2b7b6f2f7f/raw/b919b891ee08cc9f229cd58fc2c3a5c9500c26da/swagger_blog.json">swagger_blog.json</a>作为swagger url</li>
+<li>在ReDoc上浏览:<a href="https://rebilly.github.io/ReDoc/?url=https://gist.githubusercontent.com/wwj718/b5d1c1a2b6129c11051e22b6b42f12cf/raw/431e42efbca287226ab23d3556a5203f83b447d3/swagger_blog.yaml">ReDoc blog</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="swagger_2">围绕Swagger的生态</h3>
+<p>可以在github上搜swagger,会发现有许多相关项目，我列出几个我恰好看到或关注的</p>
+<h4 id="django-rest-swagger"><a href="https://github.com/marcgibbons/django-rest-swagger">django-rest-swagger</a></h4>
+<p><a href="https://github.com/encode/django-rest-framework">Django REST Framework</a>是写api的神器</p>
+<p>配合<a href="https://github.com/marcgibbons/django-rest-swagger">django-rest-swagger</a>更是如虎添翼</p>
+<h4 id="connexion"><a href="https://github.com/zalando/connexion">connexion</a></h4>
+<p>swagger可自动生成的20多种server代码，其中包括flask版本的，在flask的版本代码里，主要用到的就是connexion</p>
+<p>connexion是一个漂亮的框架，用于在Python中实现API First方法,如果你对此有兴趣可以参考<a href="https://caricio.com/2016/09/16/crafting-effective-microservices-in-python/">Crafting effective Microservices in Python</a></p>
+<p>如果你想看一个带有数据库和真实后端的例子，可以参考:<a href="https://github.com/zalando/connexion/tree/master/examples/sqlalchemy">connexion/examples/sqlalchemy</a>,这个例子让我们看到一个完整的项目:api的文档以及后端实现</p>
+<h4 id="redoc"><a href="https://github.com/Rebilly/ReDoc">ReDoc</a></h4>
+<p>我最近在使用的一个是<a href="https://github.com/Rebilly/ReDoc">ReDoc</a>，有不少有名的项目在用它作为api文档的展示工具:</p>
+<ul>
+<li><a href="https://docs.docker.com/engine/api/v1.25/">Docker Engine</a></li>
+<li><a href="https://docs.discourse.org/">discourse</a></li>
+</ul>
+<h1 id="_5">参考</h1>
+<ul>
+<li><a href="https://github.com/nuysoft/Mock">Mock</a><ul>
+<li><a href="https://www.easy-mock.com">easy-mock</a></li>
+</ul>
+</li>
+<li><a href="https://www.gitbook.com/book/huangwenchao/swagger/details">Swagger从入门到精通</a></li>
+<li><a href="http://openapi-specification-visual-documentation.apihandyman.io/">OpenAPI Specification Visual Documentation</a></li>
+<li><a href="https://github.com/marcgibbons/django-rest-swagger">django-rest-swagger</a></li>
+<li><a href="https://github.com/swagger-api/swagger-editor">swagger-editor</a></li>
+<li><a href="https://github.com/swagger-api/swagger-ui">swagger-ui</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21353795">Swagger：Rest API的描述语言</a></li>
+</ul>
+		</div><!-- /.entry-content -->
+<!--
+<p style="font-size:16px" class="alert alert-info">此文对我有价值，打赏杯茶喝^_^  <a target="_blank" class="btn btn-primary btn-large" href="https://me.alipay.com/wuwj">支付宝打赏</a> </p>
+-->
+<hr>
+<div class="alert alert-success">版权声明：<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名</a></div>
+<hr>
+<!-- Duoshuo Comment BEGIN -->
+<!--
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"wwj718blog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    -->
+    <!-- Duoshuo Comment END -->
+	</article>
+</section>
+        </div><!--/span-->
+      
+		<div style="margin-left:70px;" class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+    <!--<a href="/others/startedx.html"><h3>Open edX相关咨询</h3></a>-->
+<hr/>
+<!--
+<h3>我的服务<h3>
+    <a href="http://olk8jbdzi.bkt.clouddn.com/index.html"><h4>开源在线表单设计工具</h4></a>
+    <a href="#kinto.jsut4fun.site"><h4>kinto server(施工中)</h4></a>
+    <a href="#"><h4></h4></a>
+-->
+<!--<a href="/join-us"><h3>招兵买马(招实习!)<h3></a>-->
+</hr>
+</hr>
+
+<li style="text-align: center;"><a target="_blank"  href="https://www.e-ducation.cn/?utm_source=zgblog&utm_medium=ads&utm_campaign=marketing_01"><img src="http://wwj-tmp-video.just4fun.site/education.png" width="100%" max-width="250px" /> </a></li>
+<hr/>
+
+<h4>我近期在折腾</h4>
+<li><a href="https://blog.just4fun.site/about-codelab-club.html" target="_blank">codelab.club</a></li>
+<li><a href="https://codelab-adapter-docs.codelab.club/" target="_blank">codelab-adapter</a></li>
+<li><a href="https://forums.codelab.club/" target="_blank">forums.codelab.club</a></li>
+<hr/>
+
+<h4>少儿编程指北</h4>
+<p>关注少儿编程，回顾这个领域的发展历程，推荐、解读经典书籍和文章，吐槽糟糕的教育，也推荐一些好产品和有趣的项目。不蹭热点不站队 :）</p>
+<li style="text-align: center;">
+<img src="http://scratch3-files.just4fun.site/qrcode_for_gh_e458d8658f3b_258.jpg" width="150px" /> 
+</li>
+<hr/>
+
+<h4>站内搜索(基于google，你可能看不到)</h4>
+<div>
+<script>
+  (function() {
+       var cx = '004056624884628766270:aaifcpik-ua';
+	       var gcse = document.createElement('script');
+		       gcse.type = 'text/javascript';
+			       gcse.async = true;
+				       gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					           '//www.google.com/cse/cse.js?cx=' + cx;
+							       var s = document.getElementsByTagName('script')[0];
+								       s.parentNode.insertBefore(gcse, s);
+									     })();
+</script>
+<gcse:search></gcse:search>
+</div>
+<hr>
+<h4>手机访问：</h4>
+<li style="text-align: center;">
+<img src="http://wwj-tmp-video.just4fun.site/1514204585.png" width="150px" /> 
+</li>
+
+    <li><i class="icon-external-link"></i><a href="/aboutme.html">关于我</a></li>
+    <li><i class="icon-external-link"></i><a href="https://github.com/wwj718">my github</a></li>
+    <li><i class="icon-external-link"></i><a href="#">my gmail：wuwenjie718@gmail.com</a></li>
+<hr>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>分类</h4></li>
+<li>
+<a href="/category/编程.html">
+    <i class="icon-folder-open icon-large"></i>编程
+</a>
+</li>
+<li>
+<a href="/category/读书.html">
+    <i class="icon-folder-open icon-large"></i>读书
+</a>
+</li>
+<li>
+<a href="/category/edx.html">
+    <i class="icon-folder-open icon-large"></i>edx
+</a>
+</li>
+<li>
+<a href="/category/工具.html">
+    <i class="icon-folder-open icon-large"></i>工具
+</a>
+</li>
+<li>
+<a href="/category/观念.html">
+    <i class="icon-folder-open icon-large"></i>观念
+</a>
+</li>
+<li>
+<a href="/category/技术.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/架构.html">
+    <i class="icon-folder-open icon-large"></i>架构
+</a>
+</li>
+<li>
+<a href="/category/空想.html">
+    <i class="icon-folder-open icon-large"></i>空想
+</a>
+</li>
+<li>
+<a href="/category/少儿编程.html">
+    <i class="icon-folder-open icon-large"></i>少儿编程
+</a>
+</li>
+<li>
+<a href="/category/诗词.html">
+    <i class="icon-folder-open icon-large"></i>诗词
+</a>
+</li>
+<li>
+<a href="/category/数据.html">
+    <i class="icon-folder-open icon-large"></i>数据
+</a>
+</li>
+<li>
+<a href="/category/算法.html">
+    <i class="icon-folder-open icon-large"></i>算法
+</a>
+</li>
+<li>
+<a href="/category/随笔.html">
+    <i class="icon-folder-open icon-large"></i>随笔
+</a>
+</li>
+<li>
+<a href="/category/瓦碎集.html">
+    <i class="icon-folder-open icon-large"></i>瓦碎集
+</a>
+</li>
+<li>
+<a href="/category/硬件.html">
+    <i class="icon-folder-open icon-large"></i>硬件
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<hr>
+
+<a target="_blank" href="http://wwj718.github.io/feeds/all.rss.xml">订阅feed</a>
+
+
+<hr>
+<h3>友情链接</h3>
+<li><a target="_blank"  href="https://scratch.mit.edu/">Scratch</a></li>
+<li><a target="_blank"  href="https://www.raspberrypi.org/">Raspberry Pi</a></li>
+<li><a target="_blank" href="http://microbit.org/">micro:bit</a></li>
+<li><a target="_blank" href="https://code.org/">Code.org</a></li>
+<li><a target="_blank" href="https://www.edustack.org/">edustack</a></li>
+<li><a target="_blank" href="http://blog.e-ducation.cn/">e-ducation</a></li>
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer id="footer">
+        <address id="about">
+            诗酒趁年华<hr>
+              powered by Pelican 
+              <hr>
+              <a href="www.miitbeian.gov.cn" target="_blank">苏ICP备18043473号</a>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F18db4b662c04fbd6cc2851d246c51b3f' type='text/javascript'%3E%3C/script%3E"));
+</script>        </address><!-- /#about -->
+      </footer>
+
+    </div><!--/.fluid-container-->
+<a href="https://github.com/wwj718"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//libs.baidu.com/jquery/1.8.2/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/twitter-bootstrap/2.0.4/bootstrap.min.js"></script>
+    <!--
+    <script src="/theme/js/bootstrap-transition.js"></script>
+    <script src="/theme/js/bootstrap-dropdown.js"></script>
+    <script src="/theme/js/bootstrap-collapse.js"></script>
+    -->
+	
+	<!--<script src="/theme/js/autosidebar.js"></script>-->
+  </body>
+</html>
